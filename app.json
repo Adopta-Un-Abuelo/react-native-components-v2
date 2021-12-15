@@ -3,10 +3,11 @@
     "name": "react-native-components-v2",
     "slug": "react-native-components-v2",
     "version": "1.0.0",
+    "entryPoint": "node_modules/expo/AppEntry.js",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./src/assets/expo/icon.png",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./src/assets/expo/splash.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -21,12 +22,12 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./src/assets/expo/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
       }
     },
     "web": {
-      "favicon": "./assets/favicon.png"
+      "favicon": "./src/assets/expo/favicon.png"
     }
   }
 }

@@ -17,18 +17,17 @@ const TextStyled = styled.Text<{weight?: string, fontStyle?: string}>`
 `
 
 const Text: FC<Props> = props =>{
+
+    const { weight, fontStyle, ...restProps } = props;
+
     return(
         <TextStyled
-            {...props}
-        >
-            {props.children}
-        </TextStyled>
+            {...restProps}
+        />
     )
 }
 export default Text;
 export interface Props extends TextProps{
     weight?: 'bold' | 'regular' | 'semibold' | 'medium',
     fontStyle?: 'italic'
-    onPress?: any,
-    ref?: any
 }

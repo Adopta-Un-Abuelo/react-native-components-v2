@@ -18,7 +18,7 @@ const Container = styled.Pressable<{size?: 'normal' | 'small', type?: 'line' | '
     padding: 0px 24px;
 `
 
-const Button: FC<Props> = props =>{
+const Button = (props: Props) =>{
 
     const onPress = (e: GestureResponderEvent) =>{
         if(!props.loading)
@@ -54,7 +54,7 @@ const Button: FC<Props> = props =>{
                         ...props.textStyle
                     }}
                     numberOfLines={1}
-                    lineBreakMode={'tail'}
+                    ellipsizeMode={'tail'}
                     adjustsFontSizeToFit={true}
                 >
                     {props.title}

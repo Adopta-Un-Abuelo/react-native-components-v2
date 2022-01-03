@@ -1,6 +1,6 @@
-import React, { FC } from 'react';
+import React from 'react';
 import styled from 'styled-components/native';
-import { TextProps } from 'react-native';
+import { TextStyle } from 'react-native';
 
 import Color from '../../constants/Color';
 
@@ -13,21 +13,25 @@ const TextStyled = styled.Text<{weight?: string, fontStyle?: string}>`
         props.fontStyle === 'italic' ? 'Poppins-Italic' :
         'Poppins-Regular'
     };
-    color: ${Color.gray3};
+    color: ${Color.gray2};
 `
 
-const Text: FC<Props> = props =>{
-
-    const { weight, fontStyle, ...restProps } = props;
-
+const Text = (props: Props) =>{
     return(
         <TextStyled
-            {...restProps}
-        />
+            {...props}
+        >
+            {props.children}
+        </TextStyled>
     )
 }
 export default Text;
-export interface Props extends TextProps{
+export interface Props{
     weight?: 'bold' | 'regular' | 'semibold' | 'medium',
-    fontStyle?: 'italic'
+    fontStyle?: 'italic',
+    style?: TextStyle,
+    children?: any,
+    numberOfLines?: number,
+    ellipsizeMode?: 'head' | 'middle' | 'tail' | 'clip',
+    adjustsFontSizeToFit?: boolean
 }

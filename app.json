@@ -1,0 +1,33 @@
+{
+  "expo": {
+    "name": "react-native-components-v2",
+    "slug": "react-native-components-v2",
+    "version": "1.0.0",
+    "entryPoint": "node_modules/expo/AppEntry.js",
+    "orientation": "portrait",
+    "icon": "./src/assets/expo/icon.png",
+    "splash": {
+      "image": "./src/assets/expo/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./src/assets/expo/adaptive-icon.png",
+        "backgroundColor": "#FFFFFF"
+      }
+    },
+    "web": {
+      "favicon": "./src/assets/expo/favicon.png"
+    }
+  }
+}

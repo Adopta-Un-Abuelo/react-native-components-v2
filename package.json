@@ -23,6 +23,7 @@
     "react-native": "0.66.4",
     "react-native-feather": "^1.1.2",
     "react-native-flash-message": "^0.2.0",
+    "react-native-safe-area-context": "^3.3.2",
     "react-native-web": "0.17.5",
     "styled-components": "^5.3.3"
   },

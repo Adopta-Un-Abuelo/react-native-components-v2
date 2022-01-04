@@ -4,3 +4,4 @@ import './Alert.stories';
 import './Banner.stories';
 import './Breadcrumb.stories';
 import './Container.stories';
+import './Checkbox.stories';

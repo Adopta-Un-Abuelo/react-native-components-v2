@@ -1,10 +1,10 @@
 import React, { FC } from 'react';
 import styled from 'styled-components/native';
-import { ViewStyle } from 'react-native';
+import { ViewStyle, Animated } from 'react-native';
 
 import Color from '../../constants/Color';
 
-const Container = styled.View`
+const Container = styled(Animated.View)`
     flex-direction: row;
     height: 8px;
 `
@@ -35,7 +35,7 @@ const Breadcrumb: FC<Props> = props =>{
 }
 export default Breadcrumb;
 export interface Props{
-    style?: ViewStyle,
+    style?: Object,
     steps: number,
     currentStep: number
 }

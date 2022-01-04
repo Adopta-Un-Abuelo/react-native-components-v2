@@ -10,3 +10,5 @@ export { default as Title } from './Text/Title';
 export { default as Container } from './Container/Container';
 export { default as ScrollContainer } from './Container/ScrollContainer';
 export { default as ListContainer } from './Container/ListContainer';
+export { default as Checkbox } from './Checkbox/Checkbox';
+export { default as RadioButton } from './RadioButton/RadioButton';

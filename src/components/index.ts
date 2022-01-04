@@ -20,3 +20,4 @@ export { default as InputCode } from './Input/InputCode';
 export { default as Select } from './Select/Select';
 export { default as InputDate } from './Input/InputDate';
 export { default as InputDatePicker } from './Input/InputDatePicker';
+export { default as InputPlace } from './Input/InputPlace';

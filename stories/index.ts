@@ -6,3 +6,4 @@ import './Breadcrumb.stories';
 import './Container.stories';
 import './Checkbox.stories';
 import './RadioButton.stories';
+import './Tag.stories';

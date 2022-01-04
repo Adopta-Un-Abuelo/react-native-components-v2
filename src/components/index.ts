@@ -8,3 +8,4 @@ export { default as ButtonBottom } from './Button/ButtonBottom';
 export { default as ButtonImage } from './Button/ButtonImage';
 export { default as Title } from './Text/Title';
 export { default as Container } from './Container/Container';
+export { default as NavigationBar } from './Navigation/NavigationBar';

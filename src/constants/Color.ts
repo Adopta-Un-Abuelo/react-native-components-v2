@@ -13,6 +13,7 @@ const Color = {
     gradient1: 'linear-gradient(95.39deg, #009BBC 1.12%, #5963F6 100%)',
     gradient2: 'linear-gradient(95.39deg, #009BBC 1.12%, #5963F6 53.13%, #004773 100%)',
     gradient3: 'linear-gradient(40.44deg, #004773 0%, #009BBC 98.5%)',
-    warning: '#FFAC4B'
+    warning: '#FFAC4B',
+    error: '#FF5A5A',
 }
 export default Color;

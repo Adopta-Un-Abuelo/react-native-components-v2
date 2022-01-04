@@ -1,6 +1,6 @@
 {
   "name": "react-native-components-v2",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "private": false,
   "main": "lib/commonjs/index.js",
   "scripts": {

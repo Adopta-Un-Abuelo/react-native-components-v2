@@ -33,5 +33,6 @@ export interface Props{
     children?: any,
     numberOfLines?: number,
     ellipsizeMode?: 'head' | 'middle' | 'tail' | 'clip',
-    adjustsFontSizeToFit?: boolean
+    adjustsFontSizeToFit?: boolean,
+    onPress?: any
 }

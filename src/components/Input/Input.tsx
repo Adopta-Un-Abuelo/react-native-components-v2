@@ -103,6 +103,8 @@ const Input: FC<Props> = forwardRef((props, ref) =>{
                     isFocused={isFocused}
                     hasValue={value ? true : false}
                     placeholderTextColor={Color.gray4}
+                    maxLength={props.maxLength}
+                    keyboardType={props.keyboardType}
                     {...rest}
                 />
             </InputView>
@@ -118,5 +120,10 @@ export interface Props{
     onFocus?: any,
     onBlur?: any,
     placeholder?: string,
-    onChangeText?: any
+    onChangeText?: any,
+    maxLength?: number,
+    keyboardType?: 'default' | 'number-pad' | 'decimal-pad' | 'phone-pad' | 'numeric' | 'email-address',
+    blurOnSubmit?: boolean,
+    clearButtonMode?: 'never' | 'while-editing' | 'unless-editing' | 'always',
+    value?: string
 }

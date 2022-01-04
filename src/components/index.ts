@@ -10,3 +10,4 @@ export { default as Title } from './Text/Title';
 export { default as Container } from './Container/Container';
 export { default as NavigationBar } from './Navigation/NavigationBar';
 export { default as Checkbox } from './Checkbox/Checkbox';
+export { default as RadioButton } from './RadioButton/RadioButton';

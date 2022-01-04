@@ -1,4 +1,7 @@
 {
+  "name": "react-native-components-v2",
+	"version": "0.0.1",
+  "private": false,
   "main": "lib/commonjs/index.js",
   "scripts": {
     "start": "expo start",
@@ -39,7 +42,6 @@
     "react-native-storybook-loader": "^2.0.4",
     "typescript": "~4.5.4"
   },
-  "private": true,
   "react-native": "src/index.ts",
   "module": "lib/module/index.js",
   "types": "lib/typescript/src/index.d.ts",

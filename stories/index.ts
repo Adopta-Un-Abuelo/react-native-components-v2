@@ -9,3 +9,5 @@ import './RadioButton.stories';
 import './Tag.stories';
 import './Modal.stories';
 import './MenuList.stories';
+import './Input.stories';
+import './Select.stories';

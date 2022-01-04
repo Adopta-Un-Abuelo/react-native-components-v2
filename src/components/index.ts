@@ -15,3 +15,6 @@ export { default as RadioButton } from './RadioButton/RadioButton';
 export { default as Tag } from './Tag/Tag';
 export { default as Modal } from './Modal/Modal';
 export { default as MenuList } from './MenuList/MenuList';
+export { default as Input } from './Input/Input';
+export { default as InputCode } from './Input/InputCode';
+export { default as Select } from './Select/Select';

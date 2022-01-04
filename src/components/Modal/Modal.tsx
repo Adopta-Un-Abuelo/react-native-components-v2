@@ -142,7 +142,7 @@ const ModalComponent: FC<Props> = props =>{
 };
 export default ModalComponent;
 export interface Props{
-    translation: {
+    translation?: {
 		[key: string]: any
 	},
     style?: Object,

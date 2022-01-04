@@ -14,3 +14,4 @@ export { default as Checkbox } from './Checkbox/Checkbox';
 export { default as RadioButton } from './RadioButton/RadioButton';
 export { default as Tag } from './Tag/Tag';
 export { default as Modal } from './Modal/Modal';
+export { default as MenuList } from './MenuList/MenuList';

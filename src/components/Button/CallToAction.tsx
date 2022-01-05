@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components/native';
-import { ButtonProps } from 'react-native';
 
 import Text from '../Text/Text';
 import { Color } from '../../constants';
@@ -23,7 +22,8 @@ const CallToAction = (props: Props) =>{
     )
 }
 export default CallToAction;
-export interface Props extends ButtonProps{
+export interface Props{
     title: string,
-    color?: string
+    color?: string,
+    style?: Object
 }

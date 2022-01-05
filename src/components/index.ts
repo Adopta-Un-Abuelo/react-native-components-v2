@@ -29,3 +29,4 @@ export { default as WebModal } from './Modal/WebModal';
 export { default as VideoModal } from './Modal/VideoModal';
 export { default as Subtitle } from './Text/Subtitle';
 export { default as VideoProgressBar } from './ProgressBar/VideoProgressBar';
+export { default as CallToAction } from './Button/CallToAction';

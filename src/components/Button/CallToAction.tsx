@@ -25,5 +25,6 @@ export default CallToAction;
 export interface Props{
     title: string,
     color?: string,
-    style?: Object
+    style?: Object,
+    onPress?: any
 }

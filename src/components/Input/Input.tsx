@@ -128,5 +128,6 @@ export interface Props{
     clearButtonMode?: 'never' | 'while-editing' | 'unless-editing' | 'always',
     value?: string,
     autoComplete?: string
-    autoCapitalize?: 'none' | 'sentences' | 'words' | 'characters'
+    autoCapitalize?: 'none' | 'sentences' | 'words' | 'characters',
+    autoCorrent?: boolean
 }

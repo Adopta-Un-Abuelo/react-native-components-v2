@@ -3,7 +3,7 @@ import React from 'react';
 import { action } from '@storybook/addon-actions';
 import { boolean, text } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/react-native';
-import { Modal, Text, SelectionModal, PaymentMethodModal } from '../src';
+import { Modal, Text, SelectionModal, PaymentMethodModal, WebModal, VideoModal } from '../src';
 
 storiesOf('Modal', module)
 	.add('Main', () => (
@@ -41,5 +41,17 @@ storiesOf('Modal', module)
     .add('PaymentMethod', () => (
         <PaymentMethodModal
             visible={true}
+        />
+    ))
+    .add('Web', () => (
+        <WebModal
+            visible={true}
+            url={'https://adoptaunabuelo.org'}
+        />
+    ))
+    .add('Video', () => (
+        <VideoModal
+            visible={true}
+            url={'https://data.adoptaunabuelo.org/video/register_welcome.mp4'}
         />
     ))

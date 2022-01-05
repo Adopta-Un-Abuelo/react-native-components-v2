@@ -70,7 +70,7 @@ const Select: FC<Props> = props =>{
                 }
                 {selectedItem && selectedItem.Icon && !props.hideIcon && 
                     <Icon>
-                        {selectedItem.Icon}
+                        <selectedItem.Icon/>
                     </Icon>
                 }
                 {!props.hideTitle &&

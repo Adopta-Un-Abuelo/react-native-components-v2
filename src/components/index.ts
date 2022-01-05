@@ -37,3 +37,4 @@ export { default as KeyboardPhone } from './Keyboard/KeyboardPhone';
 export { default as Stories } from './Carousel/Stories';
 export { default as Carousel } from './Carousel/Carousel';
 export { default as List } from './List/List';
+export { default as Tabs } from './Tabs/Tabs';

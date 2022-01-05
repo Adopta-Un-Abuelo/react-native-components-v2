@@ -23,3 +23,4 @@ export { default as InputDatePicker } from './Input/InputDatePicker';
 export { default as InputPlace } from './Input/InputPlace';
 export { default as Review } from './Review/Review';
 export { default as SelectionModal } from './Modal/SelectionModal';
+export { default as PaymentMethodModal } from './Modal/PaymentMethodModal';

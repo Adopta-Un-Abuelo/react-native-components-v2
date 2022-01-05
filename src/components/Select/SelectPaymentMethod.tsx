@@ -1,4 +1,4 @@
-import React, { FC, useState, useEffect, forwardRef, useImperativeHandle } from 'react';
+import React, { FC, useState, useEffect, forwardRef, useImperativeHandle, Ref } from 'react';
 import styled from 'styled-components/native';
 import { Plus } from 'react-native-feather';
 import { Platform } from 'react-native';
@@ -21,7 +21,7 @@ const applePay = 'Apple pay'
 const googlePay = 'Google Pay'
 const creditCardHidde = '**** **** **** '
 
-const PaymentMethodSelect: FC <Props> = forwardRef((props, ref) =>{
+const PaymentMethodSelect = forwardRef((props: Props, ref: Ref<SelectPaymentMethodRef>) =>{
 
     const nativePayment = {
         id: Platform.OS === 'ios' ? 'applePay' : 'googlePay',
@@ -227,4 +227,7 @@ export interface Props{
     showAddCard?: boolean,
     nativePay?: boolean,
     onDismiss?: Function
+}
+export interface SelectPaymentMethodRef{
+    confirmPaymentIntent: (clientSecret: string) => Promise<any>
 }

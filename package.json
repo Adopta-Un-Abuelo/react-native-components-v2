@@ -1,6 +1,6 @@
 {
   "name": "react-native-components-v2",
-  "version": "0.0.4",
+  "version": "0.0.7",
   "private": false,
   "main": "lib/commonjs/index.js",
   "scripts": {
@@ -25,9 +25,14 @@
     "react-native-feather": "^1.1.2",
     "react-native-flash-message": "^0.2.0",
     "react-native-google-places-autocomplete": "^2.4.1",
+    "react-native-progress": "^5.0.0",
     "react-native-safe-area-context": "^3.3.2",
+    "react-native-svg": "12.1.1",
+    "react-native-video": "^5.2.0",
     "react-native-web": "0.17.5",
-    "styled-components": "^5.3.3"
+    "react-native-webview": "^11.15.0",
+    "styled-components": "^5.3.3",
+    "tipsi-stripe": "^9.2.0"
   },
   "devDependencies": {
     "@babel/core": "^7.16.7",

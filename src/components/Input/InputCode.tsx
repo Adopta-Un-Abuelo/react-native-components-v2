@@ -1,4 +1,4 @@
-import React, { useRef, forwardRef, useImperativeHandle, useState, FC } from 'react';
+import React, { useRef, forwardRef, useImperativeHandle, useState, Ref } from 'react';
 import { TextInput } from 'react-native';
 import styled from 'styled-components/native';
 
@@ -22,7 +22,7 @@ const Input = styled.TextInput<{error?: boolean, ref?: any}>`
     padding: 0px;
 `
 
-const CodeInput: FC<Props> = forwardRef((props, ref) =>{
+const CodeInput = forwardRef((props: Props, ref: Ref<InputCodeRef>) =>{
 
     const [ input1Value, setInput1Value ] = useState<string | undefined>(undefined);
     const [ input2Value, setInput2Value ] = useState<string | undefined>(undefined);
@@ -209,4 +209,9 @@ export interface Props{
     error?: boolean
     autoFocus?: boolean,
     style?: Object
+}
+export interface InputCodeRef{
+    focus: () => void,
+    blur: () => void
+    clean: () => void
 }

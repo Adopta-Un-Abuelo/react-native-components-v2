@@ -33,3 +33,6 @@ export { default as CallToAction } from './Button/CallToAction';
 export { default as TextView } from './Input/TextView';
 export { default as SelectOption } from './Select/SelectOption';
 export { default as SelectTag } from './Select/SelectTag';
+export { default as KeyboardPhone } from './Keyboard/KeyboardPhone';
+export { default as Stories } from './Carousel/Stories';
+export { default as Carousel } from './Carousel/Carousel';

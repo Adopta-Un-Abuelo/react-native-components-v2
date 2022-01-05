@@ -113,6 +113,7 @@ const Input: FC<Props> = forwardRef((props, ref) =>{
 });
 export default Input;
 export interface Props{
+    id?: string,
     ref?: any,
     error?: boolean,
     icon?: any,
@@ -125,5 +126,6 @@ export interface Props{
     keyboardType?: 'default' | 'number-pad' | 'decimal-pad' | 'phone-pad' | 'numeric' | 'email-address',
     blurOnSubmit?: boolean,
     clearButtonMode?: 'never' | 'while-editing' | 'unless-editing' | 'always',
-    value?: string
+    value?: string,
+    autoComplete?: string
 }

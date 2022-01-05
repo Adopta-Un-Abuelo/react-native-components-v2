@@ -22,3 +22,4 @@ export { default as InputDate } from './Input/InputDate';
 export { default as InputDatePicker } from './Input/InputDatePicker';
 export { default as InputPlace } from './Input/InputPlace';
 export { default as Review } from './Review/Review';
+export { default as SelectionModal } from './Modal/SelectionModal';

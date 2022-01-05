@@ -30,3 +30,6 @@ export { default as VideoModal } from './Modal/VideoModal';
 export { default as Subtitle } from './Text/Subtitle';
 export { default as VideoProgressBar } from './ProgressBar/VideoProgressBar';
 export { default as CallToAction } from './Button/CallToAction';
+export { default as TextView } from './Input/TextView';
+export { default as SelectOption } from './Select/SelectOption';
+export { default as SelectTag } from './Select/SelectTag';

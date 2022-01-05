@@ -28,6 +28,7 @@ const Alert: FC<Props> = props =>{
     )
 }
 export default Alert;
-export interface Props extends React.Component<FlashMessage>{
-
+export interface Props{
+    position: 'top',
+    type: 'warning'
 }

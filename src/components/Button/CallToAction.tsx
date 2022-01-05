@@ -1,12 +1,11 @@
 import React from 'react';
 import styled from 'styled-components/native';
-import { PressableProps } from 'react-native';
+import { ButtonProps } from 'react-native';
 
 import Text from '../Text/Text';
 import { Color } from '../../constants';
 
 const Button = styled.Pressable`
-
 `
 
 const CallToAction = (props: Props) =>{
@@ -24,7 +23,7 @@ const CallToAction = (props: Props) =>{
     )
 }
 export default CallToAction;
-export interface Props{
+export interface Props extends ButtonProps{
     title: string,
     color?: string
 }

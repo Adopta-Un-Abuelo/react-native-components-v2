@@ -35,4 +35,6 @@ export interface Props{
     ellipsizeMode?: 'head' | 'middle' | 'tail' | 'clip',
     adjustsFontSizeToFit?: boolean,
     onPress?: any
+    allowFontScaling?: boolean,
+    autoCapitalize?: string
 }

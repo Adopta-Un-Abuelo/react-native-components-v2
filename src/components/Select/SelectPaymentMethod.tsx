@@ -226,6 +226,5 @@ export interface Props{
     paymentMethods?: Array<any>,
     showAddCard?: boolean,
     nativePay?: boolean,
-    onDismiss?: Function,
-    onActivate: Function
+    onDismiss?: Function
 }

@@ -35,7 +35,7 @@ const BottomButton: FC<Props> = props =>{
                 <props.leftView/>
             }
             <Button
-                size={size}
+                style={{flex: props.size === 'big' && 1}}
                 {...rest}
             />
         </Container>
@@ -43,7 +43,7 @@ const BottomButton: FC<Props> = props =>{
 }
 export default BottomButton;
 export interface Props extends PressableProps{
-    size?: 'normal' | 'small',
+    size?: 'big' | 'small',
     title: string,
     leftView?: any,
     showShadow?: boolean,

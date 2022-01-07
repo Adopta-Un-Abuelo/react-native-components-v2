@@ -7,7 +7,7 @@ import { ChevronRight } from 'react-native-feather';
 import Color from '../../constants/Color';
 import Text from '../Text/Text';
 
-const Container = styled.Pressable<{type?: 'line' | 'fill', color?: string, showIcon: boolean}>`
+const Container = styled.Pressable<{type?: 'line' | 'fill', color?: string}>`
     flex-direction: row;
     height: 58px;
     border-radius: 36px;
@@ -16,9 +16,8 @@ const Container = styled.Pressable<{type?: 'line' | 'fill', color?: string, show
     justify-content: center;
     border-width: ${props => props.type === 'line' ? '1px' : '0px'};
     border-color: ${props => props.color ? props.color : Color.blue5};
-    padding: ${props => props.showIcon ? '0px 14px 0px 22px' : '0px 22px'};
+    padding: 0px 22px;
     opacity: ${props => props.disabled ? 0.5 : 1};
-    align-self: flex-end;
 `
 
 const Button = (props: Props) =>{
@@ -35,11 +34,7 @@ const Button = (props: Props) =>{
             onPress={onPress}
             type={props.type}
             color={props.color}
-            showIcon={!props.hideIcon && props.size === 'small'}
         >
-            {props.icon &&
-                <props.icon style={{marginLeft: -24, marginRight: 8, ...props.iconStyle}} stroke={props.iconStyle && props.iconStyle.stroke ? props.iconStyle.stroke : 'white'}/>
-            }
             {props.loading ?
                 <LottieView 
                     style={{width: 100}}
@@ -49,9 +44,11 @@ const Button = (props: Props) =>{
                 />
             :
                 <>
+                {props.icon &&
+                    <props.icon style={{marginRight: 8, ...props.iconStyle}} stroke={(props.iconStyle && props.iconStyle.stroke) ? props.iconStyle.stroke : (props.type === 'line' ? (props.color ? props.color : Color.blue5) : 'white')}/>
+                }
                 <Text
                     style={{
-                        flex: props.size === 'small' ? 0 : 1,
                         textAlign: 'center',
                         color: props.type === 'line' ? (props.color ? props.color : Color.blue5) : 'white',
                         fontFamily: 'Poppins-SemiBold',
@@ -63,9 +60,6 @@ const Button = (props: Props) =>{
                 >
                     {props.title}
                 </Text>
-                {!props.hideIcon && props.size === 'small' &&
-                    <ChevronRight stroke={props.type === 'line' ? (props.color ? props.color : Color.blue5) : 'white'}/>
-                }
                 </>
             }
         </Container>

@@ -5,7 +5,6 @@ import { ViewStyle } from 'react-native';
 import Color from '../../constants/Color';
 import Text from '../Text/Text';
 import Button from '../Button/Button';
-import ButtonSmall from '../Button/ButtonSmall'
 
 const Container = styled.View`
     padding: 24px 32px;
@@ -40,8 +39,9 @@ const Banner: FC<Props> = props =>{
                 {props.children}
             </ChildrenView>
             {props.buttonProps &&
-                <ButtonSmall
+                <Button
                     style={{height: 36}}
+                    size={'small'}
                     {...props.buttonProps}
                 />
             }
@@ -53,6 +53,6 @@ export interface Props {
     position: "top" | "bottom" | "center",
     title: string,
     icon: any,
-    buttonProps?: React.Component<typeof Button>
+    buttonProps?: any,
     style?: ViewStyle
 }

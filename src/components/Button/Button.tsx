@@ -1,21 +1,24 @@
-import React, { FC } from 'react';
+import React from 'react';
 import styled from 'styled-components/native';
 import LottieView from 'lottie-react-native';
-import { GestureResponderEvent, PressableProps } from 'react-native';
+import { GestureResponderEvent, PressableProps, ViewStyle, TextStyle } from 'react-native';
 
+import { ChevronRight } from 'react-native-feather';
 import Color from '../../constants/Color';
 import Text from '../Text/Text';
 
-const Container = styled.Pressable<{size?: 'normal' | 'small', type?: 'line' | 'fill', color?: string}>`
+const Container = styled.Pressable<{type?: 'line' | 'fill', color?: string, showIcon: boolean}>`
     flex-direction: row;
-    height: ${props => props.size === 'small' ? '40px' : '58px'};
+    height: 58px;
     border-radius: 36px;
-    background-color: ${props => props.type === 'line' ? 'transparent' : (props.disabled ? Color.blue5+'50' : (props.color ? props.color : Color.blue5))};
+    background-color: ${props => props.type === 'line' ? 'transparent' : (props.color ? props.color : Color.blue5)};
     align-items: center;
     justify-content: center;
     border-width: ${props => props.type === 'line' ? '1px' : '0px'};
-    border-color: ${props => props.disabled ? Color.blue5+'50' : (props.color ? props.color : Color.blue5)};
-    padding: 0px 24px;
+    border-color: ${props => props.color ? props.color : Color.blue5};
+    padding: ${props => props.showIcon ? '0px 14px 0px 22px' : '0px 22px'};
+    opacity: ${props => props.disabled ? 0.5 : 1};
+    align-self: flex-end;
 `
 
 const Button = (props: Props) =>{
@@ -30,9 +33,9 @@ const Button = (props: Props) =>{
             style={props.style}
             disabled={props.disabled}
             onPress={onPress}
-            size={props.size}
             type={props.type}
             color={props.color}
+            showIcon={!props.hideIcon && props.size === 'small'}
         >
             {props.icon &&
                 <props.icon style={{marginLeft: -24, marginRight: 8, ...props.iconStyle}} stroke={props.iconStyle && props.iconStyle.stroke ? props.iconStyle.stroke : 'white'}/>
@@ -45,12 +48,13 @@ const Button = (props: Props) =>{
                     loop
                 />
             :
+                <>
                 <Text
                     style={{
-                        fontSize: props.size === 'small' ? 14 : 16,
-                        color: props.color ? props.color : (props.type === 'line' ? Color.blue5 : 'white'),
+                        flex: props.size === 'small' ? 0 : 1,
+                        textAlign: 'center',
+                        color: props.type === 'line' ? (props.color ? props.color : Color.blue5) : 'white',
                         fontFamily: 'Poppins-SemiBold',
-                        opacity: props.disabled ? 0.5 : 1,
                         ...props.textStyle
                     }}
                     numberOfLines={1}
@@ -59,6 +63,10 @@ const Button = (props: Props) =>{
                 >
                     {props.title}
                 </Text>
+                {!props.hideIcon && props.size === 'small' &&
+                    <ChevronRight stroke={props.type === 'line' ? (props.color ? props.color : Color.blue5) : 'white'}/>
+                }
+                </>
             }
         </Container>
     )
@@ -66,12 +74,13 @@ const Button = (props: Props) =>{
 export default Button;
 export interface Props extends PressableProps{
     loading?: boolean,
-    textStyle?: any,
-    style?: any,
+    textStyle?: TextStyle,
+    style?: ViewStyle,
     title: string,
     color?: string,
     icon?: any,
     iconStyle?: any,
+    type?: 'fill' | 'line',
     size?: 'normal' | 'small',
-    type?: 'fill' | 'line'
+    hideIcon?: boolean
 }

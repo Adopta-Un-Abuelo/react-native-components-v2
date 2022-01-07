@@ -34,7 +34,6 @@ const ScrollContainer: FC<Props> = props =>{
                     />
                 :
                     <NavigationBar
-                        backButtonStyle={{left: 24}}
                         animatedValue={offset}
                         {...props.navbarProps}
                     />

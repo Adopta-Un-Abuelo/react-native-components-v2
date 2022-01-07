@@ -22,8 +22,8 @@ const MenuList: FC <Props> = props =>{
             icon={Menu}
             style={props.style}
             onPress={onButtonPress}
-            height={28}
-            width={28}
+            height={24}
+            width={24}
         />
         <SelectionModal
             visible={showModal}

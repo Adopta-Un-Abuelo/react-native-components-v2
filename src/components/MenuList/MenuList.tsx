@@ -1,7 +1,7 @@
 import React, { FC, useState } from 'react';
 import { Menu } from 'react-native-feather';
 
-import ButtomImage from '../Button/ButtonImage';
+import ButtonImage from '../Button/ButtonImage';
 import SelectionModal from '../Modal/SelectionModal';
 
 const MenuList: FC <Props> = props =>{
@@ -18,7 +18,7 @@ const MenuList: FC <Props> = props =>{
 
     return(
         <>
-        <ButtomImage
+        <ButtonImage
             icon={Menu}
             style={props.style}
             onPress={onButtonPress}

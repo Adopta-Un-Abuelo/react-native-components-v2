@@ -1,9 +1,8 @@
 import React, { FC } from 'react';
 import styled from 'styled-components/native';
-import { PressableProps } from 'react-native';
+import { PressableProps, ViewStyle } from 'react-native';
 
 import Button from './Button';
-import ButtonSmall from './ButtonSmall';
 import Color from '../../constants/Color';
 
 const Container = styled.View`
@@ -35,16 +34,10 @@ const BottomButton: FC<Props> = props =>{
             {leftView &&
                 <props.leftView/>
             }
-            {size === 'big' ?
-                <Button
-                    style={{flex: 1}}
-                    {...rest}
-                />
-            : 
-                <ButtonSmall
-                    {...rest}
-                />
-            }
+            <Button
+                style={{flex: props.size === 'big' && 1}}
+                {...rest}
+            />
         </Container>
     )
 }
@@ -53,5 +46,6 @@ export interface Props extends PressableProps{
     size?: 'big' | 'small',
     title: string,
     leftView?: any,
-    showShadow?: boolean
+    showShadow?: boolean,
+    style?: ViewStyle
 }

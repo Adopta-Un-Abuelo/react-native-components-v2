@@ -1,6 +1,9 @@
 import React, { FC } from 'react';
+import { ViewStyle } from 'react-native';
 import styled from 'styled-components/native';
+
 import Color from '../../constants/Color';
+import Text from '../Text/Text';
 
 const Button = styled.Pressable`
     flex-direction: row;
@@ -13,7 +16,7 @@ const Icon = styled.Image`
     width: 32px;
 `
 
-const ButtonImage: FC<Props> = props =>{
+const ButtonImage = (props: Props) =>{
 
     const { source, icon, height, width, ...restProps } = props;
 
@@ -35,7 +38,13 @@ const ButtonImage: FC<Props> = props =>{
                     fill={props.fill ? props.fill : 'transparent'}
                 />
             }
-            {props.children}
+            {props.title &&
+                <Text
+                    style={{marginLeft: 8}}
+                >
+                    {props.title}
+                </Text>
+            }
         </Button>
     )
 }
@@ -44,9 +53,10 @@ export interface Props{
     source?: any,
     icon?: any,
     onPress: any,
-    style?: Object,
+    style?: ViewStyle,
     height?: number,
     width?: number,
     color?: string,
     fill?: string
+    title?: string
 }

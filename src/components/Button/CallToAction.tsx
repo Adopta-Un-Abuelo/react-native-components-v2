@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components/native';
+import { ViewStyle } from 'react-native';
 
 import Text from '../Text/Text';
 import { Color } from '../../constants';
@@ -25,6 +26,6 @@ export default CallToAction;
 export interface Props{
     title: string,
     color?: string,
-    style?: Object,
+    style?: ViewStyle,
     onPress?: any
 }

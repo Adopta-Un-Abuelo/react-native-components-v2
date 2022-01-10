@@ -93,7 +93,7 @@ const TagSelect: FC<Props> = props =>{
                                 style={{color: selected ? 'white' : color, fontFamily: 'Poppins-Medium', ...props.textStyle}}
                                 weight={'semibold'}
                             >
-                                {props.language === 'es' ? item.title : item.en}
+                                {props.locale === 'en' ? item.en : item.title}
                             </Text>
                             {item.subtitle &&
                                 <Text
@@ -128,7 +128,7 @@ export interface Props{
         title: string,
         subtitle?: string
     }>,
-    language?: string,
+    locale?: string,
     icon?: any,
     colors?: Array<string>,
     disabled?: boolean,

@@ -25,7 +25,7 @@ const Column = styled.View`
 
 const TagSelect: FC<Props> = props =>{
 
-    const [ selectedItems, setSelectedItems ] = useState<Array<{id: string, title?: string}>>([]);
+    const [ selectedItems, setSelectedItems ] = useState<Array<{id: string, title?: string, en?: string}>>([]);
     const [ colorsArray, setColorsArray ] = useState<Array<string>>();
 
     useEffect(() =>{
@@ -45,7 +45,7 @@ const TagSelect: FC<Props> = props =>{
         if(props.selectedItems) setSelectedItems(props.selectedItems);
     },[props.selectedItems]);
 
-    const onPress = (item: {id: string, title: string}) =>{
+    const onPress = (item: {id: string, title: string, en?: string}) =>{
         if(props.singleSelection){
             setSelectedItems([item]);
             props.onPress && props.onPress(item);
@@ -93,7 +93,7 @@ const TagSelect: FC<Props> = props =>{
                                 style={{color: selected ? 'white' : color, fontFamily: 'Poppins-Medium', ...props.textStyle}}
                                 weight={'semibold'}
                             >
-                                {item.title}
+                                {props.language === 'es' ? item.title : item.en}
                             </Text>
                             {item.subtitle &&
                                 <Text
@@ -117,21 +117,23 @@ export interface Props{
     options: Array<{
         id: string,
         title: string,
+        en?: string,
         subtitle?: string,
         icon?: any,
         color?: string,
         backgroundColor?: string
-    }>
+    }>,
     selectedItems?: Array<{
         id: string,
         title: string,
         subtitle?: string
-    }>
+    }>,
+    language?: string,
     icon?: any,
     colors?: Array<string>,
     disabled?: boolean,
     singleSelection?: boolean,
-    onPress?: Function
+    onPress?: Function,
     onChange?: Function,
     defaultSelection?: Array<string>
 }

@@ -1,6 +1,6 @@
-import React, { FC, useState, useEffect, forwardRef, useImperativeHandle, useRef } from 'react';
+import React, { FC, useState, useEffect, forwardRef, useImperativeHandle, useRef, Ref } from 'react';
 import styled from 'styled-components/native';
-import { TextInput, TextInputProps, ViewStyle } from 'react-native';
+import { TextInput, ViewStyle } from 'react-native';
 
 import Color from '../../constants/Color';
 import Text from '../Text/Text';
@@ -33,7 +33,7 @@ const InputView = styled.View`
     flex: 1;
 `
 
-const Input: FC<Props> = forwardRef((props, ref) =>{
+const Input = forwardRef((props: Props, ref: Ref<InputRef>) =>{
 
     const input = useRef<TextInput>();
     const [ isFocused, setIsFocused ] = useState<boolean>(false);
@@ -130,4 +130,9 @@ export interface Props{
     autoComplete?: string
     autoCapitalize?: 'none' | 'sentences' | 'words' | 'characters',
     autoCorrent?: boolean
+    children?: any
+}
+export interface InputRef{
+    focus: () => void,
+    blur: () => void
 }

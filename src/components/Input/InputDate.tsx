@@ -1,9 +1,10 @@
 import React, { FC, useState } from 'react';
+import { ViewStyle } from 'react-native';
 import { Calendar } from 'react-native-feather';
 
 import Input from './Input';
 
-const DateInput: FC<Props> = props =>{
+const DateInput = (props: Props) =>{
 
     const [ day, setDay ] = useState<number | undefined>(undefined);
     const [ month, setMonth ] = useState<number | undefined>(undefined);
@@ -61,7 +62,7 @@ const DateInput: FC<Props> = props =>{
             onChangeText={onDateChange}
             keyboardType={'number-pad'}
             value={dateInputValue}
-            error={dateError}
+            error={dateError ? dateError : props.error}
             maxLength={10}
             placeholder={props.placeholder}
         />
@@ -69,7 +70,7 @@ const DateInput: FC<Props> = props =>{
 }
 export default DateInput;
 export interface Props{
-    style?: Object,
+    style?: ViewStyle,
     error?: boolean,
     onChange?: Function,
     maximumDate?: Date,

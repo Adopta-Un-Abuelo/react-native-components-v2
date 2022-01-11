@@ -28,7 +28,7 @@ const Icon = styled.View`
     margin-right: 8px;
 `
 
-const Select: FC<Props> = props =>{
+const Select = (props: Props) =>{
 
     const [ showMenu, setShowMenu ] = useState<boolean>(false);
     const [ selectedItem, setSelectedItem ] = useState<{[key: string]: any}>(props.options && props.options[0]);
@@ -65,12 +65,12 @@ const Select: FC<Props> = props =>{
             >
                 {selectedItem && selectedItem.icon && !props.hideIcon && 
                     <Icon>
-                        {selectedItem.icon}
+                        <selectedItem.icon/>
                     </Icon>
                 }
                 {selectedItem && selectedItem.Icon && !props.hideIcon && 
                     <Icon>
-                        <selectedItem.Icon/>
+                        {selectedItem.Icon}
                     </Icon>
                 }
                 {!props.hideTitle &&
@@ -98,7 +98,7 @@ const Select: FC<Props> = props =>{
 export default Select;
 export interface Props{
     style?: ViewStyle,
-    selectStyle?: any,
+    selectStyle?: ViewStyle,
     textStyle?: TextStyle,
     selectedItem?: {
         [key: string]: any

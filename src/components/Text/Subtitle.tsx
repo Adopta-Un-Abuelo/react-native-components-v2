@@ -1,9 +1,9 @@
-import React, { FC } from 'react';
-import { TextStyle } from 'react-native';
+import React from 'react';
+import { TextStyle, TextProps } from 'react-native';
 
 import Text from './Text';
 
-const Subtitle: FC <Props> = props =>{
+const Subtitle = (props: Props) =>{
 
     return(
         <Text
@@ -21,6 +21,7 @@ const Subtitle: FC <Props> = props =>{
     )
 }
 export default Subtitle;
-export interface Props{
-    style?: TextStyle
+export interface Props extends TextProps{
+    style?: TextStyle,
+    children?: any
 }

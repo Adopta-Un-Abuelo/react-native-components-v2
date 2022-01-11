@@ -1,17 +1,22 @@
 import React from 'react';
 
-import { action } from '@storybook/addon-actions';
-import { boolean, text } from '@storybook/addon-knobs';
+import { boolean, object, array } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/react-native';
 import { Tag } from '../src';
 
 storiesOf('Tag', module)
 	.add('Main', () => (
 		<Tag
-            options={[
+            style={object('style', {
+                margin: 24
+            })}
+            textStyle={object('textStyle', {})}
+            optionStyle={object('optionStyle', {})}
+            options={array('options', [
                 'Option 1',
                 'Option 2',
                 'Option 3'
-            ]}
+            ])}
+            hideIcon={boolean('hideIcon', false)}
         />
 	))

@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components/native';
 import { Check } from 'react-native-feather';
 import { ViewStyle, TextStyle } from 'react-native';
@@ -26,7 +26,7 @@ const CheckButton = styled.Pressable<{selected: boolean, error?: boolean}>`
     border-color: ${Color.error};
 `
 
-const Checkbox: FC<Props> = props =>{
+const Checkbox = (props: Props) =>{
 
     const [ selection, setSelection ] = useState<{id: string} | undefined>(undefined);
 

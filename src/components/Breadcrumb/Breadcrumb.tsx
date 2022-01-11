@@ -35,7 +35,7 @@ const Breadcrumb = (props: Props) =>{
 }
 export default Breadcrumb;
 export interface Props{
-    style?: ViewStyle,
+    style?: any,
     steps: number,
     currentStep: number
 }

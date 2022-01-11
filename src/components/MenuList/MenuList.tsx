@@ -1,10 +1,11 @@
-import React, { FC, useState } from 'react';
+import React, { useState } from 'react';
+import { ViewStyle } from 'react-native';
 import { Menu } from 'react-native-feather';
 
 import ButtonImage from '../Button/ButtonImage';
 import SelectionModal from '../Modal/SelectionModal';
 
-const MenuList: FC <Props> = props =>{
+const MenuList = (props: Props) =>{
 
     const [ showModal, setShowModal ] = useState(false);
 
@@ -37,7 +38,7 @@ const MenuList: FC <Props> = props =>{
 }
 export default MenuList;
 export interface Props{
-    style?: Object,
+    style?: ViewStyle,
     options: Array<{
         id: string,
         title: string,

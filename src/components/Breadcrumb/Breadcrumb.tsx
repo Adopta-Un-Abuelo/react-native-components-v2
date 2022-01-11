@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React from 'react';
 import styled from 'styled-components/native';
 import { ViewStyle, Animated } from 'react-native';
 
@@ -16,7 +16,7 @@ const Crumb = styled.View<{active: boolean}>`
     background-color: ${props => props.active ? Color.blue3 : Color.gray4};
 `
 
-const Breadcrumb: FC<Props> = props =>{
+const Breadcrumb = (props: Props) =>{
 
     const array = Array.from(Array(props.steps).keys())
 
@@ -35,7 +35,7 @@ const Breadcrumb: FC<Props> = props =>{
 }
 export default Breadcrumb;
 export interface Props{
-    style?: Object,
+    style?: ViewStyle,
     steps: number,
     currentStep: number
 }

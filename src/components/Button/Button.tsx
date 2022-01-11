@@ -3,11 +3,10 @@ import styled from 'styled-components/native';
 import LottieView from 'lottie-react-native';
 import { GestureResponderEvent, PressableProps, ViewStyle, TextStyle } from 'react-native';
 
-import { ChevronRight } from 'react-native-feather';
 import Color from '../../constants/Color';
 import Text from '../Text/Text';
 
-const Container = styled.Pressable<{type?: 'line' | 'fill', color?: string}>`
+const Container = styled.Pressable<{type?: 'line' | 'fill', color?: string, size?: 'small' | 'big'}>`
     flex-direction: row;
     height: 58px;
     border-radius: 36px;
@@ -75,6 +74,5 @@ export interface Props extends PressableProps{
     icon?: any,
     iconStyle?: any,
     type?: 'fill' | 'line',
-    size?: 'normal' | 'small',
     hideIcon?: boolean
 }

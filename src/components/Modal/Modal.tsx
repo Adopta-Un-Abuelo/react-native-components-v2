@@ -1,5 +1,6 @@
 import React, { FC } from 'react';
 import styled from 'styled-components/native';
+import { ViewStyle } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Modal from "react-native-modal";
 
@@ -55,7 +56,7 @@ const Swipe = styled.View`
     background-color: ${Color.gray5};
 `
 
-const ModalComponent: FC<Props> = props =>{
+const ModalComponent = (props: Props) =>{
 
     const { buttonProps, secondButtonProps } = props;
     const onClosePress = () =>{
@@ -122,7 +123,8 @@ const ModalComponent: FC<Props> = props =>{
                     }
                     {((!props.hideClose && props.horientation !== 'fullScreen') || props.showBottomClose) &&
                         <Button
-                            style={{backgroundColor: 'transparent'}}
+                            type={'line'}
+                            style={{borderWidth: 0}}
                             color={Color.gray3}
                             title={props.translation ? props.translation.modal_cancel : 'Cancelar'}
                             onPress={onClosePress}
@@ -145,7 +147,7 @@ export interface Props{
     translation?: {
 		[key: string]: any
 	},
-    style?: Object,
+    style?: ViewStyle,
     ref?: any,
     title?: string,
     subtitle?: string,
@@ -155,17 +157,18 @@ export interface Props{
     buttonProps?: {
         onPress?: any,
         title: string,
-        style?: Object,
+        style?: ViewStyle,
         [key: string]: any
     },
     secondButtonProps?: {
         onPress?: any,
         title: string,
-        style?: Object,
+        style?: ViewStyle,
         [key: string]: any
     }
     visible: boolean,
     onDismiss: Function,
     onModalHide?: Function,
-    swipeToClose?: boolean
+    swipeToClose?: boolean,
+    children?: any 
 }

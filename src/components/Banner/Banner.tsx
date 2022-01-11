@@ -1,11 +1,10 @@
-import React, { FC } from 'react';
+import React from 'react';
 import styled from 'styled-components/native';
 import { ViewStyle } from 'react-native';
 
 import Color from '../../constants/Color';
 import Text from '../Text/Text';
 import Button from '../Button/Button';
-import ButtonSmall from '../Button/ButtonSmall'
 
 const Container = styled.View`
     padding: 24px 32px;
@@ -17,7 +16,7 @@ const Row = styled.View`
 const ChildrenView = styled.View`
 `
 
-const Banner: FC<Props> = props =>{
+const Banner = (props: Props) =>{
 
     return(
         <Container
@@ -40,8 +39,8 @@ const Banner: FC<Props> = props =>{
                 {props.children}
             </ChildrenView>
             {props.buttonProps &&
-                <ButtonSmall
-                    style={{height: 36}}
+                <Button
+                    style={{height: 36, alignSelf: 'flex-end'}}
                     {...props.buttonProps}
                 />
             }
@@ -53,6 +52,7 @@ export interface Props {
     position: "top" | "bottom" | "center",
     title: string,
     icon: any,
-    buttonProps?: React.Component<typeof Button>
-    style?: ViewStyle
+    buttonProps?: any,
+    style?: ViewStyle,
+    children?: any
 }

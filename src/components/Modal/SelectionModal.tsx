@@ -66,11 +66,11 @@ const SelectionModal: FC<Props> = props =>{
                         {item.icon &&
                             <item.icon stroke={Color.blue3}/>
                         }
-                    {item.Icon &&
+                        {item.Icon &&
                             <Icon>
                                 {item.Icon}
                             </Icon>
-                    } 
+                        } 
                         <Text
                             style={{marginLeft: 12}}
                         >

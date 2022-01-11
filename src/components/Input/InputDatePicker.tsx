@@ -5,7 +5,7 @@ import DatePicker from 'react-native-date-picker'
 import Input from './InputFalse';
 import Modal from '../Modal/Modal'
 
-const DateInput: FC<Props> = props =>{
+const DateInput = (props: Props) =>{
 
     const [ showModal, setShowModal ] = useState(false);
     const [ dateInputValue, setDateInputValue ] = useState<string | undefined>(undefined);

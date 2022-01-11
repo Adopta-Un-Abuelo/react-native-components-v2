@@ -6,10 +6,9 @@ import Text from '../Text/Text';
 import Color from '../../constants/Color';
 
 const Container = styled.View`
-    flex: 1;
+    
 `
 const Cell = styled.Pressable`
-    flex: 1;
     padding: 18px 0px;
     flex-direction: row;
 `

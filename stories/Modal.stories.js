@@ -1,28 +1,38 @@
 import React from 'react';
+import { View } from 'react-native';
 
 import { action } from '@storybook/addon-actions';
-import { boolean, text } from '@storybook/addon-knobs';
+import { array, boolean, object, select, text } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/react-native';
 import { Modal, Text, SelectionModal, PaymentMethodModal, WebModal, VideoModal } from '../src';
 
 storiesOf('Modal', module)
 	.add('Main', () => (
         <Modal
-            title='Title'
-            subtitle='Subtitle'
-            visible={true}
-            buttonProps={{
+            style={object('style', {})}
+            title={text('title', 'Title')}
+            subtitle={text('subtitle', 'Subtitle')}
+            visible={boolean('visible', false)}
+            hideClose={boolean('hideClose', false)}
+            buttonProps={object('buttonProps', {
                 title: 'Button'
-            }}
+            })}
+            horientation={select('horientation', ['top', 'bottom', 'center', 'fullScreen'])}
+            showBottomClose={boolean('showBottomClose', true)}
+            swipeToClose={boolean('swipeToClose', false)}
         >
-            <Text>Children</Text>
+            <View style={{flex: 1}}>
+                <Text>Children</Text>
+            </View>
         </Modal>
     ))
     .add('Selection', () => (
         <SelectionModal
-            visible={true}
-            horientation='bottom'
-            options={[
+            style={object('style', {})}
+            title={text('title', 'Title')}
+            visible={boolean('visible', false)}
+            horientation={select('horientation', ['top', 'bottom', 'center', 'fullScreen'], 'bottom')}
+            options={array('options', [
                 {
                     id: 'option1',
                     title: 'Option 1'
@@ -35,7 +45,7 @@ storiesOf('Modal', module)
                     id: 'option3',
                     title: 'Option 3'
                 }
-            ]}
+            ])}
         />
     ))
     .add('PaymentMethod', () => (

@@ -5,7 +5,7 @@ import Select from '../Select/Select';
 import Input from '../Input/Input';
 import Country from '../../constants/Country';
 
-const PhoneInput: FC<Props> = props =>{
+const PhoneInput = (props: Props) =>{
 
     const input = useRef<TextInput>(null);
     const [ title, setTitle ] = useState('+34');
@@ -27,7 +27,7 @@ const PhoneInput: FC<Props> = props =>{
         <Input
             id = "phoneInput"
             {...props}
-            placeholder={props.translation?.input_phone_phone}
+            placeholder={props.translation ? props.translation?.input_phone_phone : 'Teléfono'}
             maxLength={10}
             autoComplete={'tel'}
             keyboardType={'number-pad'}
@@ -41,7 +41,7 @@ const PhoneInput: FC<Props> = props =>{
                 titleValue={'title'}
                 title={title}
                 modalProps={{
-                    title: props.translation?.input_phone_phone_prefix
+                    title: props.translation ? props.translation?.input_phone_phone_prefix : 'Prefijo telefónico'
                 }}
                 onChange={onCountryChange}
                 onShow={onSelectShow}

@@ -1,4 +1,4 @@
-import React, { FC, useState, forwardRef, useImperativeHandle, useRef } from 'react';
+import React, { useState, forwardRef, useImperativeHandle, useRef, Ref } from 'react';
 import { GooglePlacesAutocomplete, GooglePlaceDetail, GooglePlacesAutocompleteRef } from 'react-native-google-places-autocomplete';
 
 import Color from '../../constants/Color';
@@ -6,7 +6,7 @@ import Modal from '../Modal/Modal';
 import Input from './InputFalse';
 import { MapPin } from 'react-native-feather';
 
-const PlaceInput: FC<Props> = forwardRef((props, ref) =>{
+const PlaceInput = forwardRef((props: Props, ref: Ref<InputRef>) =>{
 
     const input = useRef<GooglePlacesAutocompleteRef>();
     const [ showModal, setShowModal ] = useState<boolean>(false);
@@ -46,7 +46,7 @@ const PlaceInput: FC<Props> = forwardRef((props, ref) =>{
             value={address}
         />
         <Modal
-            title={props.translation.input_place_search_direction}
+            title={props.translation ? props.translation.input_place_search_direction : 'Buscar localización'}
             visible={showModal}
             horientation={'fullScreen'}
             onDismiss={onDismiss}
@@ -110,4 +110,8 @@ export interface Props{
     onBlur?: Function,
     error?: boolean,
     placeholder?: string
+}
+export interface InputRef{
+    focus: () => void,
+    blur: () => void
 }

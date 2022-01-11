@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React from 'react';
 import styled from 'styled-components/native';
 
 import Color from '../../constants/Color';
@@ -8,7 +8,7 @@ const Input = styled.TextInput`
     height: 169px;
     border-radius: 24px;
     padding: 24px 16px;
-    font-family: 'Poppins';
+    font-family: 'Poppins-Regular';
     color: ${Color.gray2};
     justify-content: flex-start;
     align-items: flex-start;

@@ -21,7 +21,7 @@ const Cell = styled.View`
     border-color: ${Color.blue3};
 `
 
-const Header: FC<Props> = props =>{
+const Header = (props: Props) =>{
     return(
         <Container
             style={props.style}

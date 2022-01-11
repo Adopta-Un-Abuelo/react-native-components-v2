@@ -1,7 +1,7 @@
 import React from 'react';
 import { View } from 'react-native';
 
-import { action } from '@storybook/addon-actions';
+import { Activity, Airplay, AlignCenter } from 'react-native-feather';
 import { array, boolean, object, select, text } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/react-native';
 import { Modal, Text, SelectionModal, PaymentMethodModal, WebModal, VideoModal } from '../src';
@@ -18,6 +18,7 @@ storiesOf('Modal', module)
                 title: 'Button'
             })}
             horientation={select('horientation', ['top', 'bottom', 'center', 'fullScreen'])}
+            avoidKeyboard={boolean(boolean, false)}
             showBottomClose={boolean('showBottomClose', true)}
             swipeToClose={boolean('swipeToClose', false)}
         >
@@ -32,18 +33,22 @@ storiesOf('Modal', module)
             title={text('title', 'Title')}
             visible={boolean('visible', false)}
             horientation={select('horientation', ['top', 'bottom', 'center', 'fullScreen'], 'bottom')}
+            showSearch={boolean('showSearch', true)}
             options={array('options', [
                 {
                     id: 'option1',
-                    title: 'Option 1'
+                    title: 'Option 1',
+                    icon: Activity
                 },
                 {
                     id: 'option2',
-                    title: 'Option 3'
+                    title: 'Option 3',
+                    icon: Airplay
                 },
                 {
                     id: 'option3',
-                    title: 'Option 3'
+                    title: 'Option 3',
+                    icon: AlignCenter
                 }
             ])}
         />

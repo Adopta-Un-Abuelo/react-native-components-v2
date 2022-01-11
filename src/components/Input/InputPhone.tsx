@@ -41,7 +41,8 @@ const PhoneInput = (props: Props) =>{
                 titleValue={'title'}
                 title={title}
                 modalProps={{
-                    title: props.translation ? props.translation?.input_phone_phone_prefix : 'Prefijo telefónico'
+                    title: props.translation ? props.translation?.input_phone_phone_prefix : 'Prefijo telefónico',
+                    showSearch: true
                 }}
                 onChange={onCountryChange}
                 onShow={onSelectShow}

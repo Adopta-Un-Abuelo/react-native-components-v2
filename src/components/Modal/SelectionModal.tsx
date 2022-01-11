@@ -100,7 +100,7 @@ const SelectionModal: FC<Props> = props =>{
                         onPress={() => onPress(item)}
                     >
                         {item.icon &&
-                            <item.icon stroke={Color.blue3}/>
+                            <item.icon height={24} width={24} stroke={Color.blue3}/>
                         }
                         {item.Icon &&
                             <Icon>

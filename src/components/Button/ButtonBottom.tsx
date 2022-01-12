@@ -35,7 +35,7 @@ const BottomButton: FC<Props> = props =>{
                 <props.leftView/>
             }
             <Button
-                style={{flex: props.size === 'big' && 1}}
+                style={{flex: props.size === 'big' ? 1 : 0}}
                 {...rest}
             />
         </Container>

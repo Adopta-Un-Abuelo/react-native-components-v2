@@ -1,4 +1,4 @@
-import React, { FC, useState, useEffect, forwardRef, useImperativeHandle, Ref } from 'react';
+import React, { useState, useEffect, forwardRef, useImperativeHandle, Ref } from 'react';
 import styled from 'styled-components/native';
 import { Plus } from 'react-native-feather';
 import { Platform } from 'react-native';
@@ -32,7 +32,7 @@ const PaymentMethodSelect = forwardRef((props: Props, ref: Ref<SelectPaymentMeth
 
     const cardPayment = {
         id: 'card',
-        title: props.translation.payment_method_select_add_credit_card,
+        title: props.translation ? props.translation.payment_method_select_add_credit_card : 'Añadir forma de pago',
         icon: Plus,
         paymentMethod: undefined
     };
@@ -63,10 +63,14 @@ const PaymentMethodSelect = forwardRef((props: Props, ref: Ref<SelectPaymentMeth
             if(stripe.deviceSupportsNativePay() && stripe.canMakeNativePayPayments() && props.nativePay){
                 setOptions([nativePayment, cardPayment]);
                 props.onChange && props.onChange(nativePayment);
-            } else{
+            } 
+            else{
                 setOptions([cardPayment])
                 props.onChange && props.onChange(cardPayment);
             }
+        }
+        else{
+            setOptions([cardPayment]);
         }
     },[]);
 
@@ -122,7 +126,7 @@ const PaymentMethodSelect = forwardRef((props: Props, ref: Ref<SelectPaymentMeth
         } else {
             setDefaultCard();
         }
-
+        
         // Close select modal
         setShowSelectModal(false);
         props.onChange && props.onChange(option);
@@ -148,7 +152,7 @@ const PaymentMethodSelect = forwardRef((props: Props, ref: Ref<SelectPaymentMeth
             onPress={() => setShowSelectModal(true)}
         >
             <Modal
-                title={props.translation.payment_method_select_modal_payment_method}
+                title={props.translation ? props.translation.payment_method_select_modal_payment_method : 'Método de pago'}
                 visible={showSelectModal}
                 horientation={'bottom'}
                 onDismiss={onDismissModalSelect}
@@ -210,7 +214,7 @@ const PaymentMethodSelect = forwardRef((props: Props, ref: Ref<SelectPaymentMeth
             <Text
                 style={{color: Color.gray2}}
             >
-                {props.translation.payment_method_select_modify}
+                {props.translation ? props.translation.payment_method_select_modify : 'Modificar'}
             </Text>
         </Cell>
     )

@@ -19,5 +19,6 @@
     "**/*.test.[tj]sx",
     "App.test.tsx",
     "App.tsx"
-  ]
+  ],
+  "extends": "expo/tsconfig.base"
 }

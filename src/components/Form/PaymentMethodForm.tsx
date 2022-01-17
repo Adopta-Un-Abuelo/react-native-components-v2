@@ -115,7 +115,7 @@ const PaymentMethodForm: FC<Props> = props =>{
             style={props.style}
         >
             <Input
-                placeholder={props.translation.form_payment_method_credit_card}
+                placeholder={props.translation ? props.translation.form_payment_method_credit_card : 'Número de tarjeta'}
                 icon={CreditCard}
                 onChangeText={onCardNumberChange}
                 error={cardNumberError}
@@ -126,7 +126,7 @@ const PaymentMethodForm: FC<Props> = props =>{
             <Row>
                 <Input
                     style={{flex: 1, marginRight: 16}}
-                    placeholder={props.translation.form_payment_method_date}
+                    placeholder={props.translation ? props.translation.form_payment_method_date : 'MM/AA'}
                     icon={Calendar}
                     error={dateError}
                     keyboardType={'number-pad'}
@@ -136,7 +136,7 @@ const PaymentMethodForm: FC<Props> = props =>{
                 />
                 <Input
                     style={{flex: 1}}
-                    placeholder={props.translation.form_payment_method_cvc}
+                    placeholder={props.translation ? props.translation.form_payment_method_cvc : 'CVC'}
                     icon={Lock}
                     onChangeText={onCVCChange}
                     error={cVCError}

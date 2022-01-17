@@ -94,12 +94,12 @@ const PaymentMethodSelect = forwardRef((props: Props, ref: Ref<SelectPaymentMeth
         // Set payment if user have default card
         if(props.paymentMethods){
             props.paymentMethods?.map(item =>{
-                const isDefault = item.get('default');
+                const isDefault = item.default;
                 if(isDefault){
                     const method = {
                         id: item.id, 
-                        title: creditCardHidde+item.get('last4'),
-                        icon: PaycardLogos[item.get('brand').toLowerCase()].icon,
+                        title: creditCardHidde+item.last4,
+                        icon: PaycardLogos[item.brand.toLowerCase()].icon,
                         paymentMethod: undefined
                     }
                     setMethodSelected(method)
@@ -160,8 +160,8 @@ const PaymentMethodSelect = forwardRef((props: Props, ref: Ref<SelectPaymentMeth
             >
                 <ScrollView>
                     {props.paymentMethods && props.paymentMethods.map((item, index) =>{
-                        const Paycard = item.id === 'newCard' ? item.icon : PaycardLogos[item.get('brand').toLowerCase()].icon;
-                        const last4 = item.id === 'newCard' ? item.title : creditCardHidde+item.get('last4');
+                        const Paycard = item.id === 'newCard' ? item.icon : PaycardLogos[item.brand.toLowerCase()].icon;
+                        const last4 = item.id === 'newCard' ? item.title : creditCardHidde+item.last4;
                         return (
                             <Cell
                                 style={{borderBottomWidth: 1, borderBottomColor: Color.gray5}}

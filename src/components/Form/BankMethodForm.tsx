@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, { forwardRef, useState, Ref, useImperativeHandle } from 'react';
 import styled from 'styled-components/native';
 import { createPaymentMethod } from '@stripe/stripe-react-native';
 
@@ -6,18 +6,20 @@ import Input from '../Input/Input';
 import { DollarSign, User } from 'react-native-feather';
 
 const Container = styled.View``
-const Row = styled.View`
-    flex-direction: row;
-    margin-top: 16px;
-`
 
-const PaymentMethodForm: FC<Props> = props =>{
+const BankMethodForm = forwardRef((props: Props, ref: Ref<BankMethodFormRef>) =>{
 
     const [ iban, setIban ] = useState('');
     const [ name, setName ] = useState();
     const [ ibanError, setIbanError ] = useState(false);
     const [ nameError, setNameError ] = useState(false);
     
+    useImperativeHandle(ref, () => ({
+        async generateToken(){
+            return await generateToken(iban, name)
+        }
+    }));
+
     const onIBANChange = text =>{
         setIbanError(false);
         if(text.length < iban.length){
@@ -32,24 +34,16 @@ const PaymentMethodForm: FC<Props> = props =>{
             else
                 setIban(text);
         }
-        if(text.length === 29) checkIBAN(text, name);
     }
 
     const onNameChange = text =>{
         setName(text);
         setNameError(false);
-        if(text.length === 3){
-            checkIBAN(iban, text);
-        }
     }
 
-    const checkIBAN = async (iban, name) =>{
+    const generateToken = async (iban, name) =>{
         if(iban && name){
             try{
-                props.onChange && props.onChange({
-                    status: 'loading',
-                    result: undefined
-                });
                 const result = await createPaymentMethod({
                     type: 'SepaDebit',
                     iban: iban,
@@ -57,18 +51,25 @@ const PaymentMethodForm: FC<Props> = props =>{
                         name: name
                     }
                 });
-                console.log(result);
-                /*props.onChange && props.onChange({
+                return {
                     status: 'ok',
                     result: result
-                });*/
+                };
             } catch(e){
                 console.error(e);
-                props.onChange && props.onChange({
+                return {
                     status: 'error',
-                    result: e
-                });
+                    error: e
+                };
             }
+        }
+        else{
+            setIbanError(true);
+            setNameError(true);
+            return {
+                status: 'error'
+            };
+            
         }
     }
     return(
@@ -93,12 +94,18 @@ const PaymentMethodForm: FC<Props> = props =>{
             />
         </Container>
     )
-}
-export default PaymentMethodForm;
+})
+export default BankMethodForm;
 export interface Props{
     translation: {
 		[key: string]: any
 	},
-    style?: Object,
-    onChange?: Function
+    style?: Object
+}
+export interface BankMethodFormRef{
+    generateToken: () => Promise<{
+        status: string,
+        result?: Object,
+        error?: any
+    }>
 }

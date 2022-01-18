@@ -1,12 +1,12 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useState, useRef } from 'react';
 import styled from 'styled-components/native';
 import { Keyboard } from 'react-native';
 
 import { ChevronRight, CreditCard, DollarSign } from 'react-native-feather';
 import Modal from './Modal';
 import Text from '../Text/Text';
-import PaymentMethodForm from '../Form/PaymentMethodForm';
-import BankMethodForm from '../Form/BankMethodForm';
+import PaymentMethodForm, { PaymentMethodFormRef } from '../Form/PaymentMethodForm';
+import BankMethodForm, { BankMethodFormRef } from '../Form/BankMethodForm';
 import { Color } from '../../constants';
 import PaycardLogos from '../../constants/Paycard';
 
@@ -31,37 +31,26 @@ const Cell = styled.Pressable`
 
 const PaymentMethodModal: FC<Props> = props => {
 
+    const bankForm = useRef<BankMethodFormRef>();
+    const paycardForm = useRef<PaymentMethodFormRef>();
     const [ error, setError ] = useState<boolean>(false);
     const [ loading, setLoading ] = useState(false);
     const [ optionSelected, setOptionSelected ] = useState(undefined);
     const options = [
         {
             id: 'sepa_debit',
-            title: 'Cuenta bancaria',
+            title: props.translation ? props.translation. form_payment_method_sepa_debit : 'Cuenta bancaria',
             icon: <DollarSign height={24} width={24} stroke={Color.gray2}/>
         },
         {
             id: 'card',
-            title: 'Tarjeta de crédito o débito',
+            title: props.translation ? props.translation.general_credit_card_long : 'Tarjeta de crédito o débito',
             icon: <CreditCard height={24} width={24} stroke={Color.gray2}/>
         }
     ]
 
-    const onPaycardChange = result => {
-        Keyboard.dismiss();
-        if(result.status === 'ok') {
-            props.onChange && props.onChange(result.result);
-            onDismiss()
-            setLoading(false);
-        } else if (result.status === 'loading') {
-            setLoading(true)
-        } else {
-            setError(true);
-            setLoading(false);
-        }
-    }
-
     const onDismiss = () => {
+        setOptionSelected(undefined);
         props.onDismiss && props.onDismiss();
     }
 
@@ -69,28 +58,57 @@ const PaymentMethodModal: FC<Props> = props => {
         setOptionSelected(option);
     }
 
+    const onBackPress = () =>{
+        setOptionSelected(undefined);
+    }
+
+    const onSavePress = async () =>{
+        Keyboard.dismiss();
+        if(optionSelected.id === 'card'){
+            setLoading(true);
+            const result = await paycardForm?.current.generateToken();
+            if(result.status === 'ok'){
+                props.onChange && props.onChange(result.result);
+                onDismiss();
+            }
+            setLoading(false);
+        }
+        else if(optionSelected.id === 'sepa_debit'){
+            setLoading(true);
+            const result = await bankForm?.current.generateToken();
+            if(result.status === 'ok'){
+                props.onChange && props.onChange(result.result);
+                onDismiss();
+            }
+            setLoading(false);
+        }
+    }
+
     return(
         <Modal
             title={optionSelected ?
-                (props.translation ? props.translation.payment_method_modal_title : 'Datos de tarjeta') :
+                (optionSelected.id === 'card' ? (props.translation ? props.translation.payment_method_modal_title : 'Datos de tarjeta') : (props.translation ? props.translation.payment_method_modal_title_bank : 'Datos de cuenta bancaria')) :
                 (props.translation ? props.translation.payment_method_select_add_credit_card : 'Añadir forma de pago')
             }
             visible={props.visible}
             horientation={'fullScreen'}
             onDismiss={onDismiss}
             buttonProps={optionSelected && {
-                title: props.translation ? props.translation.payment_method_modal_btn_save_card : 'Guardar tarjeta',
-                loading: loading
+                title: optionSelected.id === 'card' ? (props.translation ? props.translation.payment_method_modal_btn_save_card : 'Guardar tarjeta') : (props.translation ? props.translation.payment_method_modal_btn_save_sepa : 'Guardar cuenta bancaria'),
+                loading: loading,
+                onPress: onSavePress
             }}
+            showBack={optionSelected}
+            onBackPress={onBackPress}
         >
             {optionSelected ? 
                 <Container>
                     {optionSelected.id === 'card' &&
                         <>
                         <PaymentMethodForm
+                            ref={paycardForm}
                             translation={props.translation}
                             style={{marginTop: 24, marginBottom: 24}}
-                            onChange={onPaycardChange}
                         />
                         {error &&
                             <Text
@@ -117,9 +135,9 @@ const PaymentMethodModal: FC<Props> = props => {
                     {optionSelected.id === 'sepa_debit' &&
                         <>
                         <BankMethodForm
+                            ref={bankForm}
                             translation={props.translation}
                             style={{marginTop: 24, marginBottom: 24}}
-                            onChange={onPaycardChange}
                         />
                         </>
                     }

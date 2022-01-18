@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, { forwardRef, useState, Ref, useImperativeHandle } from 'react';
 import styled from 'styled-components/native';
 import { createPaymentMethod, CardField } from '@stripe/stripe-react-native';
 
@@ -6,32 +6,42 @@ import Color from '../../constants/Color';
 
 const Container = styled.View``
 
-const PaymentMethodForm: FC<Props> = props =>{
+const PaymentMethodForm = forwardRef((props: Props, ref: Ref<PaymentMethodFormRef>) =>{
 
     const [ isFocus, setIsFocus ] = useState(false);
+    const [ cardDetails, setCardDetails ] = useState(undefined);
 
-    const onCardChange = async (cardDetails) =>{
-        if(cardDetails.complete){
+    useImperativeHandle(ref, () => ({
+        async generateToken(){
+            return await generateToken();
+        }
+    }));
+
+    const generateToken = async () =>{
+        if(cardDetails){
             try{
-                props.onChange && props.onChange({
-                    status: 'loading',
-                    result: undefined
-                });
                 const result = await createPaymentMethod({
                     type: 'Card',
                     ...cardDetails
                 });
-                props.onChange && props.onChange({
+                return {
                     status: 'ok',
                     result: result.paymentMethod
-                });
-            } catch(e){
+                };
+            } 
+            catch(e){
                 console.error(e);
-                props.onChange && props.onChange({
+                return{
                     status: 'error',
-                    result: e
-                });
+                    error: e
+                };
             }
+        }
+    }
+
+    const onCardChange = async (cardDetails) =>{
+        if(cardDetails.complete){
+            setCardDetails(cardDetails);
         }
     }
 
@@ -64,12 +74,18 @@ const PaymentMethodForm: FC<Props> = props =>{
             />
         </Container>
     )
-}
+})
 export default PaymentMethodForm;
 export interface Props{
     translation: {
 		[key: string]: any
 	},
-    style?: Object,
-    onChange?: Function
+    style?: Object
+}
+export interface PaymentMethodFormRef{
+    generateToken: () => Promise<{
+        status: string,
+        result?: Object,
+        error?: any
+    }>
 }

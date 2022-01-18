@@ -1,6 +1,6 @@
 import React, { FC, useState } from 'react';
 import styled from 'styled-components/native';
-import stripe from 'tipsi-stripe';
+import { createPaymentMethod } from '@stripe/stripe-react-native';
 
 import Input from '../Input/Input';
 import { DollarSign, User } from 'react-native-feather';
@@ -50,20 +50,18 @@ const PaymentMethodForm: FC<Props> = props =>{
                     status: 'loading',
                     result: undefined
                 });
-                const result = await stripe.createSourceWithParams({
-                    type: 'sepaDebit',
-                    currency: 'eur',
-                    sepaDebitDetails:{
-                        iban: iban
-                    },
-                    owner:{
+                const result = await createPaymentMethod({
+                    type: 'SepaDebit',
+                    iban: iban,
+                    billingDetails:{
                         name: name
                     }
                 });
-                props.onChange && props.onChange({
+                console.log(result);
+                /*props.onChange && props.onChange({
                     status: 'ok',
                     result: result
-                });
+                });*/
             } catch(e){
                 console.error(e);
                 props.onChange && props.onChange({
@@ -73,13 +71,12 @@ const PaymentMethodForm: FC<Props> = props =>{
             }
         }
     }
-
     return(
         <Container
             style={props.style}
         >
             <Input
-                placeholder={props.translation ? props.translation.form_payment_method_credit_card : 'Nombre del titular'}
+                placeholder={props.translation ? props.translation.form_payment_method_name : 'Nombre del titular'}
                 icon={User}
                 onChangeText={onNameChange}
                 error={nameError}
@@ -87,7 +84,7 @@ const PaymentMethodForm: FC<Props> = props =>{
             />
             <Input
                 style={{marginTop: 16}}
-                placeholder={props.translation ? props.translation.form_payment_method_cvc : 'Cuenta bancaría (IBAN)'}
+                placeholder={props.translation ? props.translation.form_payment_method_sepa_debit : 'Cuenta bancaría (IBAN)'}
                 icon={DollarSign}
                 onChangeText={onIBANChange}
                 error={ibanError}

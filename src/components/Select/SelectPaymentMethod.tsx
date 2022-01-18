@@ -2,7 +2,7 @@ import React, { useState, useEffect, forwardRef, useImperativeHandle, Ref } from
 import styled from 'styled-components/native';
 import { Plus } from 'react-native-feather';
 import { Platform } from 'react-native';
-import stripe from 'tipsi-stripe';
+import { isApplePaySupported } from '@stripe/stripe-react-native';
 
 import Color from '../../constants/Color';
 import PaycardLogos from '../../constants/Paycard';
@@ -60,7 +60,7 @@ const PaymentMethodSelect = forwardRef((props: Props, ref: Ref<SelectPaymentMeth
     useEffect(() =>{
         if(props.nativePay){
             // Set payment method (NATIVE OR CARD)
-            if(stripe.deviceSupportsNativePay() && stripe.canMakeNativePayPayments() && props.nativePay){
+            if(((Platform.OS === 'ios' && isApplePaySupported()) || Platform.OS === 'android') && props.nativePay){
                 setOptions([nativePayment, cardPayment]);
                 props.onChange && props.onChange(nativePayment);
             } 
@@ -86,7 +86,7 @@ const PaymentMethodSelect = forwardRef((props: Props, ref: Ref<SelectPaymentMeth
 
     useImperativeHandle(ref, () => ({
         async confirmPaymentIntent(clientSecret){
-            return await stripe.authenticatePaymentIntent({ clientSecret: clientSecret });
+            //return await stripe.authenticatePaymentIntent({ clientSecret: clientSecret });
         }
     }));
 

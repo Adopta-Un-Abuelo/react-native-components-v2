@@ -1,4 +1,4 @@
-import React, { useState, useEffect, forwardRef, useImperativeHandle, Ref } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components/native';
 import { Plus } from 'react-native-feather';
 import { Platform } from 'react-native';
@@ -17,21 +17,19 @@ const Cell = styled.Pressable`
     padding: 22px 0px;
     align-items: center;
 `
-const applePay = 'Apple pay'
-const googlePay = 'Google Pay'
 const creditCardHidde = '**** **** **** '
 
-const PaymentMethodSelect = forwardRef((props: Props, ref: Ref<SelectPaymentMethodRef>) =>{
+const PaymentMethodSelect = (props: Props) =>{
 
     const nativePayment = {
-        id: Platform.OS === 'ios' ? 'applePay' : 'googlePay',
-        title: Platform.OS === 'ios' ? applePay : googlePay,
+        objectId: Platform.OS === 'ios' ? 'applePay' : 'googlePay',
+        title: Platform.OS === 'ios' ? 'Apple Pay' : 'Google Pay',
         icon: Platform.OS === 'ios' ? PaycardLogos.apple.icon : PaycardLogos.google.icon,
         paymentMethod: undefined
     };
 
     const cardPayment = {
-        id: 'card',
+        objectId: 'new',
         title: props.translation ? props.translation.payment_method_select_add_credit_card : 'Añadir forma de pago',
         icon: Plus,
         paymentMethod: undefined
@@ -39,7 +37,7 @@ const PaymentMethodSelect = forwardRef((props: Props, ref: Ref<SelectPaymentMeth
 
     // Method of payment
     const [ methodSelected, setMethodSelected ] = useState(props.nativePay ? nativePayment : cardPayment)
-    const [ options, setOptions ] = useState<Array<{id: string, title: string, icon: any}>>([]);
+    const [ options, setOptions ] = useState<Array<{objectId: string, title: string, icon: any}>>([]);
 
     // Manage open/close transition
     const [ action, setAction ] = useState<undefined | string>(undefined);
@@ -58,19 +56,14 @@ const PaymentMethodSelect = forwardRef((props: Props, ref: Ref<SelectPaymentMeth
     }
 
     useEffect(() =>{
-        if(props.nativePay){
-            // Set payment method (NATIVE OR CARD)
-            if(((Platform.OS === 'ios' && isApplePaySupported()) || Platform.OS === 'android') && props.nativePay){
-                setOptions([nativePayment, cardPayment]);
-                props.onChange && props.onChange(nativePayment);
-            } 
-            else{
-                setOptions([cardPayment])
-                props.onChange && props.onChange(cardPayment);
-            }
+        // Set payment method (NATIVE OR CARD)
+        if(((Platform.OS === 'ios' && isApplePaySupported()) || Platform.OS === 'android') && props.nativePay){
+            setOptions([nativePayment, cardPayment]);
+            props.onChange && props.onChange(nativePayment);
         }
         else{
-            setOptions([cardPayment]);
+            setOptions([cardPayment])
+            props.onChange && props.onChange(cardPayment);
         }
     },[]);
 
@@ -78,39 +71,32 @@ const PaymentMethodSelect = forwardRef((props: Props, ref: Ref<SelectPaymentMeth
         setDefaultCard();
     },[props.paymentMethods]);
 
-    useEffect(() =>{
-        if(props.showAddCard){
-            setShowSelectModal(true);
+    const setDefaultCard = (method?) =>{
+        if(method){
+            setMethodSelected(method)
+            props.onChange && props.onChange(method);
         }
-    },[props.showAddCard]);
-
-    useImperativeHandle(ref, () => ({
-        async confirmPaymentIntent(clientSecret){
-            //return await stripe.authenticatePaymentIntent({ clientSecret: clientSecret });
-        }
-    }));
-
-    const setDefaultCard = () =>{
-        // Set payment if user have default card
-        if(props.paymentMethods){
-            props.paymentMethods?.map(item =>{
-                const isDefault = item.default;
-                if(isDefault){
-                    const method = {
-                        id: item.id, 
-                        title: creditCardHidde+item.last4,
-                        icon: PaycardLogos[item.brand.toLowerCase()].icon,
-                        paymentMethod: undefined
+        else{
+            // Set payment if user have default card
+            if(props.paymentMethods){
+                props.paymentMethods?.map(item =>{
+                    if(item.default){
+                        const method = {
+                            objectId: item.objectId, 
+                            title: creditCardHidde+item.last4,
+                            icon: PaycardLogos[item.brand.toLowerCase()].icon,
+                            paymentMethod: undefined
+                        }
+                        setMethodSelected(method)
+                        props.onChange && props.onChange(item);
                     }
-                    setMethodSelected(method)
-                    props.onChange && props.onChange(item);
-                }
-            })
+                })
+            }
         }
     }
 
-    const onShowModalPayCard = () =>{
-        if(action === 'goToCard'){
+    const onHideModalSelect = () =>{
+        if(action === 'goToNew'){
             setShowPaycardModal(true);
             setAction(undefined)
         }
@@ -118,13 +104,18 @@ const PaymentMethodSelect = forwardRef((props: Props, ref: Ref<SelectPaymentMeth
 
     const onOptionSelected = option => {
         // Select method of payment
-        if(option.id === 'applePay' || option.id === 'googlePay') {
+        if(option.objectId === 'applePay' || option.objectId === 'googlePay') {
             setMethodSelected(option);
-        } else if(option.id === 'card') {
+        } else if(option.objectId === 'new') {
             setMethodSelected(cardPayment);
-            setAction('goToCard');
+            setAction('goToNew');
         } else {
-            setDefaultCard();
+            setDefaultCard({
+                objectId: option.objectId, 
+                title: creditCardHidde+option.last4,
+                icon: PaycardLogos[option.brand.toLowerCase()].icon,
+                paymentMethod: undefined
+            });
         }
         
         // Close select modal
@@ -136,9 +127,9 @@ const PaymentMethodSelect = forwardRef((props: Props, ref: Ref<SelectPaymentMeth
         // dismissModalPayCard();
         if(result){
             const method = {
-                id: 'newCard',
-                title: creditCardHidde+result.card.last4,
-                icon: PaycardLogos[(result.card.brand).toLowerCase()].icon,
+                objectId: 'newCard',
+                title: creditCardHidde+result.Card.last4,
+                icon: PaycardLogos[(result.Card.brand).toLowerCase()].icon,
                 paymentMethod: result
             }
             setMethodSelected(method);
@@ -156,12 +147,12 @@ const PaymentMethodSelect = forwardRef((props: Props, ref: Ref<SelectPaymentMeth
                 visible={showSelectModal}
                 horientation={'bottom'}
                 onDismiss={onDismissModalSelect}
-                onModalHide={onShowModalPayCard}
+                onModalHide={onHideModalSelect}
             >
                 <ScrollView>
                     {props.paymentMethods && props.paymentMethods.map((item, index) =>{
-                        const Paycard = item.id === 'newCard' ? item.icon : PaycardLogos[item.brand.toLowerCase()].icon;
-                        const last4 = item.id === 'newCard' ? item.title : creditCardHidde+item.last4;
+                        const Paycard = item.objectId === 'newCard' ? item.icon : PaycardLogos[item.brand.toLowerCase()].icon;
+                        const last4 = item.objectId === 'newCard' ? item.title : creditCardHidde+item.last4;
                         return (
                             <Cell
                                 style={{borderBottomWidth: 1, borderBottomColor: Color.gray5}}
@@ -219,7 +210,7 @@ const PaymentMethodSelect = forwardRef((props: Props, ref: Ref<SelectPaymentMeth
             </Text>
         </Cell>
     )
-});
+};
 export default PaymentMethodSelect;
 export interface Props{
     translation: {
@@ -229,11 +220,7 @@ export interface Props{
     style?: Object,
     onChange?: Function,
     paymentMethods?: Array<any>,
-    showAddCard?: boolean,
     nativePay?: boolean,
     currentUser: any,
     onDismiss?: Function
-}
-export interface SelectPaymentMethodRef{
-    confirmPaymentIntent: (clientSecret: string) => Promise<any>
 }

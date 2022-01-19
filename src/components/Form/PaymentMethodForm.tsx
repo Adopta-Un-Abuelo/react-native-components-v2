@@ -22,6 +22,11 @@ const PaymentMethodForm = forwardRef((props: Props, ref: Ref<PaymentMethodFormRe
             try{
                 const result = await createPaymentMethod({
                     type: 'Card',
+                    billingDetails:{
+                        name: props.currentUser.get('name'),
+                        phone: props.currentUser.get('phone'),
+                        email: props.currentUser.get('email')
+                    },
                     ...cardDetails
                 });
                 return {
@@ -80,7 +85,8 @@ export interface Props{
     translation: {
 		[key: string]: any
 	},
-    style?: Object
+    style?: Object,
+    currentUser: any
 }
 export interface PaymentMethodFormRef{
     generateToken: () => Promise<{

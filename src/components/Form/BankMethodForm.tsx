@@ -100,7 +100,8 @@ export interface Props{
     translation: {
 		[key: string]: any
 	},
-    style?: Object
+    style?: Object,
+    currentUser: any
 }
 export interface BankMethodFormRef{
     generateToken: () => Promise<{

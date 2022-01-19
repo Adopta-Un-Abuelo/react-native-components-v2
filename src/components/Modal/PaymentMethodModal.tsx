@@ -109,12 +109,13 @@ const PaymentMethodModal: FC<Props> = props => {
                             ref={paycardForm}
                             translation={props.translation}
                             style={{marginTop: 24, marginBottom: 24}}
+                            currentUser={props.currentUser}
                         />
                         {error &&
                             <Text
                                 style={{color: Color.error}}
                             >
-                                {props.translation ? props.translation.payment_method_modal_error : 'Parece que los datos de tu tarjeta no son correctos.'}
+                                {props.translation ? props.translation.payment_method_modal_error : 'Parece que los datos de tu método de pago no son correctos.'}
                             </Text>
                         }
                         <Separator/>
@@ -138,6 +139,7 @@ const PaymentMethodModal: FC<Props> = props => {
                             ref={bankForm}
                             translation={props.translation}
                             style={{marginTop: 24, marginBottom: 24}}
+                            currentUser={props.currentUser}
                         />
                         </>
                     }
@@ -167,7 +169,8 @@ export interface Props{
     translation: {
 		[key: string]: any
 	},
+    visible: boolean,
+    currentUser: any,
     onChange?: Function,
-    onDismiss: Function,
-    visible: boolean
+    onDismiss: Function
 }

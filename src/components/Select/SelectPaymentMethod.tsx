@@ -198,6 +198,7 @@ const PaymentMethodSelect = forwardRef((props: Props, ref: Ref<SelectPaymentMeth
             <PaymentMethodModal
                 translation={props.translation}
                 visible={showPaycardModal}
+                currentUser={props.currentUser}
                 onDismiss={() => {
                     onDismissModalPayCard();
                     props.onDismiss && props.onDismiss()
@@ -230,6 +231,7 @@ export interface Props{
     paymentMethods?: Array<any>,
     showAddCard?: boolean,
     nativePay?: boolean,
+    currentUser: any,
     onDismiss?: Function
 }
 export interface SelectPaymentMethodRef{

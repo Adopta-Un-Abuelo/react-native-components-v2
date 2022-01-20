@@ -31,7 +31,10 @@ const PaymentMethodForm = forwardRef((props: Props, ref: Ref<PaymentMethodFormRe
                 });
                 return {
                     status: 'ok',
-                    result: result.paymentMethod
+                    result: {
+                        type: 'card',
+                        data: result.paymentMethod
+                    }
                 };
             } 
             catch(e){

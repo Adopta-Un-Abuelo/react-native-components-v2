@@ -1,6 +1,6 @@
 import React, { forwardRef, useState, Ref, useImperativeHandle } from 'react';
 import styled from 'styled-components/native';
-import { createPaymentMethod } from '@stripe/stripe-react-native';
+import { createPaymentMethod, confirmSetupIntent } from '@stripe/stripe-react-native';
 
 import Input from '../Input/Input';
 import { DollarSign, User } from 'react-native-feather';
@@ -44,18 +44,18 @@ const BankMethodForm = forwardRef((props: Props, ref: Ref<BankMethodFormRef>) =>
     const generateToken = async (iban, name) =>{
         if(iban && name){
             try{
-                const result = await createPaymentMethod({
-                    type: 'SepaDebit',
-                    iban: iban,
-                    billingDetails:{
-                        name: name
-                    }
-                });
                 return {
                     status: 'ok',
-                    result: result
-                };
-            } catch(e){
+                    result: {
+                        type: 'sepa_debit',
+                        data:{
+                            iban: iban,
+                            name: name
+                        }
+                    }
+                }
+            } 
+            catch(e){
                 console.error(e);
                 return {
                     status: 'error',

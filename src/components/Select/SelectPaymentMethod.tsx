@@ -46,15 +46,6 @@ const PaymentMethodSelect = (props: Props) =>{
     const [ showSelectModal, setShowSelectModal ] = useState<boolean>(false);
     const [ showPaycardModal, setShowPaycardModal ] = useState<boolean>(false);
 
-    const onDismissModalPayCard = () =>{
-        setShowPaycardModal(false);
-    }
-    const onDismissModalSelect = () =>{
-        setAction(undefined);
-        setShowSelectModal(false);
-        props.onDismiss && props.onDismiss();
-    }
-
     useEffect(() =>{
         // Set payment method (NATIVE OR CARD)
         if(((Platform.OS === 'ios' && isApplePaySupported()) || Platform.OS === 'android') && props.nativePay){
@@ -70,6 +61,15 @@ const PaymentMethodSelect = (props: Props) =>{
     useEffect(() =>{
         setDefaultCard();
     },[props.paymentMethods]);
+
+    const onDismissModalPayCard = () =>{
+        setShowPaycardModal(false);
+    }
+    const onDismiss = () =>{
+        setAction(undefined);
+        setShowSelectModal(false);
+        props.onDismiss && props.onDismiss();
+    }
 
     const setDefaultCard = (method?) =>{
         if(method){
@@ -95,7 +95,7 @@ const PaymentMethodSelect = (props: Props) =>{
         }
     }
 
-    const onHideModalSelect = () =>{
+    const onModalHide = () =>{
         if(action === 'goToNew'){
             setShowPaycardModal(true);
             setAction(undefined)
@@ -124,16 +124,27 @@ const PaymentMethodSelect = (props: Props) =>{
     }
 
     const onPaycardChange = result => {
-        // dismissModalPayCard();
         if(result){
-            const method = {
-                objectId: 'newCard',
-                title: creditCardHidde+result.Card.last4,
-                icon: PaycardLogos[(result.Card.brand).toLowerCase()].icon,
-                paymentMethod: result
+            if(result.type === "card"){
+                const method = {
+                    objectId: 'newCard',
+                    title: creditCardHidde+result.data.Card.last4,
+                    icon: PaycardLogos[(result.data.Card.brand).toLowerCase()].icon,
+                    paymentMethod: result.data
+                }
+                setMethodSelected(method);
+                props.onChange && props.onChange(method);
             }
-            setMethodSelected(method);
-            props.onChange && props.onChange(method);
+            else if(result.type === "sepa_debit"){
+                const method = {
+                    objectId: 'newCard',
+                    title: result.data.iban,
+                    icon: PaycardLogos["sepa_debit"].icon,
+                    paymentMethod: result.data
+                }
+                setMethodSelected(method);
+                props.onChange && props.onChange(method);
+            }
         }
     }
 
@@ -146,8 +157,8 @@ const PaymentMethodSelect = (props: Props) =>{
                 title={props.translation ? props.translation.payment_method_select_modal_payment_method : 'Método de pago'}
                 visible={showSelectModal}
                 horientation={'bottom'}
-                onDismiss={onDismissModalSelect}
-                onModalHide={onHideModalSelect}
+                onDismiss={onDismiss}
+                onModalHide={onModalHide}
             >
                 <ScrollView>
                     {props.paymentMethods && props.paymentMethods.map((item, index) =>{
@@ -218,7 +229,12 @@ export interface Props{
 	},
     ref?: any,
     style?: Object,
-    onChange?: Function,
+    onChange?: (method: {
+        objectId: string,
+        title: string,
+        icon: any,
+        paymentMethod: Object
+    }) => void,
     paymentMethods?: Array<any>,
     nativePay?: boolean,
     currentUser: any,

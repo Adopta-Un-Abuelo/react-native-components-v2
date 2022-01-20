@@ -29,6 +29,10 @@ const Paycard = {
 	apple:{
 		name: 'Apple Pay',
 		icon: Apple
+	},
+	sepa_debit:{
+		name: 'Cuenta bancaria',
+		icon: Visa
 	}
 }
 export default Paycard;

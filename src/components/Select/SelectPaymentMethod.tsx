@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, forwardRef, Ref, useImperativeHandle, useRef } from 'react';
 import styled from 'styled-components/native';
 import { Plus } from 'react-native-feather';
 import { Platform } from 'react-native';
@@ -8,7 +8,7 @@ import Color from '../../constants/Color';
 import PaycardLogos from '../../constants/Paycard';
 import Text from '../Text/Text';
 import Modal from '../Modal/Modal';
-import PaymentMethodModal from '../Modal/PaymentMethodModal';
+import PaymentMethodModal, { PaymentMethodModalRef } from '../Modal/PaymentMethodModal';
 
 const ScrollView = styled.ScrollView`
 `
@@ -19,7 +19,7 @@ const Cell = styled.Pressable`
 `
 const creditCardHidde = '**** **** **** '
 
-const PaymentMethodSelect = (props: Props) =>{
+const PaymentMethodSelect = forwardRef((props: Props, ref: Ref<SelectPaymentMethodRef>) =>{
 
     const nativePayment = {
         objectId: Platform.OS === 'ios' ? 'applePay' : 'googlePay',
@@ -45,6 +45,17 @@ const PaymentMethodSelect = (props: Props) =>{
     // Modals
     const [ showSelectModal, setShowSelectModal ] = useState<boolean>(false);
     const [ showPaycardModal, setShowPaycardModal ] = useState<boolean>(false);
+    
+    const paymentMethodModal = useRef<PaymentMethodModalRef>()
+
+    useImperativeHandle(ref, () => ({
+        showAdd(){
+            paymentMethodModal.current.show();
+        },
+        hideAdd(){
+            paymentMethodModal.current.hide();
+        }
+    }));
 
     useEffect(() =>{
         // Set payment method (NATIVE OR CARD)
@@ -130,7 +141,7 @@ const PaymentMethodSelect = (props: Props) =>{
                     objectId: 'newCard',
                     title: creditCardHidde+result.data.Card.last4,
                     icon: PaycardLogos[(result.data.Card.brand).toLowerCase()].icon,
-                    paymentMethod: result.data
+                    paymentMethod: result.data.id
                 }
                 setMethodSelected(method);
                 props.onChange && props.onChange(method);
@@ -198,6 +209,7 @@ const PaymentMethodSelect = (props: Props) =>{
                 </ScrollView>
             </Modal>
             <PaymentMethodModal
+                ref={paymentMethodModal}
                 translation={props.translation}
                 visible={showPaycardModal}
                 currentUser={props.currentUser}
@@ -221,7 +233,7 @@ const PaymentMethodSelect = (props: Props) =>{
             </Text>
         </Cell>
     )
-};
+});
 export default PaymentMethodSelect;
 export interface Props{
     translation: {
@@ -229,14 +241,18 @@ export interface Props{
 	},
     ref?: any,
     style?: Object,
+    paymentMethods?: Array<any>,
+    nativePay?: boolean,
+    currentUser: any,
+    onDismiss?: Function,
     onChange?: (method: {
         objectId: string,
         title: string,
         icon: any,
         paymentMethod: Object
     }) => void,
-    paymentMethods?: Array<any>,
-    nativePay?: boolean,
-    currentUser: any,
-    onDismiss?: Function
+}
+export interface SelectPaymentMethodRef{
+    showAdd: () => void,
+    hideAdd: () => void
 }

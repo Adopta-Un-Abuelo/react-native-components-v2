@@ -1,4 +1,4 @@
-import React, { FC, useState, useRef } from 'react';
+import React, { FC, useState, useRef, useEffect, forwardRef, Ref, useImperativeHandle } from 'react';
 import styled from 'styled-components/native';
 import { Keyboard } from 'react-native';
 
@@ -29,10 +29,11 @@ const Cell = styled.Pressable`
     border-bottom-color: ${Color.gray4};
 `
 
-const PaymentMethodModal: FC<Props> = props => {
+const PaymentMethodModal = forwardRef((props: Props, ref: Ref<PaymentMethodModalRef>) =>{
 
     const bankForm = useRef<BankMethodFormRef>();
     const paycardForm = useRef<PaymentMethodFormRef>();
+    const [ visible, setVisible ] = useState(props.visible);
     const [ error, setError ] = useState<boolean>(false);
     const [ loading, setLoading ] = useState(false);
     const [ optionSelected, setOptionSelected ] = useState(undefined);
@@ -48,6 +49,19 @@ const PaymentMethodModal: FC<Props> = props => {
             icon: <CreditCard height={24} width={24} stroke={Color.gray2}/>
         }
     ]
+
+    useImperativeHandle(ref, () => ({
+        show(){
+            setVisible(true);
+        },
+        hide(){
+            setVisible(false);
+        }
+    }));
+
+    useEffect(() =>{
+        setVisible(props.visible);
+    },[props.visible]);
 
     const onDismiss = () => {
         setOptionSelected(undefined);
@@ -90,7 +104,7 @@ const PaymentMethodModal: FC<Props> = props => {
                 (optionSelected.id === 'card' ? (props.translation ? props.translation.payment_method_modal_title : 'Datos de tarjeta') : (props.translation ? props.translation.payment_method_modal_title_bank : 'Datos de cuenta bancaria')) :
                 (props.translation ? props.translation.payment_method_select_add_credit_card : 'Añadir forma de pago')
             }
-            visible={props.visible}
+            visible={visible}
             horientation={'fullScreen'}
             onDismiss={onDismiss}
             buttonProps={optionSelected && {
@@ -163,7 +177,7 @@ const PaymentMethodModal: FC<Props> = props => {
         </Modal>
     )
     
-}
+});
 export default PaymentMethodModal;
 export interface Props{
     translation: {
@@ -173,4 +187,8 @@ export interface Props{
     currentUser: any,
     onChange?: Function,
     onDismiss: Function
+}
+export interface PaymentMethodModalRef{
+    show: () => void,
+    hide: () => void
 }

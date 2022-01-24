@@ -36,7 +36,7 @@ const PaymentMethodSelect = forwardRef((props: Props, ref: Ref<SelectPaymentMeth
     };
 
     // Method of payment
-    const [ methodSelected, setMethodSelected ] = useState(props.nativePay ? nativePayment : cardPayment)
+    const [ methodSelected, setMethodSelected ] = useState(props.methodsTypes.includes('native') ? nativePayment : cardPayment)
     const [ options, setOptions ] = useState<Array<{objectId: string, title: string, icon: any}>>([]);
 
     // Manage open/close transition
@@ -59,7 +59,7 @@ const PaymentMethodSelect = forwardRef((props: Props, ref: Ref<SelectPaymentMeth
 
     useEffect(() =>{
         // Set payment method (NATIVE OR CARD)
-        if(((Platform.OS === 'ios' && isApplePaySupported()) || Platform.OS === 'android') && props.nativePay){
+        if(((Platform.OS === 'ios' && isApplePaySupported()) || Platform.OS === 'android') && props.methodsTypes.includes('native')){
             setOptions([nativePayment, cardPayment]);
             props.onChange && props.onChange(nativePayment);
         }
@@ -213,6 +213,7 @@ const PaymentMethodSelect = forwardRef((props: Props, ref: Ref<SelectPaymentMeth
                 translation={props.translation}
                 visible={showPaycardModal}
                 currentUser={props.currentUser}
+                methodsTypes={props.methodsTypes}
                 onDismiss={() => {
                     onDismissModalPayCard();
                     props.onDismiss && props.onDismiss()
@@ -242,7 +243,7 @@ export interface Props{
     ref?: any,
     style?: Object,
     paymentMethods?: Array<any>,
-    nativePay?: boolean,
+    methodsTypes: Array<string>,
     currentUser: any,
     onDismiss?: Function,
     onChange?: (method: {

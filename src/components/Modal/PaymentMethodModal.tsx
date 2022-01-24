@@ -37,18 +37,7 @@ const PaymentMethodModal = forwardRef((props: Props, ref: Ref<PaymentMethodModal
     const [ error, setError ] = useState<boolean>(false);
     const [ loading, setLoading ] = useState(false);
     const [ optionSelected, setOptionSelected ] = useState(undefined);
-    const options = [
-        {
-            id: 'sepa_debit',
-            title: props.translation ? props.translation. form_payment_method_sepa_debit : 'Cuenta bancaria',
-            icon: <DollarSign height={24} width={24} stroke={Color.gray2}/>
-        },
-        {
-            id: 'card',
-            title: props.translation ? props.translation.general_credit_card_long : 'Tarjeta de crédito o débito',
-            icon: <CreditCard height={24} width={24} stroke={Color.gray2}/>
-        }
-    ]
+    const [ options, setOptions ] = useState([]);
 
     useImperativeHandle(ref, () => ({
         show(){
@@ -63,7 +52,36 @@ const PaymentMethodModal = forwardRef((props: Props, ref: Ref<PaymentMethodModal
         setVisible(props.visible);
     },[props.visible]);
 
+    useEffect(() =>{
+        if(props.methodsTypes && props.methodsTypes.length > 0){
+            const temp =[];
+            props.methodsTypes.map(item =>{
+                if(item === 'sepa_debit'){
+                    temp.push({
+                        id: 'sepa_debit',
+                        title: props.translation ? props.translation. form_payment_method_sepa_debit : 'Cuenta bancaria',
+                        icon: <DollarSign height={24} width={24} stroke={Color.gray2}/>
+                    })
+                }
+                else if(item === 'paycard'){
+                    temp.push({
+                        id: 'card',
+                        title: props.translation ? props.translation.general_credit_card_long : 'Tarjeta de crédito o débito',
+                        icon: <CreditCard height={24} width={24} stroke={Color.gray2}/>
+                    })
+                }
+            });
+            //If there is only one option, preselect it
+            if(temp.length === 1)
+                setOptionSelected(temp[0]);
+            else
+                setOptionSelected(undefined)
+            setOptions(temp);
+        }
+    },[props.methodsTypes]);
+
     const onDismiss = () => {
+        setVisible(false);
         setOptionSelected(undefined);
         props.onDismiss && props.onDismiss();
     }
@@ -175,8 +193,7 @@ const PaymentMethodModal = forwardRef((props: Props, ref: Ref<PaymentMethodModal
                 </Container>
             }
         </Modal>
-    )
-    
+    ) 
 });
 export default PaymentMethodModal;
 export interface Props{
@@ -185,6 +202,7 @@ export interface Props{
 	},
     visible: boolean,
     currentUser: any,
+    methodsTypes: Array<string>,
     onChange?: Function,
     onDismiss: Function
 }

@@ -1,4 +1,4 @@
-import React, { FC, useState, useRef } from 'react';
+import React, { FC, useState, useRef, useEffect, forwardRef, Ref, useImperativeHandle } from 'react';
 import styled from 'styled-components/native';
 import { Keyboard } from 'react-native';
 
@@ -29,27 +29,59 @@ const Cell = styled.Pressable`
     border-bottom-color: ${Color.gray4};
 `
 
-const PaymentMethodModal: FC<Props> = props => {
+const PaymentMethodModal = forwardRef((props: Props, ref: Ref<PaymentMethodModalRef>) =>{
 
     const bankForm = useRef<BankMethodFormRef>();
     const paycardForm = useRef<PaymentMethodFormRef>();
+    const [ visible, setVisible ] = useState(props.visible);
     const [ error, setError ] = useState<boolean>(false);
     const [ loading, setLoading ] = useState(false);
     const [ optionSelected, setOptionSelected ] = useState(undefined);
-    const options = [
-        {
-            id: 'sepa_debit',
-            title: props.translation ? props.translation. form_payment_method_sepa_debit : 'Cuenta bancaria',
-            icon: <DollarSign height={24} width={24} stroke={Color.gray2}/>
+    const [ options, setOptions ] = useState([]);
+
+    useImperativeHandle(ref, () => ({
+        show(){
+            setVisible(true);
         },
-        {
-            id: 'card',
-            title: props.translation ? props.translation.general_credit_card_long : 'Tarjeta de crédito o débito',
-            icon: <CreditCard height={24} width={24} stroke={Color.gray2}/>
+        hide(){
+            setVisible(false);
         }
-    ]
+    }));
+
+    useEffect(() =>{
+        setVisible(props.visible);
+    },[props.visible]);
+
+    useEffect(() =>{
+        if(props.methodsTypes && props.methodsTypes.length > 0){
+            const temp =[];
+            props.methodsTypes.map(item =>{
+                if(item === 'sepa_debit'){
+                    temp.push({
+                        id: 'sepa_debit',
+                        title: props.translation ? props.translation. form_payment_method_sepa_debit : 'Cuenta bancaria',
+                        icon: <DollarSign height={24} width={24} stroke={Color.gray2}/>
+                    })
+                }
+                else if(item === 'paycard'){
+                    temp.push({
+                        id: 'card',
+                        title: props.translation ? props.translation.general_credit_card_long : 'Tarjeta de crédito o débito',
+                        icon: <CreditCard height={24} width={24} stroke={Color.gray2}/>
+                    })
+                }
+            });
+            //If there is only one option, preselect it
+            if(temp.length === 1)
+                setOptionSelected(temp[0]);
+            else
+                setOptionSelected(undefined)
+            setOptions(temp);
+        }
+    },[props.methodsTypes]);
 
     const onDismiss = () => {
+        setVisible(false);
         setOptionSelected(undefined);
         props.onDismiss && props.onDismiss();
     }
@@ -90,7 +122,7 @@ const PaymentMethodModal: FC<Props> = props => {
                 (optionSelected.id === 'card' ? (props.translation ? props.translation.payment_method_modal_title : 'Datos de tarjeta') : (props.translation ? props.translation.payment_method_modal_title_bank : 'Datos de cuenta bancaria')) :
                 (props.translation ? props.translation.payment_method_select_add_credit_card : 'Añadir forma de pago')
             }
-            visible={props.visible}
+            visible={visible}
             horientation={'fullScreen'}
             onDismiss={onDismiss}
             buttonProps={optionSelected && {
@@ -161,9 +193,8 @@ const PaymentMethodModal: FC<Props> = props => {
                 </Container>
             }
         </Modal>
-    )
-    
-}
+    ) 
+});
 export default PaymentMethodModal;
 export interface Props{
     translation: {
@@ -171,6 +202,11 @@ export interface Props{
 	},
     visible: boolean,
     currentUser: any,
+    methodsTypes: Array<string>,
     onChange?: Function,
     onDismiss: Function
+}
+export interface PaymentMethodModalRef{
+    show: () => void,
+    hide: () => void
 }

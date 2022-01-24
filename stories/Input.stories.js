@@ -23,6 +23,7 @@ storiesOf('Input', module)
                 value={text('value')}
                 autoCapitalize={select('autoCapitalize', ['none', 'sentences', 'words', 'characters'])}
                 autoCorrent={boolean('autoCorrent', false)}
+                hideTitle={boolean('hideTitle', false)}
                 onFocus={action('onFocus')}
                 onBlur={action('onBlur')}
                 onChangeText={action('onChangeText')}

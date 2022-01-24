@@ -15,14 +15,14 @@ const Container = styled.View<{error?: boolean, isFocused: boolean | undefined}>
     padding: 0px 24px;
     background-color: ${props => props.isFocused ? 'white' : Color.gray6};
 `
-const InputStyled = styled.TextInput<{isFocused: boolean | undefined, hasValue: boolean}>`
+const InputStyled = styled.TextInput<{isFocused: boolean | undefined, hasValue: boolean, hideTitle?: boolean}>`
     flex: 1;
     font-size: 16px;
     font-family: 'Poppins-Regular';
     height: 100%;
     padding: 0px;
     color: ${Color.gray2};
-    margin-top: ${props => (props.isFocused || props.hasValue) ? 18+'px' : 0+'px'};
+    margin-top: ${props => ((props.isFocused || props.hasValue) && !props.hideTitle) ? 18+'px' : 0+'px'};
 `
 const IconView = styled.View`
     height: 24px;
@@ -85,7 +85,7 @@ const Input = forwardRef((props: Props, ref: Ref<InputRef>) =>{
             }
             {children}
             <InputView>
-                {(!currentPlaceholder || value) &&
+                {((!currentPlaceholder || value) && !props.hideTitle) &&
                     <Text
                         style={{position: 'absolute', top: 10, fontSize: 14, color: Color.gray4}}
                     >
@@ -130,7 +130,9 @@ export interface Props{
     autoComplete?: string
     autoCapitalize?: 'none' | 'sentences' | 'words' | 'characters',
     autoCorrent?: boolean
-    children?: any
+    children?: any,
+    hideTitle?: boolean,
+    returnKeyType?: 'done' | 'go' | 'next' | 'search' | 'send'
 }
 export interface InputRef{
     focus: () => void,

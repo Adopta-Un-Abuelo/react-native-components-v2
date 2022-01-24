@@ -28,161 +28,161 @@ const Country = [
 		name: 'España',
 		phone: '+34',
 		title: 'España (+34)',
-		Icon: SpainFlag
+		icon: SpainFlag
 	},
 	{
 		id: 'france',
 		name: 'Francia',
 		phone: '+33',
 		title: 'Francia (+33)',
-		Icon: FranceFlag
+		icon: FranceFlag
 	},
 	{
 		id: 'mexico',
 		name: 'México',
 		phone: '+52',
 		title: 'México (+52)',
-		Icon: MexicoFlag
+		icon: MexicoFlag
 	},
 	{
 		id: 'argentina',
 		name: 'Argentina',
 		phone: '+54',
 		title: 'Argentina (+54)',
-		Icon: ArgentinaFlag
+		icon: ArgentinaFlag
 	},
 	{
 		id: 'peru',
 		name: 'Perú',
 		phone: '+51',
 		title: 'Perú (+51)',
-		Icon: PeruFlag
+		icon: PeruFlag
 	},
 	{
 		id: 'colombia',
 		name: 'Colombia',
 		phone: '+57',
 		title: 'Colombia (+57)',
-		Icon: ColombiaFlag
+		icon: ColombiaFlag
 	},
 	{
 		id: 'chile',
 		name: 'Chile',
 		phone: '+56',
 		title: 'Chile (+56)',
-		Icon: ChileFlag
+		icon: ChileFlag
 	},
 	{
 		id: 'ecuador',
 		name: 'Ecuador',
 		phone: '+593',
 		title: 'Ecuador (+593)',
-		Icon: EcuadorFlag
+		icon: EcuadorFlag
 	},
 	{
 		id: 'costa_rica',
 		name: 'Costa Rica',
 		phone: '+506',
 		title: 'Costa Rica (+506)',
-		Icon: CostaRicaFlag
+		icon: CostaRicaFlag
 	},
 	{
 		id: 'venezuela',
 		name: 'Venezuela',
 		phone: '+58',
 		title: 'Venezuela (+58)',
-		Icon: VenezuelaFlag
+		icon: VenezuelaFlag
 	},
 	{
 		id: 'guatemala',
 		name: 'Guatemala',
 		phone: '+502',
 		title: 'Guatemala (+502)',
-		Icon: GuatemalaFlag
+		icon: GuatemalaFlag
 	},
 	{
 		id: 'bolivia',
 		name: 'Bolivia',
 		phone: '+591',
 		title: 'Bolivia (+591)',
-		Icon: BoliviaFlag
+		icon: BoliviaFlag
 	},
 	{
 		id: 'el_salvador',
 		name: 'El Salvador',
 		phone: '+503',
 		title: 'El Salvador (+503)',
-		Icon: ElSalvadorFlag
+		icon: ElSalvadorFlag
 	},
 	{
 		id: 'puerto_rico',
 		name: 'Puerto Rico',
 		phone: '+1',
 		title: 'Puerto Rico (+1)',
-		Icon: PuertoRicoFlag
+		icon: PuertoRicoFlag
 	},
 	{
 		id: 'eeuu',
 		name: 'Estados Unidos',
 		phone: '+1',
 		title: 'EEUU (+1)',
-		Icon: EEUUFlag
+		icon: EEUUFlag
 	},
 	{
 		id: 'uk',
 		name: 'UK',
 		phone: '+44',
 		title: 'UK (+44)',
-		Icon: UKFlag
+		icon: UKFlag
 	},
 	{
 		id: 'portugal',
 		name: 'Portugal',
 		phone: '+351',
 		title: 'Portugal (+351)',
-		Icon: PortugalFlag
+		icon: PortugalFlag
 	},
 	{
 		id: 'italy',
 		name: 'Italia',
 		phone: '+39',
 		title: 'Italia (+39)',
-		Icon: ItalyFlag
+		icon: ItalyFlag
 	},
 	{
 		id: 'brazil',
 		name: 'Brasil',
 		phone: '+55',
 		title: 'Brasil (+55)',
-		Icon: BrasilFlag
+		icon: BrasilFlag
 	},
 	{
 		id: 'germany',
 		name: 'Alemania',
 		phone: '+49',
 		title: 'Alemania (+49)',
-		Icon: GermanFlag
+		icon: GermanFlag
 	},
 	{
 		id: 'netherlands',
 		name: 'Países Bajos',
 		phone: '+31',
 		title: 'Países Bajos (+31)',
-		Icon: NetherlandFlag
+		icon: NetherlandFlag
 	},
 	{
 		id: 'greece',
 		name: 'Grecia',
 		phone: '+30',
 		title: 'Grecia (+30)',
-		Icon: GreeceFlag
+		icon: GreeceFlag
 	},
 	{
 		id: 'switzerland',
 		name: 'Suiza',
 		phone: '+41',
 		title: 'Suiza (+41)',
-		Icon: SuizaFlag
+		icon: SuizaFlag
 	}
 ]
 export default Country;

@@ -1,9 +1,12 @@
 import React, { FC, useEffect, useState } from 'react';
 import styled from 'styled-components/native';
+import Fuse from 'fuse.js'
 
+import { Search } from 'react-native-feather';
 import Modal from './Modal';
 import Text from '../Text/Text';
 import Color from '../../constants/Color';
+import Input from '../Input/Input';
 
 const Cell = styled.Pressable`
     flex-direction: row;
@@ -24,11 +27,23 @@ const Icon = styled.View`
 const SelectionModal: FC<Props> = props =>{
 
     const [ visible, setVisible ] = useState(props.visible);
+    const [ options, setOptions ] = useState(props.options);
     const [ option, setOption ] = useState(undefined);
+    const [ fuse, setFuse ] = useState(undefined);
 
     useEffect(() =>{
         setVisible(props.visible);
     },[props.visible]);
+
+    useEffect(() => {
+        //Init fuse search
+        const options = {
+            includeScore: true,
+            keys: ['id', 'title']
+        }
+        setFuse(new Fuse(props.options, options));
+        setOptions(props.options);
+    },[props.options]);
 
     const onPress = option =>{
         if(option && !option.disabled){
@@ -48,23 +63,44 @@ const SelectionModal: FC<Props> = props =>{
         props.onDismiss && props.onDismiss();
     }
 
+    const onSearchChange = text =>{
+        if(text){
+            const result = fuse.search(text);
+            const temp = result.map(item => item.item);
+            setOptions(temp);
+        }
+        else
+            setOptions(props.options);
+    }
+
     return(
         <Modal
             visible={visible}
             title={props.title}
             horientation={props.horientation}
+            avoidKeyboard={true}
             onDismiss={onDismiss}
             onModalHide={onModalHide}
         >
+            {props.showSearch &&
+                <Input
+                    style={{marginTop: 12, marginBottom: 12, height: 48}}
+                    placeholder='Buscar'
+                    icon={Search}
+                    hideTitle={true}
+                    returnKeyType={'search'}
+                    onChangeText={onSearchChange}
+                />
+            }
             <Scroll>
-                {props.options.map((item, index) =>(
+                {options.map((item, index) =>(
                     <Cell
                         style={{opacity: item.disabled ? 0.5 : 1}}
                         key={'callOption'+index}
                         onPress={() => onPress(item)}
                     >
                         {item.icon &&
-                            <item.icon stroke={Color.blue3}/>
+                            <item.icon height={24} width={24} stroke={Color.blue3}/>
                         }
                         {item.Icon &&
                             <Icon>
@@ -72,7 +108,7 @@ const SelectionModal: FC<Props> = props =>{
                             </Icon>
                         } 
                         <Text
-                            style={{marginLeft: 12}}
+                            style={{marginLeft: (item.Icon || item.icon) ? 12 : 0}}
                         >
                             {item.title}
                         </Text>
@@ -95,5 +131,6 @@ export interface Props{
         icon?: any,
         Icon?: any,
         disabled?: boolean
-    }>
+    }>,
+    showSearch?: boolean
 }

@@ -80,6 +80,7 @@ const ModalComponent = (props: Props) =>{
                 margin: 0
             } : {})}
             onModalHide={onModalHide}
+            avoidKeyboard={props.avoidKeyboard}
         >
             <ModalView
                 horientation={props.horientation}
@@ -170,5 +171,6 @@ export interface Props{
     onDismiss: Function,
     onModalHide?: Function,
     swipeToClose?: boolean,
+    avoidKeyboard?: boolean,
     children?: any 
 }

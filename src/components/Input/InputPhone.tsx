@@ -1,9 +1,8 @@
 import React, { FC, useState, useRef } from 'react';
 import { TextInput } from 'react-native';
 
-import Select from '../Select/Select';
+import SelectCountry from '../Select/SelectCountry';
 import Input from '../Input/Input';
-import Country from '../../constants/Country';
 
 const PhoneInput = (props: Props) =>{
 
@@ -34,11 +33,10 @@ const PhoneInput = (props: Props) =>{
             error={props.error}
             ref={input}
         >
-            <Select
-                style={{marginRight: 8}}
-                selectStyle={{borderWidth: 0, paddingTop: 0, paddingBottom: 0, paddingRight: 0, paddingLeft: 0, backgroundColor: 'transparent'}}
-                options={Country}
-                titleValue={'title'}
+            <SelectCountry
+                translation={props.translation}
+                countries={props.countries}
+                locale={props.locale}
                 title={title}
                 modalProps={{
                     title: props.translation ? props.translation?.input_phone_phone_prefix : 'Prefijo telefónico',
@@ -56,8 +54,18 @@ export interface Props{
     translation: {
 		[key: string]: any
 	},
+    countries: Array<{
+        id: string,
+        prefix: string,
+        esCountry: string,
+        enCountry: string,
+        esPrefix: string,
+        enPrefix: string,
+        icon?: any
+    }>,
+    locale: string,
     value?: string,
+    error?: boolean,
     onCountryChange?: Function,
-    onChangeText?: Function,
-    error?: boolean
+    onChangeText?: Function
 }

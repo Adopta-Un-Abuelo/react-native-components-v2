@@ -4,7 +4,7 @@ import { View } from 'react-native';
 import { storiesOf } from '@storybook/react-native';
 import { action } from '@storybook/addon-actions';
 import { array, boolean, object } from '@storybook/addon-knobs';
-import { Select, SelectTag, SelectPaymentMethod, Container } from '../src';
+import { Select, SelectTag, SelectPaymentMethod, Container, SelectCountry } from '../src';
 
 storiesOf('Select', module)
 	.add('Main', () => {
@@ -54,5 +54,29 @@ storiesOf('Select', module)
                     />
                 </View>
             </Container>
+        )
+    })
+    .add('SelectCountry', () => {
+        return(
+            <SelectCountry
+                countries={[{
+                    id: 'spain',
+                    prefix: '+34',
+                    esCountry: 'España',
+                    enCountry: 'Spain',
+                    esPrefix: 'España (+34)',
+                    enPrefix: 'Spain (+34)',
+                    // icon: SpainFlag
+                }, {
+                    id: 'france',
+                    prefix: '+33',
+                    esCountry: 'Francia',
+                    enCountry: 'France',
+                    esPrefix: 'Francia (+33)',
+                    enPrefix: 'France (+33)',
+                    // icon: FranceFlag
+                }]}
+                locale={'es'}
+            />
         )
     })

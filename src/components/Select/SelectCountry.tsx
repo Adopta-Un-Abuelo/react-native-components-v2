@@ -34,6 +34,11 @@ const SelectCountry = (props: Props) =>{
     const [ selectedCountry, setSelectedCountry ] = useState<{[key: string]: any}>(props.countries && props.countries[0]);
 
     useEffect(() =>{
+        console.log('---------------------------')
+        console.log(props.countries)
+        console.log('---------------------------')
+        console.log(props.countries[0])
+
         setSelectedCountry(props.countries[0]);
     }, [props.selectedCountry]);
 

@@ -66,6 +66,25 @@ storiesOf('Input', module)
     .add('Phone', () => {
         return(
             <InputPhone
+                translation={{input_phone_phone_prefix : 'PREFIJO PUTO TELEFONICO', input_phone_phone : 'PUTO TELEFONO'}}
+                countries={[{
+                    id: 'spain',
+                    prefix: '+34',
+                    esCountry: 'España',
+                    enCountry: 'Spain',
+                    esPrefix: 'España (+34)',
+                    enPrefix: 'Spain (+34)',
+                    // icon: SpainFlag
+                }, {
+                    id: 'france',
+                    prefix: '+33',
+                    esCountry: 'Francia',
+                    enCountry: 'France',
+                    esPrefix: 'Francia (+33)',
+                    enPrefix: 'France (+33)',
+                    // icon: FranceFlag
+                }]}
+                locale={'es'}
                 value={text('value')}
                 error={boolean('error', false)}
                 onCountryChange={action('onCountryChange')}

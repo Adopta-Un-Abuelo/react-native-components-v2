@@ -71,7 +71,7 @@ const SelectCountry = (props: Props) =>{
                 <Text
                     style={{marginRight: 4, ...props.textStyle}}
                 >
-                    {props.title ? props.title : props.locale === 'en' ? selectedCountry.enPrefix : selectedCountry.esPrefix}
+                    {props.title ? props.title : selectedCountry.prefix}
                 </Text>
                 <Arrow>
                     <ChevronDown stroke={Color.blue3}/>

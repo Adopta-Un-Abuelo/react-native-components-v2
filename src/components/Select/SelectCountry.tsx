@@ -1,6 +1,6 @@
-import React, { useState, useEffect, FC } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components/native';
-import { ViewStyle, TextStyle } from 'react-native';
+import { TextStyle } from 'react-native';
 
 import { ChevronDown } from 'react-native-feather';
 import Color from '../../constants/Color';

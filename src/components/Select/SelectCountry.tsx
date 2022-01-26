@@ -34,17 +34,9 @@ const SelectCountry = (props: Props) =>{
     const [ selectedCountry, setSelectedCountry ] = useState<{[key: string]: any}>(props.countries && props.countries[0]);
 
     useEffect(() =>{
-        
-        console.log('---------------------------')
-        console.log(props.countries)
-        console.log('---------------------------')
-        console.log(props.countries[0])
-
-        props.countries.map((item, index) => {
-            console.log(item)
-            setSelectedCountry(item)
-        });
-
+        if(props.selectedCountry){
+            setSelectedCountry(props.selectedCountry)
+        }
     }, [props.selectedCountry]);
 
     const onSelectClick = () =>{
@@ -79,7 +71,7 @@ const SelectCountry = (props: Props) =>{
                 <Text
                     style={{marginRight: 4, ...props.textStyle}}
                 >
-                    {selectedCountry && selectedCountry.prefix}
+                    {props.title ? props.title : selectedCountry.prefix}
                 </Text>
                 <Arrow>
                     <ChevronDown stroke={Color.blue3}/>
@@ -117,6 +109,7 @@ export interface Props{
         icon?: any
     }>,
     locale: string,
+    title?: string,
     modalProps?: Object,
     onChange?: Function,
     onShow?: Function,

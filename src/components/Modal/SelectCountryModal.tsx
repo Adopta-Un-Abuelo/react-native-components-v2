@@ -19,11 +19,7 @@ const Cell = styled.Pressable`
 `
 const Scroll = styled.ScrollView`
 `
-const Icon = styled.View`
-    height: 24px;
-    width: 24px;
-    margin-right: 8px;
-`
+
 const SelectCountryModal: FC<Props> = props =>{
 
     const [ visible, setVisible ] = useState(props.visible);
@@ -75,6 +71,7 @@ const SelectCountryModal: FC<Props> = props =>{
 
     return(
         <Modal
+            translation={props.translation}
             visible={visible}
             title={props.title}
             horientation={props.orientation}
@@ -85,7 +82,7 @@ const SelectCountryModal: FC<Props> = props =>{
             {props.showSearch &&
                 <Input
                     style={{marginTop: 12, marginBottom: 12, height: 48}}
-                    placeholder='Buscar'
+                    placeholder={props.translation ? props.translation.general_btn_search : 'Buscar'}
                     icon={Search}
                     hideTitle={true}
                     returnKeyType={'search'}
@@ -115,6 +112,9 @@ const SelectCountryModal: FC<Props> = props =>{
 }
 export default SelectCountryModal;
 export interface Props{
+    translation: {
+        [key: string]: any
+    },
     onPress?: Function,
     onDismiss?: Function,
     visible: boolean,

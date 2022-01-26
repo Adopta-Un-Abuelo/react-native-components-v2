@@ -78,6 +78,7 @@ const SelectCountry = (props: Props) =>{
                 </Arrow>
             </SelectStyled>
             <SelectCountryModal
+                translation={props.translation}
                 {...props.modalProps}
                 orientation={'bottom'}
                 visible={showMenu}
@@ -91,6 +92,9 @@ const SelectCountry = (props: Props) =>{
 }
 export default SelectCountry;
 export interface Props{
+    translation: {
+        [key: string]: any
+    },
     textStyle?: TextStyle,
     selectedCountry?: {
         [key: string]: any

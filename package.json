@@ -12,7 +12,7 @@
     "storybook": "start-storybook -p 7007",
     "build-storybook": "build-storybook",
     "prestorybook": "rnstl",
-    "prepare": "bob build"
+    "build": "bob build"
   },
   "dependencies": {
     "@stripe/stripe-react-native": "^0.2.3",

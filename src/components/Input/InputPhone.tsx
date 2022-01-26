@@ -34,6 +34,7 @@ const PhoneInput = (props: Props) =>{
             ref={input}
         >
             <SelectCountry
+                translation={props.translation}
                 countries={props.countries}
                 locale={props.locale}
                 title={title}

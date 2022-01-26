@@ -141,7 +141,7 @@ const ModalComponent = (props: Props) =>{
                             type={'line'}
                             style={{borderWidth: 0}}
                             color={Color.gray3}
-                            title={props.translation ? props.translation.modal_cancel : 'Cancelar'}
+                            title={props.translation ? props.translation.general_btn_cancel : 'Cancelar'}
                             onPress={onClosePress}
                         />
                     }

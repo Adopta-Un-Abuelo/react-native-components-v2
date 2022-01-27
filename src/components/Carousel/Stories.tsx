@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from 'react';
+import React, { forwardRef, useEffect, useState, Ref, useImperativeHandle } from 'react';
 import styled from 'styled-components/native';
 import LinearGradient from 'react-native-linear-gradient';
 
@@ -39,7 +39,7 @@ const Pressable = styled.Pressable`
     flex: 1;
 `
 
-const Stories: FC<Props> = props =>{
+const Stories = forwardRef((props: Props, ref: Ref<StoriesRef>) =>{
 
     const [ currentIndex, setCurrentIndex ] = useState(0);
 
@@ -47,6 +47,19 @@ const Stories: FC<Props> = props =>{
         if(props.currentIndex)
             setCurrentIndex(props.currentIndex);
     },[props.currentIndex]);
+
+    useImperativeHandle(ref, () => ({
+        next(){
+            const newIndex = currentIndex+1;
+            setCurrentIndex(newIndex);
+            onChange(newIndex);
+        },
+        previous(){
+            const newIndex = currentIndex-1;
+            setCurrentIndex(newIndex);
+            onChange(newIndex);
+        }
+    }));
 
     const onStorieFinish = index =>{
         if(currentIndex < props.views.length-1){
@@ -120,7 +133,7 @@ const Stories: FC<Props> = props =>{
             }
         </Container>
     )
-}
+});
 export default Stories;
 export interface Props {
     storyTime?: number
@@ -129,4 +142,8 @@ export interface Props {
     onChange?: Function,
     pause?: boolean,
     currentIndex?: number
+}
+export interface StoriesRef{
+    next: () => void,
+    previous: () => void
 }

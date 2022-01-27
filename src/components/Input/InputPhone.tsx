@@ -9,9 +9,9 @@ const PhoneInput = (props: Props) =>{
     const input = useRef<TextInput>(null);
     const [ title, setTitle ] = useState('+34');
 
-    const onCountryChange = (country: {phone: string}) =>{
-        setTitle(country.phone);
-        props.onCountryChange && props.onCountryChange(country.phone);
+    const onCountryChange = (country: {prefix: string}) =>{
+        setTitle(country.prefix);
+        props.onCountryChange && props.onCountryChange(country.prefix);
     }
 
     const onSelectShow = () =>{

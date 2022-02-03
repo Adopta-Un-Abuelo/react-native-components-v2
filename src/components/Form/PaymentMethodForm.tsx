@@ -23,9 +23,9 @@ const PaymentMethodForm = forwardRef((props: Props, ref: Ref<PaymentMethodFormRe
                 const result = await createPaymentMethod({
                     type: 'Card',
                     billingDetails:{
-                        name: props.currentUser.get('name'),
-                        phone: props.currentUser.get('phone'),
-                        email: props.currentUser.get('email')
+                        name: props.currentUser.name,
+                        phone: props.currentUser.phone,
+                        email: props.currentUser.email
                     },
                     ...cardDetails
                 });

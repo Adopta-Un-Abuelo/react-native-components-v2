@@ -69,7 +69,7 @@ const PaymentMethodForm = forwardRef((props: Props, ref: Ref<PaymentMethodFormRe
                     fontFamily: 'Poppins-Regular',
                     borderRadius: 24,
                     borderWidth: isFocus ? 1 : 0,
-                    borderColor: isFocus ? Color.gray3 : 'transparent',
+                    borderColor: Color.gray3,
                     cursorColor: Color.blue3
                 }}
                 style={{

@@ -5,7 +5,7 @@ import { createPaymentMethod, confirmSetupIntent } from '@stripe/stripe-react-na
 import Input from '../Input/Input';
 import { DollarSign, User } from 'react-native-feather';
 
-const Container = styled.View``
+const ScrollView = styled.ScrollView``
 
 const BankMethodForm = forwardRef((props: Props, ref: Ref<BankMethodFormRef>) =>{
 
@@ -73,7 +73,7 @@ const BankMethodForm = forwardRef((props: Props, ref: Ref<BankMethodFormRef>) =>
         }
     }
     return(
-        <Container
+        <ScrollView
             style={props.style}
         >
             <Input
@@ -92,7 +92,7 @@ const BankMethodForm = forwardRef((props: Props, ref: Ref<BankMethodFormRef>) =>
                 value={iban}
                 maxLength={29}
             />
-        </Container>
+        </ScrollView>
     )
 })
 export default BankMethodForm;

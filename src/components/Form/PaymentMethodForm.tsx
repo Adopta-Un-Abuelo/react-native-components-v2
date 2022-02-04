@@ -23,9 +23,9 @@ const PaymentMethodForm = forwardRef((props: Props, ref: Ref<PaymentMethodFormRe
                 const result = await createPaymentMethod({
                     type: 'Card',
                     billingDetails:{
-                        name: props.currentUser.get('name'),
-                        phone: props.currentUser.get('phone'),
-                        email: props.currentUser.get('email')
+                        name: props.currentUser.name,
+                        phone: props.currentUser.phone,
+                        email: props.currentUser.email
                     },
                     ...cardDetails
                 });
@@ -69,7 +69,7 @@ const PaymentMethodForm = forwardRef((props: Props, ref: Ref<PaymentMethodFormRe
                     fontFamily: 'Poppins-Regular',
                     borderRadius: 24,
                     borderWidth: isFocus ? 1 : 0,
-                    borderColor: isFocus ? Color.gray3 : 'transparent',
+                    borderColor: Color.gray3,
                     cursorColor: Color.blue3
                 }}
                 style={{

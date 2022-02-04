@@ -35,8 +35,8 @@ const PaymentMethodSelect = forwardRef((props: Props, ref: Ref<SelectPaymentMeth
         paymentMethod: undefined
     };
 
-    // Method of payment
-    const [ methodSelected, setMethodSelected ] = useState(props.methodsTypes.includes('native') ? nativePayment : cardPayment)
+    // TODO - Method of payment - Google Pay
+    const [ methodSelected, setMethodSelected ] = useState(props.methodsTypes.includes('native') && Platform.OS === 'ios' ? nativePayment : cardPayment)
     const [ options, setOptions ] = useState<Array<{objectId: string, title: string, icon: any}>>([]);
 
     // Manage open/close transition
@@ -59,7 +59,8 @@ const PaymentMethodSelect = forwardRef((props: Props, ref: Ref<SelectPaymentMeth
 
     useEffect(() =>{
         // Set payment method (NATIVE OR CARD)
-        if(((Platform.OS === 'ios' && isApplePaySupported()) || Platform.OS === 'android') && props.methodsTypes.includes('native')){
+        // if(((Platform.OS === 'ios' && isApplePaySupported()) || Platform.OS === 'android') && props.methodsTypes.includes('native')){
+        if(((Platform.OS === 'ios' && isApplePaySupported())) && props.methodsTypes.includes('native')){
             setOptions([nativePayment, cardPayment]);
             props.onChange && props.onChange(nativePayment);
         }

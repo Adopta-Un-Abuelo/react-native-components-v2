@@ -59,7 +59,7 @@ const PaymentMethodModal = forwardRef((props: Props, ref: Ref<PaymentMethodModal
                 if(item === 'sepa_debit'){
                     temp.push({
                         id: 'sepa_debit',
-                        title: props.translation ? props.translation. form_payment_method_sepa_debit : 'Cuenta bancaria',
+                        title: props.translation ? props.translation.form_payment_method_sepa_debit : 'Cuenta bancaria',
                         icon: <DollarSign height={24} width={24} stroke={Color.gray2}/>
                     })
                 }

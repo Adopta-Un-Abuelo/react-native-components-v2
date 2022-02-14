@@ -9,7 +9,7 @@ const Container = styled.View`
     flex-direction: row;
     flex-wrap: wrap;
 `
-const Cell = styled.Pressable<{selected?: boolean, backgroundColor?: string}>`
+const Cell = styled.Pressable<{selected?: boolean, backgroundColor?: string, disabled?: boolean}>`
     flex-direction: row;
     padding: 8px 18px;
     margin-right: 12px;
@@ -18,6 +18,7 @@ const Cell = styled.Pressable<{selected?: boolean, backgroundColor?: string}>`
     justify-content: center;
     align-items: center;
     background-color: ${props => props.backgroundColor ? (props.selected ? props.backgroundColor : props.backgroundColor+'10') : (props.selected ? Color.blue3 : Color.gray6)};
+    opacity: ${props => props.disabled ? 0.6 : 1.0};
 `
 const Column = styled.View`
     flex-direction: column;
@@ -73,12 +74,14 @@ const TagSelect: FC<Props> = props =>{
             {props.options.map((item, index)=>{
                 const selected= selectedItems.some(obj => obj.id === item.id);
                 const color = item.color ? item.color : (colorsArray && colorsArray.length > 0 ? colorsArray[index] : Color.blue3);
+                const disabled = props.disabledOptions ? props.disabledOptions.some(i => i.id === item.id) : false;
                 return(
                     <Cell
                         key={'cell'+index}
                         onPress={() => onPress(item)}
                         selected={selected}
                         backgroundColor={item.backgroundColor}
+                        disabled={disabled}
                         style={{...props.cellStyle}}
                     >
                         {item.icon ?
@@ -90,7 +93,7 @@ const TagSelect: FC<Props> = props =>{
                             style={{marginLeft: (props.icon || item.icon) ? 8 : 0}}
                         >
                             <Text
-                                style={{color: selected ? 'white' : color, fontFamily: 'Poppins-Medium', ...props.textStyle}}
+                                style={{color: disabled ? Color.gray3 : (selected ? 'white' : color), fontFamily: 'Poppins-Medium', ...props.textStyle}}
                                 weight={'semibold'}
                             >
                                 {props.locale === 'en' ? item.en : item.title}
@@ -122,6 +125,9 @@ export interface Props{
         icon?: any,
         color?: string,
         backgroundColor?: string
+    }>,
+    disabledOptions?: Array<{
+        id: string
     }>,
     selectedItems?: Array<{
         id: string,

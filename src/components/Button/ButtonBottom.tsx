@@ -10,6 +10,7 @@ const Container = styled.View`
     justify-content: flex-end;
     align-items: center;
     padding: 12px 24px;
+    background-color: white;
 `
 
 const BottomButton: FC<Props> = props =>{

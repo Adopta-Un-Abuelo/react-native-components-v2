@@ -4,6 +4,7 @@ import Discover from '../assets/images/paycard/discover.svg';
 import Amex from '../assets/images/paycard/amex.svg';
 import Google from '../assets/images/paycard/google.svg';
 import Apple from '../assets/images/paycard/apple.svg';
+import Sepa from '../assets/images/paycard/sepa_debit.svg';
 
 const Paycard = {
     visa:{
@@ -29,6 +30,10 @@ const Paycard = {
 	apple:{
 		name: 'Apple Pay',
 		icon: Apple
+	},
+	sepa_debit:{
+		name: 'Cuenta bancaria',
+		icon: Sepa
 	}
 }
 export default Paycard;

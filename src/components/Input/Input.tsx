@@ -21,7 +21,7 @@ const InputStyled = styled.TextInput<{isFocused: boolean | undefined, hasValue: 
     font-family: 'Poppins-Regular';
     height: 100%;
     padding: 0px;
-    color: ${Color.gray2};
+    color: ${Color.black};
     margin-top: ${props => ((props.isFocused || props.hasValue) && !props.hideTitle) ? '18px' : '0px'};
 `
 const IconView = styled.View`
@@ -87,7 +87,8 @@ const InputComponent = forwardRef((props: Props, ref: Ref<InputRef>) =>{
             <InputView>
                 {((!currentPlaceholder || value) && !props.hideTitle) &&
                     <Text
-                        style={{position: 'absolute', top: 10, fontSize: 14, color: Color.gray4}}
+                        type='c1'
+                        style={{position: 'absolute', top: 8, fontSize: 14, color: Color.gray4}}
                     >
                         {props.placeholder}
                     </Text>

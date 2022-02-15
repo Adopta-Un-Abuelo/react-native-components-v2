@@ -13,8 +13,8 @@ import { Color } from '../../constants';
 const ModalView = styled(SafeAreaView)<{horientation?: 'top' | 'bottom' | 'center' | 'fullScreen', swipeToClose?: boolean}>`
     background-color: white;
     border-radius: 8px;
-    border-top-left-radius: ${props => (props.horientation === 'bottom' || props.horientation === 'fullScreen') ? '32px' : '8px'};
-    border-top-right-radius: ${props => (props.horientation === 'bottom' || props.horientation === 'fullScreen') ? '32px' : '8px'};
+    border-top-left-radius: ${props => (props.horientation === 'bottom' || props.horientation === 'fullScreen') ? '24px' : '8px'};
+    border-top-right-radius: ${props => (props.horientation === 'bottom' || props.horientation === 'fullScreen') ? '24px' : '8px'};
     border-bottom-left-radius: ${props => (props.horientation === 'bottom' || props.horientation === 'fullScreen') ? '0px' : '8px'};
     border-bottom-right-radius: ${props => (props.horientation === 'bottom' || props.horientation === 'fullScreen') ? '0px' : '8px'};
     padding: 24px;
@@ -27,7 +27,7 @@ const ModalView = styled(SafeAreaView)<{horientation?: 'top' | 'bottom' | 'cente
 `
 const CloseButton = styled.Pressable`
     position: absolute;
-    top: 12px;
+    top: 18px;
     right: 12px;
     height: 40px;
     width: 40px;
@@ -150,7 +150,7 @@ const ModalComponent = (props: Props) =>{
                     <CloseButton
                         onPress={onClosePress}
                     >
-                        <X stroke={Color.gray2}/>
+                        <X stroke={Color.black}/>
                     </CloseButton>
                 }
             </ModalView>

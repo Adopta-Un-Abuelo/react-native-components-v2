@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components/native';
-import { TextStyle } from 'react-native';
+import { TextStyle, ViewStyle } from 'react-native';
 
 import { ChevronDown } from 'react-native-feather';
 import Color from '../../constants/Color';
@@ -8,6 +8,7 @@ import Text from '../Text/Text';
 import SelectCountryModal from '../Modal/SelectCountryModal';
 
 const Container = styled.View`
+    justify-content: center;
 `
 const SelectStyled = styled.Pressable`
   display: flex;
@@ -57,7 +58,7 @@ const SelectCountry = (props: Props) =>{
 
     return(
         <Container
-            style={{marginRight: 8}}
+            style={{marginRight: 8, ...props.style}}
         >
             <SelectStyled
                 style={{borderWidth: 0, paddingTop: 0, paddingBottom: 0, paddingRight: 0, paddingLeft: 0, backgroundColor: 'transparent'}}
@@ -69,6 +70,7 @@ const SelectCountry = (props: Props) =>{
                     </Icon>
                 }
                 <Text
+                    type='p2'
                     style={{marginRight: 4, ...props.textStyle}}
                 >
                     {props.title ? props.title : selectedCountry.prefix}
@@ -96,6 +98,7 @@ export interface Props{
         [key: string]: any
     },
     textStyle?: TextStyle,
+    style?: ViewStyle,
     selectedCountry?: {
         [key: string]: any
     },

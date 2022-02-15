@@ -3,6 +3,7 @@ import { TextInput } from 'react-native';
 
 import SelectCountry from '../Select/SelectCountry';
 import Input from '../Input/Input';
+import Color from '../../constants/Color';
 
 const PhoneInput = (props: Props) =>{
 
@@ -34,6 +35,7 @@ const PhoneInput = (props: Props) =>{
             ref={input}
         >
             <SelectCountry
+                style={{borderRightWidth: 1, borderColor: Color.gray5, height: '100%', paddingRight: 12}}
                 translation={props.translation}
                 countries={props.countries}
                 locale={props.locale}

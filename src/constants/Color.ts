@@ -15,5 +15,7 @@ const Color = {
     gradient3: 'linear-gradient(40.44deg, #004773 0%, #009BBC 98.5%)',
     warning: '#FFAC4B',
     error: '#FF5A5A',
+    black: 'rgba(0, 0, 0, 0.78)'
+
 }
 export default Color;

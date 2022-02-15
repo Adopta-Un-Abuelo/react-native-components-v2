@@ -4,7 +4,7 @@ import { TextStyle, TextProps } from 'react-native';
 import Text from './Text';
 import Color from '../../constants/Color';
 
-const Subtitle = (props: Props) =>{
+const TextDisplay = (props: Props) =>{
 
     return(
         props.type === 'd1' ?
@@ -33,7 +33,7 @@ const Subtitle = (props: Props) =>{
             </Text>
     )
 }
-export default Subtitle;
+export default TextDisplay;
 export interface Props extends TextProps{
     type?: 'd1' | 'd2' | any,
     style?: TextStyle,

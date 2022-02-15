@@ -5,7 +5,6 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import Modal from "react-native-modal";
 
 import { X, ArrowLeft } from 'react-native-feather';
-import Title from '../Text/Title';
 import Text from '../Text/Text';
 import Button from '../Button/Button';
 import ButtonImage from '../Button/ButtonImage';
@@ -110,11 +109,12 @@ const ModalComponent = (props: Props) =>{
                             style={{marginTop: props.swipeToClose ? 28 : 0}}
                         >
                             {props.title &&
-                                <Title
+                                <Text
+                                    type='h4'
                                     style={{fontSize: 24}}
                                 >
                                     {props.title}
-                                </Title>
+                                </Text>
                             }
                             {props.subtitle &&
                                 <Text>{props.subtitle}</Text>

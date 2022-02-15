@@ -4,7 +4,7 @@ import { TextStyle, TextProps } from 'react-native';
 import Text from './Text';
 import Color from '../../constants/Color';
 
-const Subtitle = (props: Props) =>{
+const TextHeader = (props: Props) =>{
 
     return(props.type === 'h1' ?
         <Text
@@ -80,7 +80,7 @@ const Subtitle = (props: Props) =>{
         </Text>
     : undefined)
 }
-export default Subtitle;
+export default TextHeader;
 export interface Props extends TextProps{
     style?: TextStyle,
     children?: any,

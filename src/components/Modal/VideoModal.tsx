@@ -7,10 +7,8 @@ import styled from 'styled-components/native';
 import Button from '../Button/Button';
 import Color from '../../constants/Color';
 import Text from '../Text/Text';
-import Title from '../Text/Title';
 import ButtonImage from '../Button/ButtonImage';
 import Modal from './Modal';
-import Subtitle from '../Text/Subtitle';
 import VideoProgressBar from '../ProgressBar/VideoProgressBar';
 
 const { width } = Dimensions.get('window');
@@ -113,17 +111,19 @@ const VideoModal: FC<Props> = props =>{
             <ContentView
                 horientation={props.horientation}
             >
-                <Title
+                <Text
+                    type='h4'
                     style={{textAlign: 'center', fontSize: 24}}
                 >
                     {props.title}
-                </Title>
+                </Text>
                 {props.subtitle &&
-                    <Subtitle
+                    <Text
+                        type='p1'
                         style={{textAlign: 'center'}}
                     >
                         {props.subtitle}
-                    </Subtitle>
+                    </Text>
                 }
             </ContentView>
             <ControllersView

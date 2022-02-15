@@ -4,7 +4,7 @@ import { View } from 'react-native';
 import { action } from '@storybook/addon-actions';
 import { boolean, text, color, object, select, number } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/react-native';
-import { Button, ButtonBottom, ButtonImage, CallToAction, Color, Text } from '../src';
+import { Button, ButtonBottom, ButtonImage, CallToAction, Color, Text, ButtonSmall } from '../src';
 import { Info } from 'react-native-feather';
 
 storiesOf('Button', module)
@@ -18,12 +18,11 @@ storiesOf('Button', module)
 			title={text('text', 'Button')}
 			loading={boolean('loading', false)}
 			disabled={boolean('disabled', false)}
-			color={color('color', Color.blue5)}
+			color={color('color', Color.blue3)}
 			type={select('type', {
 				fill: 'fill',
 				line: 'line'
 			}, 'fill')}
-			hideIcon={boolean('hideIcon', false)}
 			onPress={action('onPress')}
 		/>
 	))
@@ -37,12 +36,11 @@ storiesOf('Button', module)
 			title={text('text', 'Button')}
 			loading={boolean('loading', false)}
 			disabled={boolean('disabled', false)}
-			color={color('color', Color.blue5)}
+			color={color('color', Color.blue3)}
 			type={select('type', {
 				fill: 'fill',
 				line: 'line'
 			}, 'fill')}
-			hideIcon={boolean('hideIcon', false)}
 			icon={Info}
 			onPress={action('onPress')}
 		/>
@@ -54,7 +52,7 @@ storiesOf('Button', module)
 			title={text('text', 'Button')}
 			loading={boolean('loading', false)}
 			disabled={boolean('disabled', false)}
-			color={color('color', Color.blue5)}
+			color={color('color', Color.blue3)}
 			size={select('size', {
 				big: 'big',
 				small: 'small'
@@ -70,7 +68,7 @@ storiesOf('Button', module)
 			title={text('text', 'Button')}
 			loading={boolean('loading', false)}
 			disabled={boolean('disabled', false)}
-			color={color('color', Color.blue5)}
+			color={color('color', Color.blue3)}
 			size={select('size', {
 				big: 'big',
 				small: 'small'
@@ -88,6 +86,24 @@ storiesOf('Button', module)
 			onPress={action('onPress')}
 		/>
 	))
+	.add('Small', () => (
+		<ButtonSmall
+			style={object('style', {
+				margin: 24
+			})}
+			textStyle={object('textStyle', {})}
+			iconStyle={object('iconStyle', {})}
+			title={text('text', 'Button')}
+			loading={boolean('loading', false)}
+			disabled={boolean('disabled', false)}
+			color={color('color', Color.blue3)}
+			type={select('type', {
+				fill: 'fill',
+				line: 'line'
+			}, 'fill')}
+			onPress={action('onPress')}
+		/>
+	))
 	.add('Image', () => (
 		<ButtonImage
 			icon={Info}
@@ -95,7 +111,7 @@ storiesOf('Button', module)
 			title={text('text', 'Button')}
 			height={number('height', 28)}
 			width={number('width', 28)}
-			color={color('color', Color.blue5)}
+			color={color('color', Color.blue3)}
 			fill={color('fill', 'transparent')}
 			onPress={action('onPress')}
 		/>
@@ -104,7 +120,7 @@ storiesOf('Button', module)
 		<CallToAction
 			style={object('style', {})}
 			title={text('title', 'Call to action')}
-			color={color('color', Color.blue5)}
+			color={color('color', Color.blue3)}
 			onPress={action('onPress')}
 		/>
 	))

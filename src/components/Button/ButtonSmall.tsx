@@ -8,18 +8,19 @@ import Text from '../Text/Text';
 
 const Container = styled.Pressable<{type?: 'line' | 'fill', color?: string, size?: 'small' | 'big'}>`
     flex-direction: row;
-    height: 56px;
-    border-radius: 12px;
+    height: 36px;
+    border-radius: 8px;
     background-color: ${props => props.type === 'line' ? 'transparent' : (props.color ? props.color : Color.blue3)};
     align-items: center;
     justify-content: center;
     border-width: ${props => props.type === 'line' ? '1px' : '0px'};
     border-color: ${props => props.color ? props.color : Color.blue3};
-    padding: 0px 24px;
+    padding: 0px 14px;
     opacity: ${props => props.disabled ? 0.48 : 1};
+    align-self: flex-start;
 `
 
-const Button = (props: Props) =>{
+const ButtonSmall = (props: Props) =>{
 
     const onPress = (e: GestureResponderEvent) =>{
         if(!props.loading)
@@ -36,7 +37,7 @@ const Button = (props: Props) =>{
         >
             {props.loading ?
                 <LottieView 
-                    style={{width: 100}}
+                    style={{width: 65}}
                     source={require('../../assets/animations/button-loading.json')} 
                     autoPlay
                     loop
@@ -47,7 +48,7 @@ const Button = (props: Props) =>{
                     <props.icon style={{marginRight: 8, ...props.iconStyle}} stroke={(props.iconStyle && props.iconStyle.stroke) ? props.iconStyle.stroke : (props.type === 'line' ? (props.color ? props.color : Color.blue5) : 'white')}/>
                 }
                 <Text
-                    type='b1'
+                    type='b2'
                     weight='semibold'
                     style={{
                         textAlign: 'center',
@@ -65,7 +66,7 @@ const Button = (props: Props) =>{
         </Container>
     )
 }
-export default Button;
+export default ButtonSmall;
 export interface Props extends PressableProps{
     loading?: boolean,
     textStyle?: TextStyle,

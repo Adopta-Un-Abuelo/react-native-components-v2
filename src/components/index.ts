@@ -39,3 +39,4 @@ export { default as Tabs } from './Tabs/Tabs';
 export { default as InputPhone } from './Input/InputPhone';
 export { default as SelectCountry } from './Select/SelectCountry';
 export { default as SelectCountryModal } from './Modal/SelectCountryModal';
+export { default as ButtonSmall } from './Button/ButtonSmall';

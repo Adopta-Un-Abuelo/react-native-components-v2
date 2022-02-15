@@ -1,4 +1,4 @@
-import React, { FC, useState, useEffect, forwardRef, useImperativeHandle, useRef, Ref } from 'react';
+import React, { useState, useEffect, forwardRef, useImperativeHandle, useRef, Ref } from 'react';
 import styled from 'styled-components/native';
 import { TextInput, ViewStyle } from 'react-native';
 
@@ -6,14 +6,14 @@ import Color from '../../constants/Color';
 import Text from '../Text/Text';
 
 const Container = styled.View<{error?: boolean, isFocused: boolean | undefined}>`
-    height: 64px;
-    border-color: ${props => props.error ? Color.error : (props.isFocused ? Color.gray3 : 'transparent')};
-    border-width: 1px;
-    border-radius: 24px;
+    height: 56px;
+    border-color: ${props => props.error ? Color.error : (props.isFocused ? '#D4D6F6' : Color.gray5)};
+    border-width: ${props => props.isFocused ? '2px' : '1px'};
+    border-radius: 12px;
     align-items: center;
     flex-direction: row;
-    padding: 0px 24px;
-    background-color: ${props => props.isFocused ? 'white' : Color.gray6};
+    padding: 0px 16px;
+    background-color: white;
 `
 const InputStyled = styled.TextInput<{isFocused: boolean | undefined, hasValue: boolean, hideTitle?: boolean}>`
     flex: 1;
@@ -22,7 +22,7 @@ const InputStyled = styled.TextInput<{isFocused: boolean | undefined, hasValue: 
     height: 100%;
     padding: 0px;
     color: ${Color.gray2};
-    margin-top: ${props => ((props.isFocused || props.hasValue) && !props.hideTitle) ? 18+'px' : 0+'px'};
+    margin-top: ${props => ((props.isFocused || props.hasValue) && !props.hideTitle) ? '18px' : '0px'};
 `
 const IconView = styled.View`
     height: 24px;
@@ -33,7 +33,7 @@ const InputView = styled.View`
     flex: 1;
 `
 
-const Input = forwardRef((props: Props, ref: Ref<InputRef>) =>{
+const InputComponent = forwardRef((props: Props, ref: Ref<InputRef>) =>{
 
     const input = useRef<TextInput>();
     const [ isFocused, setIsFocused ] = useState<boolean>(false);
@@ -111,7 +111,7 @@ const Input = forwardRef((props: Props, ref: Ref<InputRef>) =>{
         </Container>
     )
 });
-export default Input;
+export default InputComponent;
 export interface Props{
     id?: string,
     ref?: any,

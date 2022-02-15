@@ -8,6 +8,7 @@ const TextButton = (props: Props) =>{
 
     return(props.type === 'b1' ?
         <Text
+            {...props}
             style={{
                 fontFamily: props.weight === 'medium' ? 'Poppins-Medium' : 'Poppins-SemiBold',
                 fontSize: 16,
@@ -20,6 +21,7 @@ const TextButton = (props: Props) =>{
         </Text>
     : props.type === 'b2' ?
         <Text
+            {...props}
             style={{
                 fontFamily: props.weight === 'medium' ? 'Poppins-Medium' : 'Poppins-SemiBold',
                 fontSize: 14,

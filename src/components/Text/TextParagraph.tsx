@@ -19,12 +19,12 @@ const TextStyled = styled.Text<{weight?: string, fontStyle?: string}>`
 const Text = (props: Props) =>{
     return(props.type === 'p2' ?
         <TextStyled
+            {...props}
             style={{
                 fontSize: 14,
                 lineHeight: 20,
                 ...props.style
             }}
-            {...props}
         >
             {props.children}
         </TextStyled>

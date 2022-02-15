@@ -8,6 +8,7 @@ const TextCaption = (props: Props) =>{
 
     return(props.type === 'c1' ?
         <Text
+            {...props}
             style={{
                 fontFamily: props.weight === 'medium' ? 'Poppins-Medium' : 'Poppins-Regular',
                 fontSize: 12,
@@ -20,6 +21,7 @@ const TextCaption = (props: Props) =>{
         </Text>
     : props.type === 'c2' ?
         <Text
+            {...props}
             style={{
                 fontFamily: props.weight === 'medium' ? 'Poppins-Medium' : 'Poppins-Regular',
                 fontSize: 10,

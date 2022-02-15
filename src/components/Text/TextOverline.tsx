@@ -8,6 +8,7 @@ const TextOverline = (props: Props) =>{
 
     return(
         <Text
+            {...props}
             style={{
                 fontFamily: 'Poppins-Regular',
                 fontSize: 12,

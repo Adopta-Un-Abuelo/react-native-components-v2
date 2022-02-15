@@ -9,6 +9,7 @@ const TextDisplay = (props: Props) =>{
     return(
         props.type === 'd1' ?
             <Text
+                {...props}
                 style={{
                     fontFamily: 'Poppins-Bold',
                     fontSize: 56,
@@ -21,6 +22,7 @@ const TextDisplay = (props: Props) =>{
             </Text>
         :
             <Text
+                {...props}
                 style={{
                     fontFamily: 'Poppins-Medium',
                     fontSize: 56,

@@ -8,6 +8,7 @@ const TextHeader = (props: Props) =>{
 
     return(props.type === 'h1' ?
         <Text
+            {...props}
             style={{
                 fontFamily: 'Poppins-Bold',
                 fontSize: 32,
@@ -20,6 +21,7 @@ const TextHeader = (props: Props) =>{
         </Text>
     : props.type === 'h2' ?
         <Text
+            {...props}
             style={{
                 fontFamily: 'Poppins-Bold',
                 fontSize: 28,
@@ -32,6 +34,7 @@ const TextHeader = (props: Props) =>{
         </Text>
     : props.type === 'h3' ?
         <Text
+            {...props}
             style={{
                 fontFamily: 'Poppins-Bold',
                 fontSize: 24,
@@ -44,6 +47,7 @@ const TextHeader = (props: Props) =>{
         </Text>
     : props.type === 'h4' ?
         <Text
+            {...props}
             style={{
                 fontFamily: 'Poppins-SemiBold',
                 fontSize: 20,
@@ -56,6 +60,7 @@ const TextHeader = (props: Props) =>{
         </Text>
     : props.type === 'h5' ?
         <Text
+            {...props}
             style={{
                 fontFamily: 'Poppins-SemiBold',
                 fontSize: 18,
@@ -68,6 +73,7 @@ const TextHeader = (props: Props) =>{
         </Text>
     : props.type === 'h6' ?
         <Text
+            {...props}
             style={{
                 fontFamily: 'Poppins-SemiBold',
                 fontSize: 16,

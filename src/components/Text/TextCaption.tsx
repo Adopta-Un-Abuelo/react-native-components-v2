@@ -6,31 +6,33 @@ import Color from '../../constants/Color';
 
 const TextCaption = (props: Props) =>{
 
-    return(props.type === 'c1' ?
+    const { style, type, children, weight, ...rest } = props;
+
+    return(type === 'c1' ?
         <Text
-            {...props}
             style={{
-                fontFamily: props.weight === 'medium' ? 'Poppins-Medium' : 'Poppins-Regular',
+                fontFamily: weight === 'medium' ? 'Poppins-Medium' : 'Poppins-Regular',
                 fontSize: 12,
                 lineHeight: 16,
                 color: Color.gray2,
-                ...props.style
+                ...style
             }}
+            {...rest}
         >
-            {props.children}
+            {children}
         </Text>
-    : props.type === 'c2' ?
+    : type === 'c2' ?
         <Text
-            {...props}
             style={{
-                fontFamily: props.weight === 'medium' ? 'Poppins-Medium' : 'Poppins-Regular',
+                fontFamily: weight === 'medium' ? 'Poppins-Medium' : 'Poppins-Regular',
                 fontSize: 10,
                 lineHeight: 14,
                 color: Color.gray2,
-                ...props.style
+                ...style
             }}
+            {...rest}
         >
-            {props.children}
+            {children}
         </Text>
     : undefined)
 }

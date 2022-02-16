@@ -6,83 +6,85 @@ import Color from '../../constants/Color';
 
 const TextHeader = (props: Props) =>{
 
-    return(props.type === 'h1' ?
+    const { style, type, children, ...rest } = props;
+
+    return(type === 'h1' ?
         <Text
-            {...props}
             style={{
                 fontFamily: 'Poppins-Bold',
                 fontSize: 32,
                 lineHeight: 36,
                 color: Color.black,
-                ...props.style
+                ...style
             }}
+            {...rest}
         >
-            {props.children}
+            {children}
         </Text>
-    : props.type === 'h2' ?
+    : type === 'h2' ?
         <Text
-            {...props}
             style={{
                 fontFamily: 'Poppins-Bold',
                 fontSize: 28,
                 lineHeight: 36,
                 color: Color.black,
-                ...props.style
+                ...style
             }}
+            {...rest}
         >
-            {props.children}
+            {children}
         </Text>
-    : props.type === 'h3' ?
+    : type === 'h3' ?
         <Text
-            {...props}
             style={{
                 fontFamily: 'Poppins-Bold',
                 fontSize: 24,
                 lineHeight: 32,
                 color: Color.black,
-                ...props.style
+                ...style
             }}
+            {...rest}
         >
-            {props.children}
+            {children}
         </Text>
-    : props.type === 'h4' ?
+    : type === 'h4' ?
         <Text
-            {...props}
             style={{
                 fontFamily: 'Poppins-SemiBold',
                 fontSize: 20,
                 lineHeight: 26,
                 color: Color.gray2,
-                ...props.style
+                ...style
             }}
+            {...rest}
         >
-            {props.children}
+            {children}
         </Text>
-    : props.type === 'h5' ?
+    : type === 'h5' ?
         <Text
-            {...props}
             style={{
                 fontFamily: 'Poppins-SemiBold',
                 fontSize: 18,
                 lineHeight: 22,
                 color: Color.gray2,
-                ...props.style
+                ...style
             }}
+            {...rest}
         >
-            {props.children}
+            {children}
         </Text>
-    : props.type === 'h6' ?
+    : type === 'h6' ?
         <Text
-            {...props}
             style={{
                 fontFamily: 'Poppins-SemiBold',
                 fontSize: 16,
                 lineHeight: 22,
                 color: Color.gray2,
-                ...props.style
+                ...style
             }}
+            {...rest}
         >
-            {props.children}
+            {children}
         </Text>
     : undefined)
 }

@@ -6,9 +6,10 @@ import Color from '../../constants/Color';
 
 const TextOverline = (props: Props) =>{
 
+    const { style, children, ...rest } = props;
+
     return(
         <Text
-            {...props}
             style={{
                 fontFamily: 'Poppins-Regular',
                 fontSize: 12,
@@ -16,10 +17,11 @@ const TextOverline = (props: Props) =>{
                 letterSpacing: 0.5,
                 color: Color.gray2,
                 textTransform: 'uppercase',
-                ...props.style
+                ...style
             }}
+            {...rest}
         >
-            {props.children}
+            {children}
         </Text>
     )
 }

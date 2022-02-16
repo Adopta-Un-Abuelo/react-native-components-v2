@@ -6,32 +6,34 @@ import Color from '../../constants/Color';
 
 const TextDisplay = (props: Props) =>{
 
+    const { style, type, children, ...rest } = props;
+
     return(
-        props.type === 'd1' ?
+        type === 'd1' ?
             <Text
-                {...props}
                 style={{
                     fontFamily: 'Poppins-Bold',
                     fontSize: 56,
                     lineHeight: 68,
                     color: Color.black,
-                    ...props.style
+                    ...style
                 }}
+                {...rest}
             >
-                {props.children}
+                {children}
             </Text>
         :
             <Text
-                {...props}
                 style={{
                     fontFamily: 'Poppins-Medium',
                     fontSize: 56,
                     lineHeight: 68,
                     color: Color.black,
-                    ...props.style
+                    ...style
                 }}
+                {...rest}
             >
-                {props.children}
+                {children}
             </Text>
     )
 }

@@ -6,31 +6,33 @@ import Color from '../../constants/Color';
 
 const TextButton = (props: Props) =>{
 
-    return(props.type === 'b1' ?
+    const { style, type, children, weight, ...rest } = props;
+
+    return(type === 'b1' ?
         <Text
-            {...props}
             style={{
-                fontFamily: props.weight === 'medium' ? 'Poppins-Medium' : 'Poppins-SemiBold',
+                fontFamily: weight === 'medium' ? 'Poppins-Medium' : 'Poppins-SemiBold',
                 fontSize: 16,
                 lineHeight: 20,
                 color: Color.gray2,
-                ...props.style
+                ...style
             }}
+            {...rest}
         >
-            {props.children}
+            {children}
         </Text>
-    : props.type === 'b2' ?
+    : type === 'b2' ?
         <Text
-            {...props}
             style={{
-                fontFamily: props.weight === 'medium' ? 'Poppins-Medium' : 'Poppins-SemiBold',
+                fontFamily: weight === 'medium' ? 'Poppins-Medium' : 'Poppins-SemiBold',
                 fontSize: 14,
                 lineHeight: 22,
                 color: Color.gray2,
-                ...props.style
+                ...style
             }}
+            {...rest}
         >
-            {props.children}
+            {children}
         </Text>
     : undefined)
 }

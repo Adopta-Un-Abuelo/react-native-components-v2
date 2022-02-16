@@ -11,7 +11,7 @@ const PhoneInput = (props: Props) =>{
 
     const onCountryChange = (country: {prefix: string}) =>{
         setTitle(country.prefix);
-        props.onCountryChange && props.onCountryChange(country.prefix);
+        props.onCountryChange && props.onCountryChange(country);
     }
 
     const onSelectShow = () =>{
@@ -27,7 +27,6 @@ const PhoneInput = (props: Props) =>{
             id = "phoneInput"
             {...props}
             placeholder={props.translation ? props.translation?.input_phone_phone : 'Teléfono'}
-            maxLength={10}
             autoComplete={'tel'}
             keyboardType={'number-pad'}
             error={props.error}

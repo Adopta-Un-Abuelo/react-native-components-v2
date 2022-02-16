@@ -33,7 +33,7 @@ const Text = (props: Props) =>{
         </TextStyled>
     : 
         <TextStyled
-            {...rest}
+            {...props}
         >
             {children}
         </TextStyled>

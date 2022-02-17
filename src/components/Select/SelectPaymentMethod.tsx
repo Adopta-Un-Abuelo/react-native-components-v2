@@ -14,10 +14,14 @@ const ScrollView = styled.ScrollView`
 `
 const Cell = styled.Pressable`
     flex-direction: row;
-    padding: 22px 0px;
     align-items: center;
 `
-const creditCardHidde = '**** **** **** '
+const Column = styled.View`
+    flex-direction: column;
+    margin-left: 12px;
+    margin-right: 8px;
+`
+const creditCardHidde = '**** '
 
 const PaymentMethodSelect = forwardRef((props: Props, ref: Ref<SelectPaymentMethodRef>) =>{
 
@@ -178,7 +182,7 @@ const PaymentMethodSelect = forwardRef((props: Props, ref: Ref<SelectPaymentMeth
                         const last4 = item.objectId === 'newCard' ? item.title : creditCardHidde+item.last4;
                         return (
                             <Cell
-                                style={{borderBottomWidth: 1, borderBottomColor: Color.gray5}}
+                                style={{borderBottomWidth: 1, borderBottomColor: Color.gray5, paddingTop: 22, paddingBottom: 22}}
                                 key={'paymentMethod'+index}
                                 onPress={() => onOptionSelected(item)}
                             >
@@ -194,7 +198,7 @@ const PaymentMethodSelect = forwardRef((props: Props, ref: Ref<SelectPaymentMeth
                     })}
                     {options.map((item, index) =>(
                         <Cell
-                            style={{borderBottomWidth: 1, borderBottomColor: Color.gray5}}
+                            style={{borderBottomWidth: 1, borderBottomColor: Color.gray5, paddingTop: 22, paddingBottom: 22}}
                             key={'paymentOption'+index}
                             onPress={() => onOptionSelected(item)}
                         >
@@ -222,17 +226,21 @@ const PaymentMethodSelect = forwardRef((props: Props, ref: Ref<SelectPaymentMeth
                 onChange={onPaycardChange}
             />
             <methodSelected.icon height={28} width={42} stroke={Color.gray3} fill={Color.gray3}/>
-            <Text
-                style={{flex: 1, color: Color.gray4, marginLeft: 8, marginRight: 8}}
-                numberOfLines={1}
-            >
-                {methodSelected.title}
-            </Text>
-            <Text
-                style={{color: Color.gray2}}
-            >
-                {props.translation ? props.translation.payment_method_select_modify : 'Modificar'}
-            </Text>
+            <Column>
+                <Text
+                    type='p2'
+                    style={{color: Color.gray4}}
+                    numberOfLines={1}
+                >
+                    {methodSelected.title}
+                </Text>
+                <Text
+                    type='b2'
+                    style={{color: Color.blue3}}
+                >
+                    {props.translation ? props.translation.payment_method_select_modify : 'Modificar'}
+                </Text>
+            </Column>
         </Cell>
     )
 });

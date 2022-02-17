@@ -10,9 +10,8 @@ const Container = styled.View`
     flex-direction: column;
 `
 const MarkView = styled.View`
-    height: 20px;
     flex-direction: row;
-    margin-top: 4px;
+    margin-top: 10px;
 `
 
 const ProgressBar: FC<Props> = props =>{
@@ -34,7 +33,7 @@ const ProgressBar: FC<Props> = props =>{
             <Progress.Bar
                 width={null}
                 progress={barProgress}
-                height={12}
+                height={6}
                 borderRadius={10}
                 borderWidth={0}
                 unfilledColor={Color.gray5}
@@ -42,14 +41,14 @@ const ProgressBar: FC<Props> = props =>{
             />
             <MarkView>
                 <Text
-                    style={{flex: 1, fontSize: 12, color: Color.gray4}}
-                    weight={'semibold'}
+                    type='c1'
+                    style={{flex: 1, color: Color.blue3}}
                 >
                     {new Date(progressLeft * 1000).toISOString().substr(14, 5)}
                 </Text>
                 <Text
-                    style={{flex: 1, textAlign: 'right', fontSize: 12, color: Color.gray4}}
-                    weight={'semibold'}
+                    type='c1'
+                    style={{flex: 1, textAlign: 'right', color: Color.gray4}}
                 >
                     {new Date(props.maxProgress * 1000).toISOString().substr(14, 5)}
                 </Text>

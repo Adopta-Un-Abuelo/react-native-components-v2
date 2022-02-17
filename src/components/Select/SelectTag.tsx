@@ -93,8 +93,9 @@ const TagSelect: FC<Props> = props =>{
                             style={{marginLeft: (props.icon || item.icon) ? 8 : 0}}
                         >
                             <Text
-                                style={{color: disabled ? Color.gray3 : (selected ? 'white' : color), fontFamily: 'Poppins-Medium', ...props.textStyle}}
-                                weight={'semibold'}
+                                type='p2'
+                                weight='medium'
+                                style={{color: disabled ? Color.gray3 : (selected ? 'white' : color), ...props.textStyle}}
                             >
                                 {props.locale === 'en' ? item.en : item.title}
                             </Text>

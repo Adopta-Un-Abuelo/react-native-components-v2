@@ -28,7 +28,6 @@ const ContentView = styled.View<{horientation: 'fullScreen' | 'center' | undefin
     flex: 1;
     padding: 24px;
     align-items: center;
-    justify-content: center;
 `
 
 const VideoModal: FC<Props> = props =>{
@@ -65,9 +64,8 @@ const VideoModal: FC<Props> = props =>{
             hideClose={true}
         >
             <Text
+                type='h4'
                 style={{
-                    fontSize: 24,
-                    fontFamily: 'Poppins-Bold',
                     marginStart: 24,
                     marginTop: 16,
                     marginBottom: 4
@@ -112,7 +110,7 @@ const VideoModal: FC<Props> = props =>{
                 horientation={props.horientation}
             >
                 <Text
-                    type='h4'
+                    type='h3'
                     style={{textAlign: 'center', fontSize: 24}}
                 >
                     {props.title}
@@ -120,7 +118,7 @@ const VideoModal: FC<Props> = props =>{
                 {props.subtitle &&
                     <Text
                         type='p1'
-                        style={{textAlign: 'center'}}
+                        style={{textAlign: 'center', marginTop: 8}}
                     >
                         {props.subtitle}
                     </Text>

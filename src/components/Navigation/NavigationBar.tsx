@@ -17,12 +17,12 @@ const MainView = styled(Animated.View)`
 `
 const RightHeader = styled.View`
     position: absolute;
-    right: 24px;
+    right: 16px;
     top: 8px;
     align-items: center;
 `
 const TextContainer = styled(Animated.View)`
-    padding-right: 24px;
+    padding-right: 16px;
 `
 
 const NavigationBar: FC<Props> = props => {
@@ -30,7 +30,7 @@ const NavigationBar: FC<Props> = props => {
     const showBackButton = (!props.hideBackButton && props.navigation && props.navigation.canGoBack()) ? true : false
 
     const MIN_HEADER_HEIGHT = 56;
-    const MAX_HEADER_HEIGHT = (props.title && props.subtitle) ? 140 : ((!props.subtitle && !props.title) ? 56 : 120);
+    const MAX_HEADER_HEIGHT = (props.title && props.subtitle) ? 120 : ((!props.subtitle && !props.title) ? 56 : 100);
 
     const headerHeight = props.animatedValue ? props.animatedValue.interpolate({
         inputRange: [0, MAX_HEADER_HEIGHT],
@@ -38,8 +38,8 @@ const NavigationBar: FC<Props> = props => {
         extrapolate: 'clamp'
     }) : MAX_HEADER_HEIGHT;
 
-    const MIN_TITLE_LEFT = 24;
-    const MAX_TITLE_LEFT = showBackButton ? 60 : 24;
+    const MIN_TITLE_LEFT = 16;
+    const MAX_TITLE_LEFT = showBackButton ? 48 : 16;
 
     const titleLeft = props.animatedValue ? props.animatedValue.interpolate({
         inputRange: [0, MAX_HEADER_HEIGHT],
@@ -47,8 +47,8 @@ const NavigationBar: FC<Props> = props => {
         extrapolate: 'clamp'
     }) : MIN_TITLE_LEFT;
 
-    const MIN_TITLE_BOTTOM = 0;
-    const MAX_TITLE_BOTTOM = (props.title && props.subtitle) ? 6 : 10;
+    const MIN_TITLE_BOTTOM = 8;
+    const MAX_TITLE_BOTTOM = (props.title && props.subtitle) ? 8 : 14;
 
     const titleBottom = props.animatedValue ? props.animatedValue.interpolate({
         inputRange: [0, MAX_HEADER_HEIGHT],
@@ -56,8 +56,8 @@ const NavigationBar: FC<Props> = props => {
         extrapolate: 'clamp'
     }) : MIN_TITLE_BOTTOM;
 
-    const MIN_TITLE_FONT = 24;
-    const MAX_TITLE_FONT = 42;
+    const MIN_TITLE_FONT = 18;
+    const MAX_TITLE_FONT = 28;
 
     const titleFont = props.animatedValue ? props.animatedValue.interpolate({
         inputRange: [0, MAX_HEADER_HEIGHT],
@@ -65,8 +65,8 @@ const NavigationBar: FC<Props> = props => {
         extrapolate: 'clamp'
     }) : MAX_TITLE_FONT;
 
-    const MIN_SUBTITLE_FONT = 18;
-    const MAX_SUBTITLE_FONT = 24;
+    const MIN_SUBTITLE_FONT = 14;
+    const MAX_SUBTITLE_FONT = 20;
 
     const subtitleFont = props.animatedValue ? props.animatedValue.interpolate({
         inputRange: [0, MAX_HEADER_HEIGHT],
@@ -101,7 +101,7 @@ const NavigationBar: FC<Props> = props => {
                     style={{
                         position: 'absolute',
                         top: 8,
-                        left: 16,
+                        left: 6,
                         height: 40,
                         width: 40,
                         zIndex: 1000,
@@ -153,7 +153,7 @@ const NavigationBar: FC<Props> = props => {
                     style={{
                         position: 'absolute', 
                         top: 24, 
-                        right: 24,
+                        right: 16,
                         opacity: breadcrumbOpacity
                     }}
                 />

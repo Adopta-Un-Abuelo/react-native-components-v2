@@ -75,7 +75,7 @@ const Keyboard: FC<Props> = props =>{
                 onPress={() => _onPress(key.mainText)}
             >
                 <View style={[keyStyle.bd]}>
-                    <Text style={keyStyle.mainText}>
+                    <Text type='h3' style={keyStyle.mainText}>
                         {key.mainText}
                     </Text>
                 </View>

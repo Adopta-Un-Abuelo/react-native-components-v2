@@ -26,7 +26,7 @@ const CellTextView = styled.View<{show: boolean}>`
     flex: 1;
     flex-direction: column;
     justify-content: center;
-    padding: 0px 0px 0px 16px;
+    margin: 0px 0px 0px 16px;
     border-bottom-color: ${Color.gray5};
     border-bottom-width: ${props => props.show ? '1px' : '0px'};
 `

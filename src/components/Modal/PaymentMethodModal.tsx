@@ -12,6 +12,7 @@ import PaycardLogos from '../../constants/Paycard';
 
 const Container = styled.View`
     flex: 1;
+    margin-top: 32px;
 `
 const InfoView = styled.View`
     flex-direction: row;
@@ -23,10 +24,18 @@ const Separator = styled.View`
     margin-bottom: 24px;
 `
 const Cell = styled.Pressable`
+    height: 80px;
     flex-direction: row;
-    padding: 18px 0px;
+    align-items: center;
+`
+const CellTextView = styled.View`
+    height: 100%;
+    flex: 1;
+    flex-direction: column;
+    justify-content: center;
+    margin: 0px 0px 0px 16px;
+    border-bottom-color: ${Color.gray5};
     border-bottom-width: 1px;
-    border-bottom-color: ${Color.gray4};
 `
 
 const PaymentMethodModal = forwardRef((props: Props, ref: Ref<PaymentMethodModalRef>) =>{
@@ -119,9 +128,12 @@ const PaymentMethodModal = forwardRef((props: Props, ref: Ref<PaymentMethodModal
     return(
         <Modal
             title={optionSelected ?
-                (optionSelected.id === 'card' ? (props.translation ? props.translation.payment_method_modal_title : 'Datos de tarjeta') : (props.translation ? props.translation.payment_method_modal_title_bank : 'Datos de cuenta bancaria')) :
-                (props.translation ? props.translation.payment_method_select_add_credit_card : 'Añadir forma de pago')
+                (optionSelected.id === 'card' ? 
+                    (props.translation ? props.translation.payment_method_modal_title : 'Datos de tarjeta') : 
+                    (props.translation ? props.translation.payment_method_modal_title_bank : 'Datos de cuenta bancaria')) :
+                    (props.translation ? props.translation.payment_method_select_add_credit_card : 'Añadir método de pago')
             }
+            subtitle={props.translation ? props.translation.payment_method_modal_sub_title : 'Selecciona cómo quieres realizar la aportación'}
             visible={visible}
             horientation={'fullScreen'}
             onDismiss={onDismiss}
@@ -130,7 +142,8 @@ const PaymentMethodModal = forwardRef((props: Props, ref: Ref<PaymentMethodModal
                 loading: loading,
                 onPress: onSavePress
             }}
-            showBack={optionSelected}
+            showBack={true}
+            hideClose={true}
             onBackPress={onBackPress}
         >
             {optionSelected ? 
@@ -178,16 +191,26 @@ const PaymentMethodModal = forwardRef((props: Props, ref: Ref<PaymentMethodModal
                 </Container>
             :
                 <Container>
-                    {options.map((item, index) =>(
+                    {options.map((item, index) =>(                    
                         <Cell
                             key={'option'+index}
                             onPress={() => onOptionPress(item)}
                         >
                             {item.icon}
-                            <Text style={{flex: 1, marginLeft: 12}}>
-                                {item.title}
-                            </Text>
-                            <ChevronRight height={24} width={24} stroke={Color.gray2}/>
+                            <CellTextView>
+                                <Text
+                                    type='p1'
+                                    weight='medium'
+                                >
+                                    {item.title}
+                                </Text>
+                                <Text
+                                    type='c1'
+                                    style={{color: Color.gray3, marginTop: 4}}
+                                >
+                                    {item.id === 'card' ? (props.translation ? props.translation.payment_method_modal_card : 'Cargo automático a tu tarjeta') : (props.translation ? props.translation.payment_method_modal_sepa : 'Cargo automático en tu cuenta')}
+                                </Text>
+                            </CellTextView>
                         </Cell>
                     ))}
                 </Container>

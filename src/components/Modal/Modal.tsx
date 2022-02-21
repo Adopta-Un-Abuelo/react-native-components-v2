@@ -4,7 +4,7 @@ import { ViewStyle } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Modal from "react-native-modal";
 
-import { X, ArrowLeft } from 'react-native-feather';
+import { X } from 'react-native-feather';
 import Text from '../Text/Text';
 import Button from '../Button/Button';
 import ButtonImage from '../Button/ButtonImage';
@@ -56,6 +56,7 @@ const Swipe = styled.View`
 `
 const Header = styled.View`
     flex-direction: row;
+    align-items: flex-start;
 `
 
 const ModalComponent = (props: Props) =>{
@@ -103,6 +104,7 @@ const ModalComponent = (props: Props) =>{
                                 <Text
                                     type='p1'
                                     weight='medium'
+                                    style={{color: Color.gray1}}
                                 >
                                     {props.title}
                                 </Text>
@@ -110,7 +112,7 @@ const ModalComponent = (props: Props) =>{
                             {props.subtitle &&
                                 <Text
                                     type='p2'
-                                    style={{color: Color.gray2}}
+                                    style={{color: Color.gray2, marginTop: 6}}
                                     >
                                     {props.subtitle}
                                 </Text>

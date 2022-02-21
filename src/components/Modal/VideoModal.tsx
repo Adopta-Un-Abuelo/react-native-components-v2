@@ -64,11 +64,12 @@ const VideoModal: FC<Props> = props =>{
             hideClose={true}
         >
             <Text
-                type='h4'
+                type='p1'
+                weight='medium'
                 style={{
-                    marginStart: 24,
-                    marginTop: 16,
-                    marginBottom: 4
+                    marginStart: 16,
+                    marginTop: 28,
+                    marginBottom: 16
                 }}
             >
                 {props.titleHeader}
@@ -98,7 +99,7 @@ const VideoModal: FC<Props> = props =>{
                 }
             </VideoContainer>
             <ControllersView
-                style={{paddingTop: 14, paddingStart: 24, paddingEnd: 24, paddingBottom: 14}}
+                style={{paddingTop: 21, paddingStart: 16, paddingEnd: 24, paddingBottom: 24}}
             >
                 <VideoProgressBar
                     style={{flex: 1}}
@@ -111,7 +112,7 @@ const VideoModal: FC<Props> = props =>{
             >
                 <Text
                     type='h3'
-                    style={{textAlign: 'center', fontSize: 24}}
+                    style={{textAlign: 'center'}}
                 >
                     {props.title}
                 </Text>

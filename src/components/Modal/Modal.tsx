@@ -17,7 +17,7 @@ const ModalView = styled(SafeAreaView)<{horientation?: 'top' | 'bottom' | 'cente
     border-top-right-radius: ${props => (props.horientation === 'bottom' || props.horientation === 'fullScreen') ? '24px' : '8px'};
     border-bottom-left-radius: ${props => (props.horientation === 'bottom' || props.horientation === 'fullScreen') ? '0px' : '8px'};
     border-bottom-right-radius: ${props => (props.horientation === 'bottom' || props.horientation === 'fullScreen') ? '0px' : '8px'};
-    padding: 24px;
+    padding: 16px 24px;
     padding-bottom: ${props => props.horientation === 'bottom' ? '0px' : '12px'};
     padding-top: ${props => props.swipeToClose ? '0px' : (props.horientation === 'top' ? '48px' : '24px')};
     width: 100%;
@@ -35,7 +35,8 @@ const CloseButton = styled.Pressable`
     justify-content: center;
 `
 const TitleView = styled.View`
-    padding-bottom: 14px;
+    top: 8px;
+    flex: 1;
 `
 const SafeArea = styled.View`
     background-color: white;
@@ -55,8 +56,6 @@ const Swipe = styled.View`
 `
 const Header = styled.View`
     flex-direction: row;
-    border-bottom-color: ${Color.gray5};
-    border-bottom-width: 1px;
 `
 
 const ModalComponent = (props: Props) =>{
@@ -97,29 +96,34 @@ const ModalComponent = (props: Props) =>{
                 }
                 {(props.title || props.subtitle) &&
                     <Header>
-                        {props.showBack &&
-                            <ButtonImage
-                                icon={ArrowLeft}
-                                height={24}
-                                width={24}
-                                onPress={() => props.onBackPress && props.onBackPress()}
-                            />
-                        }
                         <TitleView
                             style={{marginTop: props.swipeToClose ? 28 : 0}}
                         >
                             {props.title &&
                                 <Text
-                                    type='h4'
-                                    style={{fontSize: 24}}
+                                    type='p1'
+                                    weight='medium'
                                 >
                                     {props.title}
                                 </Text>
                             }
                             {props.subtitle &&
-                                <Text>{props.subtitle}</Text>
+                                <Text
+                                    type='p2'
+                                    style={{color: Color.gray2}}
+                                    >
+                                    {props.subtitle}
+                                </Text>
                             }
                         </TitleView>
+                        {props.showBack &&
+                            <ButtonImage
+                                icon={X}
+                                height={24}
+                                width={24}
+                                onPress={onClosePress}
+                            />
+                        }
                     </Header>
                 }
                 {props.children}

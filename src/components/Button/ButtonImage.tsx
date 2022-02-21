@@ -9,7 +9,6 @@ const Button = styled.Pressable`
     flex-direction: row;
     align-items: center;
     padding: 8px;
-    align-self: flex-start;
 `
 const Icon = styled.Image`
     height: 32px;

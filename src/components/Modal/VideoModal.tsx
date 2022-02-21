@@ -126,7 +126,7 @@ const VideoModal: FC<Props> = props =>{
                 }
             </ContentView>
             <ControllersView
-                style={{paddingTop: 0, paddingStart: 24, paddingEnd: 24, paddingBottom: 19}}
+                style={{paddingTop: 0, paddingStart: 24, paddingEnd: 24, paddingBottom: 24}}
             >
                 {!loading && !props.hideControllers &&
                     <ButtonImage

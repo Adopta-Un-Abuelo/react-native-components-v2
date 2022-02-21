@@ -12,22 +12,36 @@ import PaymentMethodModal, { PaymentMethodModalRef } from '../Modal/PaymentMetho
 
 const ScrollView = styled.ScrollView`
 `
-const Cell = styled.Pressable`
+const MainView = styled.Pressable`
     flex-direction: row;
     align-items: center;
+`
+const Cell = styled.Pressable`
+    height: 80px;
+    flex-direction: row;
+    align-items: center;
+`
+const CellTextView = styled.View<{show: boolean}>`
+    height: 100%;
+    flex: 1;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0px 0px 0px 16px;
+    border-bottom-color: ${Color.gray5};
+    border-bottom-width: ${props => props.show ? '1px' : '0px'};
 `
 const Column = styled.View`
     flex-direction: column;
     margin-left: 12px;
-    margin-right: 8px;
 `
-const creditCardHidde = '**** '
+const creditCardHidde = '···· '
 
 const PaymentMethodSelect = forwardRef((props: Props, ref: Ref<SelectPaymentMethodRef>) =>{
 
     const nativePayment = {
         objectId: Platform.OS === 'ios' ? 'applePay' : 'googlePay',
         title: Platform.OS === 'ios' ? 'Apple Pay' : 'Google Pay',
+        date: undefined,
         icon: Platform.OS === 'ios' ? PaycardLogos.apple.icon : PaycardLogos.google.icon,
         paymentMethod: undefined
     };
@@ -35,13 +49,14 @@ const PaymentMethodSelect = forwardRef((props: Props, ref: Ref<SelectPaymentMeth
     const cardPayment = {
         objectId: 'new',
         title: props.translation ? props.translation.payment_method_select_add_credit_card : 'Añadir forma de pago',
+        date: undefined,
         icon: Plus,
         paymentMethod: undefined
     };
 
     // TODO - Method of payment - Google Pay
     const [ methodSelected, setMethodSelected ] = useState(props.methodsTypes.includes('native') && Platform.OS === 'ios' ? nativePayment : cardPayment)
-    const [ options, setOptions ] = useState<Array<{objectId: string, title: string, icon: any}>>([]);
+    const [ options, setOptions ] = useState<Array<{objectId: string, title: string, date: string, icon: any}>>([]);
 
     // Manage open/close transition
     const [ action, setAction ] = useState<undefined | string>(undefined);
@@ -87,6 +102,15 @@ const PaymentMethodSelect = forwardRef((props: Props, ref: Ref<SelectPaymentMeth
         props.onDismiss && props.onDismiss();
     }
 
+    const parseDate = (date) => {
+        if(date) {
+            const formatter = new Intl.DateTimeFormat('es', { month: 'numeric', year: 'numeric' });
+            return formatter.format(new Date(date.iso));    
+        } else {
+            return undefined;
+        }
+    }
+
     const setDefaultCard = (method?) =>{
         if(method){
             setMethodSelected(method)
@@ -96,14 +120,18 @@ const PaymentMethodSelect = forwardRef((props: Props, ref: Ref<SelectPaymentMeth
             // Set payment if user have default card
             if(props.paymentMethods){
                 props.paymentMethods?.map(item =>{
+
+                    console.log('setDefaultCard', item)
+
                     if(item.default){
                         const method = {
                             objectId: item.objectId, 
                             title: creditCardHidde+item.last4,
+                            date: parseDate(item.expDate),
                             icon: PaycardLogos[item.brand.toLowerCase()].icon,
                             paymentMethod: undefined
                         }
-                        setMethodSelected(method)
+                        setMethodSelected(method);
                         props.onChange && props.onChange(item);
                     }
                 })
@@ -129,6 +157,7 @@ const PaymentMethodSelect = forwardRef((props: Props, ref: Ref<SelectPaymentMeth
             setDefaultCard({
                 objectId: option.objectId, 
                 title: creditCardHidde+option.last4,
+                date: parseDate(option.expDate),
                 icon: PaycardLogos[option.brand.toLowerCase()].icon,
                 paymentMethod: undefined
             });
@@ -145,6 +174,7 @@ const PaymentMethodSelect = forwardRef((props: Props, ref: Ref<SelectPaymentMeth
                 const method = {
                     objectId: 'newCard',
                     title: creditCardHidde+result.data.Card.last4,
+                    date: parseDate(result.data.Card.expDate),
                     icon: PaycardLogos[(result.data.Card.brand).toLowerCase()].icon,
                     paymentMethod: result.data.id
                 }
@@ -155,6 +185,7 @@ const PaymentMethodSelect = forwardRef((props: Props, ref: Ref<SelectPaymentMeth
                 const method = {
                     objectId: 'newCard',
                     title: result.data.iban,
+                    date: undefined,
                     icon: PaycardLogos["sepa_debit"].icon,
                     paymentMethod: result.data
                 }
@@ -164,17 +195,21 @@ const PaymentMethodSelect = forwardRef((props: Props, ref: Ref<SelectPaymentMeth
         }
     }
 
+    console.log('method', methodSelected)
+
     return(
-        <Cell
+        <MainView
             style={props.style}
             onPress={() => setShowSelectModal(true)}
         >
             <Modal
-                title={props.translation ? props.translation.payment_method_select_modal_payment_method : 'Método de pago'}
+                title={props.translation ? props.translation.payment_method_select_modal_payment_method : '¿Cómo quieres pagar?'}
                 visible={showSelectModal}
                 horientation={'bottom'}
                 onDismiss={onDismiss}
                 onModalHide={onModalHide}
+                showBack={true}
+                hideClose={true}
             >
                 <ScrollView>
                     {props.paymentMethods && props.paymentMethods.map((item, index) =>{
@@ -182,33 +217,48 @@ const PaymentMethodSelect = forwardRef((props: Props, ref: Ref<SelectPaymentMeth
                         const last4 = item.objectId === 'newCard' ? item.title : creditCardHidde+item.last4;
                         return (
                             <Cell
-                                style={{borderBottomWidth: 1, borderBottomColor: Color.gray5, paddingTop: 22, paddingBottom: 22}}
                                 key={'paymentMethod'+index}
                                 onPress={() => onOptionSelected(item)}
                             >
-                                <Paycard height={28} width={42}/>
-                                <Text
-                                    style={{flex: 1, marginLeft: 8}}
-                                    numberOfLines={1}
+                                <Paycard height={21} width={32}/>
+                                <CellTextView
+                                    show={true}
                                 >
-                                    {last4}
-                                </Text>
+                                    <Text
+                                        type='p1'
+                                        weight='medium'
+                                    >
+                                        {last4}
+                                    </Text>
+                                    {item.expDate &&
+                                        <Text
+                                            type='c1'
+                                            style={{color: Color.gray3}}
+                                        >
+                                            {parseDate(item.expDate)}
+                                        </Text>
+                                    }   
+                                </CellTextView>
                             </Cell>
                         )
                     })}
                     {options.map((item, index) =>(
                         <Cell
-                            style={{borderBottomWidth: 1, borderBottomColor: Color.gray5, paddingTop: 22, paddingBottom: 22}}
                             key={'paymentOption'+index}
                             onPress={() => onOptionSelected(item)}
                         >
-                            <item.icon height={28} width={42} stroke={Color.gray3} fill={Color.gray3}/>
-                            <Text
-                                style={{flex: 1, marginLeft: 8}}
-                                numberOfLines={1}
+                            <item.icon height={21} width={32} stroke={item.objectId === 'new' ? Color.blue3 : Color.gray3} fill={item.objectId === 'new' ? Color.blue3 : Color.gray3}/>
+                            <CellTextView
+                                show={item.objectId !== 'new'}
                             >
-                                {item.title}
-                            </Text>
+                                <Text
+                                    type='p1'
+                                    weight='medium'
+                                    style={{color: item.objectId === 'new' ? Color.blue3 : Color.gray2}}
+                                >
+                                    {item.title}
+                                </Text>
+                            </CellTextView>
                         </Cell>
                     ))}
                 </ScrollView>
@@ -229,10 +279,10 @@ const PaymentMethodSelect = forwardRef((props: Props, ref: Ref<SelectPaymentMeth
             <Column>
                 <Text
                     type='p2'
-                    style={{color: Color.gray4}}
+                    style={{color: Color.gray3}}
                     numberOfLines={1}
                 >
-                    {methodSelected.title}
+                    {methodSelected.objectId === 'new' ? (props.translation ? props.translation.payment_method_select_modify_no_payment_method : 'No hay método de pago') : (methodSelected.title ? methodSelected.title : 'Añadir método de pago')}
                 </Text>
                 <Text
                     type='b2'
@@ -241,7 +291,7 @@ const PaymentMethodSelect = forwardRef((props: Props, ref: Ref<SelectPaymentMeth
                     {props.translation ? props.translation.payment_method_select_modify : 'Modificar'}
                 </Text>
             </Column>
-        </Cell>
+        </MainView>
     )
 });
 export default PaymentMethodSelect;

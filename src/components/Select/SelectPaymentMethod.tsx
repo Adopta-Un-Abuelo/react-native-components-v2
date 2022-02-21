@@ -120,9 +120,6 @@ const PaymentMethodSelect = forwardRef((props: Props, ref: Ref<SelectPaymentMeth
             // Set payment if user have default card
             if(props.paymentMethods){
                 props.paymentMethods?.map(item =>{
-
-                    console.log('setDefaultCard', item)
-
                     if(item.default){
                         const method = {
                             objectId: item.objectId, 
@@ -194,8 +191,6 @@ const PaymentMethodSelect = forwardRef((props: Props, ref: Ref<SelectPaymentMeth
             }
         }
     }
-
-    console.log('method', methodSelected)
 
     return(
         <MainView

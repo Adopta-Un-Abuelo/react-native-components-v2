@@ -272,7 +272,9 @@ const PaymentMethodSelect = forwardRef((props: Props, ref: Ref<SelectPaymentMeth
                 }}
                 onChange={onPaycardChange}
             />
-            <methodSelected.icon height={28} width={42} />
+            {methodSelected.objectId !== 'new' &&
+                <methodSelected.icon height={28} width={42} />
+            }
             <Column>
                 <Text
                     type='p2'

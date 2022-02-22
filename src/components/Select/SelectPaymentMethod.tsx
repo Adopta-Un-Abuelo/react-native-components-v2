@@ -244,7 +244,7 @@ const PaymentMethodSelect = forwardRef((props: Props, ref: Ref<SelectPaymentMeth
                             key={'paymentOption'+index}
                             onPress={() => onOptionSelected(item)}
                         >
-                            <item.icon height={21} width={32} stroke={item.objectId === 'new' ? Color.blue3 : Color.gray3} fill={item.objectId === 'new' ? Color.blue3 : Color.gray3}/>
+                            <item.icon height={21} width={32} stroke={item.objectId === 'new' ? Color.blue3 : undefined} fill={item.objectId === 'new' ? Color.blue3 : undefined}/>
                             <CellTextView
                                 show={item.objectId !== 'new'}
                             >

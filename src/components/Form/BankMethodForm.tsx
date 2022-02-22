@@ -1,6 +1,5 @@
 import React, { forwardRef, useState, Ref, useImperativeHandle } from 'react';
 import styled from 'styled-components/native';
-import { createPaymentMethod, confirmSetupIntent } from '@stripe/stripe-react-native';
 
 import Input from '../Input/Input';
 import { DollarSign, User } from 'react-native-feather';
@@ -84,7 +83,7 @@ const BankMethodForm = forwardRef((props: Props, ref: Ref<BankMethodFormRef>) =>
                 value={name}
             />
             <Input
-                style={{marginTop: 16}}
+                style={{marginTop: 8}}
                 placeholder={props.translation ? props.translation.form_payment_method_sepa_debit : 'Cuenta bancaría (IBAN)'}
                 icon={DollarSign}
                 onChangeText={onIBANChange}

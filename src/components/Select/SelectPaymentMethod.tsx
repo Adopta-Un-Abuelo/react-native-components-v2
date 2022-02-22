@@ -168,10 +168,11 @@ const PaymentMethodSelect = forwardRef((props: Props, ref: Ref<SelectPaymentMeth
     const onPaycardChange = result => {
         if(result){
             if(result.type === "card"){
+                let expDate = result.data.Card.expMonth.toString()+'/'+result.data.Card.expYear.toString();
                 const method = {
                     objectId: 'newCard',
                     title: creditCardHidde+result.data.Card.last4,
-                    date: parseDate(result.data.Card.expDate),
+                    date: expDate,
                     icon: PaycardLogos[(result.data.Card.brand).toLowerCase()].icon,
                     paymentMethod: result.data.id
                 }
@@ -210,6 +211,7 @@ const PaymentMethodSelect = forwardRef((props: Props, ref: Ref<SelectPaymentMeth
                     {props.paymentMethods && props.paymentMethods.map((item, index) =>{
                         const Paycard = item.objectId === 'newCard' ? item.icon : PaycardLogos[item.brand.toLowerCase()].icon;
                         const last4 = item.objectId === 'newCard' ? item.title : creditCardHidde+item.last4;
+                        const expDate = item.objectId === 'newCard' ? item.date : parseDate(item.expDate);
                         return (
                             <Cell
                                 key={'paymentMethod'+index}
@@ -225,12 +227,12 @@ const PaymentMethodSelect = forwardRef((props: Props, ref: Ref<SelectPaymentMeth
                                     >
                                         {last4}
                                     </Text>
-                                    {item.expDate &&
+                                    {expDate &&
                                         <Text
                                             type='c1'
                                             style={{color: Color.gray3}}
                                         >
-                                            {parseDate(item.expDate)}
+                                            {expDate}
                                         </Text>
                                     }   
                                 </CellTextView>

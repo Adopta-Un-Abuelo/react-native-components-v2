@@ -272,7 +272,7 @@ const PaymentMethodSelect = forwardRef((props: Props, ref: Ref<SelectPaymentMeth
                 }}
                 onChange={onPaycardChange}
             />
-            <methodSelected.icon height={28} width={42} stroke={Color.gray3} fill={Color.gray3}/>
+            <methodSelected.icon height={28} width={42} />
             <Column>
                 <Text
                     type='p2'

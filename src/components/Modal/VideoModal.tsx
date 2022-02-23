@@ -24,9 +24,8 @@ const ControllersView = styled.View`
     flex-direction: row;
     align-items: center;
 `
-const ContentView = styled.View<{horientation: 'fullScreen' | 'center' | undefined}>`
+const ContentView = styled.View<{orientation: 'fullScreen' | 'center' | undefined}>`
     flex: 1;
-    padding: 24px;
     align-items: center;
 `
 
@@ -57,11 +56,13 @@ const VideoModal: FC<Props> = props =>{
 
     return(
         <Modal
-            style={{paddingLeft: 0, paddingRight: 0, paddingTop: 0, paddingBottom: 0, overflow: 'hidden'}}
+            translation={props.translation}
             visible={props.visible}
-            horientation={props.horientation ? props.horientation : 'fullScreen'}
+            orientation={props.orientation ? props.orientation : 'fullScreen'}
+            showTopClose={false}
+            showBottomClose={false}
+            style={{paddingLeft: 0, paddingRight: 0, paddingTop: 0, paddingBottom: 0, overflow: 'hidden'}}
             onDismiss={onVideoEnd}
-            hideClose={true}
         >
             <Text
                 type='p1'
@@ -99,7 +100,7 @@ const VideoModal: FC<Props> = props =>{
                 }
             </VideoContainer>
             <ControllersView
-                style={{paddingTop: 21, paddingStart: 16, paddingEnd: 24, paddingBottom: 24}}
+                style={{paddingTop: 22, paddingStart: 16, paddingEnd: 16, paddingBottom: 24}}
             >
                 <VideoProgressBar
                     style={{flex: 1}}
@@ -108,7 +109,7 @@ const VideoModal: FC<Props> = props =>{
                 />
             </ControllersView>
             <ContentView
-                horientation={props.horientation}
+                orientation={props.orientation}
             >
                 <Text
                     type='h3'
@@ -126,7 +127,7 @@ const VideoModal: FC<Props> = props =>{
                 }
             </ContentView>
             <ControllersView
-                style={{paddingTop: 0, paddingStart: 24, paddingEnd: 24, paddingBottom: 24}}
+                style={{paddingTop: 0, paddingStart: 16, paddingEnd: 16, paddingBottom: 40}}
             >
                 {!loading && !props.hideControllers &&
                     <ButtonImage
@@ -161,6 +162,6 @@ export interface Props{
     subtitle?: string,
     skipIn?: number,
     onVideoEnd?: Function,
-    horientation?: 'fullScreen' | 'center',
+    orientation?: 'fullScreen' | 'center',
     hideControllers?: boolean
 }

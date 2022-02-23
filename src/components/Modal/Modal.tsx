@@ -53,7 +53,6 @@ const TitleView = styled.View`
     top: 8px;
 `
 const ButtonArea = styled.View`
-    padding-bottom: 40px;
 `
 
 const ModalComponent = (props: Props) =>{
@@ -94,27 +93,27 @@ const ModalComponent = (props: Props) =>{
                         <Swipe/>
                     </SwipeView>
                 }
-                <Header>
-                    {props.showTopClose &&
+                {props.showTopClose &&
+                    <Header>
                         <CloseButton
                             onPress={onClosePress}
                             style={{marginTop: props.orientation === 'fullScreen' ? 8 : 0}}
                         >
                             <X stroke={Color.black}/>
                         </CloseButton>
-                    }
-                    {(props.title && props.orientation === 'top' || props.orientation === 'bottom') && 
-                        <TitleCenterView>
-                            <Text
-                                type='p1'
-                                weight='medium'
-                                style={{color: Color.gray1}}
-                            >
-                                {props.title}
-                            </Text>
-                        </TitleCenterView>
-                    }
-                </Header>
+                        {(props.title && props.orientation === 'top' || props.orientation === 'bottom') && 
+                            <TitleCenterView>
+                                <Text
+                                    type='p1'
+                                    weight='medium'
+                                    style={{color: Color.gray1}}
+                                >
+                                    {props.title}
+                                </Text>
+                            </TitleCenterView>
+                        }
+                    </Header>
+                }
                 {(props.title && props.orientation === 'fullScreen') && 
                     <TitleView>
                         <Text

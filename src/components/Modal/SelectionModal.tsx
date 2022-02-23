@@ -76,8 +76,10 @@ const SelectionModal: FC<Props> = props =>{
     return(
         <Modal
             visible={visible}
+            orientation={props.orientation}
+            showTopClose={true}
+            showBottomClose={false}
             title={props.title}
-            horientation={props.horientation}
             avoidKeyboard={true}
             onDismiss={onDismiss}
             onModalHide={onModalHide}
@@ -123,7 +125,7 @@ export interface Props{
     onPress?: Function,
     onDismiss?: Function,
     visible: boolean,
-    horientation?: 'top' | 'bottom' | 'center' | 'fullScreen',
+    orientation?: 'top' | 'bottom' | 'center' | 'fullScreen',
     title?: string,
     options: Array<{
         id: string,

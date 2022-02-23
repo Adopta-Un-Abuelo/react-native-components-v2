@@ -73,15 +73,17 @@ const SelectCountryModal: FC<Props> = props =>{
         <Modal
             translation={props.translation}
             visible={visible}
+            orientation={props.orientation}
+            showTopClose={true}
+            showBottomClose={false}
             title={props.title}
-            horientation={props.orientation}
             avoidKeyboard={true}
             onDismiss={onDismiss}
             onModalHide={onModalHide}
         >
             {props.showSearch &&
                 <Input
-                    style={{marginTop: 12, marginBottom: 12, height: 48}}
+                    style={{marginTop: 24, marginBottom: 12, height: 48}}
                     placeholder={props.translation ? props.translation.general_btn_search : 'Buscar'}
                     icon={Search}
                     hideTitle={true}

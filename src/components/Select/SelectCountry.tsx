@@ -11,22 +11,22 @@ const Container = styled.View`
     justify-content: center;
 `
 const SelectStyled = styled.Pressable`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  border: 1px solid ${Color.gray6};
-  padding: 8px 16px;
-  border-radius: 4px;
-  background-color: white;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border: 1px solid ${Color.gray6};
+    padding: 8px 16px;
+    border-radius: 4px;
+    background-color: white;
 `
 const Arrow = styled.View`
-  height: 24px;
-  width: 24px;
+    height: 24px;
+    width: 24px;
 `
 const Icon = styled.View`
-  height: 24px;
-  width: 24px;
-  margin-right: 8px;
+    height: 24px;
+    width: 24px;
+    margin-right: 8px;
 `
 
 const SelectCountry = (props: Props) =>{
@@ -82,7 +82,7 @@ const SelectCountry = (props: Props) =>{
             <SelectCountryModal
                 translation={props.translation}
                 {...props.modalProps}
-                orientation={'bottom'}
+                orientation={'fullScreen'}
                 visible={showMenu}
                 countries={props.countries}
                 locale={props.locale}

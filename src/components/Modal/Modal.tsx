@@ -7,22 +7,21 @@ import Modal from "react-native-modal";
 import { X } from 'react-native-feather';
 import Text from '../Text/Text';
 import Button from '../Button/Button';
-import ButtonImage from '../Button/ButtonImage';
 import { Color } from '../../constants';
 
-const ModalView = styled(SafeAreaView)<{horientation?: 'top' | 'bottom' | 'center' | 'fullScreen', swipeToClose?: boolean}>`
+const ModalView = styled(SafeAreaView)<{orientation?: 'top' | 'bottom' | 'center' | 'fullScreen', swipeToClose?: boolean}>`
     background-color: white;
     border-radius: 8px;
-    border-top-left-radius: ${props => (props.horientation === 'bottom' || props.horientation === 'fullScreen') ? '24px' : '8px'};
-    border-top-right-radius: ${props => (props.horientation === 'bottom' || props.horientation === 'fullScreen') ? '24px' : '8px'};
-    border-bottom-left-radius: ${props => (props.horientation === 'bottom' || props.horientation === 'fullScreen') ? '0px' : '8px'};
-    border-bottom-right-radius: ${props => (props.horientation === 'bottom' || props.horientation === 'fullScreen') ? '0px' : '8px'};
+    border-top-left-radius: ${props => (props.orientation === 'bottom' || props.orientation === 'fullScreen') ? '24px' : '8px'};
+    border-top-right-radius: ${props => (props.orientation === 'bottom' || props.orientation === 'fullScreen') ? '24px' : '8px'};
+    border-bottom-left-radius: ${props => (props.orientation === 'bottom' || props.orientation === 'fullScreen') ? '0px' : '8px'};
+    border-bottom-right-radius: ${props => (props.orientation === 'bottom' || props.orientation === 'fullScreen') ? '0px' : '8px'};
     padding: 16px 16px 46px 16px;
-    padding-bottom: ${props => props.horientation === 'bottom' ? '0px' : '12px'};
-    padding-top: ${props => props.swipeToClose ? '0px' : (props.horientation === 'top' ? '48px' : '24px')};
+    padding-bottom: ${props => props.orientation === 'bottom' ? '0px' : '12px'};
+    padding-top: ${props => props.swipeToClose ? '0px' : (props.orientation === 'top' ? '48px' : '24px')};
     width: 100%;
-    max-height: ${props => (props.horientation === 'bottom' || props.horientation === 'top') ? '80%' : (props.horientation === 'fullScreen' ? '95%' : '80%')};
-    height: ${props => props.horientation === 'fullScreen' ? '95%' : 'auto'};
+    max-height: ${props => (props.orientation === 'bottom' || props.orientation === 'top') ? '80%' : (props.orientation === 'fullScreen' ? '95%' : '80%')};
+    height: ${props => props.orientation === 'fullScreen' ? '95%' : 'auto'};
     overflow: hidden;
 `
 const SwipeView = styled.View`
@@ -52,7 +51,6 @@ const TitleView = styled.View`
     left: 8px;
     align-items: center;
     justify-content: center;
-    background-color: black;
 `
 const SafeArea = styled.View`
     padding-bottom: 40px;
@@ -74,10 +72,10 @@ const ModalComponent = (props: Props) =>{
             onBackdropPress={onClosePress}
             onSwipeComplete={props.swipeToClose ? onClosePress : undefined}
             swipeDirection={props.swipeToClose ? "down": undefined}
-            style={props.horientation === 'fullScreen' || props.horientation === 'bottom' ? {
+            style={props.orientation === 'fullScreen' || props.orientation === 'bottom' ? {
                 justifyContent: 'flex-end',
                 margin: 0
-            } : (props.horientation === 'top' ? {
+            } : (props.orientation === 'top' ? {
                 justifyContent: 'flex-start',
                 margin: 0
             } : {})}
@@ -85,7 +83,7 @@ const ModalComponent = (props: Props) =>{
             avoidKeyboard={props.avoidKeyboard}
         >
             <ModalView
-                horientation={props.horientation}
+                orientation={props.orientation}
                 swipeToClose={props.swipeToClose}
                 style={props.style}
             >
@@ -98,7 +96,7 @@ const ModalComponent = (props: Props) =>{
                 // || props.subtitle
                 ) &&
                     <Header>
-                        {(props.horientation === 'fullScreen' && !props.hideClose) &&
+                        {props.showTopClose &&
                             <CloseButton
                                 onPress={onClosePress}
                             >
@@ -140,7 +138,7 @@ const ModalComponent = (props: Props) =>{
                             style={{marginTop: 12, ...secondButtonProps.style}}
                         />
                     }
-                    {((!props.hideClose && props.horientation !== 'fullScreen') || props.showBottomClose) &&
+                    {props.showBottomClose &&
                         <Button
                             type={'line'}
                             style={{borderWidth: 0}}
@@ -163,8 +161,8 @@ export interface Props{
     ref?: any,
     title?: string,
     // subtitle?: string,
-    hideClose?: boolean,
-    horientation?: 'top' | 'bottom' | 'center' | 'fullScreen',
+    orientation?: 'top' | 'bottom' | 'center' | 'fullScreen',
+    showTopClose?: boolean,
     showBottomClose?: boolean,
     buttonProps?: {
         onPress?: any,
@@ -183,6 +181,5 @@ export interface Props{
     onModalHide?: Function,
     swipeToClose?: boolean,
     avoidKeyboard?: boolean,
-    children?: any ,
-    onBackPress?: Function
+    children?: any
 }

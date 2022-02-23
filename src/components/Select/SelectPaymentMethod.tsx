@@ -199,13 +199,14 @@ const PaymentMethodSelect = forwardRef((props: Props, ref: Ref<SelectPaymentMeth
             onPress={() => setShowSelectModal(true)}
         >
             <Modal
-                title={props.translation ? props.translation.payment_method_select_modal_payment_method : '¿Cómo quieres pagar?'}
+                translation={props.translation}
                 visible={showSelectModal}
-                horientation={'bottom'}
+                orientation={'bottom'}
+                showTopClose={true}
+                showBottomClose={false}
+                title={props.translation ? props.translation.payment_method_select_modal_payment_method : '¿Cómo quieres pagar?'}
                 onDismiss={onDismiss}
                 onModalHide={onModalHide}
-                showBack={true}
-                hideClose={true}
             >
                 <ScrollView>
                     {props.paymentMethods && props.paymentMethods.map((item, index) =>{

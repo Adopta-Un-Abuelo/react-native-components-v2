@@ -99,9 +99,9 @@ const PaymentMethodModal = forwardRef((props: Props, ref: Ref<PaymentMethodModal
         setOptionSelected(option);
     }
 
-    const onBackPress = () =>{
-        setOptionSelected(undefined);
-    }
+    // const onBackPress = () =>{
+    //     setOptionSelected(undefined);
+    // }
 
     const onSavePress = async () =>{
         Keyboard.dismiss();
@@ -127,6 +127,11 @@ const PaymentMethodModal = forwardRef((props: Props, ref: Ref<PaymentMethodModal
 
     return(
         <Modal
+            translation={props.translation}
+            visible={visible}
+            orientation={'fullScreen'}
+            showTopClose={true}
+            showBottomClose={false}
             title={optionSelected ?
                 (optionSelected.id === 'card' ? 
                     (props.translation ? props.translation.payment_method_modal_title : 'Datos de tarjeta') : 
@@ -134,17 +139,13 @@ const PaymentMethodModal = forwardRef((props: Props, ref: Ref<PaymentMethodModal
                     (props.translation ? props.translation.payment_method_select_add_credit_card : 'Añadir método de pago')
             }
             subtitle={!optionSelected && (props.translation ? props.translation.payment_method_modal_sub_title : 'Selecciona cómo quieres realizar la aportación')}
-            visible={visible}
-            horientation={'fullScreen'}
-            onDismiss={onDismiss}
             buttonProps={optionSelected && {
                 title: optionSelected.id === 'card' ? (props.translation ? props.translation.payment_method_modal_btn_save_card : 'Guardar tarjeta') : (props.translation ? props.translation.payment_method_modal_btn_save_sepa : 'Guardar cuenta bancaria'),
                 loading: loading,
                 onPress: onSavePress
             }}
-            showBack={true}
-            hideClose={true}
-            onBackPress={onBackPress}
+            onDismiss={onDismiss}
+            onModalHide={onDismiss}
         >
             {optionSelected ? 
                 <Container>

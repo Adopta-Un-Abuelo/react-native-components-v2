@@ -5,7 +5,6 @@ import Text from '../Text/Text';
 import Color from '../../constants/Color';
 
 const Container = styled.View`
-    flex-direction: row;
     top: 32px;
 `
 const Cell = styled.Pressable`
@@ -22,7 +21,7 @@ const CellContent = styled.View<{selected: boolean, color?: string}>`
     justify-content: center;
 `
 
-const OptionSelect: FC<Props> = props =>{
+const SelectGeneration: FC<Props> = props =>{
 
     const [ selectedItem, setSelectedItem ] = useState<{id: string, title?: string} | undefined>(props.defaultSelection ? {id: props.defaultSelection} : undefined);
 
@@ -42,7 +41,6 @@ const OptionSelect: FC<Props> = props =>{
                         color={props.color}
                         selected={selectedItem?.id === item.id}
                     >
-                        <item.icon stroke={'white'} height={28} width={28}/>
                     </CellContent>
                     <Text>{item.title}</Text>
                 </Cell>
@@ -50,14 +48,14 @@ const OptionSelect: FC<Props> = props =>{
         </Container>
     )
 }
-export default OptionSelect;
+export default SelectGeneration;
 export interface Props{
     onPress?: Function,
     color?: string,
     options: Array<{
         id: string,
         title: string,
-        icon: any
+        description: string
     }>
     defaultSelection?: string
 }

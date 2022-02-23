@@ -86,7 +86,7 @@ const Select = (props: Props) =>{
             </SelectStyled>
             <SelectionModal
                 {...props.modalProps}
-                horientation={'bottom'}
+                orientation={'bottom'}
                 visible={showMenu}
                 options={props.options}
                 onPress={onOptionClick}

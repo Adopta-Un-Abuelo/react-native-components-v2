@@ -30,7 +30,7 @@ const DateInput = (props: Props) =>{
         <>
         <Modal
             visible={showModal}
-            horientation={'bottom'}
+            orientation={'bottom'}
             title={props.translation?.input_date_picker_birthday}
             buttonProps={{
                 title: props.translation?.general_btn_save,

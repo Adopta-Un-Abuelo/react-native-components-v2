@@ -48,7 +48,7 @@ const PlaceInput = forwardRef((props: Props, ref: Ref<InputRef>) =>{
         <Modal
             title={props.translation ? props.translation.input_place_search_direction : 'Buscar localización'}
             visible={showModal}
-            horientation={'fullScreen'}
+            orientation={'fullScreen'}
             onDismiss={onDismiss}
         >
             <GooglePlacesAutocomplete    

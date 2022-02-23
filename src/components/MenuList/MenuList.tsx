@@ -28,7 +28,7 @@ const MenuList = (props: Props) =>{
         />
         <SelectionModal
             visible={showModal}
-            horientation={'bottom'}
+            orientation={'bottom'}
             onDismiss={onModalDismiss}
             options={props.options}
             onPress={props.onPress}

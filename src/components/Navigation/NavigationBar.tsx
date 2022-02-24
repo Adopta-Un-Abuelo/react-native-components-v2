@@ -5,7 +5,6 @@ import { Animated } from 'react-native';
 import { ArrowLeft } from "react-native-feather";
 import ButtonImage from '../Button/ButtonImage';
 import Breadcrumb from '../Breadcrumb/Breadcrumb';
-import Color from '../../constants/Color';
 import Text from '../Text/TextAnimated';
 
 const MainView = styled(Animated.View)`
@@ -125,26 +124,25 @@ const NavigationBar: FC<Props> = props => {
             >
                 {props.title &&
                     <Text
-                        weight='bold'
+                        type='h2'
                         numberOfLines={1}
                         adjustsFontSizeToFit={true}
                         lineBreakMode={'tail'}
                         style={{
                             fontSize: titleFont,
-                            marginRight: 32,
-                            color: Color.gray2
+                            marginRight: 32
                         }}
                     >
                         {props.title}
                     </Text>
                 }
-                {props.subtitle &&
+                {/* {props.subtitle &&
                     <Text
                         style={{color: Color.blue3, fontSize: subtitleFont, marginTop: -8}}
                     >
                         {props.subtitle}
                     </Text>
-                }
+                } */}
             </TextContainer>
             {(props.breadcrumbProps && !props.hideBreadcrumb) &&
                 <Breadcrumb

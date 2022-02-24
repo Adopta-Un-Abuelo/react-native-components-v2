@@ -88,7 +88,7 @@ const InputComponent = forwardRef((props: Props, ref: Ref<InputRef>) =>{
                 {((!currentPlaceholder || value) && !props.hideTitle) &&
                     <Text
                         type='c1'
-                        style={{position: 'absolute', top: 8, fontSize: 14, color: Color.gray4}}
+                        style={{position: 'absolute', top: 8, color: Color.gray3}}
                     >
                         {props.placeholder}
                     </Text>
@@ -103,7 +103,7 @@ const InputComponent = forwardRef((props: Props, ref: Ref<InputRef>) =>{
                     onChangeText={onChangeText}
                     isFocused={isFocused}
                     hasValue={value ? true : false}
-                    placeholderTextColor={Color.gray4}
+                    placeholderTextColor={Color.gray3}
                     maxLength={props.maxLength}
                     keyboardType={props.keyboardType}
                     {...rest}

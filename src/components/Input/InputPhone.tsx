@@ -3,7 +3,6 @@ import { TextInput } from 'react-native';
 
 import SelectCountry from '../Select/SelectCountry';
 import Input from '../Input/Input';
-import Color from '../../constants/Color';
 
 const PhoneInput = (props: Props) =>{
 
@@ -25,7 +24,7 @@ const PhoneInput = (props: Props) =>{
 
     return(
         <Input
-            id = "phoneInput"
+            id="phoneInput"
             {...props}
             placeholder={props.translation ? props.translation?.input_phone_phone : 'Teléfono'}
             maxLength={10}
@@ -33,9 +32,11 @@ const PhoneInput = (props: Props) =>{
             keyboardType={'number-pad'}
             error={props.error}
             ref={input}
+            style={props.style}
+            hideTitle={true}
         >
             <SelectCountry
-                style={{borderRightWidth: 1, borderColor: Color.gray5, height: '100%', paddingRight: 12}}
+                style={{height: '100%'}}
                 translation={props.translation}
                 countries={props.countries}
                 locale={props.locale}
@@ -69,5 +70,6 @@ export interface Props{
     value?: string,
     error?: boolean,
     onCountryChange?: Function,
-    onChangeText?: Function
+    onChangeText?: Function,
+    style?: Object
 }

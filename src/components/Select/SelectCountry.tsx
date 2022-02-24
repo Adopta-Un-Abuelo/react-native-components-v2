@@ -13,20 +13,15 @@ const Container = styled.View`
 const SelectStyled = styled.Pressable`
     display: flex;
     flex-direction: row;
-    align-items: center;
-    border: 1px solid ${Color.gray6};
-    padding: 8px 16px;
-    border-radius: 4px;
-    background-color: white;
-`
-const Arrow = styled.View`
-    height: 24px;
-    width: 24px;
 `
 const Icon = styled.View`
     height: 24px;
     width: 24px;
-    margin-right: 8px;
+`
+const Arrow = styled.View`
+    height: 7px;
+    width: 12px;
+    margin-left: 4px;
 `
 
 const SelectCountry = (props: Props) =>{
@@ -61,7 +56,7 @@ const SelectCountry = (props: Props) =>{
             style={{marginRight: 8, ...props.style}}
         >
             <SelectStyled
-                style={{borderWidth: 0, paddingTop: 0, paddingBottom: 0, paddingRight: 0, paddingLeft: 0, backgroundColor: 'transparent'}}
+                style={{borderWidth: 0}}
                 onPress={onSelectClick}
             >
                 {selectedCountry && selectedCountry.icon &&
@@ -69,15 +64,15 @@ const SelectCountry = (props: Props) =>{
                         <selectedCountry.icon/>
                     </Icon>
                 }
+                <Arrow>
+                    <ChevronDown stroke={Color.gray3}/>
+                </Arrow>
                 <Text
-                    type='p2'
-                    style={{marginRight: 4, ...props.textStyle}}
+                    type='p1'
+                    style={{...props.textStyle, marginLeft: 16}}
                 >
                     {props.title ? props.title : selectedCountry.prefix}
                 </Text>
-                <Arrow>
-                    <ChevronDown stroke={Color.blue3}/>
-                </Arrow>
             </SelectStyled>
             <SelectCountryModal
                 translation={props.translation}

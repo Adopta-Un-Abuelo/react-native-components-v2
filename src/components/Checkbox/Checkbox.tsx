@@ -17,13 +17,13 @@ const Cell = styled.View`
 const CheckButton = styled.Pressable<{selected: boolean, error?: boolean}>`
     margin-right: 12px;
     background-color: ${props => props.selected ? Color.blue3 : Color.gray6};
-    border-radius: 8px;
-    height: 32px;
-    width: 32px;
+    border-radius: 6px;
+    height: 24px;
+    width: 24px;
     align-items: center;
     justify-content: center;
-    border-width: ${props => props.error ? '2px' : '0px'};
-    border-color: ${Color.error};
+    border-width: ${props => props.error ? '2px' : '1px'};
+    border-color: ${props => props.error ? Color.error : props.selected ? Color.blue3 : Color.blue3+'cc'};
 `
 
 const Checkbox = (props: Props) =>{
@@ -58,7 +58,7 @@ const Checkbox = (props: Props) =>{
                             onPress={() => onCellPress(item)}
                         >
                             {selected &&
-                                <Check stroke={'white'} />
+                                <Check height={16} width={16} stroke={'white'} />
                             }
                         </CheckButton>
                         <Text

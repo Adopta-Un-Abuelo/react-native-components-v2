@@ -8,7 +8,7 @@ import Text from '../Text/Text';
 
 const Container = styled.Pressable<{type?: 'line' | 'fill', color?: string, size?: 'small' | 'big'}>`
     flex-direction: row;
-    height: 56px;
+    height: 48px;
     border-radius: 12px;
     background-color: ${props => props.type === 'line' ? 'transparent' : (props.color ? props.color : Color.blue3)};
     align-items: center;

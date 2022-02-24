@@ -11,14 +11,15 @@ const Container = styled.View`
 `
 const Cell = styled.Pressable<{selected?: boolean, backgroundColor?: string, disabled?: boolean}>`
     flex-direction: row;
-    padding: 8px 18px;
-    margin-right: 12px;
-    border-radius: 20px;
-    margin-bottom: 12px;
+    padding: 8px 12px;
+    margin-right: 4px;
+    border-radius: 1000px;
+    margin-bottom: 8px;
     justify-content: center;
     align-items: center;
-    background-color: ${props => props.backgroundColor ? (props.selected ? props.backgroundColor : props.backgroundColor+'10') : (props.selected ? Color.blue3 : Color.gray6)};
-    opacity: ${props => props.disabled ? 0.6 : 1.0};
+    border-width: ${props => props.selected ? '0px' : '1px'};
+    border-color: ${props => props.selected ? undefined : Color.blue3+'40'};
+    background-color: ${props => props.selected ? Color.blue3+'26' : 'white'};
 `
 const Column = styled.View`
     flex-direction: column;
@@ -73,7 +74,7 @@ const TagSelect: FC<Props> = props =>{
         >
             {props.options.map((item, index)=>{
                 const selected= selectedItems.some(obj => obj.id === item.id);
-                const color = item.color ? item.color : (colorsArray && colorsArray.length > 0 ? colorsArray[index] : Color.blue3);
+                const color = item.color ? item.color : (colorsArray && colorsArray.length > 0 ? colorsArray[index] : Color.gray3);
                 const disabled = props.disabledOptions ? props.disabledOptions.some(i => i.id === item.id) : false;
                 return(
                     <Cell
@@ -95,13 +96,14 @@ const TagSelect: FC<Props> = props =>{
                             <Text
                                 type='p2'
                                 weight='medium'
-                                style={{color: disabled ? Color.gray3 : (selected ? 'white' : color), ...props.textStyle}}
+                                style={{color: disabled ? Color.gray3 : (selected ? Color.gray3 : color), ...props.textStyle}}
                             >
                                 {props.locale === 'en' ? item.en : item.title}
                             </Text>
                             {item.subtitle &&
                                 <Text
-                                    style={{color: selected ? 'white' : Color.gray3, fontSize: 12}}
+                                    type='p1'
+                                    style={{color: selected ? 'white' : Color.gray3}}
                                 >
                                     {item.subtitle}
                                 </Text>

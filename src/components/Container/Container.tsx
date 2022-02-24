@@ -10,7 +10,8 @@ import NavigationBar from '../Navigation/NavigationBar';
 
 const TouchableWithoutFeedback = styled.TouchableWithoutFeedback`
 `
-const SafeView = styled(SafeAreaView)`
+const SafeView = styled(SafeAreaView)<{color?: string}>`
+    background-color: ${props => props.color ? props.color : 'white'};
     flex: 1;
 `
 const ViewContainer = styled.View`
@@ -21,9 +22,12 @@ const Container: FC<Props> = props =>{
     return(
         <SafeView
             style={props.style}
+            color={props.color}
             edges={props.edges ? props.edges : (haveCustomHeader ? ["bottom", "left", "right"] : ["bottom", "left", "right", "top"])}
         >
-            <KeyboardAvoidingView>
+            <KeyboardAvoidingView
+                color={props.color}
+            >
                 <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
                     <ViewContainer>
                         {props.navbarProps && (props.navbarProps.Header ?
@@ -74,6 +78,7 @@ export interface Props{
     subtitle?: string,
     buttonSize?: 'big' | 'small' 
     style?: Object,
+    color?: string,
     contentStyle?: Object,
     buttonProps?: {
         title: string,

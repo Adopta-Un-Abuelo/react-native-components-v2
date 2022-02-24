@@ -1,10 +1,11 @@
 import React, { useState, forwardRef, useImperativeHandle, useRef, Ref } from 'react';
 import { GooglePlacesAutocomplete, GooglePlaceDetail, GooglePlacesAutocompleteRef } from 'react-native-google-places-autocomplete';
+import { Search } from 'react-native-feather';
 
 import Color from '../../constants/Color';
 import Modal from '../Modal/Modal';
 import Input from './InputFalse';
-import { MapPin } from 'react-native-feather';
+import { View } from 'react-native';
 
 const PlaceInput = forwardRef((props: Props, ref: Ref<InputRef>) =>{
 
@@ -41,15 +42,17 @@ const PlaceInput = forwardRef((props: Props, ref: Ref<InputRef>) =>{
         <Input
             onPress={onInputFocus}
             style={props.style}
-            icon={MapPin}
             placeholder={props.placeholder}
             value={address}
         />
         <Modal
-            title={props.translation ? props.translation.input_place_search_direction : 'Buscar localización'}
+            translation={props.translation}
             visible={showModal}
+            title={props.translation ? props.translation.input_place_search_direction : 'Buscar localización'}
             orientation={'fullScreen'}
             onDismiss={onDismiss}
+            showTopClose={true}
+            showBottomClose={false}
         >
             <GooglePlacesAutocomplete    
                 ref={input}
@@ -66,24 +69,25 @@ const PlaceInput = forwardRef((props: Props, ref: Ref<InputRef>) =>{
                     autoFocus: true,
                     onFocus: () => setIsFocused(true),
                     onBlur: () => setIsFocused(false),
-                    selectionColor: Color.blue3,
                     clearButtonMode: 'while-editing',
                     autoCorrect: false
                 }}
+                renderLeftButton={() => <View style={{justifyContent: 'center', paddingLeft: 6}}><Search height={20} width={20} stroke={Color.gray3}/></View>}
                 styles={{
-                    textInput:{
-                        height: 64,
-                        borderColor: props.error ? Color.error : (isFocused ? Color.gray3 : 'transparent'),
+                    textInputContainer:{
+                        height: 48,
+                        borderColor: props.error ? Color.error : (isFocused ? '#D4D6F6' : Color.gray5),
                         borderWidth: 1,
-                        borderRadius: 24,
-                        paddingRight: 24,
-                        paddingLeft: 24,
-                        backgroundColor: isFocused ? 'white' : Color.gray6,
-                        fontFamily: 'Poppins-Regular',
-                        fontSize: 16,
-                        color: Color.gray2,
-                        marginBottom: 0,
+                        borderRadius: 12,
+                        paddingRight: 8,
+                        paddingLeft: 8,
+                        backgroundColor: 'white',
                         marginTop: 16
+                    },
+                    textInput:{
+                        fontFamily: 'Poppins-Regular',
+                        fontSize: 15,
+                        color: Color.gray2,
                     },
                     description:{
                         fontFamily: 'Poppins-Regular',

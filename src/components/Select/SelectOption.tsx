@@ -6,18 +6,18 @@ import Color from '../../constants/Color';
 
 const Container = styled.View`
     flex-direction: row;
-    top: 32px;
 `
 const Cell = styled.Pressable`
     flex: 1;
     align-items: center;
 `
 const CellContent = styled.View<{selected: boolean, color?: string}>`
-    height: 80px;
-    width: 80px;
-    border-radius: 32px;
-    background-color: ${props => props.selected ? (props.color ? props.color : Color.blue3) : (props.color ? props.color+'60' : Color.blue3+'60')};
-    margin-bottom: 8px;
+    height: 72px;
+    width: 72px;
+    border-radius: 12px;
+    border-width: ${props => props.selected ? '0px' : '1px'};
+    border-color: ${props => props.selected ? undefined : Color.blue3};
+    background-color: ${props => props.selected ? Color.blue3+'60' : 'white'};
     align-items: center;
     justify-content: center;
 `
@@ -32,7 +32,9 @@ const OptionSelect: FC<Props> = props =>{
     }
 
     return(
-        <Container>
+        <Container
+            style={{marginTop: 32}}
+        >
             {props.options.map((item, index) =>(
                 <Cell
                     key={'cell'+index}
@@ -42,9 +44,18 @@ const OptionSelect: FC<Props> = props =>{
                         color={props.color}
                         selected={selectedItem?.id === item.id}
                     >
-                        <item.icon stroke={'white'} height={28} width={28}/>
+                        <item.icon stroke={Color.gray2} height={24} width={24}/>
                     </CellContent>
-                    <Text>{item.title}</Text>
+                    <Container
+                        style={{marginTop: 4, alignItems: 'center'}}
+                    >
+                        <Text
+                            type='p1'
+                            weight='medium'
+                        >
+                            {item.title}
+                        </Text>
+                    </Container>
                 </Cell>
             ))}
         </Container>

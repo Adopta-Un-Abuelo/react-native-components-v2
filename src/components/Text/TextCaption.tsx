@@ -13,7 +13,7 @@ const TextCaption = (props: Props) =>{
             style={{
                 fontFamily: weight === 'medium' ? 'Poppins-Medium' : 'Poppins-Regular',
                 fontSize: 12,
-                lineHeight: 16,
+                lineHeight: 18,
                 color: Color.gray2,
                 ...style
             }}

@@ -8,18 +8,21 @@ const CodeInputContainer = styled.View`
     width: 100%;
     flex-direction: row;
 `
-const Input = styled.TextInput<{error?: boolean, ref?: any}>`
-    flex: 1;
-    border: none;
-    font-family: 'Poppins-SemiBold';
-    font-size: 24px;
-    border-radius: 16px;
-    aspect-ratio: 1;
+const InputContainer = styled.View`
+    height: 56px;
+    width: 48px;
+    border-radius: 12px;
+    border-width: 1px;
+    border-color: ${Color.gray5};
     text-align: center;
     justify-content: center;
-    color: white;
+    margin-right: 4px;
+`
+const Input = styled.TextInput<{error?: boolean, ref?: any}>`
+    font-family: 'Poppins-SemiBold';
+    font-size: 18px;
     text-align: center;
-    padding: 0px;
+    color: ${Color.blue3};
 `
 
 const CodeInput = forwardRef((props: Props, ref: Ref<InputCodeRef>) =>{
@@ -38,6 +41,9 @@ const CodeInput = forwardRef((props: Props, ref: Ref<InputCodeRef>) =>{
     const input4 = useRef<TextInput>();
     const input5 = useRef<TextInput>();
     const input6 = useRef<TextInput>();
+
+    const placeholder='-'
+    const keyboardType='number-pad'
 
     useImperativeHandle(ref, () => ({
         focus() {
@@ -132,73 +138,85 @@ const CodeInput = forwardRef((props: Props, ref: Ref<InputCodeRef>) =>{
         <CodeInputContainer
             style={props.style}
         >
-            <Input
-                ref={input1}
-                style={{marginRight: 8, backgroundColor: code && code.length > 0 ? Color.blue3 : Color.gray6}}
-                onChangeText={(value) => onInputChange(value, 1)}
-                onKeyPress={onInputKeyPress}
-                autoFocus={props.autoFocus}
-                error={props.error}
-                selectionColor={'transparent'}
-                placeholder={'_'}
-                keyboardType={'number-pad'}
-                value={input1Value}
-            />
-            <Input
-                ref={input2}
-                style={{marginRight: 8, backgroundColor: code && code.length > 1 ? Color.blue3 : Color.gray6}}
-                onChangeText={(value) => onInputChange(value, 2)}
-                onKeyPress={onInputKeyPress}
-                error={props.error}
-                selectionColor={'transparent'}
-                placeholder={'_'}
-                keyboardType={'number-pad'}
-                value={input2Value}
-            />
-            <Input
-                ref={input3}
-                style={{marginRight: 8, backgroundColor: code && code.length > 2 ? Color.blue3 : Color.gray6}}
-                onChangeText={(value) => onInputChange(value, 3)}
-                onKeyPress={onInputKeyPress}
-                error={props.error}
-                selectionColor={'transparent'}
-                placeholder={'_'}
-                keyboardType={'number-pad'}
-                value={input3Value}
-            />
-            <Input
-                ref={input4}
-                style={{marginRight: 8, backgroundColor: code && code.length > 3 ? Color.blue3 : Color.gray6}}
-                onChangeText={(value) => onInputChange(value, 4)}
-                onKeyPress={onInputKeyPress}
-                error={props.error}
-                selectionColor={'transparent'}
-                placeholder={'_'}
-                keyboardType={'number-pad'}
-                value={input4Value}
-            />
-            <Input
-                ref={input5}
-                style={{marginRight: 8, backgroundColor: code && code.length > 4 ? Color.blue3 : Color.gray6}}
-                onChangeText={(value) => onInputChange(value, 5)}
-                onKeyPress={onInputKeyPress}
-                error={props.error}
-                selectionColor={'transparent'}
-                placeholder={'_'}
-                keyboardType={'number-pad'}
-                value={input5Value}
-            />
-            <Input
-                ref={input6}
-                style={{backgroundColor: code && code.length > 5 ? Color.blue3 : Color.gray6}}
-                onChangeText={(value) => onInputChange(value, 6)}
-                onKeyPress={onInputKeyPress}
-                error={props.error}
-                selectionColor={'transparent'}
-                placeholder={'_'}
-                keyboardType={'number-pad'}
-                value={input6Value}
-            />
+            <InputContainer>
+                <Input
+                    ref={input1}
+                    onChangeText={(value) => onInputChange(value, 1)}
+                    onKeyPress={onInputKeyPress}
+                    autoFocus={props.autoFocus}
+                    error={props.error}
+                    selectionColor={'transparent'}
+                    placeholder={placeholder}
+                    keyboardType={keyboardType}
+                    value={input1Value}
+                    maxLength={1}
+                />
+            </InputContainer>
+            <InputContainer>
+                <Input
+                    ref={input2}
+                    onChangeText={(value) => onInputChange(value, 2)}
+                    onKeyPress={onInputKeyPress}
+                    error={props.error}
+                    selectionColor={'transparent'}
+                    placeholder={placeholder}
+                    keyboardType={keyboardType}
+                    value={input2Value}
+                    maxLength={1}
+                />
+            </InputContainer>
+            <InputContainer>
+                <Input
+                    ref={input3}
+                    onChangeText={(value) => onInputChange(value, 3)}
+                    onKeyPress={onInputKeyPress}
+                    error={props.error}
+                    selectionColor={'transparent'}
+                    placeholder={placeholder}
+                    keyboardType={keyboardType}
+                    value={input3Value}
+                    maxLength={1}
+                />
+            </InputContainer>
+            <InputContainer>
+                <Input
+                    ref={input4}
+                    onChangeText={(value) => onInputChange(value, 4)}
+                    onKeyPress={onInputKeyPress}
+                    error={props.error}
+                    selectionColor={'transparent'}
+                    placeholder={placeholder}
+                    keyboardType={keyboardType}
+                    value={input4Value}
+                    maxLength={1}
+                />
+            </InputContainer>
+            <InputContainer>
+                <Input
+                    ref={input5}
+                    onChangeText={(value) => onInputChange(value, 5)}
+                    onKeyPress={onInputKeyPress}
+                    error={props.error}
+                    selectionColor={'transparent'}
+                    placeholder={placeholder}
+                    keyboardType={keyboardType}
+                    value={input5Value}
+                    maxLength={1}
+                />
+            </InputContainer>
+            <InputContainer>
+                <Input
+                    ref={input6}
+                    onChangeText={(value) => onInputChange(value, 6)}
+                    onKeyPress={onInputKeyPress}
+                    error={props.error}
+                    selectionColor={'transparent'}
+                    placeholder={placeholder}
+                    keyboardType={keyboardType}
+                    value={input6Value}
+                    maxLength={1}
+                />
+            </InputContainer>
         </CodeInputContainer>
     )
 });

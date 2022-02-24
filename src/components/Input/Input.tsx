@@ -8,7 +8,7 @@ import Text from '../Text/Text';
 const Container = styled.View<{error?: boolean, isFocused: boolean | undefined}>`
     height: 56px;
     border-color: ${props => props.error ? Color.error : (props.isFocused ? '#D4D6F6' : Color.gray5)};
-    border-width: ${props => props.isFocused ? '2px' : '1px'};
+    border-width: ${props => props.isFocused || props.error ? '2px' : '1px'};
     border-radius: 12px;
     align-items: center;
     flex-direction: row;

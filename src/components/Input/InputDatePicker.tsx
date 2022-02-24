@@ -1,5 +1,4 @@
-import React, { FC, useState } from 'react';
-import { Calendar } from 'react-native-feather';
+import React, { useState } from 'react';
 import DatePicker from 'react-native-date-picker'
 
 import Input from './InputFalse';
@@ -50,7 +49,6 @@ const DateInput = (props: Props) =>{
         </Modal>
         <Input
             style={props.style}
-            icon={Calendar}
             value={dateInputValue}
             placeholder={props.placeholder}
             onPress={onInputFocus}

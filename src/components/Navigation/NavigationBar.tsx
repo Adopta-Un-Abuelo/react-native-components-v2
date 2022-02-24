@@ -136,13 +136,6 @@ const NavigationBar: FC<Props> = props => {
                         {props.title}
                     </Text>
                 }
-                {/* {props.subtitle &&
-                    <Text
-                        style={{color: Color.blue3, fontSize: subtitleFont, marginTop: -8}}
-                    >
-                        {props.subtitle}
-                    </Text>
-                } */}
             </TextContainer>
             {(props.breadcrumbProps && !props.hideBreadcrumb) &&
                 <Breadcrumb
@@ -151,7 +144,6 @@ const NavigationBar: FC<Props> = props => {
                     style={{
                         position: 'absolute', 
                         top: 24, 
-                        right: 16,
                         opacity: breadcrumbOpacity
                     }}
                 />

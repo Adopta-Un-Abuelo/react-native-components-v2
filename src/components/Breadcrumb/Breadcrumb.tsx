@@ -1,25 +1,26 @@
 import React from 'react';
 import styled from 'styled-components/native';
-import { ViewStyle, Animated } from 'react-native';
+import { Animated } from 'react-native';
 
 import Color from '../../constants/Color';
 
 const Container = styled(Animated.View)`
     flex-direction: row;
     height: 8px;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
 `
 const Crumb = styled.View<{active: boolean}>`
-    height: 8px;
-    width: 8px;
-    margin-right: 15px;
-    border-radius: 4px;
-    background-color: ${props => props.active ? Color.blue3 : Color.gray4};
+    height: ${props => props.active ? '10px' : '8px'};
+    width: ${props => props.active ? '10px' : '8px'};
+    margin-right: 8px;
+    border-radius: 100px;
+    background-color: ${props => props.active ? Color.blue3 : Color.gray5};
 `
 
 const Breadcrumb = (props: Props) =>{
-
     const array = Array.from(Array(props.steps).keys())
-
     return(
         <Container
             style={props.style}

@@ -11,7 +11,7 @@ const PhoneInput = (props: Props) =>{
 
     const onCountryChange = (country: {prefix: string}) =>{
         setTitle(country.prefix);
-        props.onCountryChange && props.onCountryChange(country.prefix);
+        props.onCountryChange && props.onCountryChange(country);
     }
 
     const onSelectShow = () =>{

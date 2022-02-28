@@ -15,7 +15,7 @@ const Container = styled.View`
 
 const BottomButton: FC<Props> = props =>{
 
-    const { showShadow, leftView, size, ...rest } = props;
+    const { showShadow, leftView, size, style, ...rest } = props;
 
     return(
         <Container
@@ -36,7 +36,8 @@ const BottomButton: FC<Props> = props =>{
                 <props.leftView/>
             }
             <Button
-                style={{flex: props.size === 'big' ? 1 : 0, height: props.size === 'big' ? 56 : 48}}
+                style={{flex: props.size === 'big' ? 1 : 0, ...style}}
+                size={size}
                 {...rest}
             />
         </Container>

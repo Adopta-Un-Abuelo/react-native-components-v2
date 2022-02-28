@@ -33,6 +33,7 @@ const Button = (props: Props) =>{
             onPress={onPress}
             type={props.type}
             color={props.color}
+            size={props.size}
         >
             {props.loading ?
                 <LottieView 
@@ -74,5 +75,6 @@ export interface Props extends PressableProps{
     color?: string,
     icon?: any,
     iconStyle?: any,
-    type?: 'fill' | 'line'
+    type?: 'fill' | 'line',
+    size?: 'big' | 'small'
 }

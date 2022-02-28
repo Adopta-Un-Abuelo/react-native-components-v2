@@ -19,7 +19,7 @@ const ModalView = styled(SafeAreaView)<{orientation?: 'top' | 'bottom' | 'center
     border-top-right-radius: ${props => (props.orientation === 'bottom' || props.orientation === 'fullScreen') ? '24px' : '8px'};
     border-bottom-left-radius: ${props => (props.orientation === 'bottom' || props.orientation === 'fullScreen') ? '0px' : '8px'};
     border-bottom-right-radius: ${props => (props.orientation === 'bottom' || props.orientation === 'fullScreen') ? '0px' : '8px'};
-    padding: 0px 16px 46px 16px;
+    padding: 0px 16px;
     background-color: white;
 `
 const SwipeView = styled.View`
@@ -40,17 +40,16 @@ const Header = styled.View`
     align-items: center;
 `
 const CloseButton = styled.Pressable`
+    position: absolute;
     height: 40px;
     width: 40px;
     justify-content: center;
 `
 const TitleCenterView = styled.View`
-    left: 8px;
+    flex: 1;
     align-items: center;
     justify-content: center;
-`
-const TitleView = styled.View`
-    top: 8px;
+
 `
 const ButtonArea = styled.View`
 `
@@ -101,7 +100,7 @@ const ModalComponent = (props: Props) =>{
                         >
                             <X stroke={Color.black}/>
                         </CloseButton>
-                        {(props.title && props.orientation === 'top' || props.orientation === 'bottom') && 
+                        {props.title && 
                             <TitleCenterView>
                                 <Text
                                     type='p1'
@@ -113,25 +112,6 @@ const ModalComponent = (props: Props) =>{
                             </TitleCenterView>
                         }
                     </Header>
-                }
-                {(props.title && props.orientation === 'fullScreen') && 
-                    <TitleView>
-                        <Text
-                            type='p1'
-                            weight='medium'
-                            style={{color: Color.gray1}}
-                        >
-                            {props.title}
-                        </Text>
-                        {props.subtitle &&
-                            <Text
-                                type='p2'
-                                style={{color: Color.gray2, marginTop: 6}}
-                            >
-                                {props.subtitle}
-                            </Text>
-                        }
-                    </TitleView>
                 }
                 {props.children}
                 <ButtonArea>

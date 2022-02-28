@@ -11,6 +11,7 @@ const Container = styled.View`
 const Cell = styled.Pressable`
     padding: 18px 0px;
     flex-direction: row;
+    align-items: center;
 `
 const CircleView = styled.View<{selected: boolean}>`
     height: 26px;
@@ -56,6 +57,8 @@ const RadioButton: FC <Props> = props =>{
                             {selected && <CircleSelect/>}
                         </CircleView>
                         <Text
+                            type='p2'
+                            weight='medium'
                             style={{marginLeft: 8, flex: 1}}
                         >
                             {item.title}

@@ -4,10 +4,11 @@ import styled from 'styled-components/native';
 import Color from '../../constants/Color';
 
 const Input = styled.TextInput`
-    background-color: ${Color.gray6};
+    border-color: ${Color.gray5};
+    border-width: 1px;
     height: 169px;
-    border-radius: 24px;
-    padding: 24px 16px;
+    border-radius: 12px;
+    padding: 16px;
     font-family: 'Poppins-Regular';
     color: ${Color.gray2};
     justify-content: flex-start;

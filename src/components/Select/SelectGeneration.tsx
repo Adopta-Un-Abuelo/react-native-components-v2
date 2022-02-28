@@ -3,20 +3,22 @@ import styled from 'styled-components/native';
 
 import Text from '../Text/Text';
 import Color from '../../constants/Color';
+import { Info } from 'react-native-feather';
 
 const Container = styled.View`
-    top: 32px;
+    flex-direction: row;
 `
 const Cell = styled.Pressable`
     flex: 1;
     align-items: center;
 `
 const CellContent = styled.View<{selected: boolean, color?: string}>`
-    height: 80px;
-    width: 80px;
-    border-radius: 32px;
-    background-color: ${props => props.selected ? (props.color ? props.color : Color.blue3) : (props.color ? props.color+'60' : Color.blue3+'60')};
-    margin-bottom: 8px;
+    height: 72px;
+    width: 72px;
+    border-radius: 12px;
+    border-width: ${props => props.selected ? '0px' : '1px'};
+    border-color: ${props => props.selected ? undefined : Color.blue3};
+    background-color: ${props => props.selected ? Color.blue3+'60' : 'white'};
     align-items: center;
     justify-content: center;
 `
@@ -31,7 +33,9 @@ const SelectGeneration: FC<Props> = props =>{
     }
 
     return(
-        <Container>
+        <Container
+            style={{marginTop: 32}}
+        >
             {props.options.map((item, index) =>(
                 <Cell
                     key={'cell'+index}
@@ -41,8 +45,29 @@ const SelectGeneration: FC<Props> = props =>{
                         color={props.color}
                         selected={selectedItem?.id === item.id}
                     >
+                        <Text
+                            type='h2'
+                            style={{color: Color.blue3}}
+                        >
+                            {item.title.substring(2, 4)}
+                        </Text>
                     </CellContent>
-                    <Text>{item.title}</Text>
+                    <Container
+                        style={{marginTop: 4, alignItems: 'center'}}
+                    >
+                        <Text
+                            type='p1'
+                            weight='medium'
+                        >
+                            {item.title}
+                        </Text>
+                        <Info 
+                            height={14}
+                            width={14}
+                            stroke={Color.black}
+                            style={{marginStart: 4}}
+                        />
+                    </Container>
                 </Cell>
             ))}
         </Container>

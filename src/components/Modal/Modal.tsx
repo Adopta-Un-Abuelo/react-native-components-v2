@@ -130,7 +130,7 @@ const ModalComponent = (props: Props) =>{
                     {props.showBottomClose &&
                         <Button
                             type={'line'}
-                            style={{borderWidth: 0}}
+                            style={{borderWidth: 0, marginTop: 8}}
                             color={Color.gray3}
                             title={props.translation ? props.translation.general_btn_cancel : 'Cancelar'}
                             onPress={onClosePress}

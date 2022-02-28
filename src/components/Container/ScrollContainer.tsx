@@ -19,7 +19,7 @@ const ScrollView = styled(Animated.ScrollView)`
 
 const ScrollContainer: FC<Props> = props =>{
     const offset = useRef(new Animated.Value(0)).current;
-    const { buttonProps, buttonSize, ...restProps } = props;
+    const { buttonProps, ...restProps } = props;
     const haveCustomHeader = props.navbarProps && props.navbarProps.Header;
     return(
         <SafeView 
@@ -57,7 +57,6 @@ const ScrollContainer: FC<Props> = props =>{
                 </TouchableWithoutFeedback>
                 {buttonProps &&
                     <ButtonBottom
-                        size={buttonSize}
                         {...buttonProps}
                     />
                 }

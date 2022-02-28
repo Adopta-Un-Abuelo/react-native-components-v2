@@ -83,7 +83,7 @@ export interface Props{
         onPress: any,
         loading?: boolean,
         [key: string]: any,
-        buttonSize?: 'big' | 'small' 
+        size?: 'big' | 'small' 
     },
     secondButtonProps?: {
         title: string,

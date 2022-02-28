@@ -17,7 +17,7 @@ const SelectGeneration: FC<Props> = props =>{
         <Container>
             <Checkbox
                 style={{flexDirection: 'column'}}
-                cellStyle={{paddingBottom: 16, marginBottom: 16, borderBottomWidth: 1, borderBottomColor: Color.gray4}}
+                cellStyle={{paddingBottom: 16, marginBottom: 16, borderBottomWidth: 1, borderBottomColor: Color.gray5}}
                 options={props.options}
                 onChange={onCellPress}
             />

@@ -44,6 +44,7 @@ const CloseButton = styled.Pressable`
     height: 40px;
     width: 40px;
     justify-content: center;
+    z-index: 1000;
 `
 const TitleCenterView = styled.View`
     flex: 1;

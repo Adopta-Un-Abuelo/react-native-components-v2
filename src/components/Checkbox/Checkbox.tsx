@@ -9,10 +9,9 @@ import Color from '../../constants/Color';
 const Container = styled.View`
     flex-direction: row;
 `
-const Cell = styled.View`
+const Cell = styled.Pressable`
     flex: 1;
     flex-direction: row;
-    align-items: center;
 `
 const CheckButton = styled.Pressable<{selected: boolean, error?: boolean}>`
     margin-right: 12px;
@@ -24,6 +23,10 @@ const CheckButton = styled.Pressable<{selected: boolean, error?: boolean}>`
     justify-content: center;
     border-width: ${props => props.error ? '2px' : '1px'};
     border-color: ${props => props.error ? Color.error : props.selected ? Color.blue3 : Color.blue3+'cc'};
+`
+const DataView = styled.View`
+    flex: 1;
+    flex-direction: column;
 `
 
 const Checkbox = (props: Props) =>{
@@ -41,6 +44,8 @@ const Checkbox = (props: Props) =>{
         }
     }
 
+    console.log(props.options);
+
     return(
         <Container
             style={props.style}
@@ -51,21 +56,33 @@ const Checkbox = (props: Props) =>{
                     <Cell
                         style={props.cellStyle}
                         key={'checkbox'+index}
+                        onPress={() => onCellPress(item)}
                     >
                         <CheckButton
                             selected={selected}
                             error={props.error}
-                            onPress={() => onCellPress(item)}
                         >
                             {selected &&
                                 <Check height={16} width={16} stroke={'white'} />
                             }
                         </CheckButton>
-                        <Text
-                            style={{flex: 1, ...props.textStyle}}
-                        >
-                            {item.title}
-                        </Text>
+                        <DataView>
+                            <Text
+                                type='p1'
+                                weight='medium'
+                                style={{flex: 1, ...props.textStyle}}
+                            >
+                                {item.title}
+                            </Text>
+                            {item.subtitle &&
+                                <Text
+                                    type='c1'
+                                    style={{flex: 1, color: Color.gray3, ...props.subtitleStyle}}
+                                >
+                                    {item.subtitle}
+                                </Text>
+                            }
+                        </DataView>
                     </Cell>
                 )
             })}
@@ -76,6 +93,7 @@ export default Checkbox;
 export interface Props{
     style?: ViewStyle,
     textStyle?: TextStyle,
+    subtitleStyle?: TextStyle,
     cellStyle?: ViewStyle,
     options: Array<{
         id: string,

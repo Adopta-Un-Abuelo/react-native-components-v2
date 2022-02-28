@@ -90,7 +90,6 @@ export interface Props{
         style?: StyleMedia,
         Header?: any
     }
-    buttonSize?: 'big' | 'small' ,
     buttonProps?: any,
     secondButtonProps?: any,
     contentStyle?: any,

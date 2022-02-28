@@ -42,7 +42,6 @@ const ListContainer: FC<Props> = props =>{
             {props.children}
             {props.buttonProps &&
                 <ButtonBottom
-                    size={props.buttonSize}
                     {...props.buttonProps}
                 />
             }
@@ -66,7 +65,6 @@ export interface Props{
         noHeader?: boolean
     }
     listProps?: any,
-    buttonSize?: 'big' | 'small' ,
     buttonProps?: any,
     style?: any,
     edges?: Array<"top" | "right" | "left" | "bottom">

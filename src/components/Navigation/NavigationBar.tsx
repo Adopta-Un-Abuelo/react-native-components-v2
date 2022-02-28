@@ -47,7 +47,7 @@ const NavigationBar: FC<Props> = props => {
     }) : MIN_TITLE_LEFT;
 
     const MIN_TITLE_BOTTOM = 8;
-    const MAX_TITLE_BOTTOM = (props.title && props.subtitle) ? 8 : 14;
+    const MAX_TITLE_BOTTOM = (props.title && props.subtitle) ? 8 : 8;
 
     const titleBottom = props.animatedValue ? props.animatedValue.interpolate({
         inputRange: [0, MAX_HEADER_HEIGHT],

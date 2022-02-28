@@ -13,7 +13,7 @@ const Cell = styled.Pressable`
     flex: 1;
     flex-direction: row;
 `
-const CheckButton = styled.Pressable<{selected: boolean, error?: boolean}>`
+const CheckButton = styled.View<{selected: boolean, error?: boolean}>`
     margin-right: 12px;
     background-color: ${props => props.selected ? Color.blue3 : Color.gray6};
     border-radius: 6px;
@@ -43,8 +43,6 @@ const Checkbox = (props: Props) =>{
             props.onChange && props.onChange(item);
         }
     }
-
-    console.log(props.options);
 
     return(
         <Container

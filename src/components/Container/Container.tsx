@@ -40,7 +40,6 @@ const Container: FC<Props> = props =>{
                         {props.children}
                         {props.buttonProps &&
                             <ButtonBottom
-                                size={props.buttonSize}
                                 {...props.buttonProps}
                             />
                         }
@@ -76,7 +75,6 @@ export interface Props{
     }
     title?: string,
     subtitle?: string,
-    buttonSize?: 'big' | 'small' 
     style?: Object,
     color?: string,
     contentStyle?: Object,
@@ -84,7 +82,8 @@ export interface Props{
         title: string,
         onPress: any,
         loading?: boolean,
-        [key: string]: any
+        [key: string]: any,
+        buttonSize?: 'big' | 'small' 
     },
     secondButtonProps?: {
         title: string,

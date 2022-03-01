@@ -2,7 +2,7 @@ import React, { forwardRef, useState, Ref, useImperativeHandle } from 'react';
 import styled from 'styled-components/native';
 
 import Input from '../Input/Input';
-import { DollarSign, User } from 'react-native-lucide';
+import { Landmark, User } from 'react-native-lucide';
 
 const ScrollView = styled.ScrollView``
 
@@ -85,7 +85,7 @@ const BankMethodForm = forwardRef((props: Props, ref: Ref<BankMethodFormRef>) =>
             <Input
                 style={{marginTop: 8}}
                 placeholder={props.translation ? props.translation.form_payment_method_sepa_debit : 'Cuenta bancaría (IBAN)'}
-                icon={DollarSign}
+                icon={Landmark}
                 onChangeText={onIBANChange}
                 error={ibanError}
                 value={iban}

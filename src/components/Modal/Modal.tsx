@@ -4,7 +4,7 @@ import { ViewStyle } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Modal from "react-native-modal";
 
-import { X } from 'react-native-lucide';
+import { X, ArrowLeft } from 'react-native-lucide';
 import Text from '../Text/Text';
 import Button from '../Button/Button';
 import { Color } from '../../constants';
@@ -38,20 +38,27 @@ const Header = styled.View`
     height: 56px;
     flex-direction: row;
     align-items: center;
+    margin-top: 8px;
 `
 const CloseButton = styled.Pressable`
     position: absolute;
     height: 40px;
     width: 40px;
     justify-content: center;
+    align-items: center;
+    margin-left: -8px;
     z-index: 1000;
 `
 const TitleCenterView = styled.View`
     flex: 1;
     align-items: center;
     justify-content: center;
-
 `
+const GoBackContainer = styled.View`
+`
+const TitleDownView = styled.View`
+`
+
 const ButtonArea = styled.View`
 `
 
@@ -94,25 +101,56 @@ const ModalComponent = (props: Props) =>{
                     </SwipeView>
                 }
                 {props.showTopClose &&
-                    <Header>
-                        <CloseButton
-                            onPress={onClosePress}
-                            style={{marginTop: props.orientation === 'fullScreen' ? 8 : 0}}
-                        >
-                            <X color={Color.black}/>
-                        </CloseButton>
-                        {props.title && 
-                            <TitleCenterView>
-                                <Text
-                                    type='p1'
-                                    weight='medium'
-                                    style={{color: Color.gray1}}
+                    props.canGoBack ?
+                        <GoBackContainer>
+                            <Header>
+                                <CloseButton
+                                    onPress={onClosePress}
+                                    style={{marginTop: props.orientation === 'fullScreen' ? 8 : 0}}
                                 >
-                                    {props.title}
-                                </Text>
-                            </TitleCenterView>
-                        }
-                    </Header>
+                                    <ArrowLeft color={Color.black}/>
+                                </CloseButton>
+                            </Header>
+                            {props.title &&
+                                <TitleDownView>
+                                    <Text
+                                        type='h4'
+                                        weight='semibold'
+                                        style={{color: Color.gray1}}
+                                    >
+                                        {props.title}
+                                    </Text>
+                                    {props.subtitle &&
+                                        <Text
+                                            type='p2'
+                                            style={{color: Color.gray4}}
+                                        >
+                                            {props.subtitle}
+                                        </Text>
+                                    }
+                                </TitleDownView>
+                            }
+                        </GoBackContainer>
+                        :
+                        <Header>
+                            <CloseButton
+                                onPress={onClosePress}
+                                style={{marginTop: props.orientation === 'fullScreen' ? 8 : 0}}
+                            >
+                                <X color={Color.black}/>
+                            </CloseButton>
+                            {props.title && 
+                                <TitleCenterView>
+                                    <Text
+                                        type='p1'
+                                        weight='medium'
+                                        style={{color: Color.gray1}}
+                                    >
+                                        {props.title}
+                                    </Text>
+                                </TitleCenterView>
+                            }
+                        </Header>
                 }
                 {props.children}
                 <ButtonArea>
@@ -153,6 +191,7 @@ export interface Props{
     subtitle?: string,
     orientation?: 'top' | 'bottom' | 'center' | 'fullScreen',
     showTopClose?: boolean,
+    canGoBack?: boolean,
     showBottomClose?: boolean,
     buttonProps?: {
         onPress?: any,

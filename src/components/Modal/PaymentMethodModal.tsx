@@ -2,7 +2,7 @@ import React, { FC, useState, useRef, useEffect, forwardRef, Ref, useImperativeH
 import styled from 'styled-components/native';
 import { Keyboard } from 'react-native';
 
-import { CreditCard, DollarSign, Lock } from 'react-native-lucide';
+import { CreditCard, Landmark, Lock } from 'react-native-lucide';
 import Modal from './Modal';
 import Text from '../Text/Text';
 import PaymentMethodForm, { PaymentMethodFormRef } from '../Form/PaymentMethodForm';
@@ -14,7 +14,7 @@ const Container = styled.View`
     margin-top: 32px;
 `
 const Cell = styled.Pressable`
-    height: 80px;
+    height: 72px;
     flex-direction: row;
     align-items: center;
 `
@@ -69,7 +69,7 @@ const PaymentMethodModal = forwardRef((props: Props, ref: Ref<PaymentMethodModal
                     temp.push({
                         id: 'sepa_debit',
                         title: props.translation ? props.translation.form_payment_method_sepa_debit : 'Cuenta bancaria',
-                        icon: <DollarSign height={24} width={24} color={Color.gray2}/>
+                        icon: <Landmark height={24} width={24} color={Color.gray2}/>
                     })
                 }
                 else if(item === 'paycard'){
@@ -99,9 +99,9 @@ const PaymentMethodModal = forwardRef((props: Props, ref: Ref<PaymentMethodModal
         setOptionSelected(option);
     }
 
-    // const onBackPress = () =>{
-    //     setOptionSelected(undefined);
-    // }
+    const onBackPress = () =>{
+        setOptionSelected(undefined);
+    }
 
     const onSavePress = async () =>{
         Keyboard.dismiss();
@@ -131,6 +131,7 @@ const PaymentMethodModal = forwardRef((props: Props, ref: Ref<PaymentMethodModal
             visible={visible}
             orientation={'fullScreen'}
             showTopClose={true}
+            canGoBack={optionSelected !== undefined}
             showBottomClose={false}
             title={optionSelected ?
                 (optionSelected.id === 'card' ? 
@@ -144,8 +145,8 @@ const PaymentMethodModal = forwardRef((props: Props, ref: Ref<PaymentMethodModal
                 loading: loading,
                 onPress: onSavePress
             }}
-            onDismiss={onDismiss}
-            onModalHide={onDismiss}
+            onDismiss={optionSelected === undefined ? onDismiss : onBackPress}
+            onModalHide={optionSelected === undefined ? onDismiss : onBackPress}
         >
             {optionSelected ? 
                 <Container>
@@ -163,7 +164,6 @@ const PaymentMethodModal = forwardRef((props: Props, ref: Ref<PaymentMethodModal
                         <BankMethodForm
                             ref={bankForm}
                             translation={props.translation}
-                            style={{marginTop: 24, marginBottom: 24}}
                             currentUser={props.currentUser}
                         />
                         </>

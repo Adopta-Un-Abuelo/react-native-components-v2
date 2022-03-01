@@ -77,8 +77,8 @@ const SelectionModal: FC<Props> = props =>{
         <Modal
             visible={visible}
             orientation={props.orientation}
-            showTopClose={true}
-            showBottomClose={false}
+            showTopClose={false}
+            showBottomClose={true}
             title={props.title}
             avoidKeyboard={true}
             onDismiss={onDismiss}

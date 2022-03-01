@@ -1,5 +1,5 @@
 import React, { FC, useRef } from 'react';
-import { Animated } from 'react-native';
+import { Animated, FlatListProps } from 'react-native';
 import styled from 'styled-components/native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
@@ -32,8 +32,6 @@ const ListContainer: FC<Props> = props =>{
                 contentContainerStyle={{paddingLeft: 24, paddingRight: 24, paddingBottom: 48}}
                 stickyHeaderIndices={props.listProps.stickyHeaderIndices}
                 {...props.listProps}
-                ListHeaderComponent={props.listProps.HeaderComponent}
-                ListEmptyComponent={props.listProps.ListEmptyComponent}
                 onScroll={Animated.event(
                     [{ nativeEvent: { contentOffset: { y: offset } } }],
                     { useNativeDriver: false }
@@ -64,7 +62,7 @@ export interface Props{
         navigation: any,
         noHeader?: boolean
     }
-    listProps?: any,
+    listProps?: FlatListProps<any>,
     buttonProps?: any,
     style?: any,
     edges?: Array<"top" | "right" | "left" | "bottom">

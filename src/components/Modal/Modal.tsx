@@ -131,15 +131,8 @@ const ModalComponent = (props: Props) =>{
                                 </TitleDownView>
                             }
                         </GoBackContainer>
-                        :
-                        <Header>
-                            <CloseButton
-                                onPress={onClosePress}
-                                style={{marginTop: props.orientation === 'fullScreen' ? 8 : 0}}
-                            >
-                                <X color={Color.black}/>
-                            </CloseButton>
-                            {props.title && 
+                        : props.title &&
+                            <Header>
                                 <TitleCenterView>
                                     <Text
                                         type='p1'
@@ -149,8 +142,7 @@ const ModalComponent = (props: Props) =>{
                                         {props.title}
                                     </Text>
                                 </TitleCenterView>
-                            }
-                        </Header>
+                            </Header>
                 }
                 {props.children}
                 <ButtonArea>
@@ -175,6 +167,7 @@ const ModalComponent = (props: Props) =>{
                             onPress={onClosePress}
                         />
                     }
+                    {props.ButtonArea}
                 </ButtonArea>
             </ModalView>
         </Modal>
@@ -205,6 +198,7 @@ export interface Props{
         style?: ViewStyle,
         [key: string]: any
     }
+    ButtonArea?: any,
     visible: boolean,
     onDismiss: Function,
     onModalHide?: Function,

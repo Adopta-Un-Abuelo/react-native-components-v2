@@ -19,13 +19,17 @@ const MenuList = (props: Props) =>{
 
     return(
         <>
-        <ButtonImage
-            icon={Menu}
-            style={props.style}
-            onPress={onButtonPress}
-            height={24}
-            width={24}
-        />
+        {props.icon ?
+            <props.icon onPress={onButtonPress}/>
+        :
+            <ButtonImage
+                icon={Menu}
+                style={props.style}
+                onPress={onButtonPress}
+                height={24}
+                width={24}
+            />
+        }
         <SelectionModal
             visible={showModal}
             orientation={'bottom'}
@@ -38,6 +42,7 @@ const MenuList = (props: Props) =>{
 }
 export default MenuList;
 export interface Props{
+    icon?: any,
     style?: ViewStyle,
     options: Array<{
         id: string,

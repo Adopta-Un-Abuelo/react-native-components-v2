@@ -8,14 +8,14 @@ const Container = styled.View<{theme: 'line' | 'circular'}>`
     flex-direction: row;
     height: ${props => props.theme === 'circular' ? '36px' : '48px'};
     background-color: ${props => props.theme === 'circular' ? Color.gray6 : 'transparent'};
-    border-radius: 8px;
+    border-radius: ${props => props.theme === 'circular' ? '8px' : '0px'};;
 `
 const List = styled.FlatList`
 `
 const Tab = styled.Pressable<{selected: boolean, color?: string}>`
     align-items: center;
     justify-content: center;
-    border-bottom-width: ${props => props.selected ? '4px' : '0px'}; 
+    border-bottom-width: ${props => props.selected ? '3px' : '0px'}; 
     border-bottom-color: ${props => props.color ? props.color: Color.blue5};
     margin: 0px 8px;
 `

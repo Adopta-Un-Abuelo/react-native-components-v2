@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import styled from 'styled-components/native';
 import { ViewStyle, TextStyle } from 'react-native';
 
-import { Hash } from 'react-native-feather';
+import { Hash } from 'react-native-lucide';
 import Color from '../../constants/Color';
 import Text from '../Text/Text';
 
@@ -32,7 +32,7 @@ const Header = (props: Props) =>{
                     style={props.optionStyle}
                 >
                     {!props.hideIcon &&
-                        <Hash stroke={Color.blue5} height={10} width={10}/>
+                        <Hash color={Color.blue5} height={10} width={10}/>
                     }
                     <Text
                         style={{fontSize: 12, color: Color.blue3, ...props.textStyle}}

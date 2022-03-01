@@ -1,6 +1,6 @@
 import React, { FC, useState } from 'react';
 import Video from 'react-native-video';
-import { Play, Pause } from 'react-native-feather';
+import { Play, Pause } from 'react-native-lucide';
 import { Dimensions, ActivityIndicator } from 'react-native';
 import styled from 'styled-components/native';
 

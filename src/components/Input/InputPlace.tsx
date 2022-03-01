@@ -1,6 +1,6 @@
 import React, { useState, forwardRef, useImperativeHandle, useRef, Ref } from 'react';
 import { GooglePlacesAutocomplete, GooglePlaceDetail, GooglePlacesAutocompleteRef } from 'react-native-google-places-autocomplete';
-import { Search } from 'react-native-feather';
+import { Search } from 'react-native-lucide';
 
 import Color from '../../constants/Color';
 import Modal from '../Modal/Modal';
@@ -72,7 +72,7 @@ const PlaceInput = forwardRef((props: Props, ref: Ref<InputRef>) =>{
                     clearButtonMode: 'while-editing',
                     autoCorrect: false
                 }}
-                renderLeftButton={() => <View style={{justifyContent: 'center', paddingLeft: 6}}><Search height={20} width={20} stroke={Color.gray3}/></View>}
+                renderLeftButton={() => <View style={{justifyContent: 'center', paddingLeft: 6}}><Search height={20} width={20} color={Color.gray3}/></View>}
                 styles={{
                     textInputContainer:{
                         height: 48,

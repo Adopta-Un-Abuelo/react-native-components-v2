@@ -25,7 +25,7 @@ const Banner = (props: Props) =>{
             <Row>
                 <props.icon 
                     style={{marginRight: 8}}
-                    stroke={Color.blue3}
+                    color={Color.blue3}
                     height={18}
                     width={18}
                 />

@@ -1,13 +1,13 @@
 import React from 'react';
 import FlashMessage from "react-native-flash-message";
-import { AlertTriangle } from 'react-native-feather';
+import { AlertTriangle } from 'react-native-lucide';
 
 import Color from '../../constants/Color';
 
 const Alert = (props: Props) =>{
 
     const renderFlashMessageIcon = type =>(
-        <AlertTriangle style={{marginRight: 8}} stroke={'white'}/>
+        <AlertTriangle style={{marginRight: 8}} color={'white'}/>
     )
 
     return(

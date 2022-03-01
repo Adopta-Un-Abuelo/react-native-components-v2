@@ -5,7 +5,7 @@ import { action } from '@storybook/addon-actions';
 import { boolean, text, color, object, select, number } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/react-native';
 import { Button, ButtonBottom, ButtonImage, CallToAction, Color, Text, ButtonSmall } from '../src';
-import { Info } from 'react-native-feather';
+import { Info } from 'react-native-lucide';
 
 storiesOf('Button', module)
 	.add('Main', () => (

@@ -1,10 +1,9 @@
 import React from 'react';
 
-import { action } from '@storybook/addon-actions';
-import { boolean, object, select, text } from '@storybook/addon-knobs';
+import { object, select, text } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/react-native';
 import { Banner, Text } from '../src';
-import { Wifi } from 'react-native-feather';
+import { Wifi } from 'react-native-lucide';
 
 storiesOf('Banner', module)
 	.add('Main', () => (

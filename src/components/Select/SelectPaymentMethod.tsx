@@ -1,6 +1,6 @@
 import React, { useState, useEffect, forwardRef, Ref, useImperativeHandle, useRef } from 'react';
 import styled from 'styled-components/native';
-import { Plus } from 'react-native-feather';
+import { Plus } from 'react-native-lucide';
 import { Platform } from 'react-native';
 import { isApplePaySupported } from '@stripe/stripe-react-native';
 
@@ -245,7 +245,7 @@ const PaymentMethodSelect = forwardRef((props: Props, ref: Ref<SelectPaymentMeth
                             key={'paymentOption'+index}
                             onPress={() => onOptionSelected(item)}
                         >
-                            <item.icon height={21} width={32} stroke={item.objectId === 'new' ? Color.blue3 : undefined} fill={item.objectId === 'new' ? Color.blue3 : undefined}/>
+                            <item.icon height={21} width={32} color={item.objectId === 'new' ? Color.blue3 : undefined} fill={item.objectId === 'new' ? Color.blue3 : undefined}/>
                             <CellTextView
                                 show={item.objectId !== 'new'}
                             >

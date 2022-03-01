@@ -44,7 +44,7 @@ const OptionSelect: FC<Props> = props =>{
                         color={props.color}
                         selected={selectedItem?.id === item.id}
                     >
-                        <item.icon stroke={Color.gray2} height={24} width={24}/>
+                        <item.icon color={Color.gray2} height={24} width={24}/>
                     </CellContent>
                     <Container
                         style={{marginTop: 4, alignItems: 'center'}}

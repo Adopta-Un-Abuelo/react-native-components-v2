@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components/native';
-import { Check } from 'react-native-feather';
+import { Check } from 'react-native-lucide';
 import { ViewStyle, TextStyle } from 'react-native';
 
 import Text from '../Text/Text';
@@ -61,7 +61,7 @@ const Checkbox = (props: Props) =>{
                             error={props.error}
                         >
                             {selected &&
-                                <Check height={16} width={16} stroke={'white'} />
+                                <Check height={16} width={16} color={'white'} />
                             }
                         </CheckButton>
                         <DataView>

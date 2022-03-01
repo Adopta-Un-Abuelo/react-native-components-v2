@@ -2,7 +2,7 @@ import React, { FC, useEffect, useState } from 'react';
 import styled from 'styled-components/native';
 import Fuse from 'fuse.js'
 
-import { Search } from 'react-native-feather';
+import { Search } from 'react-native-lucide';
 import Modal from './Modal';
 import Text from '../Text/Text';
 import Color from '../../constants/Color';
@@ -102,7 +102,7 @@ const SelectionModal: FC<Props> = props =>{
                         onPress={() => onPress(item)}
                     >
                         {item.icon &&
-                            <item.icon height={24} width={24} stroke={Color.blue3}/>
+                            <item.icon height={24} width={24} color={Color.blue3}/>
                         }
                         {item.Icon &&
                             <Icon>

@@ -2,7 +2,7 @@ import React, { useState, useEffect, FC } from 'react';
 import styled from 'styled-components/native';
 import { ViewStyle, TextStyle } from 'react-native';
 
-import { ChevronDown } from 'react-native-feather';
+import { ChevronDown } from 'react-native-lucide';
 import Color from '../../constants/Color';
 import Text from '../Text/Text';
 import SelectionModal from '../Modal/SelectionModal';
@@ -81,7 +81,7 @@ const Select = (props: Props) =>{
                     </Text>
                 }
                 <Arrow>
-                    <ChevronDown stroke={Color.blue3}/>
+                    <ChevronDown color={Color.blue3}/>
                 </Arrow>
             </SelectStyled>
             <SelectionModal

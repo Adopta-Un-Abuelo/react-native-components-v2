@@ -2,7 +2,7 @@ import React, { FC, useState, useRef, useEffect, forwardRef, Ref, useImperativeH
 import styled from 'styled-components/native';
 import { Keyboard } from 'react-native';
 
-import { CreditCard, DollarSign, Lock } from 'react-native-feather';
+import { CreditCard, DollarSign, Lock } from 'react-native-lucide';
 import Modal from './Modal';
 import Text from '../Text/Text';
 import PaymentMethodForm, { PaymentMethodFormRef } from '../Form/PaymentMethodForm';
@@ -69,14 +69,14 @@ const PaymentMethodModal = forwardRef((props: Props, ref: Ref<PaymentMethodModal
                     temp.push({
                         id: 'sepa_debit',
                         title: props.translation ? props.translation.form_payment_method_sepa_debit : 'Cuenta bancaria',
-                        icon: <DollarSign height={24} width={24} stroke={Color.gray2}/>
+                        icon: <DollarSign height={24} width={24} color={Color.gray2}/>
                     })
                 }
                 else if(item === 'paycard'){
                     temp.push({
                         id: 'card',
                         title: props.translation ? props.translation.general_credit_card_long : 'Tarjeta de crédito o débito',
-                        icon: <CreditCard height={24} width={24} stroke={Color.gray2}/>
+                        icon: <CreditCard height={24} width={24} color={Color.gray2}/>
                     })
                 }
             });
@@ -178,7 +178,7 @@ const PaymentMethodModal = forwardRef((props: Props, ref: Ref<PaymentMethodModal
                     }
                     <ContainerSecure>
                         <Row style={{alignItems: 'flex-start'}}>
-                            <Lock height={20} width={20} stroke={Color.blue3}/>
+                            <Lock height={20} width={20} color={Color.blue3}/>
                             <Text
                                 type='c1'
                                 style={{color: Color.gray3, flex: 1, marginLeft: 8}}

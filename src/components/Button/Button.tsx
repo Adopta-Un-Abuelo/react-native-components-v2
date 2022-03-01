@@ -45,7 +45,7 @@ const Button = (props: Props) =>{
             :
                 <>
                 {props.icon &&
-                    <props.icon style={{marginRight: 8, ...props.iconStyle}} stroke={(props.iconStyle && props.iconStyle.stroke) ? props.iconStyle.stroke : (props.type === 'line' ? (props.color ? props.color : Color.blue5) : 'white')}/>
+                    <props.icon style={{marginRight: 8, ...props.iconStyle}} color={(props.iconStyle && props.iconStyle.stroke) ? props.iconStyle.stroke : (props.type === 'line' ? (props.color ? props.color : Color.blue5) : 'white')}/>
                 }
                 <Text
                     type='b1'

@@ -33,7 +33,7 @@ const ButtonImage = (props: Props) =>{
                 <props.icon 
                     height={height ? height : 32} 
                     width={width ? width : 32} 
-                    stroke={props.color ? props.color : Color.gray2}
+                    color={props.color ? props.color : Color.gray2}
                     fill={props.fill ? props.fill : 'transparent'}
                 />
             }

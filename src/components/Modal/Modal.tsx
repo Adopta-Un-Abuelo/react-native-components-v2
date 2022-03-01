@@ -4,7 +4,7 @@ import { ViewStyle } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Modal from "react-native-modal";
 
-import { X } from 'react-native-feather';
+import { X } from 'react-native-lucide';
 import Text from '../Text/Text';
 import Button from '../Button/Button';
 import { Color } from '../../constants';
@@ -99,7 +99,7 @@ const ModalComponent = (props: Props) =>{
                             onPress={onClosePress}
                             style={{marginTop: props.orientation === 'fullScreen' ? 8 : 0}}
                         >
-                            <X stroke={Color.black}/>
+                            <X color={Color.black}/>
                         </CloseButton>
                         {props.title && 
                             <TitleCenterView>

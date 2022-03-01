@@ -80,7 +80,7 @@ const InputComponent = forwardRef((props: Props, ref: Ref<InputRef>) =>{
         >
             {props.icon &&
                 <IconView>
-                    <props.icon stroke={props.error ? Color.error : Color.blue3}/>
+                    <props.icon color={props.error ? Color.error : Color.blue3}/>
                 </IconView>
             }
             {children}

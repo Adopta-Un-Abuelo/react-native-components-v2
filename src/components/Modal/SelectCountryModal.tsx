@@ -2,7 +2,7 @@ import React, { FC, useEffect, useState } from 'react';
 import styled from 'styled-components/native';
 import Fuse from 'fuse.js'
 
-import { Search } from 'react-native-feather';
+import { Search } from 'react-native-lucide';
 import Modal from './Modal';
 import Text from '../Text/Text';
 import Color from '../../constants/Color';
@@ -99,7 +99,7 @@ const SelectCountryModal: FC<Props> = props =>{
                         onPress={() => onPress(item)}
                     >
                         {item.icon &&
-                            <item.icon height={24} width={24} stroke={Color.blue3}/>
+                            <item.icon height={24} width={24} color={Color.blue3}/>
                         }
                         <Text
                             style={{marginLeft: (item.icon) ? 12 : 0}}

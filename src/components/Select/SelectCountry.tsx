@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components/native';
 import { TextStyle, ViewStyle } from 'react-native';
 
-import { ChevronDown } from 'react-native-feather';
+import { ChevronDown } from 'react-native-lucide';
 import Color from '../../constants/Color';
 import Text from '../Text/Text';
 import SelectCountryModal from '../Modal/SelectCountryModal';
@@ -65,7 +65,7 @@ const SelectCountry = (props: Props) =>{
                     </Icon>
                 }
                 <Arrow>
-                    <ChevronDown stroke={Color.gray3}/>
+                    <ChevronDown color={Color.gray3}/>
                 </Arrow>
                 <Text
                     type='p1'

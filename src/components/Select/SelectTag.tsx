@@ -88,7 +88,7 @@ const TagSelect: FC<Props> = props =>{
                         {item.icon ?
                             item.icon
                         : props.icon &&
-                            <props.icon height={18} width={18} stroke={selected ? 'white' : color}/>
+                            <props.icon height={18} width={18} color={selected ? 'white' : color}/>
                         }
                         <Column
                             style={{marginLeft: (props.icon || item.icon) ? 8 : 0}}

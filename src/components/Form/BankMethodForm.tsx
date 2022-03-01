@@ -2,7 +2,7 @@ import React, { forwardRef, useState, Ref, useImperativeHandle } from 'react';
 import styled from 'styled-components/native';
 
 import Input from '../Input/Input';
-import { DollarSign, User } from 'react-native-feather';
+import { DollarSign, User } from 'react-native-lucide';
 
 const ScrollView = styled.ScrollView``
 

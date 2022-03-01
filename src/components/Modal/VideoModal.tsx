@@ -24,8 +24,9 @@ const ControllersView = styled.View`
     flex-direction: row;
     align-items: center;
 `
-const ContentView = styled.View<{orientation: 'fullScreen' | 'center' | undefined}>`
+const ContentView = styled.View`
     flex: 1;
+    padding: 0px 16px;
     align-items: center;
 `
 
@@ -108,9 +109,7 @@ const VideoModal: FC<Props> = props =>{
                     maxProgress={videoDuration}
                 />
             </ControllersView>
-            <ContentView
-                orientation={props.orientation}
-            >
+            <ContentView>
                 <Text
                     type='h3'
                     style={{textAlign: 'center'}}
@@ -127,7 +126,7 @@ const VideoModal: FC<Props> = props =>{
                 }
             </ContentView>
             <ControllersView
-                style={{paddingTop: 0, paddingStart: 16, paddingEnd: 16, paddingBottom: 40}}
+                style={{paddingTop: 12, paddingStart: 16, paddingEnd: 16, paddingBottom: 16}}
             >
                 {!loading && !props.hideControllers &&
                     <ButtonImage

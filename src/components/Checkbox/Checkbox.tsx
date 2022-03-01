@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components/native';
 import { Check } from 'react-native-lucide';
 import { ViewStyle, TextStyle } from 'react-native';
@@ -32,6 +32,10 @@ const DataView = styled.View`
 const Checkbox = (props: Props) =>{
 
     const [ selection, setSelection ] = useState<{id: string} | undefined>(undefined);
+
+    useEffect(() =>{
+        if(props.defaultSelection) setSelection({id: props.defaultSelection});
+    },[props.defaultSelection]);
 
     const onCellPress = (item: {id: string}) =>{
         if(selection && item.id === selection.id){
@@ -98,6 +102,7 @@ export interface Props{
         title: string | Element,
         subtitle?: string
     }>
+    defaultSelection?: string,
     onChange?: Function,
     error?: boolean
 }

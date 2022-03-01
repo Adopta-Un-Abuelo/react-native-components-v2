@@ -25,7 +25,6 @@ export { default as PaymentMethodModal } from './Modal/PaymentMethodModal';
 export { default as SelectPaymentMethod } from './Select/SelectPaymentMethod';
 export { default as WebModal } from './Modal/WebModal';
 export { default as VideoModal } from './Modal/VideoModal';
-export { default as SelectGeneration } from './Select/SelectGeneration';
 export { default as VideoProgressBar } from './ProgressBar/VideoProgressBar';
 export { default as CallToAction } from './Button/CallToAction';
 export { default as TextView } from './Input/TextView';

@@ -27,8 +27,14 @@ const OptionSelect: FC<Props> = props =>{
     const [ selectedItem, setSelectedItem ] = useState<{id: string, title?: string} | undefined>(props.defaultSelection ? {id: props.defaultSelection} : undefined);
 
     const onCellPress = (item: {id: string, title: string}) =>{
-        setSelectedItem(item);
-        props.onPress && props.onPress(item);
+        if(selectedItem && selectedItem.id === item.id){
+            setSelectedItem(undefined);
+            props.onPress && props.onPress(undefined);
+        }
+        else{
+            setSelectedItem(item);
+            props.onPress && props.onPress(item);
+        }
     }
 
     return(

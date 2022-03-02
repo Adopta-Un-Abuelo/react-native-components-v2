@@ -15,7 +15,70 @@ const Color = {
     gradient3: 'linear-gradient(40.44deg, #004773 0%, #009BBC 98.5%)',
     warning: '#FFAC4B',
     error: '#E02D2D',
-    black: 'rgba(0, 0, 0, 0.78)'
-
+    black: 'rgba(0, 0, 0, 0.78)',
+    background: {
+        primary: '#006BE5',
+        primaryLow: '#EBF3FA',
+        secondary: '#FFAA47',
+        secondaryLow: '#FFF6E5',
+        deepBlue: '#00315C',
+        aquamarine: '#00ABC5',
+        full: '#333333',
+        high: '#4F4F4F',
+        mediumHigh: '#828282',
+        mediumLow: '#BDBDBD',
+        low: '#E0E0E0',
+        soft: '#F2F2F2',
+        neutral: '#FFFFFF'
+    },
+    line: {
+        primary: '#006BE5',
+        primarySoft: '#C4DEF5',
+        secondary: '#FFAA47',
+        secondarySoft: '#FFE3C1',
+        greenSoft: '#B2EBD0',
+        redSoft: '#F5CFCF',
+        full: '#333333',
+        soft: '#EBEBEB',
+        softTransparent: '#0A000000'
+    },
+    text: {
+        primary: '#006BE5',
+        aquamarine: '#00ABC5',
+        primaryBlack: '#001D3D',
+        secondaryBlack: '#701E09',
+        full: '#C7000000',
+        high: '#7D000000',
+        medium: '#40000000',
+        low: '#1F000000'
+    },
+    status: {
+        primary: {
+            default: '#006BE5',
+            hover: '#004FA8',
+            pressed: '#00315C',
+            softDefault: '#EBF3FA',
+            softHover: '#D3E2F0',
+            softPressed: '#ABC7E0'
+        },
+        secondary: {
+            default: '#FFAA47',
+            hover: '#EB9026',
+            pressed: '#C76B00'
+        },
+        neutral: {
+            default: '#FFFFFF',
+            hover: '#0D000000',
+            pressed: '#1F000000'
+        },
+        color: {
+            success: '#08A85B',
+            successDefault: '#E4F8EE',
+            error: '#E02D2D',
+            errorDefault: '#FFE5E5',
+            warning: '#FFAA47',
+            warningDefault: '#FFF6E5'
+        }
+    }
 }
 export default Color;

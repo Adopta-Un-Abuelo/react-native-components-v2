@@ -1,10 +1,11 @@
 import React, { FC } from 'react';
 import { Platform } from 'react-native'
 import styled from 'styled-components/native';
+import { Color } from '../../constants';
 
 const KeyboardAvoidingView = styled.KeyboardAvoidingView<{color?: string}>`
     flex: 1;
-    background-color: ${props => props.color ? props.color : 'white'};
+    background-color: ${props => props.color ? props.color : Color.background.neutral};
 `
 const ViewContainer = styled.View`
 	flex: 1;

@@ -7,9 +7,11 @@ import ButtonBottom from '../Button/ButtonBottom';
 import NavigationBar from '../Navigation/NavigationBar';
 import Button from '../Button/Button';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { Color } from '../../constants';
 
 const SafeView = styled(SafeAreaView)`
     flex: 1;
+    background-color: ${Color.background.neutral};
 `
 const TouchableWithoutFeedback = styled.TouchableWithoutFeedback`
 `

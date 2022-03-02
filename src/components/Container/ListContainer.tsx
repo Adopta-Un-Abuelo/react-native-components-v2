@@ -6,10 +6,11 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import ButtonBottom from '../Button/ButtonBottom';
 import NavigationBar from '../Navigation/NavigationBar';
 import List from '../List/List';
+import { Color } from '../../constants';
 
 const SafeView = styled(SafeAreaView)`
     flex: 1;
-    background-color: white;
+    background-color: ${Color.background.neutral};
 `
 
 const ListContainer: FC<Props> = props =>{

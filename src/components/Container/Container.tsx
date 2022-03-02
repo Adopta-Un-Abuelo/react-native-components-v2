@@ -7,11 +7,12 @@ import KeyboardAvoidingView from './KeyboardAvoidingView';
 import ButtonBottom from '../Button/ButtonBottom';
 import Button from '../Button/Button';
 import NavigationBar from '../Navigation/NavigationBar';
+import { Color } from '../../constants';
 
 const TouchableWithoutFeedback = styled.TouchableWithoutFeedback`
 `
 const SafeView = styled(SafeAreaView)<{color?: string}>`
-    background-color: ${props => props.color ? props.color : 'white'};
+    background-color: ${props => props.color ? props.color : Color.background.neutral};
     flex: 1;
 `
 const ViewContainer = styled.View`

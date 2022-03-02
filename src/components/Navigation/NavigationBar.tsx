@@ -109,8 +109,6 @@ const NavigationBar: FC<Props> = props => {
                         padding: 0,
                         ...props.backButtonStyle
                     }}
-                    height={24}
-                    width={24}
                     icon={ArrowLeft}
                     onPress={()=>props.navigation?.goBack()}
                 />

@@ -26,8 +26,6 @@ const MenuList = (props: Props) =>{
                 icon={Menu}
                 style={props.style}
                 onPress={onButtonPress}
-                height={24}
-                width={24}
             />
         }
         <SelectionModal

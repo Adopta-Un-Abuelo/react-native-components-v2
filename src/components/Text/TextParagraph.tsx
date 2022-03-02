@@ -1,6 +1,5 @@
 import React from 'react';
-import { TextStyle } from 'react-native';
-import Text from './Text';
+import { TextStyle, Text, TextProps } from 'react-native';
 import Color from '../../constants/Color';
 
 const TextParagraph = (props: Props) =>{
@@ -36,7 +35,7 @@ const TextParagraph = (props: Props) =>{
     )
 }
 export default TextParagraph;
-export interface Props{
+export interface Props extends TextProps{
     weight?: 'regular' | 'semibold' | 'medium' | 'bold',
     type?: 'p1' | 'p2' | any,
     fontStyle?: 'italic',

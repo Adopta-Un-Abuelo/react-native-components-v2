@@ -1,6 +1,5 @@
 import React from 'react';
-import { TextStyle, TextProps } from 'react-native';
-import Text from './Text';
+import { TextStyle, TextProps, Text } from 'react-native';
 import Color from '../../constants/Color';
 
 const TextOverline = (props: Props) =>{

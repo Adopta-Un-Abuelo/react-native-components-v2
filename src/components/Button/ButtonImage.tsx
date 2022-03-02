@@ -21,15 +21,19 @@ const ButtonImage = (props: Props) =>{
         >
             {icon &&
                 <props.icon 
+                    height={24}
+                    width={24}
                     color={props.color ? props.color : Color.text.full}
                 />
             }
+            {props.Icon && props.Icon}
         </Button>
     )
 }
 export default ButtonImage;
 export interface Props{
     icon?: any,
+    Icon?: any,
     onPress: any,
     style?: ViewStyle,
     color?: string

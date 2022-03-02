@@ -24,23 +24,27 @@ const Review: FC<Props> = props =>{
             style={props.style}
         >
             <ButtonImage
-                icon={<Heart height={40} width={40} color={selection >= 1 ? Color.blue3 : 'transparent'}/>}
+                style={{marginRight: 14}}
+                Icon={<Heart height={40} width={40} color={selection >= 1 ? Color.text.primary : Color.line.primarySoft}/>}
                 onPress={() => onButtonPress(1)}
             />
             <ButtonImage
-                icon={<Heart height={40} width={40} color={selection >= 2 ? Color.blue3 : 'transparent'}/>}
+                style={{marginRight: 14}}
+                Icon={<Heart height={40} width={40} color={selection >= 2 ? Color.text.primary : Color.line.primarySoft}/>}
                 onPress={() => onButtonPress(2)}
             />
             <ButtonImage
-                icon={<Heart height={40} width={40} color={selection >= 3 ? Color.blue3 : 'transparent'}/>}
+                style={{marginRight: 14}}
+                Icon={<Heart height={40} width={40} color={selection >= 3 ? Color.text.primary : Color.line.primarySoft}/>}
                 onPress={() => onButtonPress(3)}
             />
             <ButtonImage
-                icon={<Heart height={40} width={40} color={selection >= 4 ? Color.blue3 : 'transparent'}/>}
+                style={{marginRight: 14}}
+                Icon={<Heart height={40} width={40} color={selection >= 4 ? Color.text.primary : Color.line.primarySoft}/>}
                 onPress={() => onButtonPress(4)}
             />
             <ButtonImage
-                icon={<Heart height={40} width={40} color={selection >= 5 ? Color.blue3 : 'transparent'}/>}
+                Icon={<Heart height={40} width={40} color={selection >= 5 ? Color.text.primary : Color.line.primarySoft}/>}
                 onPress={() => onButtonPress(5)}
             />
         </Container>

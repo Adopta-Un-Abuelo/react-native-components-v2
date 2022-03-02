@@ -30,7 +30,7 @@ const ListContainer: FC<Props> = props =>{
                 scrollEventThrottle={1}
                 alwaysBounceHorizontal={false}
                 alwaysBounceVertical={false}
-                contentContainerStyle={{paddingLeft: 24, paddingRight: 24, paddingBottom: 48}}
+                contentContainerStyle={{paddingLeft: props.noPadding ? 0 : 16, paddingRight: props.noPadding ? 0 : 16, paddingBottom: 48}}
                 stickyHeaderIndices={props.listProps.stickyHeaderIndices}
                 {...props.listProps}
                 onScroll={Animated.event(
@@ -66,5 +66,6 @@ export interface Props{
     listProps?: FlatListProps<any>,
     buttonProps?: any,
     style?: any,
-    edges?: Array<"top" | "right" | "left" | "bottom">
+    edges?: Array<"top" | "right" | "left" | "bottom">,
+    noPadding?: boolean
 }

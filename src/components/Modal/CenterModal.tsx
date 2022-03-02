@@ -27,14 +27,18 @@ const CenterModal: FC <Props> = props =>{
         props.onDismiss && props.onDismiss();
     }
 
+    const onPress = () =>{
+        props.onPress && props.onPress();
+    }
+
     return(
         <Modal
             translation={props.translation}
             visible={visible}
             showTopClose={false}
             showBottomClose={false}
-            onDismiss={onDismiss}
-            onModalHide={onDismiss}
+            onDismiss={() => onDismiss()}
+            onModalHide={() => onDismiss()}
         >
             <ContentView>
                 {props.icon &&
@@ -60,10 +64,12 @@ const CenterModal: FC <Props> = props =>{
                         style={{flex: 1, marginRight: 4, backgroundColor: Color.background.soft}}
                         color={Color.text.high}
                         title={props.translation.general_btn_cancel}
+                        onPress={onDismiss}
                     />
                     <Button
                         style={{flex: 1, marginLeft: 4}}
                         title={props.buttonTitle}
+                        onPress={onPress}
                     />
                 </ButtonView>
             </ContentView>

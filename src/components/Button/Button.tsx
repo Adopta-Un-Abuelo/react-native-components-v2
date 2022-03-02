@@ -52,7 +52,7 @@ const Button = (props: Props) =>{
                     weight='semibold'
                     style={{
                         textAlign: 'center',
-                        color: props.type === 'line' ? (props.color ? props.color : Color.status.primary.default) : Color.text.white,
+                        color: props.color ? props.color : Color.text.white,
                         ...props.textStyle
                     }}
                     numberOfLines={1}

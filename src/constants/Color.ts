@@ -50,7 +50,11 @@ const Color = {
         full: '#000000C7',
         high: '#0000007D',
         medium: '#00000040',
-        low: '#0000001F'
+        low: '#0000001F',
+        white: '#FFFFFF',
+        whiteHigh: '#FFFFFFA6',
+        whiteMedium: '#FFFFFF66',
+        whiteLow: '#FFFFFF47'
     },
     status: {
         primary: {

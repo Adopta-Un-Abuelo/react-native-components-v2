@@ -2,7 +2,6 @@ import React from 'react';
 import styled from 'styled-components/native';
 import LottieView from 'lottie-react-native';
 import { GestureResponderEvent, PressableProps, ViewStyle, TextStyle } from 'react-native';
-
 import Color from '../../constants/Color';
 import Text from '../Text/Text';
 
@@ -10,12 +9,12 @@ const Container = styled.Pressable<{type?: 'line' | 'fill', color?: string, size
     flex-direction: row;
     height: 36px;
     border-radius: 8px;
-    background-color: ${props => props.type === 'line' ? 'transparent' : (props.color ? props.color : Color.blue3)};
+    background-color: ${props => props.type === 'line' ? 'transparent' : (props.color ? props.color : Color.status.primary.default)};
     align-items: center;
     justify-content: center;
     border-width: ${props => props.type === 'line' ? '1px' : '0px'};
-    border-color: ${props => props.color ? props.color : Color.blue3};
-    padding: 0px 14px;
+    border-color: ${props => props.color ? props.color : Color.status.primary.default};
+    padding: 0px 12px;
     opacity: ${props => props.disabled ? 0.48 : 1};
     align-self: flex-start;
 `
@@ -52,7 +51,7 @@ const ButtonSmall = (props: Props) =>{
                     weight='semibold'
                     style={{
                         textAlign: 'center',
-                        color: props.type === 'line' ? (props.color ? props.color : Color.blue5) : 'white',
+                        color: props.type === 'line' ? (props.color ? props.color : Color.status.primary.default) : Color.text.white,
                         ...props.textStyle
                     }}
                     numberOfLines={1}

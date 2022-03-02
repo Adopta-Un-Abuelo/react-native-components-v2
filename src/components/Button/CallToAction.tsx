@@ -17,7 +17,7 @@ const CallToAction = (props: Props) =>{
             <Text
                 type='b1'
                 weight='semibold'
-                style={{color: props.color ? props.color : Color.blue3}}
+                style={{color: props.color ? props.color : Color.status.primary.default}}
             >
                 {props.title}
             </Text>

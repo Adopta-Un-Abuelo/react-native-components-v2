@@ -1,6 +1,5 @@
 import React from 'react';
 import { TextStyle, TextProps } from 'react-native';
-
 import Text from './Text';
 import Color from '../../constants/Color';
 
@@ -14,7 +13,7 @@ const TextCaption = (props: Props) =>{
                 fontFamily: weight === 'medium' ? 'Poppins-Medium' : 'Poppins-Regular',
                 fontSize: 12,
                 lineHeight: 18,
-                color: Color.gray2,
+                color: Color.text.full,
                 ...style
             }}
             {...rest}
@@ -27,7 +26,7 @@ const TextCaption = (props: Props) =>{
                 fontFamily: weight === 'medium' ? 'Poppins-Medium' : 'Poppins-Regular',
                 fontSize: 10,
                 lineHeight: 14,
-                color: Color.gray2,
+                color: Color.text.full,
                 ...style
             }}
             {...rest}

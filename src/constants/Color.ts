@@ -40,17 +40,17 @@ const Color = {
         redSoft: '#F5CFCF',
         full: '#333333',
         soft: '#EBEBEB',
-        softTransparent: '#0A000000'
+        softTransparent: '#00000004'
     },
     text: {
         primary: '#006BE5',
         aquamarine: '#00ABC5',
         primaryBlack: '#001D3D',
         secondaryBlack: '#701E09',
-        full: '#C7000000',
-        high: '#7D000000',
-        medium: '#40000000',
-        low: '#1F000000'
+        full: '#00000078',
+        high: '#00000049',
+        medium: '#00000025',
+        low: '#00000012'
     },
     status: {
         primary: {
@@ -68,8 +68,8 @@ const Color = {
         },
         neutral: {
             default: '#FFFFFF',
-            hover: '#0D000000',
-            pressed: '#1F000000'
+            hover: '#00000005',
+            pressed: '#00000012'
         },
         color: {
             success: '#08A85B',

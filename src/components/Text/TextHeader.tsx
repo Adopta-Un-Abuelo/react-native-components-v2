@@ -1,12 +1,11 @@
 import React from 'react';
 import { TextStyle, TextProps } from 'react-native';
-
 import Text from './Text';
 import Color from '../../constants/Color';
 
 const TextHeader = (props: Props) =>{
 
-    const { style, type, children, ...rest } = props;
+    const { style, type, children, weight, ...rest } = props;
 
     return(type === 'h1' ?
         <Text
@@ -14,7 +13,7 @@ const TextHeader = (props: Props) =>{
                 fontFamily: 'Poppins-Bold',
                 fontSize: 32,
                 lineHeight: 36,
-                color: Color.black,
+                color: Color.text.full,
                 ...style
             }}
             {...rest}
@@ -27,7 +26,7 @@ const TextHeader = (props: Props) =>{
                 fontFamily: 'Poppins-Bold',
                 fontSize: 28,
                 lineHeight: 36,
-                color: Color.black,
+                color: Color.text.full,
                 ...style
             }}
             {...rest}
@@ -37,10 +36,10 @@ const TextHeader = (props: Props) =>{
     : type === 'h3' ?
         <Text
             style={{
-                fontFamily: 'Poppins-Bold',
+                fontFamily: weight === 'regular' ? 'Poppins-Regular' : 'Poppins-Bold',
                 fontSize: 24,
                 lineHeight: 32,
-                color: Color.black,
+                color: Color.text.full,
                 ...style
             }}
             {...rest}
@@ -50,10 +49,10 @@ const TextHeader = (props: Props) =>{
     : type === 'h4' ?
         <Text
             style={{
-                fontFamily: 'Poppins-SemiBold',
+                fontFamily: weight === 'regular' ? 'Poppins-Regular' : 'Poppins-SemiBold',
                 fontSize: 20,
-                lineHeight: 26,
-                color: Color.gray2,
+                lineHeight: 28,
+                color: Color.text.full,
                 ...style
             }}
             {...rest}
@@ -65,8 +64,8 @@ const TextHeader = (props: Props) =>{
             style={{
                 fontFamily: 'Poppins-SemiBold',
                 fontSize: 18,
-                lineHeight: 22,
-                color: Color.gray2,
+                lineHeight: 24,
+                color: Color.text.full,
                 ...style
             }}
             {...rest}
@@ -79,7 +78,7 @@ const TextHeader = (props: Props) =>{
                 fontFamily: 'Poppins-SemiBold',
                 fontSize: 16,
                 lineHeight: 22,
-                color: Color.gray2,
+                color: Color.text.full,
                 ...style
             }}
             {...rest}
@@ -92,5 +91,6 @@ export default TextHeader;
 export interface Props extends TextProps{
     style?: TextStyle,
     children?: any,
-    type?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | any
+    type?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | any,
+    weight?: 'bold' | 'regular' | any
 }

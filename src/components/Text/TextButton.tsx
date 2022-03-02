@@ -1,6 +1,5 @@
 import React from 'react';
 import { TextStyle, TextProps } from 'react-native';
-
 import Text from './Text';
 import Color from '../../constants/Color';
 
@@ -13,8 +12,8 @@ const TextButton = (props: Props) =>{
             style={{
                 fontFamily: weight === 'medium' ? 'Poppins-Medium' : 'Poppins-SemiBold',
                 fontSize: 16,
-                lineHeight: 20,
-                color: Color.gray2,
+                lineHeight: 22,
+                color: Color.text.full,
                 ...style
             }}
             {...rest}
@@ -26,8 +25,8 @@ const TextButton = (props: Props) =>{
             style={{
                 fontFamily: weight === 'medium' ? 'Poppins-Medium' : 'Poppins-SemiBold',
                 fontSize: 14,
-                lineHeight: 22,
-                color: Color.gray2,
+                lineHeight: 20,
+                color: Color.text.full,
                 ...style
             }}
             {...rest}

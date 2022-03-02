@@ -1,6 +1,5 @@
 import React from 'react';
 import { TextStyle, TextProps } from 'react-native';
-
 import Text from './Text';
 import Color from '../../constants/Color';
 
@@ -13,9 +12,9 @@ const TextDisplay = (props: Props) =>{
             <Text
                 style={{
                     fontFamily: 'Poppins-Bold',
-                    fontSize: 56,
-                    lineHeight: 68,
-                    color: Color.black,
+                    fontSize: 48,
+                    lineHeight: 60,
+                    color: Color.text.full,
                     ...style
                 }}
                 {...rest}
@@ -26,9 +25,9 @@ const TextDisplay = (props: Props) =>{
             <Text
                 style={{
                     fontFamily: 'Poppins-Medium',
-                    fontSize: 56,
-                    lineHeight: 68,
-                    color: Color.black,
+                    fontSize: 48,
+                    lineHeight: 60,
+                    color: Color.text.full,
                     ...style
                 }}
                 {...rest}

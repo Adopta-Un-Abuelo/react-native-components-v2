@@ -31,7 +31,7 @@ const Text = (props: Props) =>{
             <Caption {...props}>
                 {props.children}
             </Caption>
-         : props.type === 'o1' ?
+        : props.type === 'o1' || props.type === 'o2' ?
             <Overline {...props}>
                 {props.children}
             </Overline>
@@ -44,6 +44,6 @@ const Text = (props: Props) =>{
 export default Text;
 export interface Props extends TextProps{
     type?: 'd1' | 'd2' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'b1' | 'b2' | 'p1' | 'p2' | 'c1' | 'c2' | 'o1',
-    weight?: 'regular' | 'semibold' | 'medium',
+    weight?: 'regular' | 'semibold' | 'medium' | 'bold',
     style?: TextStyle
 }

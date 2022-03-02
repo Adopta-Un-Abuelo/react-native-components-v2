@@ -1,54 +1,45 @@
 import React from 'react';
-import styled from 'styled-components/native';
 import { TextStyle } from 'react-native';
-
+import Text from './Text';
 import Color from '../../constants/Color';
 
-const TextStyled = styled.Text<{weight?: string, fontStyle?: string}>`
-    font-size: 16px;
-    line-height: 22px;
-    font-family: ${props =>
-        props.weight === 'semibold' ? 'Poppins-SemiBold' : 
-        props.weight === 'medium' ? 'Poppins-Medium' : 
-        props.fontStyle === 'italic' ? 'Poppins-Italic' :
-        'Poppins-Regular'
-    };
-    color: ${Color.gray2};
-`
+const TextParagraph = (props: Props) =>{
 
-const Text = (props: Props) =>{
+    const { style, type, children, weight, fontStyle, ...rest } = props;
 
-    const { style, type, children, ...rest } = props;
-
-    return(type === 'p2' ?
-        <TextStyled
+    return(type === 'p1' ?
+        <Text
             style={{
-                fontSize: 14,
-                lineHeight: 20,
+                fontFamily: weight === 'semibold' ? 'Poppins-SemiBold' : weight === 'medium' ? 'Poppins-Medium' : fontStyle === 'italic' ? 'Poppins-Italic' : 'Poppins-Regular',
+                fontSize: 15,
+                lineHeight: 22,
+                color: Color.text.full,
                 ...style
             }}
             {...rest}
         >
             {children}
-        </TextStyled>
-    : 
-        <TextStyled
-            {...props}
+        </Text>
+    : type === 'p2' ?
+        <Text
+            style={{
+                fontFamily: weight === 'medium' ? 'Poppins-Medium' : fontStyle === 'italic' ? 'Poppins-Italic' : 'Poppins-Regular',
+                fontSize: 14,
+                lineHeight: 22,
+                color: Color.text.full,
+                ...style
+            }}
+            {...rest}
         >
             {children}
-        </TextStyled>
-    )
+        </Text>
+    : undefined)
 }
-export default Text;
+export default TextParagraph;
 export interface Props{
     weight?: 'regular' | 'semibold' | 'medium',
     type?: 'p1' | 'p2' | any,
     fontStyle?: 'italic',
     style?: TextStyle,
-    children?: any,
-    numberOfLines?: number,
-    ellipsizeMode?: 'head' | 'middle' | 'tail' | 'clip',
-    adjustsFontSizeToFit?: boolean,
-    onPress?: any
-    allowFontScaling?: boolean
+    children?: any
 }

@@ -37,7 +37,7 @@ const TextParagraph = (props: Props) =>{
 }
 export default TextParagraph;
 export interface Props{
-    weight?: 'regular' | 'semibold' | 'medium',
+    weight?: 'regular' | 'semibold' | 'medium' | 'bold',
     type?: 'p1' | 'p2' | any,
     fontStyle?: 'italic',
     style?: TextStyle,

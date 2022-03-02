@@ -133,6 +133,14 @@ const ModalComponent = (props: Props) =>{
                         </GoBackContainer>
                         : props.title &&
                             <Header>
+                                {!props.showBottomClose &&
+                                    <CloseButton
+                                        onPress={onClosePress}
+                                        style={{marginTop: props.orientation === 'fullScreen' ? 8 : 0}}
+                                    >
+                                        <X color={Color.black}/>
+                                    </CloseButton>
+                                }
                                 <TitleCenterView>
                                     <Text
                                         type='p1'

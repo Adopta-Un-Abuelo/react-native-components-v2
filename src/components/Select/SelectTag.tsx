@@ -11,15 +11,15 @@ const Container = styled.View`
 `
 const Cell = styled.Pressable<{selected?: boolean, backgroundColor?: string, disabled?: boolean}>`
     flex-direction: row;
-    padding: 8px 12px;
+    padding: 5px 12px;
     margin-right: 4px;
     border-radius: 1000px;
     margin-bottom: 8px;
     justify-content: center;
     align-items: center;
-    border-width: ${props => props.selected ? '0px' : '1px'};
-    border-color: ${props => props.selected ? undefined : Color.blue3+'40'};
-    background-color: ${props => props.selected ? Color.blue3+'26' : 'white'};
+    border-width: ${props => props.selected ? '2px' : '1px'};
+    border-color: ${props => props.selected ? Color.line.primary : Color.line.primarySoft};
+    background-color: ${props => props.selected ? Color.status.primary.softDefault : 'white'};
 `
 const Column = styled.View`
     flex-direction: column;
@@ -28,13 +28,8 @@ const Column = styled.View`
 const TagSelect: FC<Props> = props =>{
 
     const [ selectedItems, setSelectedItems ] = useState<Array<{id: string, title?: string, en?: string}>>([]);
-    const [ colorsArray, setColorsArray ] = useState<Array<string>>();
 
     useEffect(() =>{
-        if(props.colors && props.colors.length > 0){
-            const arrayLength = +(props.options.length/props.colors.length).toFixed(0);
-            setColorsArray([].concat(...Array(arrayLength).fill(props.colors)));
-        }
         if(props.defaultSelection) {
             const temp = props.defaultSelection.map(item =>({
                 id: item
@@ -74,7 +69,6 @@ const TagSelect: FC<Props> = props =>{
         >
             {props.options.map((item, index)=>{
                 const selected= selectedItems.some(obj => obj.id === item.id);
-                const color = item.color ? item.color : (colorsArray && colorsArray.length > 0 ? colorsArray[index] : Color.gray3);
                 const disabled = props.disabledOptions ? props.disabledOptions.some(i => i.id === item.id) : false;
                 return(
                     <Cell
@@ -88,7 +82,7 @@ const TagSelect: FC<Props> = props =>{
                         {item.icon ?
                             item.icon
                         : props.icon &&
-                            <props.icon height={18} width={18} color={selected ? 'white' : color}/>
+                            <props.icon height={18} width={18} color={selected ? Color.text.primary : Color.text.high}/>
                         }
                         <Column
                             style={{marginLeft: (props.icon || item.icon) ? 8 : 0}}
@@ -96,7 +90,7 @@ const TagSelect: FC<Props> = props =>{
                             <Text
                                 type='p2'
                                 weight='medium'
-                                style={{color: disabled ? Color.gray3 : (selected ? Color.gray3 : color), ...props.textStyle}}
+                                style={{color: disabled ? Color.text.high : (selected ? Color.text.primary : Color.text.high), ...props.textStyle}}
                             >
                                 {props.locale === 'en' ? item.en : item.title}
                             </Text>
@@ -139,7 +133,6 @@ export interface Props{
     }>,
     locale?: string,
     icon?: any,
-    colors?: Array<string>,
     disabled?: boolean,
     singleSelection?: boolean,
     onPress?: Function,

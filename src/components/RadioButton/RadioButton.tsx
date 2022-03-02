@@ -2,6 +2,7 @@ import React, { FC, useState } from 'react';
 import styled from 'styled-components/native';
 import { ViewStyle } from 'react-native';
 
+import { Check } from 'react-native-lucide';
 import Text from '../Text/Text';
 import Color from '../../constants/Color';
 
@@ -12,22 +13,18 @@ const Cell = styled.Pressable`
     padding: 18px 0px;
     flex-direction: row;
     align-items: center;
+    border-bottom-width: 1px;
+    border-bottom-color: ${Color.gray6};
 `
 const CircleView = styled.View<{selected: boolean}>`
-    height: 26px;
-    width: 26px;
-    background-color: ${props => props.selected ? 'white' : Color.gray6};
+    height: 32px;
+    width: 32px;
+    background-color: ${props => props.selected ? Color.background.primary : Color.background.primaryLow};
     border-radius: 200px;
-    border-width: ${props => props.selected ? '1px' : '0px'};
-    border-color: ${Color.blue3};
+    border-width: 1px;
+    border-color: ${props => props.selected ? Color.background.primary : Color.line.primarySoft};
     justify-content: center;
     align-items: center;
-`
-const CircleSelect = styled.View`
-    height: 16px;
-    width: 16px;
-    background-color: ${Color.blue3};
-    border-radius: 200px;
 `
 
 const RadioButton: FC <Props> = props =>{
@@ -51,18 +48,18 @@ const RadioButton: FC <Props> = props =>{
                         onPress={() => onPress(item)}
                         style={props.cellStyle}
                     >
-                        <CircleView
-                            selected={selected}
-                        >
-                            {selected && <CircleSelect/>}
-                        </CircleView>
                         <Text
-                            type='p2'
+                            type='p1'
                             weight='medium'
-                            style={{marginLeft: 8, flex: 1}}
+                            style={{marginRight: 12, flex: 1}}
                         >
                             {item.title}
                         </Text>
+                        <CircleView
+                            selected={selected}
+                        >
+                            {selected && <Check width={20} height={20} color={'white'}/>}
+                        </CircleView>
                     </Cell>
                 )
             })}

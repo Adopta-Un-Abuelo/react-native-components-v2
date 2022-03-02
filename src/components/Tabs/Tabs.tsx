@@ -7,7 +7,7 @@ import Text from '../Text/Text';
 const Container = styled.View<{theme: 'line' | 'circular'}>`
     flex-direction: row;
     height: ${props => props.theme === 'circular' ? '36px' : '48px'};
-    background-color: ${props => props.theme === 'circular' ? Color.gray6 : 'transparent'};
+    background-color: ${props => props.theme === 'circular' ? Color.background.soft : 'transparent'};
     border-radius: ${props => props.theme === 'circular' ? '8px' : '0px'};;
 `
 const List = styled.FlatList`
@@ -16,7 +16,7 @@ const Tab = styled.Pressable<{selected: boolean, color?: string}>`
     align-items: center;
     justify-content: center;
     border-bottom-width: ${props => props.selected ? '3px' : '0px'}; 
-    border-bottom-color: ${props => props.color ? props.color: Color.blue5};
+    border-bottom-color: ${props => props.color ? props.color: Color.text.primary};
     margin: 0px 8px;
 `
 const TabCircular = styled.Pressable<{selected: boolean, color?: string}>`
@@ -24,7 +24,7 @@ const TabCircular = styled.Pressable<{selected: boolean, color?: string}>`
     justify-content: center;
     padding: 0px 18px;
     border-radius: 8px;
-    background-color: ${props => props.selected ? Color.blue3 : 'transparent'};
+    background-color: ${props => props.selected ? Color.background.primary : 'transparent'};
 `
 
 const Tabs: FC<Props> = props =>{
@@ -59,9 +59,11 @@ const Tabs: FC<Props> = props =>{
                                 onPress={() => onTabPress(temp)}
                             >
                                 <Text
-                                    weight={'semibold'}
+                                    type='p1'
+                                    weight={'medium'}
                                     numberOfLines={1}
                                     ellipsizeMode={'tail'}
+                                    style={{color: selected ? Color.text.primary : Color.text.high}}
                                 >
                                     {temp.title}
                                 </Text>
@@ -79,7 +81,7 @@ const Tabs: FC<Props> = props =>{
                                 onPress={() => onTabPress(temp)}
                             >
                                 <Text
-                                    style={{color: selected ? 'white' : Color.gray3}}
+                                    style={{color: selected ? 'white' : Color.text.high}}
                                     weight={'semibold'}
                                     numberOfLines={1}
                                     ellipsizeMode={'tail'}

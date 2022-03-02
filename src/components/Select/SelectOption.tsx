@@ -15,9 +15,9 @@ const CellContent = styled.View<{selected: boolean, color?: string}>`
     height: 72px;
     width: 72px;
     border-radius: 12px;
-    border-width: ${props => props.selected ? '0px' : '1px'};
-    border-color: ${props => props.selected ? undefined : Color.blue3};
-    background-color: ${props => props.selected ? Color.blue3+'60' : 'white'};
+    border-width: ${props => props.selected ? '2px' : '1px'};
+    border-color: ${props => props.selected ? Color.line.primary : Color.line.soft};
+    background-color: ${props => props.selected ? Color.background.primaryLow : 'white'};
     align-items: center;
     justify-content: center;
 `
@@ -50,7 +50,7 @@ const OptionSelect: FC<Props> = props =>{
                         color={props.color}
                         selected={selectedItem?.id === item.id}
                     >
-                        <item.icon color={Color.gray2} height={24} width={24}/>
+                        <item.icon color={Color.text.full} height={24} width={24}/>
                     </CellContent>
                     <Container
                         style={{marginTop: 4, alignItems: 'center'}}

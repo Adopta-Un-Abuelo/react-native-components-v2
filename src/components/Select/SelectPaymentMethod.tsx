@@ -27,7 +27,7 @@ const CellTextView = styled.View<{show: boolean}>`
     flex-direction: column;
     justify-content: center;
     margin: 0px 0px 0px 16px;
-    border-bottom-color: ${Color.gray5};
+    border-bottom-color: ${Color.line.soft};
     border-bottom-width: ${props => props.show ? '1px' : '0px'};
 `
 const Column = styled.View`
@@ -231,7 +231,7 @@ const PaymentMethodSelect = forwardRef((props: Props, ref: Ref<SelectPaymentMeth
                                     {expDate &&
                                         <Text
                                             type='c1'
-                                            style={{color: Color.gray3}}
+                                            style={{color: Color.text.high}}
                                         >
                                             {expDate}
                                         </Text>
@@ -245,14 +245,14 @@ const PaymentMethodSelect = forwardRef((props: Props, ref: Ref<SelectPaymentMeth
                             key={'paymentOption'+index}
                             onPress={() => onOptionSelected(item)}
                         >
-                            <item.icon height={21} width={32} color={item.objectId === 'new' ? Color.blue3 : undefined} fill={item.objectId === 'new' ? Color.blue3 : undefined}/>
+                            <item.icon height={21} width={32} color={item.objectId === 'new' ? Color.text.primary : undefined} fill={item.objectId === 'new' ? Color.text.primary : undefined}/>
                             <CellTextView
                                 show={item.objectId !== 'new'}
                             >
                                 <Text
                                     type='p1'
                                     weight='medium'
-                                    style={{color: item.objectId === 'new' ? Color.blue3 : Color.gray2}}
+                                    style={{color: item.objectId === 'new' ? Color.text.primary : Color.text.full}}
                                 >
                                     {item.title}
                                 </Text>
@@ -279,14 +279,14 @@ const PaymentMethodSelect = forwardRef((props: Props, ref: Ref<SelectPaymentMeth
             <Column>
                 <Text
                     type='p2'
-                    style={{color: Color.gray3}}
+                    style={{color: Color.text.high}}
                     numberOfLines={1}
                 >
                     {methodSelected.objectId === 'new' ? (props.translation ? props.translation.payment_method_select_modify_no_payment_method : 'No hay método de pago') : (methodSelected.title ? methodSelected.title : 'Añadir método de pago')}
                 </Text>
                 <Text
                     type='b2'
-                    style={{color: Color.blue3}}
+                    style={{color: Color.text.primary}}
                 >
                     {props.translation ? props.translation.payment_method_select_modify : 'Modificar'}
                 </Text>

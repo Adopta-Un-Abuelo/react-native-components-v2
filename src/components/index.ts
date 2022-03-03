@@ -40,3 +40,4 @@ export { default as SelectCountry } from './Select/SelectCountry';
 export { default as SelectCountryModal } from './Modal/SelectCountryModal';
 export { default as ButtonSmall } from './Button/ButtonSmall';
 export { default as CenterModal } from './Modal/CenterModal';
+export { default as CheckboxButton } from './Checkbox/CheckboxButton';

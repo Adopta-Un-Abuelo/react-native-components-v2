@@ -11,7 +11,7 @@ const Cell = styled.Pressable`
     flex: 1;
     align-items: center;
 `
-const CellContent = styled.View<{selected: boolean, color?: string}>`
+const CellContent = styled.View<{selected: boolean}>`
     height: 72px;
     width: 72px;
     border-radius: 12px;
@@ -47,7 +47,6 @@ const OptionSelect: FC<Props> = props =>{
                     onPress={() => onCellPress(item)}
                 >
                     <CellContent
-                        color={props.color}
                         selected={selectedItem?.id === item.id}
                     >
                         <item.icon color={Color.text.full} height={24} width={24}/>
@@ -58,6 +57,7 @@ const OptionSelect: FC<Props> = props =>{
                         <Text
                             type='p1'
                             weight='medium'
+                            style={{textAlign: 'center'}}
                         >
                             {item.title}
                         </Text>
@@ -70,7 +70,6 @@ const OptionSelect: FC<Props> = props =>{
 export default OptionSelect;
 export interface Props{
     onPress?: Function,
-    color?: string,
     options: Array<{
         id: string,
         title: string,

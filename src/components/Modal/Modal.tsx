@@ -22,9 +22,9 @@ const ModalView = styled(SafeAreaView)<{orientation?: 'top' | 'bottom' | 'center
     background-color: ${Color.background.neutral};
 `
 const SwipeView = styled.View`
-    height: 30px;
+    height: 15px;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-end;
     z-index: 1000;
 `
 const Swipe = styled.View`

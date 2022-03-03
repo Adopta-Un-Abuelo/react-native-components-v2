@@ -16,7 +16,7 @@ const Crumb = styled.View<{active: boolean}>`
     width: ${props => props.active ? '10px' : '8px'};
     margin-right: 8px;
     border-radius: 100px;
-    background-color: ${props => props.active ? Color.blue3 : Color.gray5};
+    background-color: ${props => props.active ? Color.background.primary : Color.text.low};
 `
 
 const Breadcrumb = (props: Props) =>{

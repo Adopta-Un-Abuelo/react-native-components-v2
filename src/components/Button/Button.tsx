@@ -14,8 +14,8 @@ const Container = styled.Pressable<{type?: 'line' | 'fill', color?: string, size
     justify-content: center;
     border-width: ${props => props.type === 'line' ? '1px' : '0px'};
     border-color: ${props => props.color ? props.color : Color.status.primary.default};
-    padding-left: ${props => props.size === 'small' ? '12px' : '24px'};
-    padding-right: ${props => props.size === 'small' ? '12px' : '24px'};
+    padding-left: 24px;
+    padding-right: 24px;
     opacity: ${props => props.disabled ? 0.48 : 1};
 `
 

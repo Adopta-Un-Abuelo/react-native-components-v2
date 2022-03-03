@@ -19,6 +19,7 @@ const WebModal: FC<Props> = props =>{
             visible={visible}
             orientation={'fullScreen'}
             showTopClose={true}
+            title={props.title}
             showBottomClose={false}
             onDismiss={onDismiss}
             onModalHide={onDismiss}
@@ -31,6 +32,7 @@ const WebModal: FC<Props> = props =>{
 }
 export default WebModal;
 export interface Props{
+    title: string,
     visible: boolean,
     url: string,
     onDismiss: Function

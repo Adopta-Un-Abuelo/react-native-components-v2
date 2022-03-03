@@ -36,19 +36,19 @@ const ProgressBar: FC<Props> = props =>{
                 height={6}
                 borderRadius={10}
                 borderWidth={0}
-                unfilledColor={Color.gray5}
-                color={Color.blue3}
+                unfilledColor={Color.background.soft}
+                color={Color.background.primary}
             />
             <MarkView>
                 <Text
                     type='c1'
-                    style={{flex: 1, color: Color.blue3}}
+                    style={{flex: 1, color: Color.text.primary}}
                 >
                     {new Date(progressLeft * 1000).toISOString().substr(14, 5)}
                 </Text>
                 <Text
                     type='c1'
-                    style={{flex: 1, textAlign: 'right', color: Color.gray4}}
+                    style={{flex: 1, textAlign: 'right', color: Color.text.high}}
                 >
                     {new Date(props.maxProgress * 1000).toISOString().substr(14, 5)}
                 </Text>

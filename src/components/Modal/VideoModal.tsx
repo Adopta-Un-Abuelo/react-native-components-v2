@@ -133,7 +133,7 @@ const VideoModal: FC<Props> = props =>{
                         style={{alignSelf: 'auto', flex: 1}}
                         icon={paused ? Play : Pause}
                         onPress={onVideoPress}
-                        color={Color.blue3}
+                        color={Color.text.primary}
                     />
                 }
                 {props.skipIn &&

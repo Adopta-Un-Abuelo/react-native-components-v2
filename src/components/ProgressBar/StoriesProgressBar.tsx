@@ -1,7 +1,6 @@
 import React, { FC, useEffect, useState } from 'react';
 import * as Progress from 'react-native-progress';
 import styled from 'styled-components/native';
-
 import Color from '../../constants/Color';
 
 const Container = styled.View`
@@ -49,14 +48,14 @@ const ProgressBar: FC<Props> = props =>{
         <Container
             style={props.style}
         >
-             <Progress.Bar
+            <Progress.Bar
                 width={null}
                 progress={seconds/props.maxTime}
                 height={4}
                 borderRadius={10}
                 borderWidth={0}
-                unfilledColor={props.unfilledColor ? props.unfilledColor : Color.gray5}
-                color={props.color ? props.color : Color.blue3}
+                unfilledColor={props.unfilledColor ? props.unfilledColor : Color.background.soft}
+                color={props.color ? props.color : Color.text.primary}
             />
         </Container>
     )

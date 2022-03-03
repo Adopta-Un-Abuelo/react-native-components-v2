@@ -5,15 +5,15 @@ import { TextInput, ViewStyle } from 'react-native';
 import Color from '../../constants/Color';
 import Text from '../Text/Text';
 
-const Container = styled.View<{error?: boolean, isFocused: boolean | undefined}>`
-    height: 56px;
-    border-color: ${props => props.error ? Color.error : (props.isFocused ? '#D4D6F6' : Color.gray5)};
-    border-width: ${props => props.isFocused || props.error ? '2px' : '1px'};
+const Container = styled.View<{error?: boolean, isFocused: boolean | undefined, type?: string}>`
+    height: ${props => props.type === 'small' ? '48px' : '56px'};
+    border-color: ${props => props.error ? Color.status.color.error : Color.line.soft};
+    border-width: ${props => props.type === 'small' ? '0px' : (props.error ? '2px' : '1px')};
     border-radius: 12px;
     align-items: center;
     flex-direction: row;
     padding: 0px 16px;
-    background-color: white;
+    background-color: ${props => props.type === 'small' ? Color.background.soft : 'white'};
 `
 const InputStyled = styled.TextInput<{isFocused: boolean | undefined, hasValue: boolean, hideTitle?: boolean}>`
     flex: 1;
@@ -21,7 +21,7 @@ const InputStyled = styled.TextInput<{isFocused: boolean | undefined, hasValue: 
     font-family: 'Poppins-Regular';
     height: 100%;
     padding: 0px;
-    color: ${Color.black};
+    color: ${Color.text.primaryBlack};
     margin-top: ${props => ((props.isFocused || props.hasValue) && !props.hideTitle) ? '18px' : '0px'};
 `
 const IconView = styled.View`
@@ -77,10 +77,11 @@ const InputComponent = forwardRef((props: Props, ref: Ref<InputRef>) =>{
             style={style}
             error={props.error}
             isFocused={isFocused}
+            type={props.type}
         >
             {props.icon &&
                 <IconView>
-                    <props.icon color={props.error ? Color.error : Color.gray3}/>
+                    <props.icon color={props.error ? Color.status.color.error : Color.text.primaryBlack}/>
                 </IconView>
             }
             {children}
@@ -88,7 +89,7 @@ const InputComponent = forwardRef((props: Props, ref: Ref<InputRef>) =>{
                 {((!currentPlaceholder || value) && !props.hideTitle) &&
                     <Text
                         type='c1'
-                        style={{position: 'absolute', top: 8, color: Color.gray3}}
+                        style={{position: 'absolute', top: 8, color: Color.text.high}}
                     >
                         {props.placeholder}
                     </Text>
@@ -96,14 +97,14 @@ const InputComponent = forwardRef((props: Props, ref: Ref<InputRef>) =>{
                 <InputStyled
                     ref={input}
                     caretHidden={true}
-                    selectionColor={Color.blue3}
+                    selectionColor={Color.text.primary}
                     onFocus={onFocus}
                     onBlur={onBlur}
                     placeholder={currentPlaceholder}
                     onChangeText={onChangeText}
                     isFocused={isFocused}
                     hasValue={value ? true : false}
-                    placeholderTextColor={Color.gray3}
+                    placeholderTextColor={Color.text.high}
                     maxLength={props.maxLength}
                     keyboardType={props.keyboardType}
                     {...rest}
@@ -133,7 +134,8 @@ export interface Props{
     autoCorrent?: boolean
     children?: any,
     hideTitle?: boolean,
-    returnKeyType?: 'done' | 'go' | 'next' | 'search' | 'send'
+    returnKeyType?: 'done' | 'go' | 'next' | 'search' | 'send',
+    type?: 'small' | 'big'
 }
 export interface InputRef{
     focus: () => void,

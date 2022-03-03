@@ -83,12 +83,13 @@ const SelectCountryModal: FC<Props> = props =>{
         >
             {props.showSearch &&
                 <Input
-                    style={{marginTop: 24, marginBottom: 12, height: 48}}
+                    style={{marginBottom: 12, height: 48}}
                     placeholder={props.translation ? props.translation.general_btn_search : 'Buscar'}
                     icon={Search}
                     hideTitle={true}
                     returnKeyType={'search'}
                     onChangeText={onSearchChange}
+                    type={'small'}
                 />
             }
             <Scroll>

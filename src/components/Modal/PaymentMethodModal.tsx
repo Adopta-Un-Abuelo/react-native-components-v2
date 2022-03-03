@@ -24,7 +24,7 @@ const CellTextView = styled.View`
     flex-direction: column;
     justify-content: center;
     margin: 0px 0px 0px 16px;
-    border-bottom-color: ${Color.gray5};
+    border-bottom-color: ${Color.line.soft};
     border-bottom-width: 1px;
 `
 const Row = styled.View`
@@ -69,14 +69,14 @@ const PaymentMethodModal = forwardRef((props: Props, ref: Ref<PaymentMethodModal
                     temp.push({
                         id: 'sepa_debit',
                         title: props.translation ? props.translation.form_payment_method_sepa_debit : 'Cuenta bancaria',
-                        icon: <Landmark height={24} width={24} color={Color.gray2}/>
+                        icon: <Landmark height={24} width={24} color={Color.text.full}/>
                     })
                 }
                 else if(item === 'paycard'){
                     temp.push({
                         id: 'card',
                         title: props.translation ? props.translation.general_credit_card_long : 'Tarjeta de crédito o débito',
-                        icon: <CreditCard height={24} width={24} color={Color.gray2}/>
+                        icon: <CreditCard height={24} width={24} color={Color.text.full}/>
                     })
                 }
             });
@@ -131,6 +131,7 @@ const PaymentMethodModal = forwardRef((props: Props, ref: Ref<PaymentMethodModal
             visible={visible}
             orientation={'fullScreen'}
             showTopClose={true}
+            avoidKeyboard={true}
             canGoBack={optionSelected !== undefined}
             showBottomClose={false}
             title={optionSelected ?
@@ -171,17 +172,17 @@ const PaymentMethodModal = forwardRef((props: Props, ref: Ref<PaymentMethodModal
                     {error &&
                         <Text
                             type='c1'
-                            style={{color: Color.error, marginTop: 24}}
+                            style={{color: Color.status.color.error, marginTop: 24}}
                         >
                             {props.translation ? props.translation.payment_method_modal_error : 'Parece que los datos de tu método de pago no son correctos.'}
                         </Text>
                     }
                     <ContainerSecure>
                         <Row style={{alignItems: 'flex-start'}}>
-                            <Lock height={20} width={20} color={Color.blue3}/>
+                            <Lock height={20} width={20} color={Color.text.primary}/>
                             <Text
                                 type='c1'
-                                style={{color: Color.gray3, flex: 1, marginLeft: 8}}
+                                style={{color: Color.text.high, flex: 1, marginLeft: 8}}
                             >
                                 {props.translation ? props.translation.payment_method_modal_secure : 'Tu información de pago se guardará de forma segura. Más información.'}
                             </Text>
@@ -205,7 +206,7 @@ const PaymentMethodModal = forwardRef((props: Props, ref: Ref<PaymentMethodModal
                                 </Text>
                                 <Text
                                     type='c1'
-                                    style={{color: Color.gray3, marginTop: 4}}
+                                    style={{color: Color.text.high}}
                                 >
                                     {item.id === 'card' ? (props.translation ? props.translation.payment_method_modal_card : 'Cargo automático a tu tarjeta') : (props.translation ? props.translation.payment_method_modal_sepa : 'Cargo automático en tu cuenta')}
                                 </Text>

@@ -59,6 +59,7 @@ const TitleDownView = styled.View`
 `
 
 const ButtonArea = styled.View`
+    padding-bottom: 12px;
 `
 
 const ModalComponent = (props: Props) =>{

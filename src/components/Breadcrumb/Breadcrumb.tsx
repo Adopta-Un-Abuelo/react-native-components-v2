@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components/native';
 import { Animated } from 'react-native';
-
 import Color from '../../constants/Color';
 
 const Container = styled(Animated.View)`

@@ -1,7 +1,6 @@
 import React, { useState, useEffect, forwardRef, useImperativeHandle, useRef, Ref } from 'react';
 import styled from 'styled-components/native';
 import { TextInput, ViewStyle } from 'react-native';
-
 import Color from '../../constants/Color';
 import Text from '../Text/Text';
 
@@ -13,7 +12,7 @@ const Container = styled.View<{error?: boolean, isFocused: boolean | undefined, 
     align-items: center;
     flex-direction: row;
     padding: 0px 16px;
-    background-color: ${props => props.type === 'small' ? Color.background.soft : 'white'};
+    background-color: ${props => props.type === 'small' ? Color.background.soft : Color.background.neutral};
 `
 const InputStyled = styled.TextInput<{isFocused: boolean | undefined, hasValue: boolean, hideTitle?: boolean}>`
     flex: 1;

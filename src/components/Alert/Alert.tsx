@@ -1,19 +1,18 @@
 import React from 'react';
 import FlashMessage from "react-native-flash-message";
 import { AlertTriangle } from 'react-native-lucide';
-
 import Color from '../../constants/Color';
 
 const Alert = (props: Props) =>{
 
     const renderFlashMessageIcon = type =>(
-        <AlertTriangle style={{marginRight: 8}} color={'white'}/>
+        <AlertTriangle style={{marginRight: 8}} color={Color.text.white}/>
     )
 
     return(
         <FlashMessage 
             style={{
-                backgroundColor: Color.warning
+                backgroundColor: Color.status.color.warning
             }}
             titleStyle={{
                 fontFamily: 'Poppins-Medium'

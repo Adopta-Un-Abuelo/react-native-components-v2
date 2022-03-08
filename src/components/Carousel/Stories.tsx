@@ -1,8 +1,8 @@
 import React, { forwardRef, useEffect, useState, Ref, useImperativeHandle } from 'react';
 import styled from 'styled-components/native';
 import LinearGradient from 'react-native-linear-gradient';
-
 import ProgressBar from '../ProgressBar/StoriesProgressBar';
+import { Color } from '../..';
 
 const Container = styled.View`
     flex: 1;
@@ -114,7 +114,7 @@ const Stories = forwardRef((props: Props, ref: Ref<StoriesRef>) =>{
                             pause={currentIndex !== index ? true : (props.pause ? props.pause : false)}
                             fill={index < currentIndex}
                             clean={index > currentIndex}
-                            color={'white'}
+                            color={Color.text.white}
                             unfilledColor={'#00000040'}
                         />
                     )}

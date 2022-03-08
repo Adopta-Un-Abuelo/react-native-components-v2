@@ -1,14 +1,13 @@
 import React from 'react';
 import styled from 'styled-components/native';
 import { ViewStyle } from 'react-native';
-
 import Color from '../../constants/Color';
 import Text from '../Text/Text';
 import Button from '../Button/Button';
 
 const Container = styled.View`
     padding: 24px 32px;
-    background-color: ${Color.gray6};
+    background-color: ${Color.background.soft};
 `
 const Row = styled.View`
     flex-direction: row;
@@ -25,12 +24,13 @@ const Banner = (props: Props) =>{
             <Row>
                 <props.icon 
                     style={{marginRight: 8}}
-                    color={Color.blue3}
+                    color={Color.text.primary}
                     height={18}
                     width={18}
                 />
-                <Text 
-                    style={{color: Color.blue3, fontSize: 14, marginBottom: 8}}
+                <Text
+                    type='c1'
+                    style={{color: Color.text.primary, marginBottom: 8}}
                 >
                     {props.title}
                 </Text>

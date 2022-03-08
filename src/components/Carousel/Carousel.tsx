@@ -1,7 +1,6 @@
 import React, { FC, forwardRef } from 'react';
 import { Dimensions } from 'react-native';
 import styled from 'styled-components/native';
-
 import { SwiperFlatList } from 'react-native-swiper-flatlist';
 
 const { width } = Dimensions.get('window');

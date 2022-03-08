@@ -1,7 +1,6 @@
 import React, { useRef, forwardRef, useImperativeHandle, useState, Ref } from 'react';
 import { TextInput } from 'react-native';
 import styled from 'styled-components/native';
-
 import Color from '../../constants/Color';
 
 const CodeInputContainer = styled.View`

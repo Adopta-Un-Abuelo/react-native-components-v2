@@ -1,7 +1,6 @@
 import React, { FC, useRef } from 'react';
 import { Animated, Keyboard } from 'react-native';
 import styled from 'styled-components/native';
-
 import KeyboardAvoidingView from './KeyboardAvoidingView';
 import ButtonBottom from '../Button/ButtonBottom';
 import NavigationBar from '../Navigation/NavigationBar';

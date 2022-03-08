@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components/native';
 import { Check } from 'react-native-lucide';
 import { ViewStyle, TextStyle } from 'react-native';
-
 import Text from '../Text/Text';
 import Color from '../../constants/Color';
 
@@ -23,7 +22,7 @@ const CheckButton = styled.View<{selected: boolean, error?: boolean}>`
     align-items: center;
     justify-content: center;
     border-width: 1px;
-    border-color: ${props => props.error ? Color.error : (props.selected ? Color.line.primary : Color.line.primarySoft)};
+    border-color: ${props => props.error ? Color.status.color.error : (props.selected ? Color.line.primary : Color.line.primarySoft)};
 `
 const DataView = styled.View`
     flex: 1;
@@ -83,7 +82,7 @@ const Checkbox = (props: Props) =>{
                             error={props.error}
                         >
                             {selected &&
-                                <Check height={18} width={18} color={'white'} />
+                                <Check height={18} width={18} color={Color.text.white} />
                             }
                         </CheckButton>
                     </Cell>

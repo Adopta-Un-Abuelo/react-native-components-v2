@@ -1,7 +1,6 @@
 import React, { FC, useState } from 'react';
 import styled from 'styled-components/native';
 import { ViewStyle } from 'react-native';
-
 import { Check } from 'react-native-lucide';
 import Text from '../Text/Text';
 import Color from '../../constants/Color';
@@ -14,7 +13,7 @@ const Cell = styled.Pressable`
     flex-direction: row;
     align-items: center;
     border-bottom-width: 1px;
-    border-bottom-color: ${Color.gray6};
+    border-bottom-color: ${Color.line.soft};
 `
 const CircleView = styled.View<{selected: boolean}>`
     height: 32px;
@@ -58,7 +57,7 @@ const RadioButton: FC <Props> = props =>{
                         <CircleView
                             selected={selected}
                         >
-                            {selected && <Check width={20} height={20} color={'white'}/>}
+                            {selected && <Check width={20} height={20} color={Color.text.white}/>}
                         </CircleView>
                     </Cell>
                 )

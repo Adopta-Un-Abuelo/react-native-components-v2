@@ -3,7 +3,6 @@ import styled from 'styled-components/native';
 import { ViewStyle } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Modal from "react-native-modal";
-
 import { X, ArrowLeft } from 'react-native-lucide';
 import Text from '../Text/Text';
 import Button from '../Button/Button';
@@ -31,7 +30,7 @@ const Swipe = styled.View`
     height: 5px;
     width: 48px;
     border-radius: 100px;
-    background-color: ${Color.gray4};
+    background-color: ${Color.background.mediumLow};
 `
 const Header = styled.View`
     height: 56px;
@@ -108,7 +107,7 @@ const ModalComponent = (props: Props) =>{
                                     onPress={onClosePress}
                                     style={{marginTop: props.orientation === 'fullScreen' ? 8 : 0}}
                                 >
-                                    <ArrowLeft color={Color.black}/>
+                                    <ArrowLeft color={Color.text.full}/>
                                 </CloseButton>
                             </Header>
                             {props.title &&
@@ -116,14 +115,13 @@ const ModalComponent = (props: Props) =>{
                                     <Text
                                         type='h4'
                                         weight='semibold'
-                                        style={{color: Color.gray1}}
                                     >
                                         {props.title}
                                     </Text>
                                     {props.subtitle &&
                                         <Text
                                             type='p2'
-                                            style={{color: Color.gray4}}
+                                            style={{color: Color.text.high}}
                                         >
                                             {props.subtitle}
                                         </Text>
@@ -138,14 +136,13 @@ const ModalComponent = (props: Props) =>{
                                         onPress={onClosePress}
                                         style={{marginTop: props.orientation === 'fullScreen' ? 8 : 0}}
                                     >
-                                        <X color={Color.black}/>
+                                        <X color={Color.text.full}/>
                                     </CloseButton>
                                 }
                                 <TitleCenterView>
                                     <Text
                                         type='p1'
                                         weight='medium'
-                                        style={{color: Color.gray1}}
                                     >
                                         {props.title}
                                     </Text>
@@ -170,7 +167,7 @@ const ModalComponent = (props: Props) =>{
                         <Button
                             type={'line'}
                             style={{borderWidth: 0, marginTop: 8}}
-                            color={Color.gray3}
+                            color={Color.text.high}
                             title={props.translation ? props.translation.general_btn_cancel : 'Cancelar'}
                             onPress={onClosePress}
                         />

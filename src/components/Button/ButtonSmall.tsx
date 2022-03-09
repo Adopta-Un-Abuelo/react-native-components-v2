@@ -44,7 +44,7 @@ const ButtonSmall = (props: Props) =>{
             :
                 <>
                 {props.icon &&
-                    <props.icon style={{marginRight: 8, ...props.iconStyle}} color={(props.iconStyle && props.iconStyle.stroke) ? props.iconStyle.stroke : (props.type === 'line' ? (props.color ? props.color : Color.blue5) : 'white')}/>
+                    <props.icon style={{marginRight: 8, ...props.iconStyle}} color={(props.iconStyle && props.iconStyle.stroke) ? props.iconStyle.stroke : (props.type === 'line' ? (props.color ? props.color : Color.text.primary) : Color.text.white)}/>
                 }
                 <Text
                     type='b2'

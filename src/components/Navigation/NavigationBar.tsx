@@ -1,17 +1,17 @@
 import React, { FC } from 'react';
 import styled from 'styled-components/native';
 import { Animated } from 'react-native';
-
 import { ArrowLeft } from "react-native-lucide";
 import ButtonImage from '../Button/ButtonImage';
 import Breadcrumb from '../Breadcrumb/Breadcrumb';
 import Text from '../Text/TextAnimated';
+import { Color } from '../../constants';
 
 const MainView = styled(Animated.View)`
     width: 100%;
     justify-content: flex-end;
     padding-top: 18px;
-    background-color: white;
+    background-color: ${Color.background.neutral};
     border-bottom-width: 1px;
 `
 const RightHeader = styled.View`

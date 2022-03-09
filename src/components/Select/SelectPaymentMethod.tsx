@@ -3,7 +3,6 @@ import styled from 'styled-components/native';
 import { Plus } from 'react-native-lucide';
 import { Platform } from 'react-native';
 import { isApplePaySupported } from '@stripe/stripe-react-native';
-
 import Color from '../../constants/Color';
 import PaycardLogos from '../../constants/Paycard';
 import Text from '../Text/Text';

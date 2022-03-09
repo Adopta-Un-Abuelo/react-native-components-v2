@@ -80,7 +80,7 @@ const PlaceInput = forwardRef((props: Props, ref: Ref<InputRef>) =>{
                         borderRadius: 12,
                         paddingRight: 8,
                         paddingLeft: 8,
-                        backgroundColor: 'white',
+                        backgroundColor: Color.background.neutral,
                         marginTop: 16
                     },
                     textInput:{

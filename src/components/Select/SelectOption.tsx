@@ -17,7 +17,7 @@ const CellContent = styled.View<{selected: boolean}>`
     border-radius: 12px;
     border-width: ${props => props.selected ? '2px' : '1px'};
     border-color: ${props => props.selected ? Color.line.primary : Color.line.soft};
-    background-color: ${props => props.selected ? Color.background.primaryLow : 'white'};
+    background-color: ${props => props.selected ? Color.background.primaryLow : Color.text.white};
     align-items: center;
     justify-content: center;
 `

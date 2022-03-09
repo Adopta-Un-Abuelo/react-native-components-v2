@@ -1,6 +1,5 @@
 import React, {FC, useEffect, useState} from "react";
 import styled from 'styled-components/native';
-
 import Modal from './Modal';
 import Text from '../Text/Text';
 import Button from '../Button/Button';

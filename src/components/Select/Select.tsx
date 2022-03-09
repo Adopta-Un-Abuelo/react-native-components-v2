@@ -1,7 +1,6 @@
 import React, { useState, useEffect, FC } from 'react';
 import styled from 'styled-components/native';
 import { ViewStyle, TextStyle } from 'react-native';
-
 import { ChevronDown } from 'react-native-lucide';
 import Color from '../../constants/Color';
 import Text from '../Text/Text';
@@ -13,10 +12,10 @@ const SelectStyled = styled.Pressable`
     display: flex;
     flex-direction: row;
     align-items: center;
-    border: 1px solid ${Color.gray6};
+    border: 1px solid ${Color.line.soft};
     padding: 8px 16px;
     border-radius: 4px;
-    background-color: white;
+    background-color: ${Color.background.neutral};
 `
 const Arrow = styled.View`
     height: 24px;
@@ -75,13 +74,15 @@ const Select = (props: Props) =>{
                 }
                 {!props.hideTitle &&
                     <Text
+                        type='p1'
+                        weight='medium'
                         style={{marginRight: 4, ...props.textStyle}}
                     >
                         {props.title ? props.title : selectedItem[props.titleValue]}
                     </Text>
                 }
                 <Arrow>
-                    <ChevronDown color={Color.blue3}/>
+                    <ChevronDown color={Color.text.primary}/>
                 </Arrow>
             </SelectStyled>
             <SelectionModal

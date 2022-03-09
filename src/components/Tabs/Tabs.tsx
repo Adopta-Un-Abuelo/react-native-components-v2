@@ -1,7 +1,6 @@
 import React, { FC, useState } from 'react';
 import styled from 'styled-components/native';
 import Color from '../../constants/Color';
-
 import Text from '../Text/Text';
 
 const Container = styled.View<{theme: 'line' | 'circular'}>`
@@ -81,7 +80,7 @@ const Tabs: FC<Props> = props =>{
                                 onPress={() => onTabPress(temp)}
                             >
                                 <Text
-                                    style={{color: selected ? 'white' : Color.text.high}}
+                                    style={{color: selected ? Color.text.white : Color.text.high}}
                                     weight={'semibold'}
                                     numberOfLines={1}
                                     ellipsizeMode={'tail'}

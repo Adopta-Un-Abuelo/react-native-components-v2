@@ -1,7 +1,6 @@
 import React, { FC, useEffect, useState } from 'react';
 import styled from 'styled-components/native';
 import Fuse from 'fuse.js'
-
 import { Search } from 'react-native-lucide';
 import Modal from './Modal';
 import Text from '../Text/Text';
@@ -14,8 +13,8 @@ const Cell = styled.Pressable`
     margin-left: -24px;
     margin-right: -24px;
     padding: 16px 24px;
-    border-bottom-width: 0.5px;
-    border-bottom-color: ${Color.gray5};
+    border-bottom-width: 1px;
+    border-bottom-color: ${Color.line.soft};
 `
 const Scroll = styled.ScrollView`
 `
@@ -100,9 +99,10 @@ const SelectCountryModal: FC<Props> = props =>{
                         onPress={() => onPress(item)}
                     >
                         {item.icon &&
-                            <item.icon height={24} width={24} color={Color.blue3}/>
+                            <item.icon height={24} width={24}/>
                         }
                         <Text
+                            type='p2'
                             style={{marginLeft: (item.icon) ? 12 : 0}}
                         >
                             {props.locale === 'en' ? item.enPrefix : item.esPrefix}

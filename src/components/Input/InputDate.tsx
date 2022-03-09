@@ -1,7 +1,6 @@
 import React, { FC, useState } from 'react';
 import { ViewStyle } from 'react-native';
 import { Calendar } from 'react-native-lucide';
-
 import Input from './Input';
 
 const DateInput = (props: Props) =>{

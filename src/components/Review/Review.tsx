@@ -1,7 +1,6 @@
 import React, { FC, useState } from 'react';
 import styled from 'styled-components/native';
 import { ViewStyle } from 'react-native';
-
 import { Heart } from 'react-native-lucide';
 import ButtonImage from '../Button/ButtonImage';
 import Color from '../../constants/Color'

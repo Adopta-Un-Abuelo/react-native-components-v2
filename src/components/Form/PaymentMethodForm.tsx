@@ -1,7 +1,6 @@
 import React, { forwardRef, useState, Ref, useImperativeHandle } from 'react';
 import styled from 'styled-components/native';
 import { createPaymentMethod, CardField } from '@stripe/stripe-react-native';
-
 import Color from '../../constants/Color';
 
 const Container = styled.View``
@@ -64,7 +63,7 @@ const PaymentMethodForm = forwardRef((props: Props, ref: Ref<PaymentMethodFormRe
                     expiration: props.translation.form_payment_method_date
                 }}
                 cardStyle={{
-                    textColor: Color.gray2,
+                    textColor: Color.text.full,
                     fontFamily: 'Poppins-Regular',
                     borderRadius: 12,
                     borderWidth: isFocus ? 2 : 1,

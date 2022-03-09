@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { ViewStyle } from 'react-native';
 import { Menu } from 'react-native-lucide';
-
 import ButtonImage from '../Button/ButtonImage';
 import SelectionModal from '../Modal/SelectionModal';
 

@@ -15,20 +15,16 @@ export const keyStyle = StyleSheet.create({
         flexDirection: 'row'
     },
     wrapperIn: {
-        height: 70,
-        width: 70,
-        borderRadius: 70/2,
+        height: 72,
+        width: 72,
+        borderRadius: 72/2,
         margin: 8,
-        backgroundColor: Color.gray6+'60',
+        backgroundColor: Color.status.neutralDark.default,
     },
     bd: {
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
-    },
-    mainText: {
-        fontSize: 24,
-        color: 'white'
     }
 });
 
@@ -71,11 +67,15 @@ const Keyboard: FC<Props> = props =>{
                 key={index}
                 activeOpacity={1}
                 style={keyStyle.wrapperIn}
-                underlayColor={Color.gray6+'bb'}
+                underlayColor={Color.status.neutralDark.pressed}
                 onPress={() => _onPress(key.mainText)}
             >
                 <View style={[keyStyle.bd]}>
-                    <Text type='h3' style={keyStyle.mainText}>
+                    <Text 
+                        type='h3'
+                        weight='regular'
+                        style={{color: Color.text.white}}
+                    >
                         {key.mainText}
                     </Text>
                 </View>

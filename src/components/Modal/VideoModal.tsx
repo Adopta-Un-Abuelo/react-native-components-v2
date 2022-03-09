@@ -3,7 +3,6 @@ import Video from 'react-native-video';
 import { Play, Pause } from 'react-native-lucide';
 import { Dimensions, ActivityIndicator } from 'react-native';
 import styled from 'styled-components/native';
-
 import Button from '../Button/Button';
 import Color from '../../constants/Color';
 import Text from '../Text/Text';

@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import DatePicker from 'react-native-date-picker'
-
 import Input from './InputFalse';
 import Modal from '../Modal/Modal'
 

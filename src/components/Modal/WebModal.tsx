@@ -1,6 +1,5 @@
 import React, { FC, useEffect, useState } from 'react';
 import { WebView } from 'react-native-webview';
-
 import Modal from './Modal';
 
 const WebModal: FC<Props> = props =>{

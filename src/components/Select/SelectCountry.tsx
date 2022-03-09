@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components/native';
 import { TextStyle, ViewStyle } from 'react-native';
-
 import { ChevronDown } from 'react-native-lucide';
 import Color from '../../constants/Color';
 import Text from '../Text/Text';
@@ -65,10 +64,11 @@ const SelectCountry = (props: Props) =>{
                     </Icon>
                 }
                 <Arrow>
-                    <ChevronDown color={Color.gray3}/>
+                    <ChevronDown color={Color.text.primary}/>
                 </Arrow>
                 <Text
                     type='p1'
+                    weight='medium'
                     style={{...props.textStyle, marginLeft: 16}}
                 >
                     {props.title ? props.title : selectedCountry.prefix}

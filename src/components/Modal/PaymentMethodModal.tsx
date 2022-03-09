@@ -1,7 +1,6 @@
 import React, { FC, useState, useRef, useEffect, forwardRef, Ref, useImperativeHandle } from 'react';
 import styled from 'styled-components/native';
 import { Keyboard } from 'react-native';
-
 import { CreditCard, Landmark, Lock } from 'react-native-lucide';
 import Modal from './Modal';
 import Text from '../Text/Text';

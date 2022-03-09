@@ -1,7 +1,6 @@
 import React, { FC } from 'react';
 import styled from 'styled-components/native';
 import { ViewStyle, TextStyle } from 'react-native';
-
 import { Hash } from 'react-native-lucide';
 import Color from '../../constants/Color';
 import Text from '../Text/Text';
@@ -18,7 +17,7 @@ const Cell = styled.View`
     border-radius: 11px;
     margin-right: 8px;
     border-width: 1px;
-    border-color: ${Color.blue3};
+    border-color: ${Color.line.primary};
 `
 
 const Header = (props: Props) =>{
@@ -32,10 +31,10 @@ const Header = (props: Props) =>{
                     style={props.optionStyle}
                 >
                     {!props.hideIcon &&
-                        <Hash color={Color.blue5} height={10} width={10}/>
+                        <Hash color={Color.background.deepBlue} height={10} width={10}/>
                     }
                     <Text
-                        style={{fontSize: 12, color: Color.blue3, ...props.textStyle}}
+                        style={{fontSize: 12, color: Color.background.primary, ...props.textStyle}}
                     >
                         {item.toLowerCase()}
                     </Text>

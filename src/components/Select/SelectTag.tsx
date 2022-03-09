@@ -1,7 +1,6 @@
 import React, { FC, useState, useEffect } from 'react';
 import styled from 'styled-components/native';
 import { ViewStyle, TextStyle } from 'react-native';
-
 import Text from '../Text/Text';
 import Color from '../../constants/Color';
 
@@ -19,7 +18,7 @@ const Cell = styled.Pressable<{selected?: boolean, backgroundColor?: string, dis
     align-items: center;
     border-width: ${props => props.selected ? '2px' : '1px'};
     border-color: ${props => props.selected ? Color.line.primary : Color.line.primarySoft};
-    background-color: ${props => props.selected ? Color.status.primary.softDefault : 'white'};
+    background-color: ${props => props.selected ? Color.status.primary.softDefault : Color.background.neutral};
     opacity: ${props => props.disabled ? 0.48 : 1};
 `
 const Column = styled.View`
@@ -98,7 +97,7 @@ const TagSelect: FC<Props> = props =>{
                             {item.subtitle &&
                                 <Text
                                     type='p1'
-                                    style={{color: selected ? 'white' : Color.gray3}}
+                                    style={{color: selected ? Color.text.white : Color.text.medium}}
                                 >
                                     {item.subtitle}
                                 </Text>

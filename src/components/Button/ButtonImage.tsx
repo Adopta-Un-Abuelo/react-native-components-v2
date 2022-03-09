@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React from 'react';
 import { ViewStyle } from 'react-native';
 import styled from 'styled-components/native';
 import Color from '../../constants/Color';

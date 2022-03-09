@@ -2,7 +2,6 @@ import React, { FC } from 'react';
 import styled from 'styled-components/native';
 import { Keyboard } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-
 import KeyboardAvoidingView from './KeyboardAvoidingView';
 import ButtonBottom from '../Button/ButtonBottom';
 import Button from '../Button/Button';

@@ -20,6 +20,7 @@ const Cell = styled.Pressable<{selected?: boolean, backgroundColor?: string, dis
     border-width: ${props => props.selected ? '2px' : '1px'};
     border-color: ${props => props.selected ? Color.line.primary : Color.line.primarySoft};
     background-color: ${props => props.selected ? Color.status.primary.softDefault : 'white'};
+    opacity: ${props => props.disabled ? 0.48 : 1};
 `
 const Column = styled.View`
     flex-direction: column;

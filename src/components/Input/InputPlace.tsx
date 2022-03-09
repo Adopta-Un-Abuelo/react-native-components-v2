@@ -1,7 +1,6 @@
 import React, { useState, forwardRef, useImperativeHandle, useRef, Ref } from 'react';
 import { GooglePlacesAutocomplete, GooglePlaceDetail, GooglePlacesAutocompleteRef } from 'react-native-google-places-autocomplete';
 import { Search } from 'react-native-lucide';
-
 import Color from '../../constants/Color';
 import Modal from '../Modal/Modal';
 import Input from './InputFalse';
@@ -72,11 +71,11 @@ const PlaceInput = forwardRef((props: Props, ref: Ref<InputRef>) =>{
                     clearButtonMode: 'while-editing',
                     autoCorrect: false
                 }}
-                renderLeftButton={() => <View style={{justifyContent: 'center', paddingLeft: 6}}><Search height={20} width={20} color={Color.gray3}/></View>}
+                renderLeftButton={() => <View style={{justifyContent: 'center', paddingLeft: 6}}><Search height={20} width={20} color={Color.text.full}/></View>}
                 styles={{
                     textInputContainer:{
                         height: 48,
-                        borderColor: props.error ? Color.error : (isFocused ? '#D4D6F6' : Color.gray5),
+                        borderColor: props.error ? Color.status.color.error : (isFocused ? Color.line.primarySoft : Color.line.soft),
                         borderWidth: 1,
                         borderRadius: 12,
                         paddingRight: 8,
@@ -87,12 +86,12 @@ const PlaceInput = forwardRef((props: Props, ref: Ref<InputRef>) =>{
                     textInput:{
                         fontFamily: 'Poppins-Regular',
                         fontSize: 15,
-                        color: Color.gray2,
+                        color: Color.text.full,
                     },
                     description:{
                         fontFamily: 'Poppins-Regular',
                         fontSize: 14,
-                        color: Color.gray2
+                        color: Color.text.full
                     }
                 }}
             />

@@ -1,6 +1,5 @@
-import React, { FC, useState, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import { TextInput } from 'react-native';
-
 import SelectCountry from '../Select/SelectCountry';
 import Input from '../Input/Input';
 

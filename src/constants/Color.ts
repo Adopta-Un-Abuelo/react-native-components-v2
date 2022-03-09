@@ -58,6 +58,11 @@ const Color = {
             hover: '#0000000D',
             pressed: '#0000001F'
         },
+        neutralDark:{
+            default: '#FFFFFF1F',
+            hover: '#FFFFFF52',
+            pressed: '#FFFFFF7A'
+        },
         color: {
             success: '#08A85B',
             successDefault: '#E4F8EE',

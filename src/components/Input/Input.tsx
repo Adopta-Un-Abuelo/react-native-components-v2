@@ -6,8 +6,8 @@ import Text from '../Text/Text';
 
 const Container = styled.View<{error?: boolean, isFocused: boolean | undefined, type?: string}>`
     height: ${props => props.type === 'small' ? '48px' : '56px'};
-    border-color: ${props => props.error ? Color.status.color.error : Color.line.soft};
-    border-width: ${props => props.type === 'small' ? '0px' : (props.error ? '2px' : '1px')};
+    border-color: ${props => props.error ? Color.status.color.error : props.isFocused ? Color.line.primarySoft : Color.line.soft};
+    border-width: ${props => props.type === 'small' ? '0px' : (props.error || props.isFocused ? '2px' : '1px')};
     border-radius: 12px;
     align-items: center;
     flex-direction: row;

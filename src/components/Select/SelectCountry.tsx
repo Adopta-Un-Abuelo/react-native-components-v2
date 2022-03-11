@@ -64,7 +64,7 @@ const SelectCountry = (props: Props) =>{
                     </Icon>
                 }
                 <Arrow>
-                    <ChevronDown color={Color.text.primary}/>
+                    <ChevronDown color={Color.text.high}/>
                 </Arrow>
                 <Text
                     type='p1'

@@ -35,8 +35,7 @@ const PaymentMethodForm = forwardRef((props: Props, ref: Ref<PaymentMethodFormRe
                         data: result.paymentMethod
                     }
                 };
-            } 
-            catch(e){
+            } catch(e){
                 console.error(e);
                 return{
                     status: 'error',
@@ -63,7 +62,6 @@ const PaymentMethodForm = forwardRef((props: Props, ref: Ref<PaymentMethodFormRe
                     expiration: props.translation.form_payment_method_date
                 }}
                 cardStyle={{
-                    textColor: Color.text.full,
                     fontFamily: 'Poppins-Regular',
                     borderRadius: 12,
                     borderWidth: isFocus ? 2 : 1,

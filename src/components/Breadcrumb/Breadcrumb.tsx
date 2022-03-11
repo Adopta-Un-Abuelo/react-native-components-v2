@@ -11,8 +11,8 @@ const Container = styled(Animated.View)`
     align-items: center;
 `
 const Crumb = styled.View<{active: boolean}>`
-    height: ${props => props.active ? '10px' : '8px'};
-    width: ${props => props.active ? '10px' : '8px'};
+    height: ${props => props.active ? '8px' : '8px'};
+    width: ${props => props.active ? '8px' : '8px'};
     margin-right: 8px;
     border-radius: 100px;
     background-color: ${props => props.active ? Color.background.primary : Color.text.low};

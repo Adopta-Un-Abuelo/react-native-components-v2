@@ -103,20 +103,19 @@ const PaymentMethodModal = forwardRef((props: Props, ref: Ref<PaymentMethodModal
     }
 
     const onSavePress = async () =>{
-        Keyboard.dismiss();
+        Keyboard.dismiss();        
         if(optionSelected.id === 'card'){
             setLoading(true);
             const result = await paycardForm?.current.generateToken();
-            if(result.status === 'ok'){
+            if(result && result.status === 'ok'){
                 props.onChange && props.onChange(result.result);
                 onDismiss();
             }
             setLoading(false);
-        }
-        else if(optionSelected.id === 'sepa_debit'){
+        } else if(optionSelected.id === 'sepa_debit'){
             setLoading(true);
             const result = await bankForm?.current.generateToken();
-            if(result.status === 'ok'){
+            if(result && result.status === 'ok'){
                 props.onChange && props.onChange(result.result);
                 onDismiss();
             }

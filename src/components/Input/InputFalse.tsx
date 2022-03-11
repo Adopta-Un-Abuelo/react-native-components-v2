@@ -6,7 +6,7 @@ import Text from '../Text/Text';
 
 const Container = styled.Pressable<{error?: boolean}>`
     height: 56px;
-    border-color: ${props => props.error ? Color.status.color.error : Color.line.primarySoft};
+    border-color: ${props => props.error ? Color.status.color.error : Color.line.soft};
     border-width: ${props => props.error ? '2px' : '1px'};
     border-radius: 12px;
     align-items: center;
@@ -38,14 +38,14 @@ const Input: FC<Props> = forwardRef((props, ref) =>{
                 {props.value &&
                     <Text
                         type='c1'
-                        style={{position: 'absolute', top: 8, color: Color.text.medium}}
+                        style={{position: 'absolute', top: 8, color: Color.text.high}}
                     >
                         {placeholder}
                     </Text>
                 }
                 <Text
                     type='p1'
-                    style={{color: props.value ? Color.text.medium : Color.text.low, marginTop: props.value ? 18 : 0}}
+                    style={{color: props.value ? Color.text.full : Color.text.high, marginTop: props.value ? 18 : 0}}
                     numberOfLines={1}
                 >
                     {props.value ? props.value : props.placeholder}

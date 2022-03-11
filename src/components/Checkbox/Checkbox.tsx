@@ -14,19 +14,19 @@ const Cell = styled.Pressable`
     align-items: center;
 `
 const CheckButton = styled.View<{selected: boolean, error?: boolean}>`
-    margin-left: 16px;
     background-color: ${props => props.selected ? Color.background.primary : Color.background.primaryLow};
     border-radius: 4px;
     height: 24px;
     width: 24px;
     align-items: center;
     justify-content: center;
-    border-width: 1px;
+    border-width: ${props => props.error ? '2px' : '1px'};
     border-color: ${props => props.error ? Color.status.color.error : (props.selected ? Color.line.primary : Color.line.primarySoft)};
 `
 const DataView = styled.View`
     flex: 1;
     flex-direction: column;
+    margin-left: 16px;
 `
 
 const Checkbox = (props: Props) =>{
@@ -60,6 +60,14 @@ const Checkbox = (props: Props) =>{
                         key={'checkbox'+index}
                         onPress={() => onCellPress(item)}
                     >
+                        <CheckButton
+                            selected={selected}
+                            error={props.error}
+                        >
+                            {selected &&
+                                <Check height={18} width={18} color={Color.text.white} />
+                            }
+                        </CheckButton>
                         <DataView>
                             <Text
                                 type='p1'
@@ -77,14 +85,6 @@ const Checkbox = (props: Props) =>{
                                 </Text>
                             }
                         </DataView>
-                        <CheckButton
-                            selected={selected}
-                            error={props.error}
-                        >
-                            {selected &&
-                                <Check height={18} width={18} color={Color.text.white} />
-                            }
-                        </CheckButton>
                     </Cell>
                 )
             })}

@@ -8,7 +8,7 @@ import Text from '../Text/Text';
 import Button from '../Button/Button';
 import { Color } from '../../constants';
 
-const ModalView = styled(SafeAreaView)<{orientation?: 'top' | 'bottom' | 'center' | 'fullScreen', swipeToClose?: boolean}>`
+const ModalView = styled(SafeAreaView)<{orientation?: 'top' | 'bottom' | 'center' | 'fullScreen', swipeToClose?: boolean, noPadding?: boolean}>`
     height: ${props => props.orientation === 'fullScreen' ? '95%' : 'auto'};
     max-height: ${props => (props.orientation === 'bottom' || props.orientation === 'top') ? '80%' : (props.orientation === 'fullScreen' ? '90%' : '80%')};
     width: 100%;
@@ -17,7 +17,7 @@ const ModalView = styled(SafeAreaView)<{orientation?: 'top' | 'bottom' | 'center
     border-top-right-radius: ${props => (props.orientation === 'bottom' || props.orientation === 'fullScreen') ? '24px' : '12px'};
     border-bottom-left-radius: ${props => (props.orientation === 'bottom' || props.orientation === 'fullScreen') ? '0px' : '12px'};
     border-bottom-right-radius: ${props => (props.orientation === 'bottom' || props.orientation === 'fullScreen') ? '0px' : '12px'};
-    padding: 0px 16px;
+    padding: ${props => props.noPadding ? '0px' : '0px 16px'};
     background-color: ${Color.background.neutral};
 `
 const SwipeView = styled.View`
@@ -44,7 +44,6 @@ const CloseButton = styled.Pressable`
     width: 40px;
     justify-content: center;
     align-items: center;
-    margin-left: -8px;
     z-index: 1000;
 `
 const TitleCenterView = styled.View`
@@ -93,6 +92,7 @@ const ModalComponent = (props: Props) =>{
                 orientation={props.orientation}
                 swipeToClose={swipeToClose}
                 style={props.style}
+                noPadding={props.noPadding}
             >
                 {swipeToClose &&
                     <SwipeView>
@@ -134,7 +134,7 @@ const ModalComponent = (props: Props) =>{
                                 {!props.showBottomClose &&
                                     <CloseButton
                                         onPress={onClosePress}
-                                        style={{marginTop: props.orientation === 'fullScreen' ? 8 : 0}}
+                                        style={{marginTop: props.orientation === 'fullScreen' ? 8 : 0, marginLeft: props.noPadding ? 0 : -8}}
                                     >
                                         <X color={Color.text.full}/>
                                     </CloseButton>
@@ -208,5 +208,6 @@ export interface Props{
     onDismiss: Function,
     onModalHide?: Function,
     avoidKeyboard?: boolean,
-    children?: any
+    children?: any,
+    noPadding?: boolean
 }

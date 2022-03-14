@@ -22,6 +22,7 @@ const WebModal: FC<Props> = props =>{
             showBottomClose={false}
             onDismiss={onDismiss}
             onModalHide={onDismiss}
+            noPadding={true}
         >
             <WebView
                 source={{ uri: props.url }}

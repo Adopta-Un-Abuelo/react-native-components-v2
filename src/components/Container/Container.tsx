@@ -71,7 +71,8 @@ export interface Props{
         navigation: any,
         noHeader?: boolean,
         backButtonStyle?: any,
-        Header?: any
+        Header?: any,
+        backgroundColor?: string
     }
     title?: string,
     subtitle?: string,

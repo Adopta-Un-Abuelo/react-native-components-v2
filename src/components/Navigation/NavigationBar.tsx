@@ -7,11 +7,11 @@ import Breadcrumb from '../Breadcrumb/Breadcrumb';
 import Text from '../Text/TextAnimated';
 import { Color } from '../../constants';
 
-const MainView = styled(Animated.View)`
+const MainView = styled(Animated.View)<{backgroundColor?: string}>`
     width: 100%;
     justify-content: flex-end;
     padding-top: 18px;
-    background-color: ${Color.background.neutral};
+    background-color: ${props => props.backgroundColor ? props.backgroundColor : Color.background.neutral};
     border-bottom-width: 1px;
 `
 const RightHeader = styled.View`
@@ -94,6 +94,7 @@ const NavigationBar: FC<Props> = props => {
     return(
         <MainView
             style={{height: headerHeight, borderBottomColor: borderColor}}
+            backgroundColor={props.backgroundColor}
         >
             {showBackButton &&
                 <ButtonImage
@@ -172,5 +173,6 @@ export interface Props{
     title?: string,
     subtitle?: string,
     headerRight?: any,
-    animatedValue?: Animated.Value
+    animatedValue?: Animated.Value,
+    backgroundColor?: string
 }

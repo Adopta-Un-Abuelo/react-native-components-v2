@@ -21,7 +21,7 @@ const InputStyled = styled.TextInput<{isFocused: boolean | undefined, hasValue: 
     height: 100%;
     padding: 0px;
     color: ${Color.text.primaryBlack};
-    margin-top: ${props => ((props.isFocused || props.hasValue) && !props.hideTitle) ? '18px' : '0px'};
+    margin-top: ${props => ((props.isFocused || props.hasValue) && !props.hideTitle) ? '18px' : '16px'};
 `
 const IconView = styled.View`
     height: 24px;
@@ -106,6 +106,8 @@ const InputComponent = forwardRef((props: Props, ref: Ref<InputRef>) =>{
                     placeholderTextColor={Color.text.high}
                     maxLength={props.maxLength}
                     keyboardType={props.keyboardType}
+                    textAlignVertical={props.alignVertical ? 'top' : 'auto'}
+                    multiline={props.multiline}
                     {...rest}
                 />
             </InputView>
@@ -134,7 +136,9 @@ export interface Props{
     children?: any,
     hideTitle?: boolean,
     returnKeyType?: 'done' | 'go' | 'next' | 'search' | 'send',
-    type?: 'small' | 'big'
+    type?: 'small' | 'big',
+    multiline?: boolean,
+    alignVertical?: boolean
 }
 export interface InputRef{
     focus: () => void,

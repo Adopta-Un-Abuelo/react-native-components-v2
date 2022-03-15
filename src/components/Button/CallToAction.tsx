@@ -3,23 +3,27 @@ import styled from 'styled-components/native';
 import { ViewStyle } from 'react-native';
 import Text from '../Text/Text';
 import { Color } from '../../constants';
+import { ArrowRight } from 'react-native-lucide';
 
 const Button = styled.Pressable`
+    flex-direction: row;
 `
 
 const CallToAction = (props: Props) =>{
-
     return(
         <Button
             {...props}
         >
             <Text
-                type='b1'
-                weight='semibold'
-                style={{color: props.color ? props.color : Color.status.primary.default}}
+                type='b2'
+                weight='medium'
+                style={{color: props.color ? props.color : Color.text.primary}}
             >
                 {props.title}
             </Text>
+            {props.showIcon &&
+                <ArrowRight height={20} width={20} style={{marginLeft: 4}} color={props.color ? props.color : Color.text.primary}/>
+            }
         </Button>
     )
 }
@@ -28,5 +32,6 @@ export interface Props{
     title: string,
     color?: string,
     style?: ViewStyle,
-    onPress?: any
+    onPress?: any,
+    showIcon?: boolean
 }

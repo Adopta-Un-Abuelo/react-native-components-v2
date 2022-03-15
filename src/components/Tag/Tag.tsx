@@ -10,13 +10,13 @@ const Container = styled.View`
 `
 const Cell = styled.View`
     height: 22px;
-    background-color: white;
+    background-color: ${Color.background.soft};
     padding: 0px 8px;
     flex-direction: row;
     align-items: center;
-    border-radius: 11px;
     margin-right: 8px;
     border-width: 1px;
+    border-radius: 12px;
     border-color: ${Color.line.primary};
 `
 
@@ -31,10 +31,11 @@ const Header = (props: Props) =>{
                     style={props.optionStyle}
                 >
                     {!props.hideIcon &&
-                        <Hash color={Color.background.deepBlue} height={10} width={10}/>
+                        <Hash color={Color.text.primary} height={10} width={10}/>
                     }
                     <Text
-                        style={{fontSize: 12, color: Color.background.primary, ...props.textStyle}}
+                        type='c1'
+                        style={{color: Color.text.primary, ...props.textStyle}}
                     >
                         {item.toLowerCase()}
                     </Text>
@@ -49,5 +50,5 @@ export interface Props{
     optionStyle?: ViewStyle,
     options: Array<string>,
     hideIcon?: boolean,
-    textStyle?: TextStyle,
+    textStyle?: TextStyle
 }

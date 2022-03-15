@@ -24,26 +24,26 @@ const Review: FC<Props> = props =>{
         >
             <ButtonImage
                 style={{marginRight: 14}}
-                Icon={<Heart height={40} width={40} color={selection >= 1 ? Color.text.primary : Color.line.primarySoft}/>}
+                Icon={<Heart strokeWidth={1} height={40} width={40} color={selection >= 1 ? Color.text.primary : Color.line.primarySoft} fill={selection >= 1 ? Color.text.primary : undefined}/>}
                 onPress={() => onButtonPress(1)}
             />
             <ButtonImage
                 style={{marginRight: 14}}
-                Icon={<Heart height={40} width={40} color={selection >= 2 ? Color.text.primary : Color.line.primarySoft}/>}
+                Icon={<Heart strokeWidth={1} height={40} width={40} color={selection >= 2 ? Color.text.primary : Color.line.primarySoft} fill={selection >= 2 ? Color.text.primary : undefined}/>}
                 onPress={() => onButtonPress(2)}
             />
             <ButtonImage
                 style={{marginRight: 14}}
-                Icon={<Heart height={40} width={40} color={selection >= 3 ? Color.text.primary : Color.line.primarySoft}/>}
+                Icon={<Heart strokeWidth={1} height={40} width={40} color={selection >= 3 ? Color.text.primary : Color.line.primarySoft} fill={selection >= 3 ? Color.text.primary : undefined}/>}
                 onPress={() => onButtonPress(3)}
             />
             <ButtonImage
                 style={{marginRight: 14}}
-                Icon={<Heart height={40} width={40} color={selection >= 4 ? Color.text.primary : Color.line.primarySoft}/>}
+                Icon={<Heart strokeWidth={1} height={40} width={40} color={selection >= 4 ? Color.text.primary : Color.line.primarySoft} fill={selection >= 4 ? Color.text.primary : undefined}/>}
                 onPress={() => onButtonPress(4)}
             />
             <ButtonImage
-                Icon={<Heart height={40} width={40} color={selection >= 5 ? Color.text.primary : Color.line.primarySoft}/>}
+                Icon={<Heart strokeWidth={1} height={40} width={40} color={selection >= 5 ? Color.text.primary : Color.line.primarySoft} fill={selection >= 5 ? Color.text.primary : undefined}/>}
                 onPress={() => onButtonPress(5)}
             />
         </Container>

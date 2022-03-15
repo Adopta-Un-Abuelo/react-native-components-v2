@@ -109,7 +109,7 @@ const SelectionModal: FC<Props> = props =>{
                             </Icon>
                         } 
                         <Text
-                            type='p2'
+                            type='p1'
                             style={{marginLeft: (item.Icon || item.icon) ? 12 : 0}}
                         >
                             {item.title}

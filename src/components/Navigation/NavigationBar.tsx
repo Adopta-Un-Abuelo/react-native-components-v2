@@ -98,15 +98,11 @@ const NavigationBar: FC<Props> = props => {
             {showBackButton &&
                 <ButtonImage
                     style={{
-                        position: 'absolute',
-                        top: 8,
-                        left: 6,
-                        height: 40,
-                        width: 40,
+                        height: 56,
+                        width: 56,
                         zIndex: 1000,
                         alignItems: 'center',
-                        justifyContent: 'flex-end',
-                        padding: 0,
+                        justifyContent: 'center',
                         ...props.backButtonStyle
                     }}
                     icon={ArrowLeft}

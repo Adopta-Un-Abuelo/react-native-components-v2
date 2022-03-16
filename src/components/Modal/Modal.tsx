@@ -25,6 +25,7 @@ const SwipeView = styled.View`
     align-items: center;
     justify-content: flex-end;
     z-index: 1000;
+    margin-bottom: 16px;
 `
 const Swipe = styled.View`
     height: 5px;

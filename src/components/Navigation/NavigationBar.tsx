@@ -9,24 +9,27 @@ import { Color } from '../../constants';
 
 const MainView = styled(Animated.View)<{backgroundColor?: string}>`
     width: 100%;
-    justify-content: flex-end;
-    padding-top: 18px;
+    flex-diretion: row;
     background-color: ${props => props.backgroundColor ? props.backgroundColor : Color.background.neutral};
     border-bottom-width: 1px;
 `
 const RightHeader = styled.View`
     position: absolute;
-    right: 16px;
-    top: 8px;
+    right: 0;
+    top: 0;
+    height: 56px;
+    width: 56px;
     align-items: center;
+    justify-content: center;
 `
 const TextContainer = styled(Animated.View)`
-    padding-right: 16px;
+    flex: 1;
+    justify-content: flex-end;
 `
 
 const NavigationBar: FC<Props> = props => {
 
-    const showBackButton = (!props.hideBackButton && props.navigation && props.navigation.canGoBack()) ? true : false
+    const showBackButton = (!props.hideBackButton && props.navigation && props.navigation.canGoBack()) ? true : false;
 
     const MIN_HEADER_HEIGHT = 56;
     const MAX_HEADER_HEIGHT = (props.title && props.subtitle) ? 120 : ((!props.subtitle && !props.title) ? 56 : 100);
@@ -37,16 +40,18 @@ const NavigationBar: FC<Props> = props => {
         extrapolate: 'clamp'
     }) : MAX_HEADER_HEIGHT;
 
+    // Title margin left
     const MIN_TITLE_LEFT = 16;
-    const MAX_TITLE_LEFT = showBackButton ? 48 : 16;
+    const MAX_TITLE_LEFT = showBackButton ? 56 : 16;
 
-    const titleLeft = props.animatedValue ? props.animatedValue.interpolate({
+    const titleSides = props.animatedValue ? props.animatedValue.interpolate({
         inputRange: [0, MAX_HEADER_HEIGHT],
         outputRange: [MIN_TITLE_LEFT, MAX_TITLE_LEFT],
         extrapolate: 'clamp'
     }) : MIN_TITLE_LEFT;
 
-    const MIN_TITLE_BOTTOM = 8;
+    // Title margin bottom
+    const MIN_TITLE_BOTTOM = 0;
     const MAX_TITLE_BOTTOM = (props.title && props.subtitle) ? 8 : 8;
 
     const titleBottom = props.animatedValue ? props.animatedValue.interpolate({
@@ -55,8 +60,9 @@ const NavigationBar: FC<Props> = props => {
         extrapolate: 'clamp'
     }) : MIN_TITLE_BOTTOM;
 
+    // Title Font
     const MIN_TITLE_FONT = 18;
-    const MAX_TITLE_FONT = 28;
+    const MAX_TITLE_FONT = 32;
 
     const titleFont = props.animatedValue ? props.animatedValue.interpolate({
         inputRange: [0, MAX_HEADER_HEIGHT],
@@ -64,15 +70,7 @@ const NavigationBar: FC<Props> = props => {
         extrapolate: 'clamp'
     }) : MAX_TITLE_FONT;
 
-    const MIN_SUBTITLE_FONT = 14;
-    const MAX_SUBTITLE_FONT = 20;
-
-    const subtitleFont = props.animatedValue ? props.animatedValue.interpolate({
-        inputRange: [0, MAX_HEADER_HEIGHT],
-        outputRange: [MAX_SUBTITLE_FONT, MIN_SUBTITLE_FONT],
-        extrapolate: 'clamp'
-    }) : MAX_SUBTITLE_FONT;
-
+    // Bread crumb
     const MIN_BREADCRUMB_OPACITY = 0;
     const MAX_BREADCRUMB_OPACITY = 1;
 
@@ -82,6 +80,7 @@ const NavigationBar: FC<Props> = props => {
         extrapolate: 'clamp'
     }) : MAX_BREADCRUMB_OPACITY;
 
+    // Border color
     const MIN_BORDER_OPACITY = 'rgba(224, 224, 224, 0)';
     const MAX_BORDER_OPACITY = 'rgba(224, 224, 224, 1)';
 
@@ -99,6 +98,7 @@ const NavigationBar: FC<Props> = props => {
             {showBackButton &&
                 <ButtonImage
                     style={{
+                        position: 'absolute',
                         height: 56,
                         width: 56,
                         zIndex: 1000,
@@ -112,8 +112,8 @@ const NavigationBar: FC<Props> = props => {
             }
             <TextContainer
                 style={{
-                    left: titleLeft,
-                    right: titleLeft,
+                    left: titleSides,
+                    right: titleSides,
                     bottom: titleBottom
                 }}
             >
@@ -125,7 +125,7 @@ const NavigationBar: FC<Props> = props => {
                         lineBreakMode={'tail'}
                         style={{
                             fontSize: titleFont,
-                            marginRight: 32
+                            marginRight: 16
                         }}
                     >
                         {props.title}

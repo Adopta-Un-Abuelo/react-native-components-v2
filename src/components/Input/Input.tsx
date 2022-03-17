@@ -21,7 +21,7 @@ const InputStyled = styled.TextInput<{isFocused: boolean | undefined, hasValue: 
     height: 100%;
     padding: 0px;
     color: ${Color.text.primaryBlack};
-    margin-top: ${props => ((props.isFocused || props.hasValue) && !props.hideTitle) ? '18px' : '16px'};
+    margin-top: ${props => ((props.isFocused || props.hasValue) && !props.hideTitle) ? '18px' : '0px'};
 `
 const IconView = styled.View`
     height: 24px;

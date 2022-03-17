@@ -114,8 +114,7 @@ const PaymentMethodSelect = forwardRef((props: Props, ref: Ref<SelectPaymentMeth
         if(method){
             setMethodSelected(method)
             props.onChange && props.onChange(method);
-        }
-        else{
+        } else{
             // Set payment if user have default card
             if(props.paymentMethods){
                 props.paymentMethods?.map(item =>{
@@ -154,11 +153,10 @@ const PaymentMethodSelect = forwardRef((props: Props, ref: Ref<SelectPaymentMeth
                 objectId: option.objectId, 
                 title: creditCardHidde+option.last4,
                 date: parseDate(option.expDate),
-                icon: PaycardLogos[option.brand.toLowerCase()].icon,
+                icon: option.icon ? option.icon : PaycardLogos[option.brand.toLowerCase()].icon,
                 paymentMethod: undefined
             });
         }
-        
         // Close select modal
         setShowSelectModal(false);
         props.onChange && props.onChange(option);
@@ -177,13 +175,12 @@ const PaymentMethodSelect = forwardRef((props: Props, ref: Ref<SelectPaymentMeth
                 }
                 setMethodSelected(method);
                 props.onChange && props.onChange(method);
-            }
-            else if(result.type === "sepa_debit"){
+            } else if(result.type === "sepa_debit"){
                 const method = {
                     objectId: 'newCard',
                     title: result.data.iban,
                     date: undefined,
-                    icon: PaycardLogos["sepa_debit"].icon,
+                    icon: PaycardLogos["Cuenta bancaria"].icon,
                     paymentMethod: result.data
                 }
                 setMethodSelected(method);

@@ -25,6 +25,7 @@ const RightHeader = styled.View`
 const TextContainer = styled(Animated.View)`
     flex: 1;
     justify-content: flex-end;
+    margin-right: 16px;
 `
 
 const NavigationBar: FC<Props> = props => {

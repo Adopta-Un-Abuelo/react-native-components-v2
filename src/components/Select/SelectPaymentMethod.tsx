@@ -214,7 +214,7 @@ const PaymentMethodSelect = forwardRef((props: Props, ref: Ref<SelectPaymentMeth
                                 key={'paymentMethod'+index}
                                 onPress={() => onOptionSelected(item)}
                             >
-                                <Paycard height={21} width={32}/>
+                                <Paycard height={32} width={32}/>
                                 <CellTextView
                                     show={true}
                                 >
@@ -241,7 +241,7 @@ const PaymentMethodSelect = forwardRef((props: Props, ref: Ref<SelectPaymentMeth
                             key={'paymentOption'+index}
                             onPress={() => onOptionSelected(item)}
                         >
-                            <item.icon height={21} width={32} color={item.objectId === 'new' ? Color.text.primary : undefined} fill={item.objectId === 'new' ? Color.text.primary : undefined}/>
+                            <item.icon height={32} width={32} color={item.objectId === 'new' ? Color.text.primary : undefined} fill={item.objectId === 'new' ? Color.text.primary : undefined}/>
                             <CellTextView
                                 show={item.objectId !== 'new'}
                             >

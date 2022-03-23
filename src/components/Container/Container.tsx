@@ -2,15 +2,16 @@ import React, { FC } from 'react';
 import styled from 'styled-components/native';
 import { Keyboard } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-
 import KeyboardAvoidingView from './KeyboardAvoidingView';
 import ButtonBottom from '../Button/ButtonBottom';
 import Button from '../Button/Button';
 import NavigationBar from '../Navigation/NavigationBar';
+import { Color } from '../../constants';
 
 const TouchableWithoutFeedback = styled.TouchableWithoutFeedback`
 `
-const SafeView = styled(SafeAreaView)`
+const SafeView = styled(SafeAreaView)<{color?: string}>`
+    background-color: ${props => props.color ? props.color : Color.background.neutral};
     flex: 1;
 `
 const ViewContainer = styled.View`
@@ -21,9 +22,12 @@ const Container: FC<Props> = props =>{
     return(
         <SafeView
             style={props.style}
+            color={props.color}
             edges={props.edges ? props.edges : (haveCustomHeader ? ["bottom", "left", "right"] : ["bottom", "left", "right", "top"])}
         >
-            <KeyboardAvoidingView>
+            <KeyboardAvoidingView
+                color={props.color}
+            >
                 <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
                     <ViewContainer>
                         {props.navbarProps && (props.navbarProps.Header ?
@@ -36,7 +40,6 @@ const Container: FC<Props> = props =>{
                         {props.children}
                         {props.buttonProps &&
                             <ButtonBottom
-                                size={props.buttonSize}
                                 {...props.buttonProps}
                             />
                         }
@@ -68,18 +71,20 @@ export interface Props{
         navigation: any,
         noHeader?: boolean,
         backButtonStyle?: any,
-        Header?: any
+        Header?: any,
+        backgroundColor?: string
     }
     title?: string,
     subtitle?: string,
-    buttonSize?: 'big' | 'small' 
     style?: Object,
+    color?: string,
     contentStyle?: Object,
     buttonProps?: {
         title: string,
         onPress: any,
         loading?: boolean,
-        [key: string]: any
+        [key: string]: any,
+        size?: 'big' | 'small' 
     },
     secondButtonProps?: {
         title: string,

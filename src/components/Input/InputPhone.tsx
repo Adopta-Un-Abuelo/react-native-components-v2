@@ -1,6 +1,5 @@
-import React, { FC, useState, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import { TextInput } from 'react-native';
-
 import SelectCountry from '../Select/SelectCountry';
 import Input from '../Input/Input';
 
@@ -24,15 +23,18 @@ const PhoneInput = (props: Props) =>{
 
     return(
         <Input
-            id = "phoneInput"
+            id="phoneInput"
             {...props}
             placeholder={props.translation ? props.translation?.input_phone_phone : 'Teléfono'}
             autoComplete={'tel'}
             keyboardType={'number-pad'}
             error={props.error}
             ref={input}
+            style={props.style}
+            hideTitle={true}
         >
             <SelectCountry
+                style={{height: '100%'}}
                 translation={props.translation}
                 countries={props.countries}
                 locale={props.locale}
@@ -66,5 +68,6 @@ export interface Props{
     value?: string,
     error?: boolean,
     onCountryChange?: Function,
-    onChangeText?: Function
+    onChangeText?: Function,
+    style?: Object
 }

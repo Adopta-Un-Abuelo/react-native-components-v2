@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { ViewStyle } from 'react-native';
-import { Menu } from 'react-native-feather';
-
+import { Menu } from 'react-native-lucide';
 import ButtonImage from '../Button/ButtonImage';
 import SelectionModal from '../Modal/SelectionModal';
 
@@ -19,16 +18,18 @@ const MenuList = (props: Props) =>{
 
     return(
         <>
-        <ButtonImage
-            icon={Menu}
-            style={props.style}
-            onPress={onButtonPress}
-            height={24}
-            width={24}
-        />
+        {props.icon ?
+            <props.icon onPress={onButtonPress}/>
+        :
+            <ButtonImage
+                icon={Menu}
+                style={props.style}
+                onPress={onButtonPress}
+            />
+        }
         <SelectionModal
             visible={showModal}
-            horientation={'bottom'}
+            orientation={'bottom'}
             onDismiss={onModalDismiss}
             options={props.options}
             onPress={props.onPress}
@@ -38,6 +39,7 @@ const MenuList = (props: Props) =>{
 }
 export default MenuList;
 export interface Props{
+    icon?: any,
     style?: ViewStyle,
     options: Array<{
         id: string,

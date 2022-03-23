@@ -1,19 +1,18 @@
-import React, { FC, useState, useEffect, forwardRef, useImperativeHandle, useRef, Ref } from 'react';
+import React, { useState, useEffect, forwardRef, useImperativeHandle, useRef, Ref } from 'react';
 import styled from 'styled-components/native';
 import { TextInput, ViewStyle } from 'react-native';
-
 import Color from '../../constants/Color';
 import Text from '../Text/Text';
 
-const Container = styled.View<{error?: boolean, isFocused: boolean | undefined}>`
-    height: 64px;
-    border-color: ${props => props.error ? Color.error : (props.isFocused ? Color.gray3 : 'transparent')};
-    border-width: 1px;
-    border-radius: 24px;
+const Container = styled.View<{error?: boolean, isFocused: boolean | undefined, type?: string}>`
+    height: ${props => props.type === 'small' ? '48px' : '56px'};
+    border-color: ${props => props.error ? Color.status.color.error : props.isFocused ? Color.line.primarySoft : Color.line.soft};
+    border-width: ${props => props.type === 'small' ? '0px' : (props.error || props.isFocused ? '2px' : '1px')};
+    border-radius: 12px;
     align-items: center;
     flex-direction: row;
-    padding: 0px 24px;
-    background-color: ${props => props.isFocused ? 'white' : Color.gray6};
+    padding: 0px 16px;
+    background-color: ${props => props.type === 'small' ? Color.background.soft : Color.background.neutral};
 `
 const InputStyled = styled.TextInput<{isFocused: boolean | undefined, hasValue: boolean, hideTitle?: boolean}>`
     flex: 1;
@@ -21,8 +20,8 @@ const InputStyled = styled.TextInput<{isFocused: boolean | undefined, hasValue: 
     font-family: 'Poppins-Regular';
     height: 100%;
     padding: 0px;
-    color: ${Color.gray2};
-    margin-top: ${props => ((props.isFocused || props.hasValue) && !props.hideTitle) ? 18+'px' : 0+'px'};
+    color: ${Color.text.primaryBlack};
+    margin-top: ${props => ((props.isFocused || props.hasValue) && !props.hideTitle) ? '18px' : '0px'};
 `
 const IconView = styled.View`
     height: 24px;
@@ -33,7 +32,7 @@ const InputView = styled.View`
     flex: 1;
 `
 
-const Input = forwardRef((props: Props, ref: Ref<InputRef>) =>{
+const InputComponent = forwardRef((props: Props, ref: Ref<InputRef>) =>{
 
     const input = useRef<TextInput>();
     const [ isFocused, setIsFocused ] = useState<boolean>(false);
@@ -77,17 +76,19 @@ const Input = forwardRef((props: Props, ref: Ref<InputRef>) =>{
             style={style}
             error={props.error}
             isFocused={isFocused}
+            type={props.type}
         >
             {props.icon &&
                 <IconView>
-                    <props.icon stroke={props.error ? Color.error : Color.blue3}/>
+                    <props.icon color={props.error ? Color.status.color.error : Color.text.primaryBlack}/>
                 </IconView>
             }
             {children}
             <InputView>
                 {((!currentPlaceholder || value) && !props.hideTitle) &&
                     <Text
-                        style={{position: 'absolute', top: 10, fontSize: 14, color: Color.gray4}}
+                        type='c1'
+                        style={{position: 'absolute', top: 8, color: Color.text.high}}
                     >
                         {props.placeholder}
                     </Text>
@@ -95,23 +96,25 @@ const Input = forwardRef((props: Props, ref: Ref<InputRef>) =>{
                 <InputStyled
                     ref={input}
                     caretHidden={true}
-                    selectionColor={Color.blue3}
+                    selectionColor={Color.text.primary}
                     onFocus={onFocus}
                     onBlur={onBlur}
                     placeholder={currentPlaceholder}
                     onChangeText={onChangeText}
                     isFocused={isFocused}
                     hasValue={value ? true : false}
-                    placeholderTextColor={Color.gray4}
+                    placeholderTextColor={Color.text.high}
                     maxLength={props.maxLength}
                     keyboardType={props.keyboardType}
+                    textAlignVertical={props.alignVertical ? 'top' : 'auto'}
+                    multiline={props.multiline}
                     {...rest}
                 />
             </InputView>
         </Container>
     )
 });
-export default Input;
+export default InputComponent;
 export interface Props{
     id?: string,
     ref?: any,
@@ -132,7 +135,10 @@ export interface Props{
     autoCorrent?: boolean
     children?: any,
     hideTitle?: boolean,
-    returnKeyType?: 'done' | 'go' | 'next' | 'search' | 'send'
+    returnKeyType?: 'done' | 'go' | 'next' | 'search' | 'send',
+    type?: 'small' | 'big',
+    multiline?: boolean,
+    alignVertical?: boolean
 }
 export interface InputRef{
     focus: () => void,

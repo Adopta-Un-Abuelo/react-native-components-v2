@@ -1,24 +1,24 @@
 import React from 'react';
 import styled from 'styled-components/native';
-
 import Color from '../../constants/Color';
 
-const Input = styled.TextInput`
-    background-color: ${Color.gray6};
-    height: 169px;
-    border-radius: 24px;
-    padding: 24px 16px;
+const Input = styled.TextInput<{error?: boolean, isFocused: boolean | undefined}>`
+    border-color: ${props => props.error ? Color.status.color.error : props.isFocused ? Color.line.primarySoft : Color.line.soft};
+    border-width: ${props => props.error || props.isFocused ? '2px' : '1px'};
+    border-radius: 12px;
+    color: ${Color.text.full};
+    min-height: 169px;
+    padding: 16px;
     font-family: 'Poppins-Regular';
-    color: ${Color.gray2};
+    font-size: 15px;
+    line-height: 22px;
     justify-content: flex-start;
     align-items: flex-start;
 `
 
 const TextInputStyled = props =>{
-
     return(
         <Input
-            selectionColor={Color.blue3}
             textAlignVertical={'top'}
             multiline={true}
             {...props}

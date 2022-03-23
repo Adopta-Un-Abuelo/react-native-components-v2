@@ -1,8 +1,7 @@
 import React, { FC, useState } from 'react';
 import styled from 'styled-components/native';
 import { ViewStyle } from 'react-native';
-
-import { Heart } from 'react-native-feather';
+import { Heart } from 'react-native-lucide';
 import ButtonImage from '../Button/ButtonImage';
 import Color from '../../constants/Color'
 
@@ -24,43 +23,27 @@ const Review: FC<Props> = props =>{
             style={props.style}
         >
             <ButtonImage
-                icon={Heart}
-                height={40}
-                width={40}
-                color={selection >= 1 ? Color.blue3 : Color.gray3}
-                fill={selection >= 1 ? Color.blue3 : 'transparent'}
+                style={{marginRight: 14}}
+                Icon={<Heart strokeWidth={1} height={40} width={40} color={selection >= 1 ? Color.text.primary : Color.line.primarySoft} fill={selection >= 1 ? Color.text.primary : undefined}/>}
                 onPress={() => onButtonPress(1)}
             />
             <ButtonImage
-                icon={Heart}
-                height={40}
-                width={40}
-                color={selection >= 2 ? Color.blue3 : Color.gray3}
-                fill={selection >= 2 ? Color.blue3 : 'transparent'}
+                style={{marginRight: 14}}
+                Icon={<Heart strokeWidth={1} height={40} width={40} color={selection >= 2 ? Color.text.primary : Color.line.primarySoft} fill={selection >= 2 ? Color.text.primary : undefined}/>}
                 onPress={() => onButtonPress(2)}
             />
             <ButtonImage
-                icon={Heart}
-                height={40}
-                width={40}
-                color={selection >= 3 ? Color.blue3 : Color.gray3}
-                fill={selection >= 3 ? Color.blue3 : 'transparent'}
+                style={{marginRight: 14}}
+                Icon={<Heart strokeWidth={1} height={40} width={40} color={selection >= 3 ? Color.text.primary : Color.line.primarySoft} fill={selection >= 3 ? Color.text.primary : undefined}/>}
                 onPress={() => onButtonPress(3)}
             />
             <ButtonImage
-                icon={Heart}
-                height={40}
-                width={40}
-                color={selection >= 4 ? Color.blue3 : Color.gray3}
-                fill={selection >= 4 ? Color.blue3 : 'transparent'}
+                style={{marginRight: 14}}
+                Icon={<Heart strokeWidth={1} height={40} width={40} color={selection >= 4 ? Color.text.primary : Color.line.primarySoft} fill={selection >= 4 ? Color.text.primary : undefined}/>}
                 onPress={() => onButtonPress(4)}
             />
             <ButtonImage
-                icon={Heart}
-                height={40}
-                width={40}
-                color={selection >= 5 ? Color.blue3 : Color.gray3}
-                fill={selection >= 5 ? Color.blue3 : 'transparent'}
+                Icon={<Heart strokeWidth={1} height={40} width={40} color={selection >= 5 ? Color.text.primary : Color.line.primarySoft} fill={selection >= 5 ? Color.text.primary : undefined}/>}
                 onPress={() => onButtonPress(5)}
             />
         </Container>

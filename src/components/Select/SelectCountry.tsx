@@ -1,31 +1,26 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components/native';
-import { TextStyle } from 'react-native';
-
-import { ChevronDown } from 'react-native-feather';
+import { TextStyle, ViewStyle } from 'react-native';
+import { ChevronDown } from 'react-native-lucide';
 import Color from '../../constants/Color';
 import Text from '../Text/Text';
 import SelectCountryModal from '../Modal/SelectCountryModal';
 
 const Container = styled.View`
+    justify-content: center;
 `
 const SelectStyled = styled.Pressable`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  border: 1px solid ${Color.gray6};
-  padding: 8px 16px;
-  border-radius: 4px;
-  background-color: white;
-`
-const Arrow = styled.View`
-  height: 24px;
-  width: 24px;
+    display: flex;
+    flex-direction: row;
 `
 const Icon = styled.View`
-  height: 24px;
-  width: 24px;
-  margin-right: 8px;
+    height: 24px;
+    width: 24px;
+`
+const Arrow = styled.View`
+    height: 7px;
+    width: 12px;
+    margin-left: 4px;
 `
 
 const SelectCountry = (props: Props) =>{
@@ -57,10 +52,10 @@ const SelectCountry = (props: Props) =>{
 
     return(
         <Container
-            style={{marginRight: 8}}
+            style={{marginRight: 8, ...props.style}}
         >
             <SelectStyled
-                style={{borderWidth: 0, paddingTop: 0, paddingBottom: 0, paddingRight: 0, paddingLeft: 0, backgroundColor: 'transparent'}}
+                style={{borderWidth: 0}}
                 onPress={onSelectClick}
             >
                 {selectedCountry && selectedCountry.icon &&
@@ -68,19 +63,21 @@ const SelectCountry = (props: Props) =>{
                         <selectedCountry.icon/>
                     </Icon>
                 }
+                <Arrow>
+                    <ChevronDown color={Color.text.high}/>
+                </Arrow>
                 <Text
-                    style={{marginRight: 4, ...props.textStyle}}
+                    type='p1'
+                    weight='medium'
+                    style={{...props.textStyle, marginLeft: 16}}
                 >
                     {props.title ? props.title : selectedCountry.prefix}
                 </Text>
-                <Arrow>
-                    <ChevronDown stroke={Color.blue3}/>
-                </Arrow>
             </SelectStyled>
             <SelectCountryModal
                 translation={props.translation}
                 {...props.modalProps}
-                orientation={'bottom'}
+                orientation={'fullScreen'}
                 visible={showMenu}
                 countries={props.countries}
                 locale={props.locale}
@@ -96,6 +93,7 @@ export interface Props{
         [key: string]: any
     },
     textStyle?: TextStyle,
+    style?: ViewStyle,
     selectedCountry?: {
         [key: string]: any
     },

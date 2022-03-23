@@ -1,8 +1,7 @@
 import React, { FC, useEffect, useState } from 'react';
 import styled from 'styled-components/native';
 import Fuse from 'fuse.js'
-
-import { Search } from 'react-native-feather';
+import { Search } from 'react-native-lucide';
 import Modal from './Modal';
 import Text from '../Text/Text';
 import Color from '../../constants/Color';
@@ -15,7 +14,7 @@ const Cell = styled.Pressable`
     margin-right: -24px;
     padding: 16px 24px;
     border-bottom-width: 0.5px;
-    border-bottom-color: ${Color.gray5};
+    border-bottom-color: ${Color.line.soft};
 `
 const Scroll = styled.ScrollView`
 `
@@ -76,8 +75,10 @@ const SelectionModal: FC<Props> = props =>{
     return(
         <Modal
             visible={visible}
+            orientation={props.orientation}
+            showTopClose={false}
+            showBottomClose={true}
             title={props.title}
-            horientation={props.horientation}
             avoidKeyboard={true}
             onDismiss={onDismiss}
             onModalHide={onModalHide}
@@ -100,7 +101,7 @@ const SelectionModal: FC<Props> = props =>{
                         onPress={() => onPress(item)}
                     >
                         {item.icon &&
-                            <item.icon height={24} width={24} stroke={Color.blue3}/>
+                            <item.icon height={24} width={24}/>
                         }
                         {item.Icon &&
                             <Icon>
@@ -108,6 +109,7 @@ const SelectionModal: FC<Props> = props =>{
                             </Icon>
                         } 
                         <Text
+                            type='p1'
                             style={{marginLeft: (item.Icon || item.icon) ? 12 : 0}}
                         >
                             {item.title}
@@ -123,7 +125,7 @@ export interface Props{
     onPress?: Function,
     onDismiss?: Function,
     visible: boolean,
-    horientation?: 'top' | 'bottom' | 'center' | 'fullScreen',
+    orientation?: 'top' | 'bottom' | 'center' | 'fullScreen',
     title?: string,
     options: Array<{
         id: string,

@@ -1,23 +1,20 @@
 import React, { FC } from 'react';
 import styled from 'styled-components/native';
-import { TextProps, Animated, TextStyle } from 'react-native';
-
+import { TextProps, Animated } from 'react-native';
 import Color from '../../constants/Color';
 
-const TextStyled = styled(Animated.Text)<{weight?: string, fontStyle?: string}>`
-    font-size: 16px;
+const TextStyled = styled(Animated.Text)<{type?: string}>`
+    font-size: ${props => props.type  === 'h2' ? '28px' : '16px'};
     font-family: ${props => 
-        props.weight === 'bold' ? 'Poppins-Bold' : 
-        props.weight === 'semibold' ? 'Poppins-SemiBold' : 
-        props.weight === 'medium' ? 'Poppins-Medium' : 
-        props.fontStyle === 'italic' ? 'Poppins-Italic' :
+        props.type === 'h2' ? 'Poppins-Bold' : 
         'Poppins-Regular'
     };
-    color: ${Color.gray3};
+    color: ${Color.text.full};
+    line-height: 36px;
+    ...props.style
 `
 
 const Text: FC<Props> = props =>{
-
     return(
         <TextStyled
             {...props}
@@ -28,7 +25,6 @@ const Text: FC<Props> = props =>{
 }
 export default Text;
 export interface Props extends TextProps{
-    weight?: 'bold' | 'regular' | 'semibold' | 'medium',
-    fontStyle?: 'italic',
     style?: Object
+    type: 'h2' | 'other'
 }

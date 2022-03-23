@@ -1,7 +1,6 @@
 import React, { FC, useState, useEffect } from 'react';
 import styled from 'styled-components/native';
 import { ViewStyle, TextStyle } from 'react-native';
-
 import Text from '../Text/Text';
 import Color from '../../constants/Color';
 
@@ -11,14 +10,16 @@ const Container = styled.View`
 `
 const Cell = styled.Pressable<{selected?: boolean, backgroundColor?: string, disabled?: boolean}>`
     flex-direction: row;
-    padding: 8px 18px;
-    margin-right: 12px;
-    border-radius: 20px;
-    margin-bottom: 12px;
+    padding: 5px 12px;
+    margin-right: 4px;
+    border-radius: 1000px;
+    margin-bottom: 8px;
     justify-content: center;
     align-items: center;
-    background-color: ${props => props.backgroundColor ? (props.selected ? props.backgroundColor : props.backgroundColor+'10') : (props.selected ? Color.blue3 : Color.gray6)};
-    opacity: ${props => props.disabled ? 0.6 : 1.0};
+    border-width: ${props => props.backgroundColor ? '0px' : props.selected ? '2px' : '1px'};
+    border-color: ${props => props.selected ? Color.line.primary : Color.line.primarySoft};
+    background-color: ${props => props.backgroundColor ? props.backgroundColor : props.selected ? Color.status.primary.softDefault : Color.background.neutral};
+    opacity: ${props => props.disabled ? 0.48 : 1};
 `
 const Column = styled.View`
     flex-direction: column;
@@ -27,13 +28,8 @@ const Column = styled.View`
 const TagSelect: FC<Props> = props =>{
 
     const [ selectedItems, setSelectedItems ] = useState<Array<{id: string, title?: string, en?: string}>>([]);
-    const [ colorsArray, setColorsArray ] = useState<Array<string>>();
 
     useEffect(() =>{
-        if(props.colors && props.colors.length > 0){
-            const arrayLength = +(props.options.length/props.colors.length).toFixed(0);
-            setColorsArray([].concat(...Array(arrayLength).fill(props.colors)));
-        }
         if(props.defaultSelection) {
             const temp = props.defaultSelection.map(item =>({
                 id: item
@@ -73,7 +69,6 @@ const TagSelect: FC<Props> = props =>{
         >
             {props.options.map((item, index)=>{
                 const selected= selectedItems.some(obj => obj.id === item.id);
-                const color = item.color ? item.color : (colorsArray && colorsArray.length > 0 ? colorsArray[index] : Color.blue3);
                 const disabled = props.disabledOptions ? props.disabledOptions.some(i => i.id === item.id) : false;
                 return(
                     <Cell
@@ -87,20 +82,22 @@ const TagSelect: FC<Props> = props =>{
                         {item.icon ?
                             item.icon
                         : props.icon &&
-                            <props.icon height={18} width={18} stroke={selected ? 'white' : color}/>
+                            <props.icon height={18} width={18} color={selected ? Color.text.primary : Color.text.high}/>
                         }
                         <Column
                             style={{marginLeft: (props.icon || item.icon) ? 8 : 0}}
                         >
                             <Text
-                                style={{color: disabled ? Color.gray3 : (selected ? 'white' : color), fontFamily: 'Poppins-Medium', ...props.textStyle}}
-                                weight={'semibold'}
+                                type='p2'
+                                weight='medium'
+                                style={{color: item.color ? item.color : disabled ? Color.text.high : (selected ? Color.text.primary : Color.text.high), ...props.textStyle}}
                             >
                                 {props.locale === 'en' ? item.en : item.title}
                             </Text>
                             {item.subtitle &&
                                 <Text
-                                    style={{color: selected ? 'white' : Color.gray3, fontSize: 12}}
+                                    type='p1'
+                                    style={{color: selected ? Color.text.white : Color.text.medium}}
                                 >
                                     {item.subtitle}
                                 </Text>
@@ -136,7 +133,6 @@ export interface Props{
     }>,
     locale?: string,
     icon?: any,
-    colors?: Array<string>,
     disabled?: boolean,
     singleSelection?: boolean,
     onPress?: Function,

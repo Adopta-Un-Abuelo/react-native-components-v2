@@ -3,66 +3,69 @@ import styled from 'styled-components/native';
 import { ViewStyle } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Modal from "react-native-modal";
-
-import { X, ArrowLeft } from 'react-native-feather';
-import Title from '../Text/Title';
+import { X, ArrowLeft } from 'react-native-lucide';
 import Text from '../Text/Text';
 import Button from '../Button/Button';
-import ButtonImage from '../Button/ButtonImage';
 import { Color } from '../../constants';
 
-const ModalView = styled(SafeAreaView)<{horientation?: 'top' | 'bottom' | 'center' | 'fullScreen', swipeToClose?: boolean}>`
-    background-color: white;
-    border-radius: 8px;
-    border-top-left-radius: ${props => (props.horientation === 'bottom' || props.horientation === 'fullScreen') ? '32px' : '8px'};
-    border-top-right-radius: ${props => (props.horientation === 'bottom' || props.horientation === 'fullScreen') ? '32px' : '8px'};
-    border-bottom-left-radius: ${props => (props.horientation === 'bottom' || props.horientation === 'fullScreen') ? '0px' : '8px'};
-    border-bottom-right-radius: ${props => (props.horientation === 'bottom' || props.horientation === 'fullScreen') ? '0px' : '8px'};
-    padding: 24px;
-    padding-bottom: ${props => props.horientation === 'bottom' ? '0px' : '12px'};
-    padding-top: ${props => props.swipeToClose ? '0px' : (props.horientation === 'top' ? '48px' : '24px')};
+const ModalView = styled(SafeAreaView)<{orientation?: 'top' | 'bottom' | 'center' | 'fullScreen', swipeToClose?: boolean, noPadding?: boolean}>`
+    height: ${props => props.orientation === 'fullScreen' ? '95%' : 'auto'};
+    max-height: ${props => (props.orientation === 'bottom' || props.orientation === 'top') ? '80%' : (props.orientation === 'fullScreen' ? '90%' : '80%')};
     width: 100%;
-    max-height: ${props => (props.horientation === 'bottom' || props.horientation === 'top') ? '65%' : (props.horientation === 'fullScreen' ? '95%' : '80%')};
-    height: ${props => props.horientation === 'fullScreen' ? '95%' : 'auto'};
     overflow: hidden;
+    border-top-left-radius: ${props => (props.orientation === 'bottom' || props.orientation === 'fullScreen') ? '24px' : '12px'};
+    border-top-right-radius: ${props => (props.orientation === 'bottom' || props.orientation === 'fullScreen') ? '24px' : '12px'};
+    border-bottom-left-radius: ${props => (props.orientation === 'bottom' || props.orientation === 'fullScreen') ? '0px' : '12px'};
+    border-bottom-right-radius: ${props => (props.orientation === 'bottom' || props.orientation === 'fullScreen') ? '0px' : '12px'};
+    padding: ${props => props.noPadding ? '0px' : '0px 16px'};
+    background-color: ${Color.background.neutral};
+`
+const SwipeView = styled.View`
+    height: 15px;
+    align-items: center;
+    justify-content: flex-end;
+    z-index: 1000;
+    margin-bottom: 16px;
+`
+const Swipe = styled.View`
+    height: 5px;
+    width: 48px;
+    border-radius: 100px;
+    background-color: ${Color.background.mediumLow};
+`
+const Header = styled.View`
+    height: 56px;
+    flex-direction: row;
+    align-items: center;
+    margin-top: 8px;
 `
 const CloseButton = styled.Pressable`
     position: absolute;
-    top: 12px;
-    right: 12px;
     height: 40px;
     width: 40px;
-    align-items: center;
     justify-content: center;
-`
-const TitleView = styled.View`
-    padding-bottom: 14px;
-`
-const SafeArea = styled.View`
-    background-color: white;
-`
-const SwipeView = styled.View`
     align-items: center;
-    justify-content: center;
     z-index: 1000;
-    height: 22px;
-    margin-bottom: -22px;
 `
-const Swipe = styled.View`
-    height: 6px;
-    width: 60px;
-    border-radius: 22px;
-    background-color: ${Color.gray5};
+const TitleCenterView = styled.View`
+    flex: 1;
+    align-items: center;
+    justify-content: center;
 `
-const Header = styled.View`
-    flex-direction: row;
-    border-bottom-color: ${Color.gray5};
-    border-bottom-width: 1px;
+const GoBackContainer = styled.View`
+`
+const TitleDownView = styled.View`
+`
+
+const ButtonArea = styled.View`
+    padding-bottom: 12px;
 `
 
 const ModalComponent = (props: Props) =>{
 
     const { buttonProps, secondButtonProps } = props;
+    let swipeToClose = (props.orientation === 'top' || props.orientation === 'bottom');
+
     const onClosePress = () =>{
         props.onDismiss && props.onDismiss();
     }
@@ -73,57 +76,82 @@ const ModalComponent = (props: Props) =>{
     return(
         <Modal
             isVisible={props.visible}
-            onBackdropPress={onClosePress}
-            onSwipeComplete={props.swipeToClose ? onClosePress : undefined}
-            swipeDirection={props.swipeToClose ? "down": undefined}
-            style={props.horientation === 'fullScreen' || props.horientation === 'bottom' ? {
+            swipeDirection={swipeToClose ? "down": undefined}
+            style={props.orientation === 'fullScreen' || props.orientation === 'bottom' ? {
                 justifyContent: 'flex-end',
                 margin: 0
-            } : (props.horientation === 'top' ? {
+            } : (props.orientation === 'top' ? {
                 justifyContent: 'flex-start',
                 margin: 0
             } : {})}
             onModalHide={onModalHide}
+            onBackdropPress={onClosePress}
+            onSwipeComplete={swipeToClose ? onClosePress : undefined}
             avoidKeyboard={props.avoidKeyboard}
         >
             <ModalView
-                horientation={props.horientation}
-                swipeToClose={props.swipeToClose}
+                orientation={props.orientation}
+                swipeToClose={swipeToClose}
                 style={props.style}
+                noPadding={props.noPadding}
             >
-                {props.swipeToClose &&
+                {swipeToClose &&
                     <SwipeView>
                         <Swipe/>
                     </SwipeView>
                 }
-                {(props.title || props.subtitle) &&
-                    <Header>
-                        {props.showBack &&
-                            <ButtonImage
-                                icon={ArrowLeft}
-                                height={24}
-                                width={24}
-                                onPress={() => props.onBackPress && props.onBackPress()}
-                            />
-                        }
-                        <TitleView
-                            style={{marginTop: props.swipeToClose ? 28 : 0}}
-                        >
-                            {props.title &&
-                                <Title
-                                    style={{fontSize: 24}}
+                {props.showTopClose &&
+                    props.canGoBack ?
+                        <GoBackContainer>
+                            <Header>
+                                <CloseButton
+                                    onPress={onClosePress}
+                                    style={{marginTop: props.orientation === 'fullScreen' ? 8 : 0}}
                                 >
-                                    {props.title}
-                                </Title>
+                                    <ArrowLeft color={Color.text.full}/>
+                                </CloseButton>
+                            </Header>
+                            {props.title &&
+                                <TitleDownView>
+                                    <Text
+                                        type='h4'
+                                        weight='semibold'
+                                    >
+                                        {props.title}
+                                    </Text>
+                                    {props.subtitle &&
+                                        <Text
+                                            type='p2'
+                                            style={{color: Color.text.high}}
+                                        >
+                                            {props.subtitle}
+                                        </Text>
+                                    }
+                                </TitleDownView>
                             }
-                            {props.subtitle &&
-                                <Text>{props.subtitle}</Text>
-                            }
-                        </TitleView>
-                    </Header>
+                        </GoBackContainer>
+                        : props.title &&
+                            <Header>
+                                {!props.showBottomClose &&
+                                    <CloseButton
+                                        onPress={onClosePress}
+                                        style={{marginTop: props.orientation === 'fullScreen' ? 8 : 0, marginLeft: props.noPadding ? 0 : -8}}
+                                    >
+                                        <X color={Color.text.full}/>
+                                    </CloseButton>
+                                }
+                                <TitleCenterView>
+                                    <Text
+                                        type='p1'
+                                        weight='medium'
+                                    >
+                                        {props.title}
+                                    </Text>
+                                </TitleCenterView>
+                            </Header>
                 }
                 {props.children}
-                <SafeArea>
+                <ButtonArea>
                     {buttonProps &&
                         <Button
                             {...buttonProps}
@@ -136,23 +164,17 @@ const ModalComponent = (props: Props) =>{
                             style={{marginTop: 12, ...secondButtonProps.style}}
                         />
                     }
-                    {((!props.hideClose && props.horientation !== 'fullScreen') || props.showBottomClose) &&
+                    {props.showBottomClose &&
                         <Button
                             type={'line'}
-                            style={{borderWidth: 0}}
-                            color={Color.gray3}
+                            style={{borderWidth: 0, marginTop: 8}}
+                            color={Color.text.high}
                             title={props.translation ? props.translation.general_btn_cancel : 'Cancelar'}
                             onPress={onClosePress}
                         />
                     }
-                </SafeArea>
-                {(props.horientation === 'fullScreen' && !props.hideClose) &&
-                    <CloseButton
-                        onPress={onClosePress}
-                    >
-                        <X stroke={Color.gray2}/>
-                    </CloseButton>
-                }
+                    {props.ButtonArea}
+                </ButtonArea>
             </ModalView>
         </Modal>
     )
@@ -166,9 +188,9 @@ export interface Props{
     ref?: any,
     title?: string,
     subtitle?: string,
-    hideClose?: boolean,
-    showBack?: boolean,
-    horientation?: 'top' | 'bottom' | 'center' | 'fullScreen',
+    orientation?: 'top' | 'bottom' | 'center' | 'fullScreen',
+    showTopClose?: boolean,
+    canGoBack?: boolean,
     showBottomClose?: boolean,
     buttonProps?: {
         onPress?: any,
@@ -182,11 +204,11 @@ export interface Props{
         style?: ViewStyle,
         [key: string]: any
     }
+    ButtonArea?: any,
     visible: boolean,
     onDismiss: Function,
     onModalHide?: Function,
-    swipeToClose?: boolean,
     avoidKeyboard?: boolean,
-    children?: any ,
-    onBackPress?: Function
+    children?: any,
+    noPadding?: boolean
 }

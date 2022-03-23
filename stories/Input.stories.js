@@ -4,7 +4,7 @@ import { action } from '@storybook/addon-actions';
 import { boolean, text, object, number, select, date } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/react-native';
 import { Input, InputCode, InputDate, InputDatePicker, InputPhone, InputPlace, TextView } from '../src';
-import { Watch } from 'react-native-feather'
+import { Watch } from 'react-native-lucide'
 
 storiesOf('Input', module)
 	.add('Main', () => {

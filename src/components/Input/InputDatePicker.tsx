@@ -1,8 +1,6 @@
-import React, { FC, useState } from 'react';
-import { Calendar } from 'react-native-feather';
+import React, { useState } from 'react';
 import DatePicker from 'react-native-date-picker'
-
-import Input from './InputFalse';
+import InputFalse from './InputFalse';
 import Modal from '../Modal/Modal'
 
 const DateInput = (props: Props) =>{
@@ -30,7 +28,7 @@ const DateInput = (props: Props) =>{
         <>
         <Modal
             visible={showModal}
-            horientation={'bottom'}
+            orientation={'bottom'}
             title={props.translation?.input_date_picker_birthday}
             buttonProps={{
                 title: props.translation?.general_btn_save,
@@ -48,9 +46,8 @@ const DateInput = (props: Props) =>{
                 locale={props.currentLocale}
             />
         </Modal>
-        <Input
+        <InputFalse
             style={props.style}
-            icon={Calendar}
             value={dateInputValue}
             placeholder={props.placeholder}
             onPress={onInputFocus}

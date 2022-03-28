@@ -1,32 +1,40 @@
 import React, { FC, useState, useRef, useEffect, forwardRef, Ref, useImperativeHandle } from 'react';
 import styled from 'styled-components/native';
 import { Keyboard } from 'react-native';
-
-import { ChevronRight, CreditCard, DollarSign } from 'react-native-feather';
+import { CreditCard, Landmark, Lock } from 'react-native-lucide';
 import Modal from './Modal';
 import Text from '../Text/Text';
 import PaymentMethodForm, { PaymentMethodFormRef } from '../Form/PaymentMethodForm';
 import BankMethodForm, { BankMethodFormRef } from '../Form/BankMethodForm';
 import { Color } from '../../constants';
-import PaycardLogos from '../../constants/Paycard';
 
 const Container = styled.View`
     flex: 1;
+    margin-top: 32px;
 `
-const InfoView = styled.View`
+const Cell = styled.Pressable`
+    height: 72px;
     flex-direction: row;
     align-items: center;
 `
-const Separator = styled.View`
+const CellTextView = styled.View`
+    height: 100%;
+    flex: 1;
+    flex-direction: column;
+    justify-content: center;
+    margin: 0px 0px 0px 16px;
+    border-bottom-color: ${Color.line.soft};
     border-bottom-width: 1px;
-    border-bottom-color: ${Color.gray5};
-    margin-bottom: 24px;
 `
-const Cell = styled.Pressable`
+const Row = styled.View`
     flex-direction: row;
-    padding: 18px 0px;
-    border-bottom-width: 1px;
-    border-bottom-color: ${Color.gray4};
+    align-items: center;
+    margin-bottom: 16px;
+`
+const ContainerSecure = styled.View`
+    flex: 1;
+    flex-direction: column;
+    justify-content: flex-end;
 `
 
 const PaymentMethodModal = forwardRef((props: Props, ref: Ref<PaymentMethodModalRef>) =>{
@@ -60,14 +68,14 @@ const PaymentMethodModal = forwardRef((props: Props, ref: Ref<PaymentMethodModal
                     temp.push({
                         id: 'sepa_debit',
                         title: props.translation ? props.translation.form_payment_method_sepa_debit : 'Cuenta bancaria',
-                        icon: <DollarSign height={24} width={24} stroke={Color.gray2}/>
+                        icon: <Landmark height={24} width={24} color={Color.text.full}/>
                     })
                 }
                 else if(item === 'paycard'){
                     temp.push({
                         id: 'card',
                         title: props.translation ? props.translation.general_credit_card_long : 'Tarjeta de crédito o débito',
-                        icon: <CreditCard height={24} width={24} stroke={Color.gray2}/>
+                        icon: <CreditCard height={24} width={24} color={Color.text.full}/>
                     })
                 }
             });
@@ -95,20 +103,19 @@ const PaymentMethodModal = forwardRef((props: Props, ref: Ref<PaymentMethodModal
     }
 
     const onSavePress = async () =>{
-        Keyboard.dismiss();
+        Keyboard.dismiss();        
         if(optionSelected.id === 'card'){
             setLoading(true);
             const result = await paycardForm?.current.generateToken();
-            if(result.status === 'ok'){
+            if(result && result.status === 'ok'){
                 props.onChange && props.onChange(result.result);
                 onDismiss();
             }
             setLoading(false);
-        }
-        else if(optionSelected.id === 'sepa_debit'){
+        } else if(optionSelected.id === 'sepa_debit'){
             setLoading(true);
             const result = await bankForm?.current.generateToken();
-            if(result.status === 'ok'){
+            if(result && result.status === 'ok'){
                 props.onChange && props.onChange(result.result);
                 onDismiss();
             }
@@ -118,20 +125,27 @@ const PaymentMethodModal = forwardRef((props: Props, ref: Ref<PaymentMethodModal
 
     return(
         <Modal
-            title={optionSelected ?
-                (optionSelected.id === 'card' ? (props.translation ? props.translation.payment_method_modal_title : 'Datos de tarjeta') : (props.translation ? props.translation.payment_method_modal_title_bank : 'Datos de cuenta bancaria')) :
-                (props.translation ? props.translation.payment_method_select_add_credit_card : 'Añadir forma de pago')
-            }
+            translation={props.translation}
             visible={visible}
-            horientation={'fullScreen'}
-            onDismiss={onDismiss}
+            orientation={'fullScreen'}
+            showTopClose={true}
+            avoidKeyboard={true}
+            canGoBack={optionSelected !== undefined}
+            showBottomClose={false}
+            title={optionSelected ?
+                (optionSelected.id === 'card' ? 
+                    (props.translation ? props.translation.payment_method_modal_title : 'Datos de tarjeta') : 
+                    (props.translation ? props.translation.payment_method_modal_title_bank : 'Datos de cuenta bancaria')) :
+                    (props.translation ? props.translation.payment_method_select_add_credit_card : 'Añadir método de pago')
+            }
+            subtitle={!optionSelected && (props.translation ? props.translation.payment_method_modal_sub_title : 'Selecciona cómo quieres realizar la aportación')}
             buttonProps={optionSelected && {
                 title: optionSelected.id === 'card' ? (props.translation ? props.translation.payment_method_modal_btn_save_card : 'Guardar tarjeta') : (props.translation ? props.translation.payment_method_modal_btn_save_sepa : 'Guardar cuenta bancaria'),
                 loading: loading,
                 onPress: onSavePress
             }}
-            showBack={optionSelected}
-            onBackPress={onBackPress}
+            onDismiss={optionSelected === undefined ? onDismiss : onBackPress}
+            onModalHide={optionSelected === undefined ? onDismiss : onBackPress}
         >
             {optionSelected ? 
                 <Container>
@@ -140,29 +154,8 @@ const PaymentMethodModal = forwardRef((props: Props, ref: Ref<PaymentMethodModal
                         <PaymentMethodForm
                             ref={paycardForm}
                             translation={props.translation}
-                            style={{marginTop: 24, marginBottom: 24}}
                             currentUser={props.currentUser}
                         />
-                        {error &&
-                            <Text
-                                style={{color: Color.error}}
-                            >
-                                {props.translation ? props.translation.payment_method_modal_error : 'Parece que los datos de tu método de pago no son correctos.'}
-                            </Text>
-                        }
-                        <Separator/>
-                        <InfoView
-                            style={{marginBottom: 18}}
-                        >
-                            <PaycardLogos.visa.icon style={{marginRight: 8}} height={32} width={42}/>
-                            <PaycardLogos.mastercard.icon style={{marginRight: 8}} height={32} width={42}/>
-                            <PaycardLogos.amex.icon style={{marginRight: 12}} height={32} width={42}/>
-                            <Text 
-                                style={{fontSize: 12, color: Color.gray3}}
-                            >
-                                {props.translation ? props.translation.payment_method_modal_more : 'y muchas más...'}
-                            </Text>
-                        </InfoView>
                         </>
                     }
                     {optionSelected.id === 'sepa_debit' &&
@@ -170,24 +163,52 @@ const PaymentMethodModal = forwardRef((props: Props, ref: Ref<PaymentMethodModal
                         <BankMethodForm
                             ref={bankForm}
                             translation={props.translation}
-                            style={{marginTop: 24, marginBottom: 24}}
                             currentUser={props.currentUser}
                         />
                         </>
                     }
+                    {error &&
+                        <Text
+                            type='c1'
+                            style={{color: Color.status.color.error, marginTop: 24}}
+                        >
+                            {props.translation ? props.translation.payment_method_modal_error : 'Parece que los datos de tu método de pago no son correctos.'}
+                        </Text>
+                    }
+                    <ContainerSecure>
+                        <Row style={{alignItems: 'flex-start'}}>
+                            <Lock height={20} width={20} color={Color.text.primary}/>
+                            <Text
+                                type='c1'
+                                style={{color: Color.text.high, flex: 1, marginLeft: 8}}
+                            >
+                                {props.translation ? props.translation.payment_method_modal_secure : 'Tu información de pago se guardará de forma segura. Más información.'}
+                            </Text>
+                        </Row>
+                    </ContainerSecure>
                 </Container>
             :
                 <Container>
-                    {options.map((item, index) =>(
+                    {options.map((item, index) =>(                    
                         <Cell
                             key={'option'+index}
                             onPress={() => onOptionPress(item)}
                         >
                             {item.icon}
-                            <Text style={{flex: 1, marginLeft: 12}}>
-                                {item.title}
-                            </Text>
-                            <ChevronRight height={24} width={24} stroke={Color.gray2}/>
+                            <CellTextView>
+                                <Text
+                                    type='p1'
+                                    weight='medium'
+                                >
+                                    {item.title}
+                                </Text>
+                                <Text
+                                    type='c1'
+                                    style={{color: Color.text.high}}
+                                >
+                                    {item.id === 'card' ? (props.translation ? props.translation.payment_method_modal_card : 'Cargo automático a tu tarjeta') : (props.translation ? props.translation.payment_method_modal_sepa : 'Cargo automático en tu cuenta')}
+                                </Text>
+                            </CellTextView>
                         </Cell>
                     ))}
                 </Container>

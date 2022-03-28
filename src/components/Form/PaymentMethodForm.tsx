@@ -1,7 +1,6 @@
 import React, { forwardRef, useState, Ref, useImperativeHandle } from 'react';
 import styled from 'styled-components/native';
 import { createPaymentMethod, CardField } from '@stripe/stripe-react-native';
-
 import Color from '../../constants/Color';
 
 const Container = styled.View``
@@ -36,8 +35,7 @@ const PaymentMethodForm = forwardRef((props: Props, ref: Ref<PaymentMethodFormRe
                         data: result.paymentMethod
                     }
                 };
-            } 
-            catch(e){
+            } catch(e){
                 console.error(e);
                 return{
                     status: 'error',
@@ -64,17 +62,15 @@ const PaymentMethodForm = forwardRef((props: Props, ref: Ref<PaymentMethodFormRe
                     expiration: props.translation.form_payment_method_date
                 }}
                 cardStyle={{
-                    backgroundColor: isFocus ? '#ffffff' : Color.gray6,
-                    textColor: Color.gray2,
                     fontFamily: 'Poppins-Regular',
-                    borderRadius: 24,
-                    borderWidth: isFocus ? 1 : 0,
-                    borderColor: Color.gray3,
-                    cursorColor: Color.blue3
+                    borderRadius: 12,
+                    borderWidth: isFocus ? 2 : 1,
+                    borderColor: isFocus ? Color.line.primarySoft : Color.line.soft,
+                    cursorColor: Color.text.primary
                 }}
                 style={{
                     width: '100%',
-                    height: 64
+                    height: 56
                 }}
                 onCardChange={onCardChange}
                 onFocus={() =>  setIsFocus(true)}

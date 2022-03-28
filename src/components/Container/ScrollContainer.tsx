@@ -1,15 +1,16 @@
 import React, { FC, useRef } from 'react';
 import { Animated, Keyboard } from 'react-native';
 import styled from 'styled-components/native';
-
 import KeyboardAvoidingView from './KeyboardAvoidingView';
 import ButtonBottom from '../Button/ButtonBottom';
 import NavigationBar from '../Navigation/NavigationBar';
 import Button from '../Button/Button';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { Color } from '../../constants';
 
 const SafeView = styled(SafeAreaView)`
     flex: 1;
+    background-color: ${Color.background.neutral};
 `
 const TouchableWithoutFeedback = styled.TouchableWithoutFeedback`
 `
@@ -19,7 +20,7 @@ const ScrollView = styled(Animated.ScrollView)`
 
 const ScrollContainer: FC<Props> = props =>{
     const offset = useRef(new Animated.Value(0)).current;
-    const { buttonProps, buttonSize, ...restProps } = props;
+    const { buttonProps, ...restProps } = props;
     const haveCustomHeader = props.navbarProps && props.navbarProps.Header;
     return(
         <SafeView 
@@ -57,7 +58,6 @@ const ScrollContainer: FC<Props> = props =>{
                 </TouchableWithoutFeedback>
                 {buttonProps &&
                     <ButtonBottom
-                        size={buttonSize}
                         {...buttonProps}
                     />
                 }
@@ -90,7 +90,6 @@ export interface Props{
         style?: StyleMedia,
         Header?: any
     }
-    buttonSize?: 'big' | 'small' ,
     buttonProps?: any,
     secondButtonProps?: any,
     contentStyle?: any,

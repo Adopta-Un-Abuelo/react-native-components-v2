@@ -1,16 +1,13 @@
 import React, { FC, useState } from 'react';
 import Video from 'react-native-video';
-import { Play, Pause } from 'react-native-feather';
+import { Play, Pause } from 'react-native-lucide';
 import { Dimensions, ActivityIndicator } from 'react-native';
 import styled from 'styled-components/native';
-
 import Button from '../Button/Button';
 import Color from '../../constants/Color';
 import Text from '../Text/Text';
-import Title from '../Text/Title';
 import ButtonImage from '../Button/ButtonImage';
 import Modal from './Modal';
-import Subtitle from '../Text/Subtitle';
 import VideoProgressBar from '../ProgressBar/VideoProgressBar';
 
 const { width } = Dimensions.get('window');
@@ -26,11 +23,10 @@ const ControllersView = styled.View`
     flex-direction: row;
     align-items: center;
 `
-const ContentView = styled.View<{horientation: 'fullScreen' | 'center' | undefined}>`
+const ContentView = styled.View`
     flex: 1;
-    padding: 24px;
+    padding: 0px 16px;
     align-items: center;
-    justify-content: center;
 `
 
 const VideoModal: FC<Props> = props =>{
@@ -60,19 +56,21 @@ const VideoModal: FC<Props> = props =>{
 
     return(
         <Modal
-            style={{paddingLeft: 0, paddingRight: 0, paddingTop: 0, paddingBottom: 0, overflow: 'hidden'}}
+            translation={props.translation}
             visible={props.visible}
-            horientation={props.horientation ? props.horientation : 'fullScreen'}
+            orientation={props.orientation ? props.orientation : 'fullScreen'}
+            showTopClose={false}
+            showBottomClose={false}
+            style={{paddingLeft: 0, paddingRight: 0, paddingTop: 0, paddingBottom: 0, overflow: 'hidden'}}
             onDismiss={onVideoEnd}
-            hideClose={true}
         >
             <Text
+                type='p1'
+                weight='medium'
                 style={{
-                    fontSize: 24,
-                    fontFamily: 'Poppins-Bold',
-                    marginStart: 24,
-                    marginTop: 16,
-                    marginBottom: 4
+                    marginStart: 16,
+                    marginTop: 28,
+                    marginBottom: 16
                 }}
             >
                 {props.titleHeader}
@@ -102,7 +100,7 @@ const VideoModal: FC<Props> = props =>{
                 }
             </VideoContainer>
             <ControllersView
-                style={{paddingTop: 14, paddingStart: 24, paddingEnd: 24, paddingBottom: 14}}
+                style={{paddingTop: 22, paddingStart: 16, paddingEnd: 16, paddingBottom: 24}}
             >
                 <VideoProgressBar
                     style={{flex: 1}}
@@ -110,31 +108,31 @@ const VideoModal: FC<Props> = props =>{
                     maxProgress={videoDuration}
                 />
             </ControllersView>
-            <ContentView
-                horientation={props.horientation}
-            >
-                <Title
-                    style={{textAlign: 'center', fontSize: 24}}
+            <ContentView>
+                <Text
+                    type='h3'
+                    style={{textAlign: 'center'}}
                 >
                     {props.title}
-                </Title>
+                </Text>
                 {props.subtitle &&
-                    <Subtitle
-                        style={{textAlign: 'center'}}
+                    <Text
+                        type='p1'
+                        style={{textAlign: 'center', marginTop: 8}}
                     >
                         {props.subtitle}
-                    </Subtitle>
+                    </Text>
                 }
             </ContentView>
             <ControllersView
-                style={{paddingTop: 0, paddingStart: 24, paddingEnd: 24, paddingBottom: 19}}
+                style={{paddingTop: 12, paddingStart: 16, paddingEnd: 16, paddingBottom: 16}}
             >
                 {!loading && !props.hideControllers &&
                     <ButtonImage
                         style={{alignSelf: 'auto', flex: 1}}
                         icon={paused ? Play : Pause}
                         onPress={onVideoPress}
-                        color={Color.blue3}
+                        color={Color.text.primary}
                     />
                 }
                 {props.skipIn &&
@@ -162,6 +160,6 @@ export interface Props{
     subtitle?: string,
     skipIn?: number,
     onVideoEnd?: Function,
-    horientation?: 'fullScreen' | 'center',
+    orientation?: 'fullScreen' | 'center',
     hideControllers?: boolean
 }

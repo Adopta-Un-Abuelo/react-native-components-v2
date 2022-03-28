@@ -1,15 +1,28 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import { WebView } from 'react-native-webview';
-
 import Modal from './Modal';
 
 const WebModal: FC<Props> = props =>{
 
+    const [ visible, setVisible ] = useState(props.visible);
+    useEffect(() =>{
+        setVisible(props.visible);
+    },[props.visible]);
+
+    const onDismiss = () =>{
+        props.onDismiss && props.onDismiss();
+    }
+
     return(
         <Modal
-            {...props}
-            horientation={'fullScreen'}
-            style={{paddingRight: 0, paddingLeft: 0, paddingTop: 48}}
+            visible={visible}
+            orientation={'fullScreen'}
+            showTopClose={true}
+            title={props.title}
+            showBottomClose={false}
+            onDismiss={onDismiss}
+            onModalHide={onDismiss}
+            noPadding={true}
         >
             <WebView
                 source={{ uri: props.url }}
@@ -19,6 +32,7 @@ const WebModal: FC<Props> = props =>{
 }
 export default WebModal;
 export interface Props{
+    title: string,
     visible: boolean,
     url: string,
     onDismiss: Function

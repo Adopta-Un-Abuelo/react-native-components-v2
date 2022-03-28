@@ -1,24 +1,17 @@
 import React, { FC, forwardRef } from 'react';
 import styled from 'styled-components/native';
 import { ViewStyle } from 'react-native';
-
 import Color from '../../constants/Color';
 import Text from '../Text/Text';
 
 const Container = styled.Pressable<{error?: boolean}>`
-    height: 64px;
-    border-color: ${props => props.error ? Color.error :'transparent'};
-    border-width: 1px;
-    border-radius: 24px;
+    height: 56px;
+    border-color: ${props => props.error ? Color.status.color.error : Color.line.soft};
+    border-width: ${props => props.error ? '2px' : '1px'};
+    border-radius: 12px;
     align-items: center;
     flex-direction: row;
-    padding: 0px 24px;
-    background-color: ${Color.gray6};
-`
-const IconView = styled.View`
-    height: 24px;
-    width: 24px;
-    margin-right: 12px;
+    padding: 0px 16px;
 `
 const InputView = styled.View`
     flex: 1;
@@ -40,22 +33,19 @@ const Input: FC<Props> = forwardRef((props, ref) =>{
             error={props.error}
             onPress={onPress}
         >
-            {props.icon &&
-                <IconView>
-                    <props.icon stroke={props.error ? Color.error : Color.blue3}/>
-                </IconView>
-            }
             {children}
             <InputView>
                 {props.value &&
                     <Text
-                        style={{position: 'absolute', top: 10, fontSize: 14, color: Color.gray4}}
+                        type='c1'
+                        style={{position: 'absolute', top: 8, color: Color.text.high}}
                     >
                         {placeholder}
                     </Text>
                 }
                 <Text
-                    style={{color: props.value ? Color.gray2 : Color.gray4, marginTop: props.value ? 18 : 0}}
+                    type='p1'
+                    style={{color: props.value ? Color.text.full : Color.text.high, marginTop: props.value ? 18 : 0}}
                     numberOfLines={1}
                 >
                     {props.value ? props.value : props.placeholder}
@@ -67,7 +57,6 @@ const Input: FC<Props> = forwardRef((props, ref) =>{
 export default Input;
 export interface Props{
     error?: boolean,
-    icon?: any,
     placeholder?: string,
     ref?: any,
     style?: ViewStyle,

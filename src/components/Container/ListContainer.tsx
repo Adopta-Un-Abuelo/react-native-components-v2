@@ -1,15 +1,16 @@
 import React, { FC, useRef } from 'react';
-import { Animated } from 'react-native';
+import { Animated, FlatListProps } from 'react-native';
 import styled from 'styled-components/native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import ButtonBottom from '../Button/ButtonBottom';
 import NavigationBar from '../Navigation/NavigationBar';
 import List from '../List/List';
+import { Color } from '../../constants';
 
 const SafeView = styled(SafeAreaView)`
     flex: 1;
-    background-color: white;
+    background-color: ${Color.background.neutral};
 `
 
 const ListContainer: FC<Props> = props =>{
@@ -29,11 +30,9 @@ const ListContainer: FC<Props> = props =>{
                 scrollEventThrottle={1}
                 alwaysBounceHorizontal={false}
                 alwaysBounceVertical={false}
-                contentContainerStyle={{paddingLeft: 24, paddingRight: 24, paddingBottom: 48}}
+                contentContainerStyle={{paddingLeft: props.noPadding ? 0 : 16, paddingRight: props.noPadding ? 0 : 16, paddingBottom: 48}}
                 stickyHeaderIndices={props.listProps.stickyHeaderIndices}
                 {...props.listProps}
-                ListHeaderComponent={props.listProps.HeaderComponent}
-                ListEmptyComponent={props.listProps.ListEmptyComponent}
                 onScroll={Animated.event(
                     [{ nativeEvent: { contentOffset: { y: offset } } }],
                     { useNativeDriver: false }
@@ -42,7 +41,6 @@ const ListContainer: FC<Props> = props =>{
             {props.children}
             {props.buttonProps &&
                 <ButtonBottom
-                    size={props.buttonSize}
                     {...props.buttonProps}
                 />
             }
@@ -65,9 +63,9 @@ export interface Props{
         navigation: any,
         noHeader?: boolean
     }
-    listProps?: any,
-    buttonSize?: 'big' | 'small' ,
+    listProps?: FlatListProps<any>,
     buttonProps?: any,
     style?: any,
-    edges?: Array<"top" | "right" | "left" | "bottom">
+    edges?: Array<"top" | "right" | "left" | "bottom">,
+    noPadding?: boolean
 }

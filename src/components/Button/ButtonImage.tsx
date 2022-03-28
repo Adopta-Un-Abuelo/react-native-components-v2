@@ -1,62 +1,40 @@
-import React, { FC } from 'react';
+import React from 'react';
 import { ViewStyle } from 'react-native';
 import styled from 'styled-components/native';
-
 import Color from '../../constants/Color';
-import Text from '../Text/Text';
 
 const Button = styled.Pressable`
-    flex-direction: row;
-    align-items: center;
-    padding: 8px;
-    align-self: flex-start;
-`
-const Icon = styled.Image`
-    height: 32px;
-    width: 32px;
+	justify-content: center;
+	align-items: center;
+    height: 36px;
+    width: 36px;
 `
 
 const ButtonImage = (props: Props) =>{
 
-    const { source, icon, height, width, ...restProps } = props;
+    const { icon, ...restProps } = props;
 
     return(
         <Button
             {...restProps}
             onPress={props.onPress}
         >
-            {source &&
-                <Icon
-                    source={source}
-                />
-            }
             {icon &&
                 <props.icon 
-                    height={height ? height : 32} 
-                    width={width ? width : 32} 
-                    stroke={props.color ? props.color : Color.gray2}
-                    fill={props.fill ? props.fill : 'transparent'}
+                    height={24}
+                    width={24}
+                    color={props.color ? props.color : Color.text.full}
                 />
             }
-            {props.title &&
-                <Text
-                    style={{marginLeft: 8}}
-                >
-                    {props.title}
-                </Text>
-            }
+            {props.Icon && props.Icon}
         </Button>
     )
 }
 export default ButtonImage;
 export interface Props{
-    source?: any,
     icon?: any,
+    Icon?: any,
     onPress: any,
     style?: ViewStyle,
-    height?: number,
-    width?: number,
-    color?: string,
-    fill?: string
-    title?: string
+    color?: string
 }

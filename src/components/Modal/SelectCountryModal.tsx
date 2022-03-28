@@ -1,8 +1,7 @@
 import React, { FC, useEffect, useState } from 'react';
 import styled from 'styled-components/native';
 import Fuse from 'fuse.js'
-
-import { Search } from 'react-native-feather';
+import { Search } from 'react-native-lucide';
 import Modal from './Modal';
 import Text from '../Text/Text';
 import Color from '../../constants/Color';
@@ -14,8 +13,8 @@ const Cell = styled.Pressable`
     margin-left: -24px;
     margin-right: -24px;
     padding: 16px 24px;
-    border-bottom-width: 0.5px;
-    border-bottom-color: ${Color.gray5};
+    border-bottom-width: 1px;
+    border-bottom-color: ${Color.line.soft};
 `
 const Scroll = styled.ScrollView`
 `
@@ -73,20 +72,23 @@ const SelectCountryModal: FC<Props> = props =>{
         <Modal
             translation={props.translation}
             visible={visible}
+            orientation={props.orientation}
+            showTopClose={true}
+            showBottomClose={false}
             title={props.title}
-            horientation={props.orientation}
             avoidKeyboard={true}
             onDismiss={onDismiss}
             onModalHide={onModalHide}
         >
             {props.showSearch &&
                 <Input
-                    style={{marginTop: 12, marginBottom: 12, height: 48}}
+                    style={{marginBottom: 12, height: 48}}
                     placeholder={props.translation ? props.translation.general_btn_search : 'Buscar'}
                     icon={Search}
                     hideTitle={true}
                     returnKeyType={'search'}
                     onChangeText={onSearchChange}
+                    type={'small'}
                 />
             }
             <Scroll>
@@ -97,9 +99,10 @@ const SelectCountryModal: FC<Props> = props =>{
                         onPress={() => onPress(item)}
                     >
                         {item.icon &&
-                            <item.icon height={24} width={24} stroke={Color.blue3}/>
+                            <item.icon height={24} width={24}/>
                         }
                         <Text
+                            type='p2'
                             style={{marginLeft: (item.icon) ? 12 : 0}}
                         >
                             {props.locale === 'en' ? item.enPrefix : item.esPrefix}

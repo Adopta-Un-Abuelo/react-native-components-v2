@@ -87,7 +87,7 @@ const PieChart = (props: Props) =>{
                 </G>
             </Svg>
             <BackgroundContainer>
-                <Background>
+                <Background style={props.backgroundStyle}>
                     {props.children}
                 </Background>
             </BackgroundContainer>

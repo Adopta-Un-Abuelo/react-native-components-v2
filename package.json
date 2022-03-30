@@ -1,6 +1,6 @@
 {
   "name": "react-native-components-v2",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "private": false,
   "main": "lib/commonjs/index.js",
   "scripts": {
@@ -16,7 +16,7 @@
     "prepare": "npm run build"
   },
   "dependencies": {
-    "@stripe/stripe-react-native": "^0.4.0",
+    "@stripe/stripe-react-native": "^0.5.0",
     "expo": "~44.0.3",
     "expo-status-bar": "~1.2.0",
     "fuse.js": "^6.5.3",
@@ -36,7 +36,7 @@
     "react-native-swiper-flatlist": "^3.0.16",
     "react-native-video": "^5.2.0",
     "react-native-web": "0.17.5",
-    "react-native-webview": "^11.17.2",
+    "react-native-webview": "^11.18.0",
     "styled-components": "^5.3.3"
   },
   "devDependencies": {

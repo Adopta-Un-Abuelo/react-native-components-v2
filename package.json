@@ -1,13 +1,12 @@
 {
   "name": "react-native-components-v2",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "private": false,
   "main": "lib/commonjs/index.js",
   "scripts": {
     "start": "expo start",
     "android": "expo start --android",
     "ios": "expo start --ios",
-    "web": "expo start --web",
     "eject": "expo eject",
     "storybook": "start-storybook -p 7007",
     "build-storybook": "build-storybook",
@@ -35,7 +34,6 @@
     "react-native-svg": "^12.3.0",
     "react-native-swiper-flatlist": "^3.0.16",
     "react-native-video": "^5.2.0",
-    "react-native-web": "0.17.5",
     "react-native-webview": "^11.18.0",
     "styled-components": "^5.3.3"
   },

@@ -15,7 +15,7 @@
     "prepare": "npm run build"
   },
   "dependencies": {
-    "@stripe/stripe-react-native": "^0.5.0",
+    "@stripe/stripe-react-native": "^0.6.0",
     "expo": "~44.0.6",
     "expo-status-bar": "~1.2.0",
     "fuse.js": "^6.5.3",

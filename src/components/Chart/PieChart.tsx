@@ -6,15 +6,14 @@ import Svg, { G, Circle } from "react-native-svg";
 import Color from '../../constants/Color';
 
 const Container = styled.View`
-    background-color: white;
-    border-radius: 100%;
+    border-radius: 100px;
     align-items: center;
     justify-content: center;
 `
 const BackgroundContainer = styled.View`
     position: absolute;
     flex: 1;
-    border-radius: 100%;
+    border-radius: 100px;
     height: 100%;
     width: 100%;
     padding: 16px;
@@ -22,12 +21,8 @@ const BackgroundContainer = styled.View`
     justify-content: center;
 `
 const Background = styled.View`
-    background-color: white;
     align-items: center;
     justify-content: center;
-    height: 100%;
-    width: 100%;
-    border-radius: 100%;
 `
 
 const PieChart = (props: Props) =>{
@@ -87,7 +82,9 @@ const PieChart = (props: Props) =>{
                 </G>
             </Svg>
             <BackgroundContainer>
-                <Background style={props.backgroundStyle}>
+                <Background 
+                    style={props.backgroundStyle}
+                >
                     {props.children}
                 </Background>
             </BackgroundContainer>

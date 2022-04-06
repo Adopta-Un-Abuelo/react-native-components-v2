@@ -12,3 +12,4 @@ import './MenuList.stories';
 import './Input.stories';
 import './Select.stories';
 import './Review.stories';
+import './Chart.stories';

@@ -42,6 +42,4 @@ export { default as ButtonSmall } from './Button/ButtonSmall';
 export { default as CenterModal } from './Modal/CenterModal';
 export { default as CheckboxButton } from './Checkbox/CheckboxButton';
 export { default as SelectVisit } from './Select/SelectVisit';
-export { default as Chart } from './Chart/Chart';
-export { default as PieChart2 } from './Chart/PieChart2';
-export { default as PieChart3 } from './Chart/PieChart3';
+export { default as ProgressRing } from './Chart/ProgressRing';

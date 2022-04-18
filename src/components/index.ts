@@ -43,4 +43,4 @@ export { default as CenterModal } from './Modal/CenterModal';
 export { default as CheckboxButton } from './Checkbox/CheckboxButton';
 export { default as SelectVisit } from './Select/SelectVisit';
 export { default as AnimatedProgressRing } from './Chart/AnimatedProgressRing';
-export { default as Emoji } from './Image/Emoji';
+export { default as SelectChip } from './Select/SelectChip';

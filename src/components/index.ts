@@ -44,3 +44,4 @@ export { default as CheckboxButton } from './Checkbox/CheckboxButton';
 export { default as SelectVisit } from './Select/SelectVisit';
 export { default as AnimatedProgressRing } from './Chart/AnimatedProgressRing';
 export { default as SelectChip } from './Select/SelectChip';
+export { default as TabScrollable } from './Tabs/TabScrollable';

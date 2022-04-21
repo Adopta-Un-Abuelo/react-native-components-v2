@@ -16,16 +16,18 @@ const ItemView = styled.Pressable<{enabled: boolean, full: boolean}>`
 
 const TabScrollable: FC<Props> = props =>{
 
-    // const [ currentIndex, setCurrentIndex ] = useState<number>(props.options.length-1);
-    const [ options, setOptions ] = useState<Array<{date: Date, title: string, enabled: boolean}>>([]);
+    const [ currentIndex, setCurrentIndex ] = useState<number>();
+    const [ options, setOptions ] = useState<Array<{date: Date, title: string, enabled: boolean}>>();
 
     useEffect(() =>{
-        console.log(props.options);
-        setOptions(props.options);
-    }, []);
+        if(props.options && props.options.length > 0) {
+            setOptions(props.options);
+            setCurrentIndex(props.options.length-1);
+        }
+    }, [props.options]);
 
     const getItemLayout = (data, index) => {
-        return { length: 36, offset: 36 * index, index }
+        return { length: 150, offset: 150 * index, index }
     }
 
     const onTabPress = (item, index) => {
@@ -43,7 +45,7 @@ const TabScrollable: FC<Props> = props =>{
             }
         });
         setOptions(newOptions);
-        // setCurrentIndex(index);
+        setCurrentIndex(index);
         props.onTabPress && props.onTabPress(item, index);
     }
 
@@ -75,8 +77,8 @@ const TabScrollable: FC<Props> = props =>{
             data={options}
             renderItem={renderCell}
             style={props.style}
-            // initialScrollIndex={currentIndex}
-            // getItemLayout={getItemLayout}
+            initialScrollIndex={currentIndex}
+            getItemLayout={getItemLayout}
         />
     )
 }

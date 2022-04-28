@@ -17,7 +17,7 @@ const Cell = styled.Pressable<{selected?: boolean, backgroundColor?: string, dis
     justify-content: center;
     align-items: center;
     border-width: ${props => props.backgroundColor ? '0px' : props.selected ? '2px' : '1px'};
-    border-color: ${props => props.selected ? Color.line.primary : Color.line.primarySoft};
+    border-color: ${props => props.selected ? Color.line.primary : Color.line.soft};
     background-color: ${props => props.backgroundColor ? props.backgroundColor : props.selected ? Color.status.primary.softDefault : Color.background.neutral};
     opacity: ${props => props.disabled ? 0.48 : 1};
 `
@@ -90,7 +90,7 @@ const TagSelect: FC<Props> = props =>{
                             <Text
                                 type='p2'
                                 weight='medium'
-                                style={{color: item.color ? item.color : disabled ? Color.text.high : (selected ? Color.text.primary : Color.text.high), ...props.textStyle}}
+                                style={{color: item.color ? item.color : disabled ? Color.text.full : (selected ? Color.text.primary : Color.text.full), ...props.textStyle}}
                             >
                                 {props.locale === 'en' ? item.en : item.title}
                             </Text>

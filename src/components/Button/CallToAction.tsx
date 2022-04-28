@@ -24,6 +24,9 @@ const CallToAction = (props: Props) =>{
             {props.showIcon &&
                 <ArrowRight height={20} width={20} style={{marginLeft: 4}} color={props.color ? props.color : Color.text.primary}/>
             }
+            {props.Icon &&
+                props.Icon
+            }
         </Button>
     )
 }
@@ -33,5 +36,6 @@ export interface Props{
     color?: string,
     style?: ViewStyle,
     onPress?: any,
-    showIcon?: boolean
+    showIcon?: boolean,
+    Icon?: any
 }

@@ -9,7 +9,7 @@ import { Color } from '../../constants';
 
 const MainView = styled(Animated.View)<{backgroundColor?: string}>`
     width: 100%;
-    flex-diretion: row;
+    flex-direction: row;
     background-color: ${props => props.backgroundColor ? props.backgroundColor : Color.background.neutral};
     border-bottom-width: 1px;
 `

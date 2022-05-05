@@ -1,5 +1,5 @@
-import React, { FC } from 'react';
-import { FlatListProps } from 'react-native';
+import React, { forwardRef, Ref } from 'react';
+import { FlatListProps, FlatList } from 'react-native';
 import styled from 'styled-components/native';
 import LottieView from 'lottie-react-native';
 
@@ -11,7 +11,7 @@ const Container = styled.View`
     align-items: center;
 `
 
-const List: FC<Props> = props =>{
+const List = forwardRef((props: Props, ref: Ref<FlatList>) =>{
 
     const { loading, ...rest } = props;
 
@@ -29,11 +29,12 @@ const List: FC<Props> = props =>{
     return(
         <ListStyled
             {...rest}
+            ref={ref}
             alwaysBounceHorizontal={false}
             alwaysBounceVertical={false}
         />
     )
-}
+});
 export default List;
 export interface Props extends FlatListProps<any>{
     loading?: boolean

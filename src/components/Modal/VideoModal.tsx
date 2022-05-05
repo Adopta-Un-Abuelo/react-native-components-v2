@@ -1,49 +1,61 @@
 import React, { FC, useState } from 'react';
 import Video from 'react-native-video';
-import { Play, Pause } from 'react-native-lucide';
-import { Dimensions, ActivityIndicator } from 'react-native';
+import { Play, Pause, X } from 'react-native-lucide';
+import { Dimensions } from 'react-native';
 import styled from 'styled-components/native';
-import Button from '../Button/Button';
 import Color from '../../constants/Color';
 import Text from '../Text/Text';
 import ButtonImage from '../Button/ButtonImage';
-import Modal from './Modal';
+import Modal from "react-native-modal";
 import VideoProgressBar from '../ProgressBar/VideoProgressBar';
 
-const { width } = Dimensions.get('window');
-const height = width/16*9;
 const VideoContainer = styled.View`
     width: 100%;
-    height: ${height}px;
-    align-items: center;
-    justify-content: center;
-    margin-top: 8px;
+    height: 100%;
+    background-color: #000000;
 `
-const ControllersView = styled.View`
+const Header = styled.View`
+    height: 56px;
+    margin-top: 40px;
     flex-direction: row;
     align-items: center;
 `
-const ContentView = styled.View`
-    flex: 1;
-    padding: 0px 16px;
+const CloseButton = styled.Pressable`
+    height: 56px;
+    width: 56px;
+    justify-content: center;
     align-items: center;
+    z-index: 1000;
 `
+const VideoView = styled.View`
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+`
+const ControllersView = styled.View`
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 24px;
+`
+const { width } = Dimensions.get('window');
+const height = width/16*9;
 
 const VideoModal: FC<Props> = props =>{
 
     const [ paused, setPaused ] = useState<boolean>(true);
-    const [ loading, setLoading ] = useState<boolean>(true);
     const [ videoProgress, setVideoProgress ] = useState<number>(0);
     const [ videoDuration, setVideoDuration ] = useState<number>(0);
 
     const onVideoEnd = () =>{
-        props.onVideoEnd && props.onVideoEnd();
+        if(videoProgress >= props.skipIn) {
+            props.onVideoEnd && props.onVideoEnd();
+        }
     }
 
     const onVideoLoad = videoData =>{
-        setVideoDuration(videoData.duration);
-        setLoading(false);
         setPaused(false);
+        setVideoDuration(videoData.duration);
     }
 
     const onVideoPress = () =>{
@@ -56,95 +68,65 @@ const VideoModal: FC<Props> = props =>{
 
     return(
         <Modal
-            translation={props.translation}
-            visible={props.visible}
-            orientation={props.orientation ? props.orientation : 'fullScreen'}
-            showTopClose={false}
-            showBottomClose={false}
-            style={{paddingLeft: 0, paddingRight: 0, paddingTop: 0, paddingBottom: 0, overflow: 'hidden'}}
+            isVisible={props.visible}
+            style={{ margin: 0 }}
+            avoidKeyboard={true}
             onDismiss={onVideoEnd}
         >
-            <Text
-                type='p1'
-                weight='medium'
-                style={{
-                    marginStart: 16,
-                    marginTop: 28,
-                    marginBottom: 16
-                }}
-            >
-                {props.titleHeader}
-            </Text>
             <VideoContainer>
-                <Video
-                    source={{uri: props.url}}
-                    style={{
-                        position: 'absolute',
-                        top: 0,
-                        bottom: 0,
-                        right: 0,
-                        left: 0
-                    }}
-                    paused={paused}
-                    onEnd={onVideoEnd}
-                    onLoad={onVideoLoad}
-                    onProgress={onVideoProgress}
-                    resizeMode={'contain'}
-                    ignoreSilentSwitch={'ignore'}
-                />
-                {loading &&
-                    <ActivityIndicator
-                        color={'#000'}
-                        size={'large'}
-                    />
-                }
-            </VideoContainer>
-            <ControllersView
-                style={{paddingTop: 22, paddingStart: 16, paddingEnd: 16, paddingBottom: 24}}
-            >
-                <VideoProgressBar
-                    style={{flex: 1}}
-                    progress={videoProgress}
-                    maxProgress={videoDuration}
-                />
-            </ControllersView>
-            <ContentView>
-                <Text
-                    type='h3'
-                    style={{textAlign: 'center'}}
-                >
-                    {props.title}
-                </Text>
-                {props.subtitle &&
-                    <Text
-                        type='p1'
-                        style={{textAlign: 'center', marginTop: 8}}
+                <Header>
+                    <CloseButton
+                        onPress={onVideoEnd}
                     >
-                        {props.subtitle}
+                        <X color={Color.text.white}/>
+                    </CloseButton>
+                    <Text
+                        type='b2'
+                        weight='medium'
+                        style={{color: Color.text.whiteHigh}}
+                    >
+                        {props.skipIn >= videoProgress ? props.translation.modal_video_skip_in+' '+ new Date((props.skipIn - videoProgress) * 1000).toISOString().substr(14, 5) : props.translation.modal_video_skip}
                     </Text>
-                }
-            </ContentView>
-            <ControllersView
-                style={{paddingTop: 12, paddingStart: 16, paddingEnd: 16, paddingBottom: 16}}
-            >
-                {!loading && !props.hideControllers &&
+                </Header>
+                <VideoView>
+                    <Video
+                        source={{uri: props.url}}
+                        style={{
+                            flex: 1,
+                            width: width,
+                            height: height,
+                            top: 24,
+                            bottom: 0,
+                            right: 0,
+                            left: 0
+                        }}
+                        paused={paused}
+                        onEnd={onVideoEnd}
+                        onLoad={onVideoLoad}
+                        onProgress={onVideoProgress}
+                        resizeMode={'contain'}
+                        ignoreSilentSwitch={'ignore'}
+                    />
+                </VideoView>
+                <ControllersView
+                    style={{paddingTop: 24, paddingStart: 16, paddingEnd: 16, paddingBottom: 24}}
+                >
                     <ButtonImage
-                        style={{alignSelf: 'auto', flex: 1}}
                         icon={paused ? Play : Pause}
                         onPress={onVideoPress}
-                        color={Color.text.primary}
+                        color={Color.text.white}
+                        style={{marginRight: 8}}
                     />
-                }
-                {props.skipIn &&
-                    <Button
-                        style={{flex: 1}}
-                        title={props.skipIn >= videoProgress ? props.translation.modal_video_skip_in+' '+ new Date((props.skipIn - videoProgress) * 1000).toISOString().substr(14, 5) : props.translation.modal_video_skip}
-                        loading={loading}
-                        disabled={props.skipIn >= videoProgress}
-                        onPress={onVideoEnd}
+                    <VideoProgressBar
+                        progress={videoProgress}
+                        maxProgress={videoDuration}
+                        colorTextLeft={Color.text.white}
+                        colorTextTotal={Color.text.whiteMedium}
+                        colorBarLeft={Color.text.white}
+                        colorBarTotal={Color.text.whiteLow}
                     />
-                }
-            </ControllersView>
+                </ControllersView>
+            </VideoContainer>
         </Modal>
     )
 }
@@ -155,11 +137,6 @@ export interface Props{
 	},
     visible: boolean,
     url: string,
-    titleHeader?: string,
-    title?: string,
-    subtitle?: string,
     skipIn?: number,
     onVideoEnd?: Function,
-    orientation?: 'fullScreen' | 'center',
-    hideControllers?: boolean
 }

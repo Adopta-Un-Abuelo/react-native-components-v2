@@ -45,3 +45,6 @@ export { default as SelectVisit } from './Select/SelectVisit';
 export { default as AnimatedProgressRing } from './Chart/AnimatedProgressRing';
 export { default as SelectChip } from './Select/SelectChip';
 export { default as TabScrollable } from './Tabs/TabScrollable';
+export { default as TabReview } from './Tabs/TabReview';
+export { default as ReviewSmall } from './Review/ReviewSmall';
+export { default as TextGradient } from './Text/TextGradient';

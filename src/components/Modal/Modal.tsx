@@ -21,11 +21,10 @@ const ModalView = styled(SafeAreaView)<{orientation?: 'top' | 'bottom' | 'center
     background-color: ${Color.background.neutral};
 `
 const SwipeView = styled.View`
-    height: 15px;
+    height: 29px;
     align-items: center;
-    justify-content: flex-end;
+    justify-content: center;
     z-index: 1000;
-    margin-bottom: 16px;
 `
 const Swipe = styled.View`
     height: 5px;
@@ -37,7 +36,6 @@ const Header = styled.View`
     height: 56px;
     flex-direction: row;
     align-items: center;
-    margin-top: 8px;
 `
 const CloseButton = styled.Pressable`
     position: absolute;
@@ -58,7 +56,7 @@ const TitleDownView = styled.View`
 `
 
 const ButtonArea = styled.View`
-    padding-bottom: 12px;
+    padding-bottom: 24px;
 `
 
 const ModalComponent = (props: Props) =>{
@@ -76,7 +74,7 @@ const ModalComponent = (props: Props) =>{
     return(
         <Modal
             isVisible={props.visible}
-            swipeDirection={swipeToClose ? "down": undefined}
+            swipeDirection={swipeToClose ? 'down' : undefined}
             style={props.orientation === 'fullScreen' || props.orientation === 'bottom' ? {
                 justifyContent: 'flex-end',
                 margin: 0

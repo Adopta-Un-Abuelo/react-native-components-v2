@@ -69,5 +69,6 @@ export interface Props{
     buttonProps?: any,
     style?: any,
     edges?: Array<"top" | "right" | "left" | "bottom">,
-    noPadding?: boolean
+    noPadding?: boolean,
+    children?: React.ReactNode
 }

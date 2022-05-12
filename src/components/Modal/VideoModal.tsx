@@ -1,7 +1,7 @@
 import React, { FC, useState } from 'react';
 import Video from 'react-native-video';
 import { Play, Pause, X } from 'react-native-lucide';
-import { Dimensions } from 'react-native';
+import { Dimensions, Platform } from 'react-native';
 import styled from 'styled-components/native';
 import Color from '../../constants/Color';
 import Text from '../Text/Text';
@@ -16,9 +16,9 @@ const VideoContainer = styled.View`
 `
 const Header = styled.View`
     height: 56px;
-    margin-top: 40px;
     flex-direction: row;
     align-items: center;
+    margin-top: ${Platform.OS === 'ios' ? 40 : 0};
 `
 const CloseButton = styled.Pressable`
     height: 56px;
@@ -36,7 +36,7 @@ const ControllersView = styled.View`
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    margin-bottom: 24px;
+    margin-bottom: ${Platform.OS === 'ios' ? 24 : 0};
 `
 const { width } = Dimensions.get('window');
 const height = width/16*9;

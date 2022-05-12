@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React from 'react';
 import styled from 'styled-components/native';
 import { ViewStyle } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -39,10 +39,9 @@ const Header = styled.View`
 `
 const CloseButton = styled.Pressable`
     position: absolute;
-    height: 40px;
-    width: 40px;
+    height: 56px;
+    width: 56px;
     justify-content: center;
-    align-items: center;
     z-index: 1000;
 `
 const TitleCenterView = styled.View`

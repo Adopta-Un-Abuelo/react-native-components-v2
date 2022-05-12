@@ -1,12 +1,12 @@
 import React, { FC, useState, useEffect } from 'react';
-import { FlatList } from 'react-native';
+import { Dimensions, FlatList } from 'react-native';
 import styled from 'styled-components/native';
 import Color from '../../constants/Color';
 import Text from '../Text/Text';
 import ReviewSmall from '../Review/ReviewSmall';
 
 const ItemView = styled.Pressable`
-    max-width: 340px;
+    width: ${Dimensions.get('window').width - 60}px;
     padding: 16px;
     background-color: ${Color.background.neutral};
     border-radius: 12px;
@@ -66,7 +66,6 @@ const TabScrollable: FC<Props> = props =>{
     return(
         <FlatList
             horizontal
-            pagingEnabled={true}
             showsHorizontalScrollIndicator={false}
             legacyImplementation={false}
             data={options}

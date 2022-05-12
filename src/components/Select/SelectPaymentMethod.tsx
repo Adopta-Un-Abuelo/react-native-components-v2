@@ -1,6 +1,6 @@
 import React, { useState, useEffect, forwardRef, Ref, useImperativeHandle, useRef } from 'react';
 import styled from 'styled-components/native';
-import { Plus } from 'react-native-lucide';
+import { Plus, ChevronRight } from 'react-native-lucide';
 import { Platform } from 'react-native';
 import { isApplePaySupported } from '@stripe/stripe-react-native';
 import Color from '../../constants/Color';
@@ -11,9 +11,11 @@ import PaymentMethodModal, { PaymentMethodModalRef } from '../Modal/PaymentMetho
 
 const ScrollView = styled.ScrollView`
 `
-const MainView = styled.Pressable`
+const RowButton = styled.Pressable`
     flex-direction: row;
-    align-items: center;
+`
+const RowView = styled.View`
+    flex-direction: row;
 `
 const Cell = styled.Pressable`
     height: 80px;
@@ -28,10 +30,6 @@ const CellTextView = styled.View<{show: boolean}>`
     margin: 0px 0px 0px 16px;
     border-bottom-color: ${Color.line.soft};
     border-bottom-width: ${props => props.show ? '1px' : '0px'};
-`
-const Column = styled.View`
-    flex-direction: column;
-    margin-left: 12px;
 `
 const creditCardHidde = '···· '
 
@@ -54,7 +52,7 @@ const PaymentMethodSelect = forwardRef((props: Props, ref: Ref<SelectPaymentMeth
     };
 
     // TODO - Method of payment - Google Pay
-    const [ methodSelected, setMethodSelected ] = useState(props.methodsTypes.includes('native') && Platform.OS === 'ios' ? nativePayment : cardPayment)
+    const [ methodSelected, setMethodSelected ] = useState(props.methodsTypes.includes('native') && Platform.OS === 'ios' ? nativePayment : cardPayment);
     const [ options, setOptions ] = useState<Array<{objectId: string, title: string, date: string, icon: any}>>([]);
 
     // Manage open/close transition
@@ -190,7 +188,7 @@ const PaymentMethodSelect = forwardRef((props: Props, ref: Ref<SelectPaymentMeth
     }
 
     return(
-        <MainView
+        <RowButton
             style={props.style}
             onPress={() => setShowSelectModal(true)}
         >
@@ -269,25 +267,22 @@ const PaymentMethodSelect = forwardRef((props: Props, ref: Ref<SelectPaymentMeth
                 }}
                 onChange={onPaycardChange}
             />
-            {methodSelected.objectId !== 'new' &&
-                <methodSelected.icon height={28} width={42} />
-            }
-            <Column>
+            <RowView
+                style={{marginTop: 6, alignItems: 'center', flex: 1}}
+            >
+                {methodSelected.objectId !== 'new' &&
+                    <methodSelected.icon height={30} width={30} style={{marginRight: 16}} />
+                }
                 <Text
                     type='p2'
-                    style={{color: Color.text.high}}
+                    weight='medium'
                     numberOfLines={1}
                 >
                     {methodSelected.objectId === 'new' ? (props.translation ? props.translation.payment_method_select_modify_no_payment_method : 'No hay método de pago') : (methodSelected.title ? methodSelected.title : 'Añadir método de pago')}
                 </Text>
-                <Text
-                    type='b2'
-                    style={{color: Color.text.primary}}
-                >
-                    {props.translation ? props.translation.payment_method_select_modify : 'Modificar'}
-                </Text>
-            </Column>
-        </MainView>
+                <ChevronRight height={16} width={16} color={Color.text.high} style={{marginLeft: 4}} />
+            </RowView>
+        </RowButton>
     )
 });
 export default PaymentMethodSelect;

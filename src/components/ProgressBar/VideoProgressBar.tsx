@@ -1,15 +1,18 @@
 import React, { FC, useEffect, useState } from 'react';
 import * as Progress from 'react-native-progress';
 import styled from 'styled-components/native';
-import Color from '../../constants/Color';
 import Text from '../Text/Text';
 
 const Container = styled.View`
-    flex: 1;
-`
-const MarkView = styled.View`
     flex-direction: row;
-    margin-top: 10px;
+    flex: 1;
+    justify-content: center;
+    align-items: center;
+`
+const ProgressView = styled.View`
+    flex: 1;
+    margin-left: 8px;
+    margin-right: 8px;
 `
 
 const getSeconds = (secs) => {
@@ -21,7 +24,7 @@ const getSeconds = (secs) => {
     return (minutes + ':' + tempSeconds);
 }
 
-const ProgressBar: FC<Props> = props =>{
+const VideoProgressBar: FC<Props> = props =>{
 
     const [ progressLeft, setProgressLeft ] = useState(0);
     const [ barProgress, setBarProgress ] = useState(0);
@@ -34,38 +37,39 @@ const ProgressBar: FC<Props> = props =>{
     },[props.progress, props.maxProgress]);
 
     return(
-        <Container
-            style={props.style}
-        >
-            <Progress.Bar
-                width={null}
-                progress={barProgress}
-                height={6}
-                borderRadius={10}
-                borderWidth={0}
-                unfilledColor={Color.background.soft}
-                color={Color.background.primary}
-            />
-            <MarkView>
-                <Text
-                    type='c1'
-                    style={{flex: 1, color: Color.text.primary}}
-                >
-                    {getSeconds(progressLeft)}
-                </Text>
-                <Text
-                    type='c1'
-                    style={{flex: 1, textAlign: 'right', color: Color.text.high}}
-                >
-                    {getSeconds(props.maxProgress.toFixed(0))}
-                </Text>
-            </MarkView>
+        <Container>
+            <Text
+                type='c1'
+                style={{color: props.colorTextLeft}}
+            >
+                {getSeconds(progressLeft)}
+            </Text>
+            <ProgressView>
+                <Progress.Bar
+                    width={null}
+                    progress={barProgress}
+                    height={6}
+                    borderRadius={10}
+                    borderWidth={0}
+                    unfilledColor={props.colorBarTotal}
+                    color={props.colorBarLeft}
+                />
+            </ProgressView>
+            <Text
+                type='c1'
+                style={{textAlign: 'right', color: props.colorTextTotal}}
+            >
+                {getSeconds(props.maxProgress.toFixed(0))}
+            </Text>
         </Container>
     )
 }
-export default ProgressBar;
+export default VideoProgressBar;
 export interface Props{
-    style?: Object,
     progress: number,
-    maxProgress: number
+    maxProgress: number,
+    colorTextLeft: any,
+    colorTextTotal: any,
+    colorBarLeft: any,
+    colorBarTotal: any
 }

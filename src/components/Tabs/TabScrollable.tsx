@@ -1,5 +1,5 @@
 import React, { FC, useState, useEffect } from 'react';
-import { FlatList } from 'react-native';
+import { FlatList, Platform } from 'react-native';
 import styled from 'styled-components/native';
 import Color from '../../constants/Color';
 import Text from '../Text/Text';
@@ -22,7 +22,9 @@ const TabScrollable: FC<Props> = props =>{
     useEffect(() =>{
         if(props.options && props.options.length > 0) {
             setOptions(props.options);
-            setCurrentIndex(props.options.length-1);
+            if(Platform.OS === 'ios') {
+                setCurrentIndex(props.options.length-1);
+            }
         }
     }, [props.options]);
 

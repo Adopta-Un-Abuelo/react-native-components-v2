@@ -1,5 +1,5 @@
-import React, { FC, useRef } from 'react';
-import { Animated, FlatListProps } from 'react-native';
+import React, { useRef, forwardRef, Ref } from 'react';
+import { Animated, FlatList, FlatListProps } from 'react-native';
 import styled from 'styled-components/native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
@@ -13,7 +13,7 @@ const SafeView = styled(SafeAreaView)`
     background-color: ${Color.background.neutral};
 `
 
-const ListContainer: FC<Props> = props =>{
+const ListContainer = forwardRef((props: Props, ref: Ref<FlatList>) =>{
     const offset = useRef(new Animated.Value(0)).current;
     return(
         <SafeView
@@ -27,6 +27,7 @@ const ListContainer: FC<Props> = props =>{
                 />
             }
             <List
+                ref={ref}
                 scrollEventThrottle={1}
                 alwaysBounceHorizontal={false}
                 alwaysBounceVertical={false}
@@ -46,7 +47,7 @@ const ListContainer: FC<Props> = props =>{
             }
         </SafeView>
     )
-}
+});
 export default ListContainer;
 export interface Props{
     navbarProps?: {
@@ -61,11 +62,13 @@ export interface Props{
         subtitle?: string,
         headerRight?: any,
         navigation: any,
-        noHeader?: boolean
+        noHeader?: boolean,
+        backgroundColor?: string
     }
     listProps?: FlatListProps<any>,
     buttonProps?: any,
     style?: any,
     edges?: Array<"top" | "right" | "left" | "bottom">,
-    noPadding?: boolean
+    noPadding?: boolean,
+    children?: React.ReactNode
 }

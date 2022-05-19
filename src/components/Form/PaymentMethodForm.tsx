@@ -57,7 +57,7 @@ const PaymentMethodForm = forwardRef((props: Props, ref: Ref<PaymentMethodFormRe
         >
             <CardField
                 postalCodeEnabled={false}
-                placeholder={{
+                placeholders={{
                     number: props.translation.form_payment_method_credit_card,
                     expiration: props.translation.form_payment_method_date
                 }}

@@ -82,8 +82,8 @@ const VideoModal: FC<Props> = props =>{
                     </CloseButton>
                     <Text
                         type='b2'
-                        weight='medium'
-                        style={{color: Color.text.whiteHigh}}
+                        weight={props.skipIn >= videoProgress ? 'medium' : 'bold'}
+                        style={{color: props.skipIn >= videoProgress ? Color.text.whiteHigh : Color.text.white}}
                     >
                         {props.skipIn >= videoProgress ? props.translation.modal_video_skip_in+' '+ new Date((props.skipIn - videoProgress) * 1000).toISOString().substr(14, 5) : props.translation.modal_video_skip}
                     </Text>

@@ -37,7 +37,7 @@ const Color = {
         primary: '#006BE5',
         primarySoft: '#98C8FF',
         aquamarine: '#00ABC5',
-        orange: '#00ABC5',
+        orange: '#FF773D',
         red: '#E02D2D',
         green: '#08A85B',
         primaryBlack: '#001D3D',

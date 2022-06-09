@@ -9,7 +9,7 @@ const TextHeader = (props: Props) =>{
     return(type === 'h1' ?
         <Text
             style={{
-                fontFamily: 'Poppins-Bold',
+                fontFamily: 'Poppins-SemiBold',
                 fontSize: 32,
                 lineHeight: 36,
                 color: Color.text.full,
@@ -22,7 +22,7 @@ const TextHeader = (props: Props) =>{
     : type === 'h2' ?
         <Text
             style={{
-                fontFamily: 'Poppins-Bold',
+                fontFamily: 'Poppins-SemiBold',
                 fontSize: 28,
                 lineHeight: 36,
                 color: Color.text.full,
@@ -35,7 +35,7 @@ const TextHeader = (props: Props) =>{
     : type === 'h3' ?
         <Text
             style={{
-                fontFamily: weight === 'regular' ? 'Poppins-Regular' : 'Poppins-Bold',
+                fontFamily: weight === 'regular' ? 'Poppins-Regular' : 'Poppins-SemiBold',
                 fontSize: 24,
                 lineHeight: 32,
                 color: Color.text.full,

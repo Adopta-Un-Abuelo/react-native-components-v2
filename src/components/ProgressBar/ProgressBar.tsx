@@ -4,8 +4,6 @@ import styled from 'styled-components/native';
 
 const ProgressView = styled.View`
     flex: 1;
-    margin-left: 8px;
-    margin-right: 8px;
 `
 
 const ProgressBar: FC<Props> = props =>{
@@ -18,12 +16,14 @@ const ProgressBar: FC<Props> = props =>{
     },[props.progress, props.maxProgress]);
 
     return(
-        <ProgressView>
+        <ProgressView
+            style={props.style}
+        >
             <Progress.Bar
                 width={null}
                 progress={barProgress}
-                height={6}
-                borderRadius={10}
+                height={props.height ? props.height : 6}
+                borderRadius={100}
                 borderWidth={0}
                 unfilledColor={props.colorBarTotal}
                 color={props.colorBarLeft}
@@ -33,8 +33,10 @@ const ProgressBar: FC<Props> = props =>{
 }
 export default ProgressBar;
 export interface Props{
+    style?: any,
+    height?: number,
     progress: number,
     maxProgress: number,
-    colorBarLeft: any,
-    colorBarTotal: any
+    colorBarLeft?: any,
+    colorBarTotal?: any
 }

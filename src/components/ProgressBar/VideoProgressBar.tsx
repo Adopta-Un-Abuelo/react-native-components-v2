@@ -36,7 +36,9 @@ const VideoProgressBar: FC<Props> = props =>{
     },[props.progress, props.maxProgress]);
 
     return(
-        <Container>
+        <Container
+            style={props.style}
+        >
             <Text
                 type='c1'
                 style={{color: props.colorTextLeft}}
@@ -44,6 +46,7 @@ const VideoProgressBar: FC<Props> = props =>{
                 {getSeconds(progressLeft)}
             </Text>
             <ProgressBar
+                style={{marginRight: 8, marginLeft: 8}}
                 progress={props.progress}
                 maxProgress={props.maxProgress}
                 colorBarTotal={props.colorBarTotal}
@@ -60,10 +63,11 @@ const VideoProgressBar: FC<Props> = props =>{
 }
 export default VideoProgressBar;
 export interface Props{
+    style?: any,
     progress: number,
     maxProgress: number,
-    colorTextLeft: any,
-    colorTextTotal: any,
-    colorBarLeft: any,
-    colorBarTotal: any
+    colorTextLeft?: any,
+    colorTextTotal?: any,
+    colorBarLeft?: any,
+    colorBarTotal?: any
 }

@@ -16,7 +16,7 @@ const CallToAction = (props: Props) =>{
         >
             <Text
                 type='b2'
-                weight={props.weight ? props.weight : 'medium'}
+                weight={props.semibold ? 'semibold' : 'medium'}
                 style={{color: props.color ? props.color : Color.text.primary}}
             >
                 {props.title}
@@ -38,5 +38,5 @@ export interface Props{
     onPress?: any,
     showIcon?: boolean,
     Icon?: any,
-    weight?: string
+    semibold?: boolean
 }

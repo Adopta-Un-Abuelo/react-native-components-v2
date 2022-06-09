@@ -1,6 +1,8 @@
 import React, { FC, useEffect, useState } from 'react';
 import * as Progress from 'react-native-progress';
 import styled from 'styled-components/native';
+
+import ProgressBar from './ProgressBar';
 import Text from '../Text/Text';
 
 const Container = styled.View`
@@ -27,13 +29,10 @@ const getSeconds = (secs) => {
 const VideoProgressBar: FC<Props> = props =>{
 
     const [ progressLeft, setProgressLeft ] = useState(0);
-    const [ barProgress, setBarProgress ] = useState(0);
 
     useEffect(() =>{
         const left = (props.progress).toFixed(0);
         setProgressLeft(parseFloat(left));
-        if(props.maxProgress > 0)
-            setBarProgress(props.progress/props.maxProgress);
     },[props.progress, props.maxProgress]);
 
     return(
@@ -44,17 +43,12 @@ const VideoProgressBar: FC<Props> = props =>{
             >
                 {getSeconds(progressLeft)}
             </Text>
-            <ProgressView>
-                <Progress.Bar
-                    width={null}
-                    progress={barProgress}
-                    height={6}
-                    borderRadius={10}
-                    borderWidth={0}
-                    unfilledColor={props.colorBarTotal}
-                    color={props.colorBarLeft}
-                />
-            </ProgressView>
+            <ProgressBar
+                progress={props.progress}
+                maxProgress={props.maxProgress}
+                colorBarTotal={props.colorBarTotal}
+                colorBarLeft={props.colorBarLeft}
+            />
             <Text
                 type='c1'
                 style={{textAlign: 'right', color: props.colorTextTotal}}

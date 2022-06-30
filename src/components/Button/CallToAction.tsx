@@ -38,5 +38,9 @@ export interface Props{
     onPress?: any,
     showIcon?: boolean,
     Icon?: any,
-    semibold?: boolean
+    semibold?: boolean,
+    gradient?: {
+        colorStart: string,
+        colorEnd: string
+    }
 }

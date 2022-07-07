@@ -31,6 +31,9 @@ const IconView = styled.View`
 const InputView = styled.View`
     flex: 1;
 `
+const Row = styled.View`
+    flex-direction: row;
+`
 
 const InputComponent = forwardRef((props: Props, ref: Ref<InputRef>) =>{
 
@@ -93,23 +96,33 @@ const InputComponent = forwardRef((props: Props, ref: Ref<InputRef>) =>{
                         {props.placeholder}
                     </Text>
                 }
-                <InputStyled
-                    ref={input}
-                    caretHidden={true}
-                    selectionColor={Color.text.primary}
-                    onFocus={onFocus}
-                    onBlur={onBlur}
-                    placeholder={currentPlaceholder}
-                    onChangeText={onChangeText}
-                    isFocused={isFocused}
-                    hasValue={value ? true : false}
-                    placeholderTextColor={Color.text.high}
-                    maxLength={props.maxLength}
-                    keyboardType={props.keyboardType}
-                    textAlignVertical={props.alignVertical ? 'top' : 'auto'}
-                    multiline={props.multiline}
-                    {...rest}
-                />
+                <Row>
+                    <InputStyled
+                        ref={input}
+                        caretHidden={true}
+                        selectionColor={Color.text.primary}
+                        onFocus={onFocus}
+                        onBlur={onBlur}
+                        placeholder={currentPlaceholder}
+                        onChangeText={onChangeText}
+                        isFocused={isFocused}
+                        hasValue={value ? true : false}
+                        placeholderTextColor={Color.text.high}
+                        maxLength={props.maxLength}
+                        keyboardType={props.keyboardType}
+                        textAlignVertical={props.alignVertical ? 'top' : 'auto'}
+                        multiline={props.multiline}
+                        {...rest}
+                    />
+                    {props.showEuro &&
+                        <Text
+                            type='h4'
+                            weight='regular'
+                        >
+                            €
+                        </Text>
+                    }
+                </Row>
             </InputView>
         </Container>
     )
@@ -138,7 +151,8 @@ export interface Props{
     returnKeyType?: 'done' | 'go' | 'next' | 'search' | 'send',
     type?: 'small' | 'big',
     multiline?: boolean,
-    alignVertical?: boolean
+    alignVertical?: boolean,
+    showEuro?: boolean
 }
 export interface InputRef{
     focus: () => void,

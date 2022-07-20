@@ -36,8 +36,7 @@
     "react-native-swiper-flatlist": "^3.0.16",
     "react-native-video": "^5.2.0",
     "react-native-webview": "^11.18.0",
-    "styled-components": "^5.3.5",
-    "react-native-simple-gradient-progressbar-view": "^0.2.0"
+    "styled-components": "^5.3.5"
   },
   "devDependencies": {
     "@babel/core": "^7.17.8",

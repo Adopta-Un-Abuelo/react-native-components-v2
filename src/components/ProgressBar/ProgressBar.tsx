@@ -1,6 +1,10 @@
 import React, { FC, useEffect, useState } from 'react';
-import SimpleGradientProgressbarView from 'react-native-simple-gradient-progressbar-view';
-import { StyleSheet } from 'react-native'
+import * as Progress from 'react-native-progress';
+import styled from 'styled-components/native';
+
+const ProgressView = styled.View`
+    flex: 1;
+`
 
 const ProgressBar: FC<Props> = props =>{
 
@@ -12,20 +16,19 @@ const ProgressBar: FC<Props> = props =>{
     },[props.progress, props.maxProgress]);
 
     return(
-        <SimpleGradientProgressbarView
-            style={StyleSheet.flatten([
-                props.style,
-                {
-                    backgroundColor: props.colorBarTotal,
-                    height: props.height ? props.height : 12,
-                    borderRadius: 6,
-                }])}
-            fromColor={props.colorBarLeft}
-            toColor={props.colorBarLeftGradient ? props.colorBarLeftGradient : props.colorBarLeft}
-            progress={barProgress}
-            maskedCorners={[1, 1, 1, 1]}
-            cornerRadius={6}
-        />
+        <ProgressView
+            style={props.style}
+        >
+            <Progress.Bar
+                width={null}
+                progress={barProgress} 
+                borderRadius={6}
+                height={props.height ? props.height : 6}
+                borderWidth={0}
+                unfilledColor={props.colorBarTotal}
+                color={props.colorBarLeft}>
+            </Progress.Bar>
+        </ProgressView>
     )
 }
 export default ProgressBar;
@@ -35,6 +38,5 @@ export interface Props{
     progress: number,
     maxProgress: number,
     colorBarLeft?: any,
-    colorBarLeftGradient?: any,
     colorBarTotal?: any
 }

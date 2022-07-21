@@ -21,7 +21,7 @@ const InputStyled = styled.TextInput<{isFocused: boolean | undefined, hasValue: 
     height: 100%;
     padding: 0px;
     color: ${Color.text.primaryBlack};
-    margin-top: ${props => ((props.isFocused || props.hasValue) && !props.hideTitle) ? '18px' : '0px'};
+    margin-top: ${props => ((props.isFocused || props.hasValue) && !props.hideTitle) ? '10px' : '0px'};
 `
 const IconView = styled.View`
     height: 24px;
@@ -91,7 +91,7 @@ const InputComponent = forwardRef((props: Props, ref: Ref<InputRef>) =>{
                 {((!currentPlaceholder || value) && !props.hideTitle) &&
                     <Text
                         type='c1'
-                        style={{position: 'absolute', top: 8, color: Color.text.high}}
+                        style={{position: 'absolute', color: Color.text.high}}
                     >
                         {props.placeholder}
                     </Text>

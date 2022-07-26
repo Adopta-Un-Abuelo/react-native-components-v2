@@ -4,6 +4,7 @@ import LottieView from 'lottie-react-native';
 import { GestureResponderEvent, PressableProps, ViewStyle, TextStyle } from 'react-native';
 import Color from '../../constants/Color';
 import Text from '../Text/Text';
+import LinearGradient from 'react-native-linear-gradient';
 
 const Container = styled.Pressable<{type?: 'line' | 'fill', color?: string, size?: 'small' | 'big'}>`
     flex-direction: row;
@@ -17,6 +18,14 @@ const Container = styled.Pressable<{type?: 'line' | 'fill', color?: string, size
     padding: 0px 12px;
     opacity: ${props => props.disabled ? 0.48 : 1};
     align-self: flex-start;
+`
+const Gradient = styled(LinearGradient)`
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    border-radius: 12px;
 `
 
 const ButtonSmall = (props: Props) =>{
@@ -43,23 +52,30 @@ const ButtonSmall = (props: Props) =>{
                 />
             :
                 <>
-                {props.icon &&
-                    <props.icon style={{marginRight: 8, ...props.iconStyle}} color={(props.iconStyle && props.iconStyle.stroke) ? props.iconStyle.stroke : (props.type === 'line' ? (props.color ? props.color : Color.text.primary) : Color.text.white)}/>
-                }
-                <Text
-                    type='b2'
-                    weight='semibold'
-                    style={{
-                        textAlign: 'center',
-                        color: props.type === 'line' ? (props.color ? props.color : Color.status.primary.default) : Color.text.white,
-                        ...props.textStyle
-                    }}
-                    numberOfLines={1}
-                    ellipsizeMode={'tail'}
-                    adjustsFontSizeToFit={true}
-                >
-                    {props.title}
-                </Text>
+                    {props.gradient &&
+                        <Gradient
+                            colors={[props.gradient.colorStart, props.gradient.colorEnd]}
+                            start={{x: 0, y: 0}} 
+                            end={{x: 1, y: 1}}
+                        />
+                    }
+                    {props.icon &&
+                        <props.icon style={{marginRight: 8, ...props.iconStyle}} color={(props.iconStyle && props.iconStyle.stroke) ? props.iconStyle.stroke : (props.type === 'line' ? (props.color ? props.color : Color.text.primary) : Color.text.white)}/>
+                    }
+                    <Text
+                        type='b2'
+                        weight='semibold'
+                        style={{
+                            textAlign: 'center',
+                            color: props.type === 'line' ? (props.color ? props.color : Color.status.primary.default) : Color.text.white,
+                            ...props.textStyle
+                        }}
+                        numberOfLines={1}
+                        ellipsizeMode={'tail'}
+                        adjustsFontSizeToFit={true}
+                    >
+                        {props.title}
+                    </Text>
                 </>
             }
         </Container>
@@ -74,5 +90,9 @@ export interface Props extends PressableProps{
     color?: string,
     icon?: any,
     iconStyle?: any,
-    type?: 'fill' | 'line'
+    type?: 'fill' | 'line',
+    gradient?: {
+        colorStart: string,
+        colorEnd: string
+    }
 }

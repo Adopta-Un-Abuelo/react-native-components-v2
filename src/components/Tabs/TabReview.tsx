@@ -30,7 +30,9 @@ const TabScrollable: FC<Props> = props =>{
 
     const renderCell = ({item, index}) => {
         return(
-            <ItemView>
+            <ItemView
+                style={{marginLeft: index === 0 ? 16 : 0}}
+            >
                 <RowView>
                     <ColumnView
                         style={{flex: 1, marginRight: 12}}

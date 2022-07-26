@@ -48,3 +48,4 @@ export { default as TabScrollable } from './Tabs/TabScrollable';
 export { default as TabReview } from './Tabs/TabReview';
 export { default as ReviewSmall } from './Review/ReviewSmall';
 export { default as TextGradient } from './Text/TextGradient';
+export { default as ProgressBar } from './ProgressBar/ProgressBar';

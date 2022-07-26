@@ -1,6 +1,8 @@
 import React, { FC, useEffect, useState } from 'react';
 import * as Progress from 'react-native-progress';
 import styled from 'styled-components/native';
+
+import ProgressBar from './ProgressBar';
 import Text from '../Text/Text';
 
 const Container = styled.View`
@@ -27,34 +29,29 @@ const getSeconds = (secs) => {
 const VideoProgressBar: FC<Props> = props =>{
 
     const [ progressLeft, setProgressLeft ] = useState(0);
-    const [ barProgress, setBarProgress ] = useState(0);
 
     useEffect(() =>{
         const left = (props.progress).toFixed(0);
         setProgressLeft(parseFloat(left));
-        if(props.maxProgress > 0)
-            setBarProgress(props.progress/props.maxProgress);
     },[props.progress, props.maxProgress]);
 
     return(
-        <Container>
+        <Container
+            style={props.style}
+        >
             <Text
                 type='c1'
                 style={{color: props.colorTextLeft}}
             >
                 {getSeconds(progressLeft)}
             </Text>
-            <ProgressView>
-                <Progress.Bar
-                    width={null}
-                    progress={barProgress}
-                    height={6}
-                    borderRadius={10}
-                    borderWidth={0}
-                    unfilledColor={props.colorBarTotal}
-                    color={props.colorBarLeft}
-                />
-            </ProgressView>
+            <ProgressBar
+                style={{marginRight: 8, marginLeft: 8}}
+                progress={props.progress}
+                maxProgress={props.maxProgress}
+                colorBarTotal={props.colorBarTotal}
+                colorBarLeft={props.colorBarLeft}
+            />
             <Text
                 type='c1'
                 style={{textAlign: 'right', color: props.colorTextTotal}}
@@ -66,10 +63,11 @@ const VideoProgressBar: FC<Props> = props =>{
 }
 export default VideoProgressBar;
 export interface Props{
+    style?: any,
     progress: number,
     maxProgress: number,
-    colorTextLeft: any,
-    colorTextTotal: any,
-    colorBarLeft: any,
-    colorBarTotal: any
+    colorTextLeft?: any,
+    colorTextTotal?: any,
+    colorBarLeft?: any,
+    colorBarTotal?: any
 }

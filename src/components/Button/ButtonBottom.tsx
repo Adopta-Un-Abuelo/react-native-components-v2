@@ -37,5 +37,9 @@ export interface Props extends PressableProps{
     title: string,
     leftView?: any,
     style?: ViewStyle,
-    showShadow?: boolean
+    showShadow?: boolean,
+    gradient?: {
+        colorStart: string,
+        colorEnd: string
+    }
 }

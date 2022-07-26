@@ -36,5 +36,9 @@ export interface Props{
     Icon?: any,
     onPress: any,
     style?: ViewStyle,
-    color?: string
+    color?: string,
+    gradient?: {
+        colorStart: string,
+        colorEnd: string
+    }
 }

@@ -21,13 +21,13 @@ const ProgressBar: FC<Props> = props =>{
         >
             <Progress.Bar
                 width={null}
-                progress={barProgress}
+                progress={barProgress} 
+                borderRadius={6}
                 height={props.height ? props.height : 6}
-                borderRadius={100}
                 borderWidth={0}
                 unfilledColor={props.colorBarTotal}
-                color={props.colorBarLeft}
-            />
+                color={props.colorBarLeft}>
+            </Progress.Bar>
         </ProgressView>
     )
 }

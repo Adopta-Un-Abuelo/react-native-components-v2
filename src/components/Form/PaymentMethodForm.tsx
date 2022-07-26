@@ -20,7 +20,7 @@ const PaymentMethodForm = forwardRef((props: Props, ref: Ref<PaymentMethodFormRe
         if(cardDetails){
             try{
                 const result = await createPaymentMethod({
-                    type: 'Card',
+                    paymentMethodType: 'Card',
                     billingDetails:{
                         name: props.currentUser.name,
                         phone: props.currentUser.phone,

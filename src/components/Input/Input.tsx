@@ -21,7 +21,7 @@ const InputStyled = styled.TextInput<{isFocused: boolean | undefined, hasValue: 
     height: 100%;
     padding: 0px;
     color: ${Color.text.primaryBlack};
-    margin-top: ${props => ((props.isFocused || props.hasValue) && !props.hideTitle) ? '18px' : '0px'};
+    margin-top: ${props => ((props.isFocused || props.hasValue) && !props.hideTitle) ? '10px' : '0px'};
 `
 const IconView = styled.View`
     height: 24px;
@@ -30,6 +30,9 @@ const IconView = styled.View`
 `
 const InputView = styled.View`
     flex: 1;
+`
+const Row = styled.View`
+    flex-direction: row;
 `
 
 const InputComponent = forwardRef((props: Props, ref: Ref<InputRef>) =>{
@@ -88,28 +91,38 @@ const InputComponent = forwardRef((props: Props, ref: Ref<InputRef>) =>{
                 {((!currentPlaceholder || value) && !props.hideTitle) &&
                     <Text
                         type='c1'
-                        style={{position: 'absolute', top: 8, color: Color.text.high}}
+                        style={{position: 'absolute', color: Color.text.high}}
                     >
                         {props.placeholder}
                     </Text>
                 }
-                <InputStyled
-                    ref={input}
-                    caretHidden={true}
-                    selectionColor={Color.text.primary}
-                    onFocus={onFocus}
-                    onBlur={onBlur}
-                    placeholder={currentPlaceholder}
-                    onChangeText={onChangeText}
-                    isFocused={isFocused}
-                    hasValue={value ? true : false}
-                    placeholderTextColor={Color.text.high}
-                    maxLength={props.maxLength}
-                    keyboardType={props.keyboardType}
-                    textAlignVertical={props.alignVertical ? 'top' : 'auto'}
-                    multiline={props.multiline}
-                    {...rest}
-                />
+                <Row>
+                    <InputStyled
+                        ref={input}
+                        caretHidden={true}
+                        selectionColor={Color.text.primary}
+                        onFocus={onFocus}
+                        onBlur={onBlur}
+                        placeholder={currentPlaceholder}
+                        onChangeText={onChangeText}
+                        isFocused={isFocused}
+                        hasValue={value ? true : false}
+                        placeholderTextColor={Color.text.high}
+                        maxLength={props.maxLength}
+                        keyboardType={props.keyboardType}
+                        textAlignVertical={props.alignVertical ? 'top' : 'auto'}
+                        multiline={props.multiline}
+                        {...rest}
+                    />
+                    {props.showEuro &&
+                        <Text
+                            type='h4'
+                            weight='regular'
+                        >
+                            €
+                        </Text>
+                    }
+                </Row>
             </InputView>
         </Container>
     )
@@ -138,7 +151,8 @@ export interface Props{
     returnKeyType?: 'done' | 'go' | 'next' | 'search' | 'send',
     type?: 'small' | 'big',
     multiline?: boolean,
-    alignVertical?: boolean
+    alignVertical?: boolean,
+    showEuro?: boolean
 }
 export interface InputRef{
     focus: () => void,

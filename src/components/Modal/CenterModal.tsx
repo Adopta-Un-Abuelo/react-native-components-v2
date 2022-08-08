@@ -2,17 +2,18 @@ import React, {FC, useEffect, useState} from "react";
 import styled from 'styled-components/native';
 import Modal from './Modal';
 import Text from '../Text/Text';
-import Button from '../Button/Button';
 import { Color } from '../../constants';
 
 const ContentView = styled.Pressable`
     align-items: center;
     padding-top: 12px;
-    padding-bottom: 24px;
 `
-const ButtonView = styled.View`
+const ButtonContainer = styled.View`
     flex-direction: row;
     margin-top: 32px;
+`
+const ButtonView = styled.Pressable`
+    flex: 1
 `
 
 const CenterModal: FC <Props> = props =>{
@@ -58,19 +59,30 @@ const CenterModal: FC <Props> = props =>{
                         {props.subtitle}
                     </Text>
                 }
-                <ButtonView>
-                    <Button
-                        style={{flex: 1, marginRight: 4, backgroundColor: Color.background.soft}}
-                        color={Color.text.high}
-                        title={props.translation.general_btn_cancel}
+                <ButtonContainer>
+                    <ButtonView
                         onPress={onDismiss}
-                    />
-                    <Button
-                        style={{flex: 1, marginLeft: 4}}
-                        title={props.buttonTitle}
+                    >
+                        <Text
+                            type='b1'
+                            weight='medium'
+                            style={{textAlign: 'center'}}
+                        >
+                            {props.translation.general_btn_cancel}
+                        </Text>
+                    </ButtonView>
+                    <ButtonView
                         onPress={onPress}
-                    />
-                </ButtonView>
+                    >
+                        <Text
+                            type='b1'
+                            weight='medium'
+                            style={{textAlign: 'center', color: props.buttonColor ? props.buttonColor : Color.text.primary}}
+                        >
+                            {props.buttonTitle}
+                        </Text>
+                    </ButtonView>
+                </ButtonContainer>
             </ContentView>
         </Modal>
     )
@@ -86,5 +98,6 @@ export interface Props{
     title: string,
     subtitle?: string,
     buttonTitle: string,
-    icon?: any
+    buttonColor?: string,
+    icon?: any,
 }

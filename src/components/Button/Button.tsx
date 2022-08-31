@@ -8,8 +8,8 @@ import LinearGradient from 'react-native-linear-gradient';
 
 const Container = styled.Pressable<{type?: 'line' | 'fill', color?: string, size?: 'small' | 'big'}>`
     flex-direction: row;
-    height: ${props => props.size === 'small' ? '48px' : '56px'};
-    border-radius: 12px;
+    height: ${props => props.size === 'small' ? '44px' : '56px'};
+    border-radius:  ${props => props.size === 'small' ? '100px' : '12px'};
     background-color: ${props => props.type === 'line' ? 'transparent' : (props.color ? props.color : Color.status.primary.default)};
     align-items: center;
     justify-content: center;
@@ -25,7 +25,7 @@ const Gradient = styled(LinearGradient)`
     bottom: 0;
     right: 0;
     left: 0;
-    border-radius: 12px;
+    border-radius: 100px;
 `
 
 const Button = (props: Props) =>{

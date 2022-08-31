@@ -10,8 +10,8 @@ const TextCaption = (props: Props) =>{
         <Text
             style={{
                 fontFamily: weight === 'medium' ? 'Poppins-Medium' : 'Poppins-Regular',
-                fontSize: 12,
-                lineHeight: 18,
+                fontSize: 13,
+                lineHeight: 20,
                 color: Color.text.full,
                 ...style
             }}
@@ -23,8 +23,8 @@ const TextCaption = (props: Props) =>{
         <Text
             style={{
                 fontFamily: weight === 'medium' ? 'Poppins-Medium' : 'Poppins-Regular',
-                fontSize: 10,
-                lineHeight: 14,
+                fontSize: 12,
+                lineHeight: 18,
                 color: Color.text.full,
                 ...style
             }}

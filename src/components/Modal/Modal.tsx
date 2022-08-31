@@ -17,7 +17,7 @@ const ModalView = styled(SafeAreaView)<{orientation?: 'top' | 'bottom' | 'center
     border-top-right-radius: ${props => (props.orientation === 'bottom' || props.orientation === 'fullScreen') ? '24px' : '12px'};
     border-bottom-left-radius: ${props => (props.orientation === 'bottom' || props.orientation === 'fullScreen') ? '0px' : '12px'};
     border-bottom-right-radius: ${props => (props.orientation === 'bottom' || props.orientation === 'fullScreen') ? '0px' : '12px'};
-    padding: ${props => props.noPadding ? '0px' : '0px 16px'};
+    padding: ${props => props.noPadding ? '0px' : '8px 16px'};
     background-color: ${Color.background.neutral};
 `
 const SwipeView = styled.View`
@@ -43,6 +43,7 @@ const CloseButton = styled.Pressable`
     width: 56px;
     justify-content: center;
     z-index: 1000;
+    paddingLeft: 8px;
 `
 const TitleCenterView = styled.View`
     flex: 1;

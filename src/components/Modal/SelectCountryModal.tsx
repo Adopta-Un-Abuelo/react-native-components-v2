@@ -12,7 +12,7 @@ const Cell = styled.Pressable`
     align-items: center;
     margin-left: -24px;
     margin-right: -24px;
-    padding: 16px 24px;
+    padding: 16px 32px;
     border-bottom-width: 1px;
     border-bottom-color: ${Color.line.soft};
 `
@@ -82,7 +82,7 @@ const SelectCountryModal: FC<Props> = props =>{
         >
             {props.showSearch &&
                 <Input
-                    style={{marginBottom: 12, height: 48}}
+                    style={{marginBottom: 12, height: 48, borderRadius: 100}}
                     placeholder={props.translation ? props.translation.general_btn_search : 'Buscar'}
                     icon={Search}
                     hideTitle={true}

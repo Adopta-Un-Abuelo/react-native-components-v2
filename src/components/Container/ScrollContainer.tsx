@@ -88,7 +88,8 @@ export interface Props{
         noHeader?: boolean,
         backButtonStyle?: any,
         style?: StyleMedia,
-        Header?: any
+        Header?: any,
+        backgroundColor?: string
     }
     buttonProps?: any,
     secondButtonProps?: any,

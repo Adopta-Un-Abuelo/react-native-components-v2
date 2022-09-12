@@ -5,13 +5,16 @@ import Color from '../../constants/Color';
 import Text from '../Text/Text';
 
 const Container = styled.View<{error?: boolean, isFocused: boolean | undefined, type?: string}>`
-    height: ${props => props.type === 'small' ? '48px' : '56px'};
+    height: ${props => props.type === 'small' ? '48px' : props.type === 'big' ? undefined : '56px'};
+    min-height: ${props => props.type === 'big' ? '160px' : undefined};
     border-color: ${props => props.error ? Color.status.color.error : props.isFocused ? Color.line.primarySoft : Color.line.soft};
     border-width: ${props => props.type === 'small' ? '0px' : (props.error || props.isFocused ? '2px' : '1px')};
     border-radius: 12px;
-    align-items: center;
+    align-items: ${props => props.type === 'big' ? undefined : 'center'};
     flex-direction: row;
     padding: 0px 16px;
+    padding-top: ${props => props.type === 'big' ? '16px' : '0px'};
+    padding-bottom: ${props => props.type === 'big' ? '16px' : '0px'};
     background-color: ${props => props.type === 'small' ? Color.background.soft : Color.background.neutral};
 `
 const InputStyled = styled.TextInput<{isFocused: boolean | undefined, hasValue: boolean, hideTitle?: boolean}>`
@@ -34,8 +37,10 @@ const InputView = styled.View`
 const Row = styled.View`
     flex-direction: row;
 `
+const Column = styled.View`
+`
 
-const InputComponent = forwardRef((props: Props, ref: Ref<InputRef>) =>{
+const Input = forwardRef((props: Props, ref: Ref<InputRef>) =>{
 
     const input = useRef<TextInput>();
     const [ isFocused, setIsFocused ] = useState<boolean>(false);
@@ -56,6 +61,10 @@ const InputComponent = forwardRef((props: Props, ref: Ref<InputRef>) =>{
         setCurrentPlaceholder(props.placeholder);
     },[props.placeholder]);
 
+    useEffect(() =>{
+        console.log('esrsaer')
+    },[value]);
+
     const onFocus = () =>{
         setIsFocused(true);
         setCurrentPlaceholder(undefined);
@@ -68,66 +77,79 @@ const InputComponent = forwardRef((props: Props, ref: Ref<InputRef>) =>{
         props.onBlur && props.onBlur();
     }
 
-    const onChangeText = text =>{
-        if(text && text.length > 0) setValue(text);
-        else setValue(undefined);
+    const onChangeText = (text) => {
+        if(text && text.length > 0) 
+            setValue(text);
+        else 
+            setValue(undefined);
+        // setChars((1000 - text.length).toString());
         props.onChangeText && props.onChangeText(text);
     }
 
     return(
-        <Container
-            style={style}
-            error={props.error}
-            isFocused={isFocused}
-            type={props.type}
-        >
-            {props.icon &&
-                <IconView>
-                    <props.icon color={props.error ? Color.status.color.error : Color.text.primaryBlack}/>
-                </IconView>
-            }
-            {children}
-            <InputView>
-                {((!currentPlaceholder || value) && !props.hideTitle) &&
-                    <Text
-                        type='c1'
-                        style={{position: 'absolute', color: Color.text.high}}
-                    >
-                        {props.placeholder}
-                    </Text>
+        <Column>
+            <Container
+                style={style}
+                error={props.error}
+                isFocused={isFocused}
+                type={props.type}
+            >
+                {props.icon &&
+                    <IconView>
+                        <props.icon color={props.error ? Color.status.color.error : Color.text.primaryBlack}/>
+                    </IconView>
                 }
-                <Row>
-                    <InputStyled
-                        ref={input}
-                        caretHidden={true}
-                        selectionColor={Color.text.primary}
-                        onFocus={onFocus}
-                        onBlur={onBlur}
-                        placeholder={currentPlaceholder}
-                        onChangeText={onChangeText}
-                        isFocused={isFocused}
-                        hasValue={value ? true : false}
-                        placeholderTextColor={Color.text.high}
-                        maxLength={props.maxLength}
-                        keyboardType={props.keyboardType}
-                        textAlignVertical={props.alignVertical ? 'top' : 'auto'}
-                        multiline={props.multiline}
-                        {...rest}
-                    />
-                    {props.showEuro &&
+                {children}
+                <InputView>
+                    {((!currentPlaceholder || value) && !props.hideTitle) &&
                         <Text
-                            type='h4'
-                            weight='regular'
+                            type='c1'
+                            style={{position: 'absolute', color: Color.text.high}}
                         >
-                            €
+                            {props.placeholder}
                         </Text>
                     }
-                </Row>
-            </InputView>
-        </Container>
+                    <Row>
+                        <InputStyled
+                            ref={input}
+                            caretHidden={true}
+                            selectionColor={Color.text.primary}
+                            onFocus={onFocus}
+                            onBlur={onBlur}
+                            placeholder={currentPlaceholder}
+                            onChangeText={onChangeText}
+                            isFocused={isFocused}
+                            hasValue={value ? true : false}
+                            placeholderTextColor={Color.text.high}
+                            maxLength={props.maxLength}
+                            keyboardType={props.keyboardType}
+                            multiline={props.multiline}
+                            {...rest}
+                        />
+                        {props.showEuro &&
+                            <Text
+                                type='h4'
+                                weight='regular'
+                            >
+                                €
+                            </Text>
+                        }
+                    </Row>
+                </InputView>
+            </Container>
+            {/* {props.type === 'big' && 
+                <Text
+                    type='c1'
+                    weight='regular'
+                    style={{color: Color.text.high, marginLeft: 16, marginTop: 4}}
+                >
+                    /1000 caracteres
+                </Text>
+            } */}
+        </Column>
     )
 });
-export default InputComponent;
+export default Input;
 export interface Props{
     id?: string,
     ref?: any,
@@ -151,7 +173,6 @@ export interface Props{
     returnKeyType?: 'done' | 'go' | 'next' | 'search' | 'send',
     type?: 'small' | 'big',
     multiline?: boolean,
-    alignVertical?: boolean,
     showEuro?: boolean
 }
 export interface InputRef{

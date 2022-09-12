@@ -33,7 +33,7 @@ const NavigationBar: FC<Props> = props => {
     const showBackButton = (!props.hideBackButton && props.navigation && props.navigation.canGoBack()) ? true : false;
 
     const MIN_HEADER_HEIGHT = 56;
-    const MAX_HEADER_HEIGHT = (props.title && props.subtitle) ? 120 : ((!props.subtitle && !props.title) ? 56 : 100);
+    const MAX_HEADER_HEIGHT = (props.title && props.subtitle) ? 120 : ((!props.subtitle && !props.title) ? 56 : 84);
 
     const headerHeight = props.animatedValue ? props.animatedValue.interpolate({
         inputRange: [0, MAX_HEADER_HEIGHT],
@@ -63,7 +63,7 @@ const NavigationBar: FC<Props> = props => {
 
     // Title Font
     const MIN_TITLE_FONT = 18;
-    const MAX_TITLE_FONT = 32;
+    const MAX_TITLE_FONT = 24;
 
     const titleFont = props.animatedValue ? props.animatedValue.interpolate({
         inputRange: [0, MAX_HEADER_HEIGHT],

@@ -19,7 +19,7 @@ export const keyStyle = StyleSheet.create({
         width: 72,
         borderRadius: 72/2,
         margin: 8,
-        backgroundColor: Color.status.neutral.default,
+        backgroundColor: Color.status.neutralDark.default,
     },
     bd: {
         flex: 1,
@@ -67,7 +67,7 @@ const Keyboard: FC<Props> = props =>{
                 key={index}
                 activeOpacity={1}
                 style={keyStyle.wrapperIn}
-                underlayColor={Color.status.neutral.pressed}
+                underlayColor={Color.status.neutralDark.active}
                 onPress={() => _onPress(key.mainText)}
             >
                 <View style={[keyStyle.bd]}>

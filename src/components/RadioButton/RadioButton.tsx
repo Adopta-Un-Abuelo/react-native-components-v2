@@ -16,11 +16,11 @@ const Cell = styled.Pressable`
     border-bottom-color: ${Color.line.soft};
 `
 const CircleView = styled.View<{selected: boolean}>`
-    height: 24px;
-    width: 24px;
+    height: 20px;
+    width: 20px;
     background-color: ${props => props.selected ? Color.background.primary : Color.background.primaryLow};
-    border-radius: 200px;
-    border-width: 1px;
+    border-radius: 4px;
+    border-width: 2px;
     border-color: ${props => props.selected ? Color.background.primary : Color.line.primarySoft};
     justify-content: center;
     align-items: center;
@@ -57,7 +57,7 @@ const RadioButton: FC <Props> = props =>{
                         <CircleView
                             selected={selected}
                         >
-                            {selected && <Check width={18} height={18} color={Color.text.white}/>}
+                            {selected && <Check width={14} height={14} color={Color.text.white}/>}
                         </CircleView>
                     </Cell>
                 )

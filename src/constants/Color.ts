@@ -66,9 +66,15 @@ const Color = {
             pressed: '#C76B00'
         },
         neutral: {
-            default: '#FFFFFF',
+            default: '#00000000',
             hover: '#0000000D',
-            pressed: '#0000001F'
+            active: '#0000001F',
+            activeHover: '#0000003D'
+        },
+        neutralDark: {
+            default: '#FFFFFF1F',
+            hover: '#FFFFFF52',
+            active: '#FFFFFF7A'
         },
         color: {
             success: '#08A85B',

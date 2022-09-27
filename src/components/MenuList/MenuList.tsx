@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { ViewStyle } from 'react-native';
-import { Menu } from 'react-native-lucide';
+import { MoreHorizontal } from 'react-native-lucide';
 import ButtonImage from '../Button/ButtonImage';
 import SelectionModal from '../Modal/SelectionModal';
 
@@ -22,7 +22,7 @@ const MenuList = (props: Props) =>{
             <props.icon onPress={onButtonPress}/>
         :
             <ButtonImage
-                icon={Menu}
+                icon={MoreHorizontal}
                 style={props.style}
                 onPress={onButtonPress}
             />

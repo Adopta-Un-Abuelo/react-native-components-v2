@@ -9,7 +9,7 @@ import LinearGradient from 'react-native-linear-gradient';
 const Container = styled.Pressable<{type?: 'line' | 'fill', color?: string, size?: 'small' | 'big'}>`
     flex-direction: row;
     height: ${props => props.size === 'small' ? '44px' : '56px'};
-    border-radius:  ${props => props.size === 'small' ? '100px' : '12px'};
+    border-radius:  ${props => props.size === 'small' ? '100px' : '100px'};
     background-color: ${props => props.type === 'line' ? 'transparent' : (props.color ? props.color : Color.status.primary.default)};
     align-items: center;
     justify-content: center;

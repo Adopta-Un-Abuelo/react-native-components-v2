@@ -72,7 +72,8 @@ export interface Props{
         noHeader?: boolean,
         backButtonStyle?: any,
         Header?: any,
-        backgroundColor?: string
+        backgroundColor?: string,
+        textContainerStyle?: Object
     }
     title?: string,
     subtitle?: string,

@@ -80,17 +80,17 @@ const SelectCountryModal: FC<Props> = props =>{
             onDismiss={onDismiss}
             onModalHide={onModalHide}
         >
-            {props.showSearch &&
+            {/* {props.showSearch &&
                 <Input
                     style={{marginBottom: 12, height: 48, borderRadius: 100}}
-                    placeholder={props.translation ? props.translation.general_btn_search : 'Buscar'}
+                    placeholder={props.translation ? props.translation('sign_up.phone.modal.search') : 'Buscar'}
                     icon={Search}
                     hideTitle={true}
                     returnKeyType={'search'}
                     onChangeText={onSearchChange}
                     type={'small'}
                 />
-            }
+            } */}
             <Scroll>
                 {countries.map((item, index) =>(
                     <Cell
@@ -115,9 +115,7 @@ const SelectCountryModal: FC<Props> = props =>{
 }
 export default SelectCountryModal;
 export interface Props{
-    translation: {
-        [key: string]: any
-    },
+    translation: any,
     onPress?: Function,
     onDismiss?: Function,
     visible: boolean,
@@ -133,5 +131,5 @@ export interface Props{
         icon?: any
     }>,
     locale: string,
-    showSearch?: boolean
+    // showSearch?: boolean
 }

@@ -115,7 +115,8 @@ const NavigationBar: FC<Props> = props => {
                 style={{
                     left: titleSides,
                     right: titleSides,
-                    bottom: titleBottom
+                    bottom: titleBottom,
+                    ...props.textContainerStyle
                 }}
             >
                 {props.title &&
@@ -175,5 +176,6 @@ export interface Props{
     subtitle?: string,
     headerRight?: any,
     animatedValue?: Animated.Value,
-    backgroundColor?: string
+    backgroundColor?: string,
+    textContainerStyle?: Object
 }

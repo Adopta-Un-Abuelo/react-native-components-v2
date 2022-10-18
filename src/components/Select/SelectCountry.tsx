@@ -12,6 +12,7 @@ const Container = styled.View`
 const SelectStyled = styled.Pressable`
     display: flex;
     flex-direction: row;
+    z-index: 1000;
 `
 const Icon = styled.View`
     height: 24px;
@@ -89,9 +90,7 @@ const SelectCountry = (props: Props) =>{
 }
 export default SelectCountry;
 export interface Props{
-    translation: {
-        [key: string]: any
-    },
+    translation: any,
     textStyle?: TextStyle,
     style?: ViewStyle,
     selectedCountry?: {

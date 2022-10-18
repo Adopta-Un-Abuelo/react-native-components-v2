@@ -47,7 +47,7 @@ const PlaceInput = forwardRef((props: Props, ref: Ref<InputRef>) =>{
         <Modal
             translation={props.translation}
             visible={showModal}
-            title={props.translation ? props.translation.input_place_search_direction : 'Buscar localización'}
+            title={props.translation ? props.translation('sign_up.city.modal.title') : 'Busca tu ciudad'}
             orientation={'fullScreen'}
             onDismiss={onDismiss}
             showTopClose={true}
@@ -59,7 +59,7 @@ const PlaceInput = forwardRef((props: Props, ref: Ref<InputRef>) =>{
                     key: props.apiMapsKey,
                     language: props.currentLocale,
                 }}
-                placeholder={props.placeholder ? props.placeholder : ''}
+                placeholder={props.translation ? props.translation('sign_up.city.modal.search') : 'Buscar'}
                 onPress={(data, details = null) => {
                     onAddressPress(data, details);
                 }}
@@ -75,18 +75,19 @@ const PlaceInput = forwardRef((props: Props, ref: Ref<InputRef>) =>{
                 styles={{
                     textInputContainer:{
                         height: 48,
-                        borderColor: props.error ? Color.status.color.error : (isFocused ? Color.line.primarySoft : Color.line.soft),
+                        borderColor: props.error ? Color.status.color.error : (isFocused ? Color.line.low : Color.line.low),
                         borderWidth: 1,
-                        borderRadius: 12,
+                        borderRadius: 100,
                         paddingRight: 8,
                         paddingLeft: 8,
-                        backgroundColor: Color.background.neutral,
+                        backgroundColor: Color.background.soft,
                         marginTop: 16
                     },
                     textInput:{
                         fontFamily: 'Poppins-Regular',
+                        backgroundColor: undefined,
                         fontSize: 15,
-                        color: Color.text.full,
+                        color: Color.text.full
                     },
                     description:{
                         fontFamily: 'Poppins-Regular',
@@ -103,9 +104,7 @@ export default PlaceInput;
 export interface Props{
     apiMapsKey: string
     currentLocale: string,
-    translation: {
-		[key: string]: any
-	},
+    translation: any,
     ref?: any,
     style: Object,
     onChange: Function,

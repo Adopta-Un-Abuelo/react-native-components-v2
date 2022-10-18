@@ -12,8 +12,8 @@ const Cell = styled.Pressable`
     align-items: center;
 `
 const CellContent = styled.View<{selected: boolean}>`
-    height: 72px;
-    width: 72px;
+    height: 92px;
+    width: 92px;
     border-radius: 12px;
     border-width: ${props => props.selected ? '2px' : '1px'};
     border-color: ${props => props.selected ? Color.line.primary : Color.line.soft};
@@ -50,18 +50,14 @@ const OptionSelect: FC<Props> = props =>{
                         selected={selectedItem?.id === item.id}
                     >
                         <item.icon color={Color.text.full} height={24} width={24}/>
-                    </CellContent>
-                    <Container
-                        style={{marginTop: 4, alignItems: 'center'}}
-                    >
                         <Text
                             type='p1'
                             weight='medium'
-                            style={{textAlign: 'center'}}
+                            style={{textAlign: 'center', marginTop: 12}}
                         >
                             {item.title}
                         </Text>
-                    </Container>
+                    </CellContent>
                 </Cell>
             ))}
         </Container>

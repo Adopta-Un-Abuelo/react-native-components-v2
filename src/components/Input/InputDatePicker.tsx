@@ -18,7 +18,7 @@ const DateInput = (props: Props) =>{
     }
 
     const onSave = () =>{        
-        const temp = new Intl.DateTimeFormat(props.currentLocale, {month: 'short', day: 'numeric', year: 'numeric'}).format(selectedDate);
+        const temp = new Intl.DateTimeFormat(props.currentLocale, {month: '2-digit', day: '2-digit', year: '2-digit'}).format(selectedDate);
         setDateInputValue(temp);
         setShowModal(false);
         props.onChange && props.onChange(selectedDate)
@@ -26,41 +26,38 @@ const DateInput = (props: Props) =>{
 
     return(
         <>
-        <Modal
-            visible={showModal}
-            orientation={'bottom'}
-            title={props.translation?.input_date_picker_birthday}
-            buttonProps={{
-                title: props.translation?.general_btn_save,
-                onPress: onSave
-            }}
-            onDismiss={() => setShowModal(false)}
-        >
-            <DatePicker
-                date={selectedDate}
-                mode={props.mode}
-                minimumDate={props.minimumDate}
-                maximumDate={props.maximumDate}
-                androidVariant={'iosClone'}
-                onDateChange={onDateChange}
-                locale={props.currentLocale}
+            <Modal
+                visible={showModal}
+                orientation={'bottom'}
+                buttonProps={{
+                    title: props.translation('general_save'),
+                    onPress: onSave
+                }}
+                onDismiss={() => setShowModal(false)}
+            >
+                <DatePicker
+                    date={selectedDate}
+                    mode={props.mode}
+                    minimumDate={props.minimumDate}
+                    maximumDate={props.maximumDate}
+                    androidVariant={'iosClone'}
+                    onDateChange={onDateChange}
+                    locale={props.currentLocale}
+                />
+            </Modal>
+            <InputFalse
+                style={props.style}
+                value={dateInputValue}
+                placeholder={props.placeholder}
+                onPress={onInputFocus}
             />
-        </Modal>
-        <InputFalse
-            style={props.style}
-            value={dateInputValue}
-            placeholder={props.placeholder}
-            onPress={onInputFocus}
-        />
         </>
     )
 }
 export default DateInput;
 export interface Props{
     currentLocale: string,
-    translation?: {
-		[key: string]: any
-	},
+    translation?: any,
     style?: Object,
     error?: boolean,
     onChange?: Function,

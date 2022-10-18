@@ -7,7 +7,7 @@ import Text from '../Text/Text';
 const Container = styled.View<{error?: boolean, isFocused: boolean | undefined, type?: string}>`
     height: ${props => props.type === 'small' ? '48px' : props.type === 'big' ? undefined : '56px'};
     min-height: ${props => props.type === 'big' ? '160px' : undefined};
-    border-color: ${props => props.error ? Color.status.color.error : props.isFocused ? Color.line.primarySoft : Color.line.soft};
+    border-color: ${props => props.error ? Color.status.color.error : props.isFocused ? Color.line.full : Color.line.soft};
     border-width: ${props => props.type === 'small' ? '0px' : (props.error || props.isFocused ? '2px' : '1px')};
     border-radius: 12px;
     align-items: ${props => props.type === 'big' ? undefined : 'center'};
@@ -61,9 +61,7 @@ const Input = forwardRef((props: Props, ref: Ref<InputRef>) =>{
         setCurrentPlaceholder(props.placeholder);
     },[props.placeholder]);
 
-    useEffect(() =>{
-        console.log('esrsaer')
-    },[value]);
+    // useEffect(() =>{ },[value]);
 
     const onFocus = () =>{
         setIsFocused(true);
@@ -103,7 +101,7 @@ const Input = forwardRef((props: Props, ref: Ref<InputRef>) =>{
                 <InputView>
                     {((!currentPlaceholder || value) && !props.hideTitle) &&
                         <Text
-                            type='c1'
+                            type='c2'
                             style={{position: 'absolute', color: Color.text.high}}
                         >
                             {props.placeholder}

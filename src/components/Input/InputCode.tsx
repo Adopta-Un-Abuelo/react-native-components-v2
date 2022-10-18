@@ -13,7 +13,7 @@ const Input = styled.TextInput<{error?: boolean, isFocused?: boolean, ref?: any}
     width: 48px;
     border-radius: 12px;
     border-width: ${props => props.isFocused ? '2px' : '1px'};
-    border-color: ${props => props.isFocused ? Color.line.primarySoft : Color.line.soft};
+    border-color: ${props => props.isFocused ? Color.line.full : Color.line.soft};
     text-align: center;
     justify-content: center;
     margin-right: 4px;

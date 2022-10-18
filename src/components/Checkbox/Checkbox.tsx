@@ -14,13 +14,13 @@ const Cell = styled.Pressable`
     align-items: center;
 `
 const CheckButton = styled.View<{selected: boolean, error?: boolean}>`
-    background-color: ${props => props.selected ? Color.background.primary : Color.background.primaryLow};
+    background-color: ${props => props.selected ? Color.background.primary : Color.background.neutral};
     border-radius: 4px;
-    height: 24px;
-    width: 24px;
+    height: 18px;
+    width: 18px;
     align-items: center;
     justify-content: center;
-    border-width: ${props => props.error ? '2px' : '1px'};
+    border-width: 2px;
     border-color: ${props => props.error ? Color.status.color.error : (props.selected ? Color.line.primary : Color.line.primarySoft)};
 `
 const DataView = styled.View`
@@ -65,7 +65,7 @@ const Checkbox = (props: Props) =>{
                             error={props.error}
                         >
                             {selected &&
-                                <Check height={18} width={18} color={Color.text.white} />
+                                <Check height={14} width={14} color={Color.text.white} />
                             }
                         </CheckButton>
                         <DataView>

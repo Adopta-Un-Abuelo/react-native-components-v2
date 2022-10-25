@@ -75,18 +75,26 @@ const VideoModal: FC<Props> = props =>{
         >
             <VideoContainer>
                 <Header>
-                    <CloseButton
-                        onPress={onVideoEnd}
-                    >
-                        <X color={Color.text.white}/>
-                    </CloseButton>
-                    <Text
-                        type='b2'
-                        weight={props.skipIn >= videoProgress ? 'medium' : 'bold'}
-                        style={{color: props.skipIn >= videoProgress ? Color.text.whiteHigh : Color.text.white}}
-                    >
-                        {props.skipIn >= videoProgress ? props.translation.modal_video_skip_in+' '+ new Date((props.skipIn - videoProgress) * 1000).toISOString().substr(14, 5) : props.translation.modal_video_skip}
-                    </Text>
+                    {props.skipIn === 0 ? 
+                        undefined
+                        :
+                        <CloseButton
+                            onPress={onVideoEnd}
+                        >
+                            <X color={Color.text.white}/>
+                        </CloseButton>
+                    }
+                    {props.skipIn === 0 ? 
+                        undefined
+                        :
+                        <Text
+                            type='b2'
+                            weight={props.skipIn >= videoProgress ? 'medium' : 'bold'}
+                            style={{color: props.skipIn >= videoProgress ? Color.text.whiteHigh : Color.text.white}}
+                        >
+                            {props.skipIn >= videoProgress ? props.translation.modal_video_skip_in+' '+ new Date((props.skipIn - videoProgress) * 1000).toISOString().substr(14, 5) : props.translation.modal_video_skip}
+                        </Text>
+                    }
                 </Header>
                 <VideoView>
                     <Video

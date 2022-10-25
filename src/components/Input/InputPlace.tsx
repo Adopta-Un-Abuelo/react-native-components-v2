@@ -43,6 +43,7 @@ const PlaceInput = forwardRef((props: Props, ref: Ref<InputRef>) =>{
             style={props.style}
             placeholder={props.placeholder}
             value={address}
+            error={props.error}
         />
         <Modal
             translation={props.translation}
@@ -75,7 +76,7 @@ const PlaceInput = forwardRef((props: Props, ref: Ref<InputRef>) =>{
                 styles={{
                     textInputContainer:{
                         height: 48,
-                        borderColor: props.error ? Color.status.color.error : (isFocused ? Color.line.low : Color.line.low),
+                        borderColor: Color.line.low,
                         borderWidth: 1,
                         borderRadius: 100,
                         paddingRight: 8,

@@ -15,11 +15,12 @@ export const keyStyle = StyleSheet.create({
         flexDirection: 'row'
     },
     wrapperIn: {
-        height: 72,
-        width: 72,
-        borderRadius: 72/2,
+        height: 48,
+        width: 48,
+        borderRadius: 48/2,
         margin: 8,
-        backgroundColor: Color.status.neutralDark.default,
+        borderColor: Color.line.soft,
+        borderWidth: 1
     },
     bd: {
         flex: 1,
@@ -32,26 +33,13 @@ const numberKeys = [
     [
         { mainText: '1' },
         { mainText: '2' },
-        { mainText: '3' }
-    ],
-    [
+        { mainText: '3' },
         { mainText: '4' },
-        { mainText: '5' },
-        { mainText: '6' }
-    ],
-    [
-        { mainText: '7' },
-        { mainText: '8' },
-        { mainText: '9' }
-    ],
-    [
-        { mainText: '*' },
-        { mainText: '0' },
-        { mainText: '#' }
+        { mainText: '5' }
     ]
 ];
 
-const KeyboardPhone: FC<Props> = props =>{
+const KeyboardRating: FC<Props> = props =>{
         
     const _onPress = key =>{
         if (key === '') {
@@ -102,7 +90,7 @@ const KeyboardPhone: FC<Props> = props =>{
     );
 }
 
-export default KeyboardPhone;
+export default KeyboardRating;
 export interface Props {
     onKeyPress?: Function,
     ref?: any

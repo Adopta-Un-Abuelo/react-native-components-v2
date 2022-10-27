@@ -7,18 +7,17 @@ import Button from '../Button/Button';
 
 const Container = styled.View`
 `
-const ButtonView = styled.View`
+const ButtonView = styled.Pressable`
     flex-direction: row;
-    padding: 0px 56px;
 `
 
 const CheckboxButton = (props: Props) =>{
 
-    const [ selection, setSelection ] = useState<number>(undefined);
+    const [ selection, setSelection ] = useState<number>(0);
 
     const onCellPress = (id) => {
         setSelection(id);
-        const answer = id === 1 ? props.translation.general_no : props.translation.general_yes;
+        const answer = id === 1 ? 'false' : 'true';
         props.onChange && props.onChange(answer);
     }
 
@@ -28,15 +27,27 @@ const CheckboxButton = (props: Props) =>{
         >
             <ButtonView>
                 <Button
-                    style={{flex: 1, marginRight: 4, backgroundColor: props.error && selection === 1 ? Color.status.color.error : selection === 1 ? Color.status.primary.default : Color.status.primary.softDefault}}
-                    color={selection === 1 ? Color.text.white : Color.text.primary}
+                    style={{
+                        flex: 1, 
+                        borderWidth: props.error && selection === 1 ? 2 : selection === 1 ? 2 : 1, 
+                        borderColor: props.error && selection === 1 ? Color.status.color.error : selection === 1 ? Color.line.greenSoft : Color.line.soft, 
+                        marginRight: 4, 
+                        backgroundColor: props.error && selection === 1 ? Color.status.color.errorDefault : selection === 1 ? Color.status.color.successDefault: undefined
+                    }}
+                    color={selection === 1 ? Color.text.full : Color.text.high}
                     title={props.translation.general_no}
                     size='small'
                     onPress={() => onCellPress(1)}
                 />
                 <Button
-                    style={{flex: 1, marginLeft: 4, backgroundColor: props.error && selection === 2 ? Color.status.color.error : selection === 2 ? Color.status.primary.default : Color.status.primary.softDefault}}
-                    color={selection === 2 ? Color.text.white : Color.text.primary}
+                    style={{
+                        flex: 1, 
+                        borderWidth: props.error && selection === 2 ? 2 : selection === 2 ? 2 : 1, 
+                        borderColor: props.error && selection === 2 ? Color.status.color.error : selection === 2 ? Color.line.greenSoft : Color.line.soft, 
+                        marginLeft: 4, 
+                        backgroundColor: props.error && selection === 2 ? Color.status.color.errorDefault : selection === 2 ? Color.status.color.successDefault : undefined
+                    }}
+                    color={selection === 2 ? Color.text.full : Color.text.high}
                     title={props.translation.general_yes}
                     size='small'
                     onPress={() => onCellPress(2)}
@@ -44,9 +55,9 @@ const CheckboxButton = (props: Props) =>{
             </ButtonView>
             {props.error &&
                 <Text
-                    type='p2'
+                    type='b2'
                     weight='medium'
-                    style={{marginTop: 4, textAlign: 'center', color: Color.status.color.error}}
+                    style={{marginTop: 48, color: Color.status.color.error}}
                 >
                     {props.translation.general_cb_error}
                 </Text>

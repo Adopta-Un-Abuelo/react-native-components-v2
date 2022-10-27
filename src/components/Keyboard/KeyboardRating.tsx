@@ -1,9 +1,9 @@
-import React, { FC } from 'react';
-import { View, TouchableHighlight, StyleSheet } from 'react-native';
+import React, { FC, useState } from 'react';
+import { View, TouchableHighlight, StyleSheet, ViewStyle } from 'react-native';
 import Text from '../Text/Text';
 import Color from '../../constants/Color';
 
-export const keyStyle = StyleSheet.create({
+export const keyStyle = (isPressing) => StyleSheet.create({
     wrapperOut: {
         flexDirection: 'row'
     },
@@ -19,8 +19,8 @@ export const keyStyle = StyleSheet.create({
         width: 48,
         borderRadius: 48/2,
         margin: 8,
-        borderColor: Color.line.soft,
-        borderWidth: 1
+        borderColor: isPressing ? Color.line.primary : Color.line.soft,
+        borderWidth: isPressing ? 2 : 1
     },
     bd: {
         flex: 1,
@@ -40,7 +40,10 @@ const numberKeys = [
 ];
 
 const KeyboardRating: FC<Props> = props =>{
-        
+
+    const [ isPressing, setIsPressing ] = useState(false);
+    // const [ index, setIndex ] = useState(0);
+
     const _onPress = key =>{
         if (key === '') {
             return;
@@ -54,15 +57,17 @@ const KeyboardRating: FC<Props> = props =>{
             <TouchableHighlight
                 key={index}
                 activeOpacity={1}
-                style={keyStyle.wrapperIn}
-                underlayColor={Color.status.neutralDark.active}
+                style={{...keyStyle(isPressing).wrapperIn, ...props.style}}
+                // onShowUnderlay={() => {setIsPressing(true); setIndex(index)}}
+                // onHideUnderlay={() => {setIsPressing(false); setIndex(0)}}
+                underlayColor={Color.status.primary.softDefault}
                 onPress={() => _onPress(key.mainText)}
             >
-                <View style={[keyStyle.bd]}>
+                <View style={[keyStyle(isPressing).bd]}>
                     <Text 
-                        type='h3'
-                        weight='regular'
-                        style={{color: Color.text.white}}
+                        type='p1'
+                        weight='semibold'
+                        style={{color: Color.text.high}}
                     >
                         {key.mainText}
                     </Text>
@@ -74,7 +79,7 @@ const KeyboardRating: FC<Props> = props =>{
     const _renderNumberKeys = () =>{
         return numberKeys.map((group, groupIndex) => {
             return (
-                <View key={groupIndex} style={keyStyle.row}>
+                <View key={groupIndex} style={keyStyle(isPressing).row}>
                     {group.map(_renderKey.bind(this))}
                 </View>
             );
@@ -82,8 +87,8 @@ const KeyboardRating: FC<Props> = props =>{
     }
 
     return (
-        <View style={keyStyle.wrapperOut}>
-            <View style={keyStyle.main}>
+        <View style={keyStyle(isPressing).wrapperOut}>
+            <View style={keyStyle(isPressing).main}>
                 {_renderNumberKeys()}
             </View>
         </View>
@@ -93,5 +98,6 @@ const KeyboardRating: FC<Props> = props =>{
 export default KeyboardRating;
 export interface Props {
     onKeyPress?: Function,
-    ref?: any
+    ref?: any,
+    style?: ViewStyle
 }

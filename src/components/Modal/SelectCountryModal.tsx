@@ -115,7 +115,9 @@ const SelectCountryModal: FC<Props> = props =>{
 }
 export default SelectCountryModal;
 export interface Props{
-    translation: any,
+    translation:{
+        [key: string]: any
+    },
     onPress?: Function,
     onDismiss?: Function,
     visible: boolean,

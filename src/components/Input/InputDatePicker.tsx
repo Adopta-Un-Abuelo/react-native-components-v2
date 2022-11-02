@@ -30,7 +30,7 @@ const DateInput = (props: Props) =>{
                 visible={showModal}
                 orientation={'bottom'}
                 buttonProps={{
-                    title: props.translation('general_save'),
+                    title: props.translation ? props.translation.general_save : 'Guardar',
                     onPress: onSave
                 }}
                 onDismiss={() => setShowModal(false)}
@@ -57,7 +57,9 @@ const DateInput = (props: Props) =>{
 export default DateInput;
 export interface Props{
     currentLocale: string,
-    translation?: any,
+    translation:{
+        [key: string]: any
+    },
     style?: Object,
     error?: boolean,
     onChange?: Function,

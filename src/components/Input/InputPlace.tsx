@@ -105,7 +105,9 @@ export default PlaceInput;
 export interface Props{
     apiMapsKey: string
     currentLocale: string,
-    translation: any,
+    translation:{
+        [key: string]: any
+    },
     ref?: any,
     style: Object,
     onChange: Function,

@@ -90,7 +90,9 @@ const SelectCountry = (props: Props) =>{
 }
 export default SelectCountry;
 export interface Props{
-    translation: any,
+    translation:{
+        [key: string]: any
+    },
     textStyle?: TextStyle,
     style?: ViewStyle,
     selectedCountry?: {

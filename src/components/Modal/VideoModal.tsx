@@ -18,7 +18,7 @@ const Header = styled.View`
     height: 56px;
     flex-direction: row;
     align-items: center;
-    margin-top: ${Platform.OS === 'ios' ? 40 : 0};
+    margin-top: ${Platform.OS === 'ios' ? '40px' : '0px'};
 `
 const CloseButton = styled.Pressable`
     height: 56px;
@@ -36,7 +36,7 @@ const ControllersView = styled.View`
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    margin-bottom: ${Platform.OS === 'ios' ? 24 : 0};
+    margin-bottom: ${Platform.OS === 'ios' ? '24px' : '0px'};
 `
 const { width } = Dimensions.get('window');
 const height = width/16*9;

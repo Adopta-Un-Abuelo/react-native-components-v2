@@ -84,6 +84,7 @@ storiesOf('Input', module)
                     enPrefix: 'France (+33)',
                     // icon: FranceFlag
                 }]}
+                type={text('type', 'big')}
                 locale={'es'}
                 value={text('value')}
                 error={boolean('error', false)}

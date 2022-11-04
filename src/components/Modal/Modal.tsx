@@ -167,7 +167,7 @@ const ModalComponent = (props: Props) =>{
                             type={'line'}
                             style={{borderWidth: 0, marginTop: 8}}
                             color={Color.text.high}
-                            title={props.translation ? props.translation.general_btn_cancel : 'Cancelar'}
+                            title={props.cancelString ? props.cancelString : 'Cancelar'}
                             onPress={onClosePress}
                         />
                     }
@@ -179,9 +179,6 @@ const ModalComponent = (props: Props) =>{
 };
 export default ModalComponent;
 export interface Props{
-    translation?: {
-		[key: string]: any
-	},
     style?: ViewStyle,
     ref?: any,
     title?: string,
@@ -208,5 +205,6 @@ export interface Props{
     onModalHide?: Function,
     avoidKeyboard?: boolean,
     children?: any,
-    noPadding?: boolean
+    noPadding?: boolean,
+    cancelString?: string
 }

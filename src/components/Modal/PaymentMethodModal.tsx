@@ -62,7 +62,6 @@ const PaymentMethodModal = forwardRef((props: Props, ref: Ref<PaymentMethodModal
 
     return(
         <Modal
-            translation={props.translation}
             visible={visible}
             orientation={'fullScreen'}
             showTopClose={true}

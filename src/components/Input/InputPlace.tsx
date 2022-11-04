@@ -46,9 +46,8 @@ const PlaceInput = forwardRef((props: Props, ref: Ref<InputRef>) =>{
             error={props.error}
         />
         <Modal
-            translation={props.translation}
             visible={showModal}
-            title={props.translation ? props.translation.sign_up_city_modal_title : 'Busca tu ciudad'}
+            title={props.modalTitle ? props.modalTitle : 'Busca tu ciudad'}
             orientation={'fullScreen'}
             onDismiss={onDismiss}
             showTopClose={true}
@@ -60,7 +59,7 @@ const PlaceInput = forwardRef((props: Props, ref: Ref<InputRef>) =>{
                     key: props.apiMapsKey,
                     language: props.currentLocale,
                 }}
-                placeholder={props.translation ? props.translation.sign_up_city_modal_search : 'Buscar'}
+                placeholder={props.placeholder ? props.placeholder : 'Buscar'}
                 onPress={(data, details = null) => {
                     onAddressPress(data, details);
                 }}
@@ -105,16 +104,14 @@ export default PlaceInput;
 export interface Props{
     apiMapsKey: string
     currentLocale: string,
-    translation:{
-        [key: string]: any
-    },
     ref?: any,
     style: Object,
     onChange: Function,
     onFocus?: Function,
     onBlur?: Function,
     error?: boolean,
-    placeholder?: string
+    placeholder?: string,
+    modalTitle?: string
 }
 export interface InputRef{
     focus: () => void,

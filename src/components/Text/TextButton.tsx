@@ -10,7 +10,7 @@ const TextButton = (props: Props) =>{
         <Text
             style={{
                 fontFamily: weight === 'medium' ? 'Poppins-Medium' : 'Poppins-SemiBold',
-                fontSize: 16,
+                fontSize: 15,
                 lineHeight: 22,
                 color: Color.text.full,
                 ...style

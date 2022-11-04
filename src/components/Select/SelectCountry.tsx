@@ -76,7 +76,6 @@ const SelectCountry = (props: Props) =>{
                 </Text>
             </SelectStyled>
             <SelectCountryModal
-                translation={props.translation}
                 {...props.modalProps}
                 orientation={'fullScreen'}
                 visible={showMenu}
@@ -90,9 +89,6 @@ const SelectCountry = (props: Props) =>{
 }
 export default SelectCountry;
 export interface Props{
-    translation:{
-        [key: string]: any
-    },
     textStyle?: TextStyle,
     style?: ViewStyle,
     selectedCountry?: {

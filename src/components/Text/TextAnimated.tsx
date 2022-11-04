@@ -7,11 +7,11 @@ const TextStyled = styled(Animated.Text)<{type?: string}>`
     font-size: ${props => props.type  === 'h2' ? '28px' : '16px'};
     font-family: ${props => 
         props.type === 'h2' ? 'Poppins-Bold' : 
+        props.type === 'h3' ? 'Poppins-SemiBold' : 
         'Poppins-Regular'
     };
     color: ${Color.text.full};
     line-height: 36px;
-    ...props.style
 `
 
 const Text: FC<Props> = props =>{
@@ -26,5 +26,5 @@ const Text: FC<Props> = props =>{
 export default Text;
 export interface Props extends TextProps{
     style?: Object
-    type: 'h2' | 'other'
+    type: 'h2' | 'h3' | 'other'
 }

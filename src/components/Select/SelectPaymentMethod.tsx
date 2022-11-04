@@ -193,7 +193,6 @@ const PaymentMethodSelect = forwardRef((props: Props, ref: Ref<SelectPaymentMeth
             onPress={() => setShowSelectModal(true)}
         >
             <Modal
-                translation={props.translation}
                 visible={showSelectModal}
                 orientation={'bottom'}
                 showTopClose={true}

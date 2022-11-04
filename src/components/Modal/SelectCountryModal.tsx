@@ -70,7 +70,6 @@ const SelectCountryModal: FC<Props> = props =>{
 
     return(
         <Modal
-            translation={props.translation}
             visible={visible}
             orientation={props.orientation}
             showTopClose={true}
@@ -115,9 +114,6 @@ const SelectCountryModal: FC<Props> = props =>{
 }
 export default SelectCountryModal;
 export interface Props{
-    translation:{
-        [key: string]: any
-    },
     onPress?: Function,
     onDismiss?: Function,
     visible: boolean,

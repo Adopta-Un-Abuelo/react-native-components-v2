@@ -121,7 +121,7 @@ const NavigationBar: FC<Props> = props => {
             >
                 {props.title &&
                     <Text
-                        type='h2'
+                        type='h3'
                         numberOfLines={1}
                         adjustsFontSizeToFit={true}
                         lineBreakMode={'tail'}

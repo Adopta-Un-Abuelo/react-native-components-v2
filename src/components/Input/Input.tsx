@@ -6,7 +6,7 @@ import Text from '../Text/Text';
 
 const Container = styled.View<{error?: boolean, isFocused: boolean | undefined, type?: string}>`
     height: ${props => props.type === 'small' ? '48px' : props.type === 'big' ? undefined : '56px'};
-    min-height: ${props => props.type === 'big' ? '160px' : undefined};
+    min-height: ${props => props.type === 'big' ? '160px' : '0px'};
     border-color: ${props => props.error ? Color.status.color.error : props.isFocused ? Color.line.full : Color.line.soft};
     border-width: ${props => props.type === 'small' ? '0px' : (props.error || props.isFocused ? '2px' : '1px')};
     border-radius: 12px;
@@ -19,7 +19,7 @@ const Container = styled.View<{error?: boolean, isFocused: boolean | undefined, 
 `
 const InputStyled = styled.TextInput<{isFocused: boolean | undefined, hasValue: boolean, hideTitle?: boolean}>`
     flex: 1;
-    font-size: 16px;
+    font-size: 15px;
     font-family: 'Poppins-Regular';
     height: 100%;
     padding: 0px;
@@ -60,8 +60,6 @@ const Input = forwardRef((props: Props, ref: Ref<InputRef>) =>{
     useEffect(() =>{
         setCurrentPlaceholder(props.placeholder);
     },[props.placeholder]);
-
-    // useEffect(() =>{ },[value]);
 
     const onFocus = () =>{
         setIsFocused(true);

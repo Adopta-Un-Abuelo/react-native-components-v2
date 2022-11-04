@@ -25,7 +25,7 @@ const PhoneInput = (props: Props) =>{
         <Input
             id="phoneInput"
             {...props}
-            placeholder={props.translation ? props.translation.sign_up_phone_placeholder : 'Número de teléfono'}
+            placeholder={props.placeholder ? props.placeholder : 'Número de teléfono'}
             autoComplete={'tel'}
             keyboardType={'number-pad'}
             error={props.error}
@@ -35,12 +35,11 @@ const PhoneInput = (props: Props) =>{
         >
             <SelectCountry
                 style={{height: '100%'}}
-                translation={props.translation}
                 countries={props.countries}
                 locale={props.locale}
                 title={title}
                 modalProps={{
-                    title: props.translation ? props.translation.sign_up_phone_modal_title : 'Código del País',
+                    title: props.modalTitle ? props.modalTitle : 'Prefijo telefónico',
                     showSearch: true
                 }}
                 onChange={onCountryChange}
@@ -52,9 +51,6 @@ const PhoneInput = (props: Props) =>{
 }
 export default PhoneInput;
 export interface Props{
-    translation:{
-        [key: string]: any
-    },
     countries: Array<{
         id: string,
         prefix: string,
@@ -69,5 +65,7 @@ export interface Props{
     error?: boolean,
     onCountryChange?: Function,
     onChangeText?: Function,
-    style?: Object
+    style?: Object,
+    placeholder?: string,
+    modalTitle?: string
 }

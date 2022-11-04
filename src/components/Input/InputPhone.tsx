@@ -63,9 +63,9 @@ export interface Props{
     locale: string,
     value?: string,
     error?: boolean,
-    onCountryChange?: Function,
-    onChangeText?: Function,
     style?: Object,
     placeholder?: string,
-    modalTitle?: string
+    modalTitle?: string,
+    onCountryChange?: (country: { prefix: string }) => void,
+    onChangeText?: (phone: string) => void,
 }

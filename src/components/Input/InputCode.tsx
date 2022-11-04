@@ -17,8 +17,8 @@ const Input = styled.TextInput<{error?: boolean, isFocused?: boolean, ref?: any}
     text-align: center;
     justify-content: center;
     margin-right: 4px;
-    font-family: 'Poppins-SemiBold';
-    font-size: 18px;
+    font-family: 'Poppins-Regular';
+    font-size: 28px;
     text-align: center;
     color: ${Color.text.full};
 `
@@ -47,7 +47,7 @@ const CodeInput = forwardRef((props: Props, ref: Ref<InputCodeRef>) =>{
     const [ isFocused5, setIsFocused5 ] = useState<boolean>(false);
     const [ isFocused6, setIsFocused6 ] = useState<boolean>(false);
 
-    const placeholder='-'
+    const placeholder='_'
     const keyboardType='number-pad'
 
     useEffect(() =>{
@@ -167,7 +167,6 @@ const CodeInput = forwardRef((props: Props, ref: Ref<InputCodeRef>) =>{
                 placeholder={placeholder}
                 keyboardType={keyboardType}
                 value={input1Value}
-                maxLength={1}
                 autoFocus={true}
                 isFocused={isFocused1}
             />

@@ -16,8 +16,8 @@ const Cell = styled.Pressable`
 const CheckButton = styled.View<{selected: boolean, error?: boolean}>`
     background-color: ${props => props.selected ? Color.background.primary : Color.background.neutral};
     border-radius: 4px;
-    height: 18px;
-    width: 18px;
+    height: 24px;
+    width: 24px;
     align-items: center;
     justify-content: center;
     border-width: 2px;
@@ -26,7 +26,8 @@ const CheckButton = styled.View<{selected: boolean, error?: boolean}>`
 const DataView = styled.View`
     flex: 1;
     flex-direction: column;
-    margin-left: 16px;
+    margin-left: 12px;
+    margin-top: 2px;
 `
 
 const Checkbox = (props: Props) =>{

@@ -1,6 +1,6 @@
 import React from 'react';
 import FlashMessage from "react-native-flash-message";
-import { AlertTriangle } from 'react-native-lucide';
+import { AlertTriangle } from 'lucide-react-native';
 import Color from '../../constants/Color';
 
 const Alert = (props: Props) =>{

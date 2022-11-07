@@ -3,7 +3,7 @@ import styled from 'styled-components/native';
 import { ViewStyle } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Modal from "react-native-modal";
-import { X, ArrowLeft } from 'react-native-lucide';
+import { X, ArrowLeft } from 'lucide-react-native';
 import Text from '../Text/Text';
 import Button from '../Button/Button';
 import { Color } from '../../constants';

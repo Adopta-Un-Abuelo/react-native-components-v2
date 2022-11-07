@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components/native';
 import { TextStyle, ViewStyle } from 'react-native';
-import { ChevronDown } from 'react-native-lucide';
+import { ChevronDown } from 'lucide-react-native';
 import Color from '../../constants/Color';
 import Text from '../Text/Text';
 import SelectCountryModal from '../Modal/SelectCountryModal';

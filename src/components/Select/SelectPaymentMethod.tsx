@@ -1,6 +1,6 @@
 import React, { useState, useEffect, forwardRef, Ref, useImperativeHandle, useRef } from 'react';
 import styled from 'styled-components/native';
-import { Plus, ChevronRight } from 'react-native-lucide';
+import { Plus, ChevronRight } from 'lucide-react-native';
 import { Platform } from 'react-native';
 import { isApplePaySupported } from '@stripe/stripe-react-native';
 import Color from '../../constants/Color';

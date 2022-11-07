@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import styled from 'styled-components/native';
 import { Animated } from 'react-native';
-import { ArrowLeft } from "react-native-lucide";
+import { ArrowLeft } from "lucide-react-native";
 import ButtonImage from '../Button/ButtonImage';
 import Breadcrumb from '../Breadcrumb/Breadcrumb';
 import Text from '../Text/TextAnimated';

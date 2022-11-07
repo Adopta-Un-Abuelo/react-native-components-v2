@@ -3,7 +3,7 @@ import React from 'react';
 import { object, select, text } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/react-native';
 import { Banner, Text } from '../src';
-import { Wifi } from 'react-native-lucide';
+import { Wifi } from 'lucide-react-native';
 
 storiesOf('Banner', module)
 	.add('Main', () => (

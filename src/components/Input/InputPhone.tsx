@@ -23,7 +23,6 @@ const PhoneInput = (props: Props) =>{
 
     return(
         <Input
-            id="phoneInput"
             {...props}
             placeholder={props.placeholder ? props.placeholder : 'Número de teléfono'}
             autoComplete={'tel'}

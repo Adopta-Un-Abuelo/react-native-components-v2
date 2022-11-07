@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components/native';
-import { Check } from 'react-native-lucide';
+import { Check } from 'lucide-react-native';
 import { ViewStyle, TextStyle } from 'react-native';
 import Text from '../Text/Text';
 import Color from '../../constants/Color';

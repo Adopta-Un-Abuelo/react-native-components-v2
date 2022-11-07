@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import styled from 'styled-components/native';
 import { ViewStyle } from 'react-native';
-import { Star } from 'react-native-lucide';
+import { Star } from 'lucide-react-native';
 import Color from '../../constants/Color'
 
 const Container = styled.View`

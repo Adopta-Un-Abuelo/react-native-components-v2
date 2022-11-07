@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { ViewStyle } from 'react-native';
-import { MoreHorizontal } from 'react-native-lucide';
+import { MoreHorizontal } from 'lucide-react-native';
 import ButtonImage from '../Button/ButtonImage';
 import SelectionModal from '../Modal/SelectionModal';
 

@@ -1,6 +1,6 @@
 import React, { FC, useState } from 'react';
 import Video from 'react-native-video';
-import { Play, Pause, X } from 'react-native-lucide';
+import { Play, Pause, X } from 'lucide-react-native';
 import { Dimensions, Platform } from 'react-native';
 import styled from 'styled-components/native';
 import Color from '../../constants/Color';

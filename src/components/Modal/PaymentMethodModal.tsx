@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect, forwardRef, Ref, useImperativeHandle } from 'react';
 import styled from 'styled-components/native';
 import { Keyboard } from 'react-native';
-import { Lock } from 'react-native-lucide';
+import { Lock } from 'lucide-react-native';
 import Modal from './Modal';
 import Text from '../Text/Text';
 import PaymentMethodForm, { PaymentMethodFormRef } from '../Form/PaymentMethodForm';

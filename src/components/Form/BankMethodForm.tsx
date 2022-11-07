@@ -1,7 +1,7 @@
 import React, { forwardRef, useState, Ref, useImperativeHandle } from 'react';
 import styled from 'styled-components/native';
 import Input from '../Input/Input';
-import { Landmark, User } from 'react-native-lucide';
+import { Landmark, User } from 'lucide-react-native';
 
 const ScrollView = styled.ScrollView``
 

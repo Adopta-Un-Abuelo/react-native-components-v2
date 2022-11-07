@@ -1,7 +1,7 @@
 import React, { FC, useEffect, useState } from 'react';
 import styled from 'styled-components/native';
 import Fuse from 'fuse.js'
-import { Search } from 'react-native-lucide';
+import { Search } from 'lucide-react-native';
 import Modal from './Modal';
 import Text from '../Text/Text';
 import Color from '../../constants/Color';

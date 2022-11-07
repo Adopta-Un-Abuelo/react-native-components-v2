@@ -1,6 +1,6 @@
 import React, { useState, forwardRef, useImperativeHandle, useRef, Ref } from 'react';
 import { GooglePlacesAutocomplete, GooglePlaceDetail, GooglePlacesAutocompleteRef } from 'react-native-google-places-autocomplete';
-import { Search } from 'react-native-lucide';
+import { Search } from 'lucide-react-native';
 import Color from '../../constants/Color';
 import Modal from '../Modal/Modal';
 import Input from './InputFalse';

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, forwardRef, useImperativeHandle, useRef, Ref } from 'react';
 import styled from 'styled-components/native';
-import { TextInput, ViewStyle } from 'react-native';
+import { TextInput, TextInputProps, ViewStyle } from 'react-native';
 import Color from '../../constants/Color';
 import Text from '../Text/Text';
 
@@ -61,16 +61,16 @@ const Input = forwardRef((props: Props, ref: Ref<InputRef>) =>{
         setCurrentPlaceholder(props.placeholder);
     },[props.placeholder]);
 
-    const onFocus = () =>{
+    const onFocus = (e) =>{
         setIsFocused(true);
         setCurrentPlaceholder(undefined);
-        props.onFocus && props.onFocus();
+        props.onFocus && props.onFocus(e);
     }
 
-    const onBlur = () =>{
+    const onBlur = (e) =>{
         setIsFocused(false);
         setCurrentPlaceholder(props.placeholder);
-        props.onBlur && props.onBlur();
+        props.onBlur && props.onBlur(e);
     }
 
     const onChangeText = (text) => {
@@ -117,9 +117,7 @@ const Input = forwardRef((props: Props, ref: Ref<InputRef>) =>{
                             isFocused={isFocused}
                             hasValue={value ? true : false}
                             placeholderTextColor={Color.text.high}
-                            maxLength={props.maxLength}
-                            keyboardType={props.keyboardType}
-                            multiline={props.multiline}
+                            hideTitle={props.hideTitle}
                             {...rest}
                         />
                         {props.showEuro &&
@@ -146,29 +144,14 @@ const Input = forwardRef((props: Props, ref: Ref<InputRef>) =>{
     )
 });
 export default Input;
-export interface Props{
-    id?: string,
-    ref?: any,
+export interface Props extends TextInputProps{
     error?: boolean,
     icon?: any,
     style?: ViewStyle,
     onFocus?: any,
-    onBlur?: any,
-    placeholder?: string,
-    onChangeText?: any,
-    maxLength?: number,
-    keyboardType?: 'default' | 'number-pad' | 'decimal-pad' | 'phone-pad' | 'numeric' | 'email-address',
-    blurOnSubmit?: boolean,
-    clearButtonMode?: 'never' | 'while-editing' | 'unless-editing' | 'always',
-    value?: string,
-    autoComplete?: string
-    autoCapitalize?: 'none' | 'sentences' | 'words' | 'characters',
-    autoCorrent?: boolean
     children?: any,
     hideTitle?: boolean,
-    returnKeyType?: 'done' | 'go' | 'next' | 'search' | 'send',
     type?: 'small' | 'big',
-    multiline?: boolean,
     showEuro?: boolean
 }
 export interface InputRef{

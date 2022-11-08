@@ -25,7 +25,7 @@ const RightHeader = styled.View`
 const TextContainer = styled(Animated.View)`
     flex: 1;
     justify-content: flex-end;
-    margin-right: 16px;
+    margin-right: 24px;
 `
 
 const NavigationBar: FC<Props> = props => {
@@ -33,7 +33,7 @@ const NavigationBar: FC<Props> = props => {
     const showBackButton = (!props.hideBackButton && props.navigation && props.navigation.canGoBack()) ? true : false;
 
     const MIN_HEADER_HEIGHT = 56;
-    const MAX_HEADER_HEIGHT = (props.title && props.subtitle) ? 120 : ((!props.subtitle && !props.title) ? 56 : 84);
+    const MAX_HEADER_HEIGHT = !props.title ? 56 : 94;
 
     const headerHeight = props.animatedValue ? props.animatedValue.interpolate({
         inputRange: [0, MAX_HEADER_HEIGHT],
@@ -42,8 +42,8 @@ const NavigationBar: FC<Props> = props => {
     }) : MAX_HEADER_HEIGHT;
 
     // Title margin left
-    const MIN_TITLE_LEFT = 16;
-    const MAX_TITLE_LEFT = showBackButton ? 56 : 16;
+    const MIN_TITLE_LEFT = 24;
+    const MAX_TITLE_LEFT = showBackButton ? 56 : 24;
 
     const titleSides = props.animatedValue ? props.animatedValue.interpolate({
         inputRange: [0, MAX_HEADER_HEIGHT],
@@ -53,7 +53,7 @@ const NavigationBar: FC<Props> = props => {
 
     // Title margin bottom
     const MIN_TITLE_BOTTOM = 0;
-    const MAX_TITLE_BOTTOM = (props.title && props.subtitle) ? 8 : 8;
+    const MAX_TITLE_BOTTOM = 8;
 
     const titleBottom = props.animatedValue ? props.animatedValue.interpolate({
         inputRange: [0, MAX_HEADER_HEIGHT],
@@ -127,7 +127,7 @@ const NavigationBar: FC<Props> = props => {
                         lineBreakMode={'tail'}
                         style={{
                             fontSize: titleFont,
-                            marginRight: 16
+                            marginRight: 24
                         }}
                     >
                         {props.title}
@@ -173,7 +173,6 @@ export interface Props{
     hideBreadcrumb?: boolean,
     hideHeader?: boolean,
     title?: string,
-    subtitle?: string,
     headerRight?: any,
     animatedValue?: Animated.Value,
     backgroundColor?: string,

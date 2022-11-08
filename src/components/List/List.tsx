@@ -3,7 +3,7 @@ import { FlatListProps, FlatList } from 'react-native';
 import styled from 'styled-components/native';
 import LottieView from 'lottie-react-native';
 
-const ListStyled = styled.FlatList<any>`
+const ListStyled = styled.FlatList`
 `
 const Container = styled.View`
     flex: 1;

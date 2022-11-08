@@ -31,8 +31,8 @@ const ListContainer = forwardRef((props: Props, ref: Ref<FlatList>) =>{
                 scrollEventThrottle={1}
                 alwaysBounceHorizontal={false}
                 alwaysBounceVertical={false}
-                contentContainerStyle={{paddingLeft: props.noPadding ? 0 : 16, paddingRight: props.noPadding ? 0 : 16, paddingBottom: 48}}
-                stickyHeaderIndices={props.listProps.stickyHeaderIndices}
+                contentContainerStyle={{paddingLeft: props.noPadding ? 0 : 24, paddingRight: props.noPadding ? 0 : 24, paddingBottom: 48}}
+                stickyHeaderIndices={props.listProps ? props.listProps.stickyHeaderIndices : undefined}
                 {...props.listProps}
                 onScroll={Animated.event(
                     [{ nativeEvent: { contentOffset: { y: offset } } }],

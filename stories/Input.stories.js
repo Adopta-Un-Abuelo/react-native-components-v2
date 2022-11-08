@@ -60,6 +60,7 @@ storiesOf('Input', module)
         return(
             <InputDatePicker
                 placeholder='Fecha'
+                error={boolean('error', false)}
             />
 	    )
     })

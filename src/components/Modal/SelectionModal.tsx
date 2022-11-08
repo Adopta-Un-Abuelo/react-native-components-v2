@@ -80,6 +80,7 @@ const SelectionModal: FC<Props> = props =>{
             showBottomClose={true}
             title={props.title}
             avoidKeyboard={true}
+            cancelString={props.cancelString}
             onDismiss={onDismiss}
             onModalHide={onModalHide}
         >
@@ -134,5 +135,6 @@ export interface Props{
         Icon?: any,
         disabled?: boolean
     }>,
-    showSearch?: boolean
+    showSearch?: boolean,
+    cancelString?: string
 }

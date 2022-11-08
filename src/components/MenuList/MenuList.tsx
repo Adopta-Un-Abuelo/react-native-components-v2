@@ -32,6 +32,7 @@ const MenuList = (props: Props) =>{
             orientation={'bottom'}
             onDismiss={onModalDismiss}
             options={props.options}
+            cancelString={props.cancelString}
             onPress={props.onPress}
         />
         </>
@@ -48,4 +49,5 @@ export interface Props{
         disabled?: boolean
     }>
     onPress?: Function
+    cancelString?: string
 }

@@ -11,9 +11,14 @@ const ContentView = styled.Pressable`
 const ButtonContainer = styled.View`
     flex-direction: row;
     margin-top: 32px;
+    border-top-width: 1px;
+    border-top-color: ${Color.line.soft};
 `
 const ButtonView = styled.Pressable`
     flex: 1;
+    align-items: center;
+    justify-content: center;
+    height: 56px;
 `
 
 const CenterModal: FC <Props> = props =>{

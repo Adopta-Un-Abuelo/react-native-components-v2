@@ -43,7 +43,7 @@ const CloseButton = styled.Pressable`
     width: 56px;
     justify-content: center;
     z-index: 1000;
-    paddingLeft: 8px;
+    padding-left: 8px;
 `
 const TitleCenterView = styled.View`
     flex: 1;
@@ -149,30 +149,32 @@ const ModalComponent = (props: Props) =>{
                             </Header>
                 }
                 {props.children}
-                <ButtonArea>
-                    {buttonProps &&
-                        <Button
-                            {...buttonProps}
-                            style={{marginTop: 12, ...buttonProps.style}}
-                        />
-                    }
-                    {secondButtonProps &&
-                        <Button
-                            {...secondButtonProps}
-                            style={{marginTop: 12, ...secondButtonProps.style}}
-                        />
-                    }
-                    {props.showBottomClose &&
-                        <Button
-                            type={'line'}
-                            style={{borderWidth: 0, marginTop: 8}}
-                            color={Color.text.high}
-                            title={props.cancelString ? props.cancelString : 'Cancelar'}
-                            onPress={onClosePress}
-                        />
-                    }
-                    {props.ButtonArea}
-                </ButtonArea>
+                {(buttonProps || secondButtonProps || props.showBottomClose || props.ButtonArea) &&
+                    <ButtonArea>
+                        {buttonProps &&
+                            <Button
+                                {...buttonProps}
+                                style={{marginTop: 12, ...buttonProps.style}}
+                            />
+                        }
+                        {secondButtonProps &&
+                            <Button
+                                {...secondButtonProps}
+                                style={{marginTop: 12, ...secondButtonProps.style}}
+                            />
+                        }
+                        {props.showBottomClose &&
+                            <Button
+                                type={'line'}
+                                style={{borderWidth: 0, marginTop: 8}}
+                                color={Color.text.high}
+                                title={props.cancelString ? props.cancelString : 'Cancelar'}
+                                onPress={onClosePress}
+                            />
+                        }
+                        {props.ButtonArea}
+                    </ButtonArea>
+                }
             </ModalView>
         </Modal>
     )

@@ -18,7 +18,7 @@ const DateInput = (props: Props) =>{
     }
 
     const onSave = () =>{        
-        const temp = new Intl.DateTimeFormat(props.currentLocale, {month: '2-digit', day: '2-digit', year: '2-digit'}).format(selectedDate);
+        const temp = new Intl.DateTimeFormat(props.currentLocale, {month: '2-digit', day: '2-digit', year: 'numeric'}).format(selectedDate);
         setDateInputValue(temp);
         setShowModal(false);
         props.onChange && props.onChange(selectedDate)
@@ -50,6 +50,7 @@ const DateInput = (props: Props) =>{
                 value={dateInputValue}
                 placeholder={props.placeholder}
                 onPress={onInputFocus}
+                error={props.error}
             />
         </>
     )

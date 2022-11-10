@@ -5,18 +5,18 @@ import Text from '../Text/Text';
 import Color from '../../constants/Color';
 
 const Container = styled.View`
+    flex-direction: row;
 `
 const Cell = styled.Pressable<{selected: boolean}>`
-    height: 82px;
-    width: 100%;
-    padding: 16px;
-    flex-direction: row;
+    flex: 1;
+	flex-direction: column;
     align-items: center;
-    border-radius: 12px;
-    border-width: ${props => props.selected ? '2px' : '1px'};
-    border-color: ${props => props.selected ? Color.line.primary : Color.line.soft};
-    background-color: ${props => props.selected ? Color.background.primaryLow : Color.text.white};
-    margin-top: 8px;
+    justify-content: center;
+	background-color: ${props => props.selected ? Color.background.primaryLow : 'transparent'};
+    border: ${props => props.selected ? '2px solid '+Color.line.primary : '1px solid '+Color.line.soft};
+	padding: 16px;
+	border-radius: 12px;
+    margin: 0px 4px;
 `
 
 const OptionSelect: FC<Props> = props =>{
@@ -43,11 +43,10 @@ const OptionSelect: FC<Props> = props =>{
                     onPress={() => onCellPress(item)}
                     selected={selectedItem?.id === item.id}
                 >
-                    <item.icon color={Color.text.full} />
+                    <item.icon />
                     <Text
-                        type='p1'
-                        weight='semibold'
-                        style={{marginLeft: 16}}
+                        type='p2'
+                        style={{marginTop: 12}}
                     >
                         {item.title}
                     </Text>

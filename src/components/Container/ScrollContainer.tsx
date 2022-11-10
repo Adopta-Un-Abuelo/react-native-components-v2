@@ -16,6 +16,7 @@ const TouchableWithoutFeedback = styled.TouchableWithoutFeedback`
 `
 const ScrollView = styled(Animated.ScrollView)`
     flex: 1;
+    padding: 0px 24px;
 `
 
 const ScrollContainer: FC<Props> = props =>{

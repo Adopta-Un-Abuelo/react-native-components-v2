@@ -74,11 +74,11 @@ const Input = forwardRef((props: Props, ref: Ref<InputRef>) =>{
     }
 
     const onChangeText = (text) => {
-        if(text && text.length > 0) 
+        if(text && text.length > 0) {
             setValue(text);
-        else 
+        } else {
             setValue(undefined);
-        // setChars((1000 - text.length).toString());
+        }
         props.onChangeText && props.onChangeText(text);
     }
 
@@ -131,15 +131,6 @@ const Input = forwardRef((props: Props, ref: Ref<InputRef>) =>{
                     </Row>
                 </InputView>
             </Container>
-            {/* {props.type === 'big' && 
-                <Text
-                    type='c1'
-                    weight='regular'
-                    style={{color: Color.text.high, marginLeft: 16, marginTop: 4}}
-                >
-                    /1000 caracteres
-                </Text>
-            } */}
         </Column>
     )
 });

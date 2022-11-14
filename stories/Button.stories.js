@@ -18,7 +18,7 @@ storiesOf('Button', module)
 			title={text('text', 'Button')}
 			loading={boolean('loading', false)}
 			disabled={boolean('disabled', false)}
-			color={color('color', Color.blue3)}
+			textColor={color('color', Color.blue3)}
 			type={select('type', {
 				fill: 'fill',
 				line: 'line'
@@ -36,7 +36,7 @@ storiesOf('Button', module)
 			title={text('text', 'Button')}
 			loading={boolean('loading', false)}
 			disabled={boolean('disabled', false)}
-			color={color('color', Color.blue3)}
+			textColor={color('color', Color.blue3)}
 			type={select('type', {
 				fill: 'fill',
 				line: 'line'

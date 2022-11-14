@@ -92,7 +92,7 @@ const VideoModal: FC<Props> = props =>{
                             weight={props.skipIn >= videoProgress ? 'medium' : 'bold'}
                             style={{color: props.skipIn >= videoProgress ? Color.text.whiteHigh : Color.text.white}}
                         >
-                            {props.skipIn >= videoProgress ? props.translation.modal_video_skip_in+' '+ new Date((props.skipIn - videoProgress) * 1000).toISOString().substr(14, 5) : props.translation.modal_video_skip}
+                            {props.skipIn >= videoProgress ? props.skipInString+' '+ new Date((props.skipIn - videoProgress) * 1000).toISOString().substr(14, 5) : props.skipString}
                         </Text>
                     }
                 </Header>
@@ -140,9 +140,8 @@ const VideoModal: FC<Props> = props =>{
 }
 export default VideoModal;
 export interface Props{
-    translation: {
-		[key: string]: any
-	},
+    skipInString: string,
+    skipString: string,
     visible: boolean,
     url: string,
     skipIn?: number,

@@ -31,11 +31,11 @@ const CheckboxButton = (props: Props) =>{
                         flex: 1, 
                         borderWidth: props.error && selection === 1 ? 2 : selection === 1 ? 2 : 1, 
                         borderColor: props.error && selection === 1 ? Color.status.color.error : selection === 1 ? Color.line.greenSoft : Color.line.soft, 
-                        marginRight: 4, 
-                        backgroundColor: props.error && selection === 1 ? Color.status.color.errorDefault : selection === 1 ? Color.status.color.successDefault: undefined
+                        marginRight: 4
                     }}
-                    color={selection === 1 ? Color.text.full : Color.text.high}
-                    title={props.translation.general_no}
+                    textColor={selection === 1 ? Color.text.full : Color.text.high}
+                    backgroundColor={props.error && selection === 1 ? Color.status.color.errorDefault : selection === 1 ? Color.status.color.successDefault: undefined}
+                    title={props.translation.global_no}
                     size='small'
                     onPress={() => onCellPress(1)}
                 />
@@ -44,11 +44,11 @@ const CheckboxButton = (props: Props) =>{
                         flex: 1, 
                         borderWidth: props.error && selection === 2 ? 2 : selection === 2 ? 2 : 1, 
                         borderColor: props.error && selection === 2 ? Color.status.color.error : selection === 2 ? Color.line.greenSoft : Color.line.soft, 
-                        marginLeft: 4, 
-                        backgroundColor: props.error && selection === 2 ? Color.status.color.errorDefault : selection === 2 ? Color.status.color.successDefault : undefined
+                        marginLeft: 4
                     }}
-                    color={selection === 2 ? Color.text.full : Color.text.high}
-                    title={props.translation.general_yes}
+                    textColor={selection === 2 ? Color.text.full : Color.text.high}
+                    backgroundColor={props.error && selection === 2 ? Color.status.color.errorDefault : selection === 2 ? Color.status.color.successDefault : undefined}
+                    title={props.translation.global_yes}
                     size='small'
                     onPress={() => onCellPress(2)}
                 />
@@ -59,7 +59,7 @@ const CheckboxButton = (props: Props) =>{
                     weight='medium'
                     style={{marginTop: 48, color: Color.status.color.error}}
                 >
-                    {props.translation.general_cb_error}
+                    {props.translation.global_error}
                 </Text>
             }
         </Container>

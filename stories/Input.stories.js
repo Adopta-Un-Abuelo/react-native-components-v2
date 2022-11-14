@@ -67,7 +67,7 @@ storiesOf('Input', module)
     .add('Phone', () => {
         return(
             <InputPhone
-                translation={{input_phone_phone_prefix : 'PREFIJO PUTO TELEFONICO', input_phone_phone : 'PUTO TELEFONO'}}
+                translation={{input_phone_phone_prefix : 'PREFIJO TELEFONICO', input_phone_phone : 'TELEFONO'}}
                 countries={[{
                     id: 'spain',
                     prefix: '+34',

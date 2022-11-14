@@ -167,7 +167,7 @@ const ModalComponent = (props: Props) =>{
                             <Button
                                 type={'line'}
                                 style={{borderWidth: 0, marginTop: 8}}
-                                color={Color.text.high}
+                                textColor={Color.text.high}
                                 title={props.cancelString ? props.cancelString : 'Cancelar'}
                                 onPress={onClosePress}
                             />

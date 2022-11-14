@@ -23,7 +23,7 @@ const ButtonImage = (props: Props) =>{
                 <props.icon 
                     height={24}
                     width={24}
-                    color={props.color ? props.color : Color.text.full}
+                    color={props.color ? props.color : Color.text.white}
                 />
             }
             {props.Icon && props.Icon}

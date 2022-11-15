@@ -1,14 +1,14 @@
 const Color = {
     background: {
-        primary: '#006BE5',
-        primaryLow: '#EBF3FA',
+        primary: '#008FF5',
+        primaryLow: '#ECF4FB',
         secondary: '#FFAA47',
         secondaryLow: '#FFF6E5',
         deepBlue: '#00315C',
         deepBlueLow: '#F0F3F6',
-        orange: '#FF8854',
+        orange: '#FF773D',
         redLow: '#FFE5E5',
-        deepGreen: '#448B6D',
+        deepGreen: '#1A5B3C',
         greenLow: '#E4F8EE',
         aquamarine: '#00ABC5',
         aquamarineLow: '#EAF8FA',
@@ -21,25 +21,31 @@ const Color = {
         neutral: '#FFFFFF'
     },
     line: {
-        primary: '#006BE5',
+        primary: '#008FF5',
         primarySoft: '#C4DEF5',
         secondary: '#FFAA47',
-        secondarySoft: '#FFE3C1',
+        secondarySoft: '#FFD5A3',
+        green: '#08A85B',
         greenSoft: '#B2EBD0',
         redSoft: '#F5CFCF',
-        deepBlue: '#C0CFDC',
+        deepBlue: '#00315C',
+        deepBlueSoft: '#C0CFDC',
         full: '#333333',
         low: '#CCCCCC',
-        soft: '#EBEBEB',
-        softTransparent: '#0000000A'
+        soft: '#E0E0E0',
+        softTransparent: '#0000000A',
+        white: '#FFFFFF',
+        whiteTransparent: '#FFFFFF80'
     },
     text: {
-        primary: '#006BE5',
-        primarySoft: '#98C8FF',
+        primary: '#008FF5',
+        primarySoft: '#93CCF5',
+        deepBlue: '#00315C',
         aquamarine: '#00ABC5',
         orange: '#FF773D',
         red: '#E02D2D',
         green: '#08A85B',
+        deepGreen: '#1C5C3D',
         primaryBlack: '#001D3D',
         secondaryBlack: '#701E09',
         full: '#000000C7',
@@ -53,28 +59,26 @@ const Color = {
     },
     status: {
         primary: {
-            default: '#006BE5',
-            hover: '#004FA8',
+            default: '#008FF5',
+            hover: '#005AA8',
+            active: '#00315C',
             pressed: '#00315C',
             softDefault: '#EBF3FA',
-            softHover: '#D3E2F0',
-            softPressed: '#ABC7E0'
+            softHover: '#D3E5F5',
+            softActive: '#008FF5',
+            softPressed: '#008FF5'
         },
         secondary: {
             default: '#FFAA47',
             hover: '#EB9026',
-            pressed: '#C76B00'
+            pressed: '#C76B00',
+            active: '#C76B00'
         },
         neutral: {
-            default: '#00000000',
+            default: '#FFFFFF',
             hover: '#0000000D',
-            active: '#0000001F',
-            activeHover: '#0000003D'
-        },
-        neutralDark: {
-            default: '#FFFFFF1F',
-            hover: '#FFFFFF52',
-            active: '#FFFFFF7A'
+            pressed: '#0000001F',
+            active: '#0000001F'
         },
         color: {
             success: '#08A85B',
@@ -82,7 +86,7 @@ const Color = {
             error: '#E02D2D',
             errorDefault: '#FFE5E5',
             warning: '#FFAA47',
-            warningDefault: '#FFF6E5'
+            warningDefault: '#FFF1D6'
         }
     }
 }

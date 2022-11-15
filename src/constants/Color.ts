@@ -80,6 +80,10 @@ const Color = {
             pressed: '#0000001F',
             active: '#0000001F'
         },
+        neutralDark: {
+            default: '#FFFFFF1F',
+            active: '#FFFFFF7A'
+        },
         color: {
             success: '#08A85B',
             successDefault: '#E4F8EE',

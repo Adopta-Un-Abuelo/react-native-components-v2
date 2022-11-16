@@ -160,7 +160,7 @@ const ModalComponent = (props: Props) =>{
                         {secondButtonProps &&
                             <Button
                                 {...secondButtonProps}
-                                style={{marginTop: 12, ...secondButtonProps.style}}
+                                style={{marginTop: 8, ...secondButtonProps.style}}
                             />
                         }
                         {props.showBottomClose &&

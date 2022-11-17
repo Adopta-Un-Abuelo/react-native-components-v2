@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components/native';
 import { ViewStyle } from 'react-native';
-import Text from '../Text/Text';
 import Color from '../../constants/Color';
 import Button from '../Button/Button';
 
@@ -31,11 +30,11 @@ const CheckboxButton = (props: Props) =>{
                         flex: 1, 
                         borderWidth: props.error && selection === 1 ? 2 : selection === 1 ? 2 : 1, 
                         borderColor: props.error && selection === 1 ? Color.status.color.error : selection === 1 ? Color.line.greenSoft : Color.line.soft, 
-                        marginRight: 4
+                        marginRight: 4, 
+                        backgroundColor: props.error && selection === 1 ? Color.status.color.errorDefault : selection === 1 ? Color.status.color.successDefault: undefined
                     }}
                     textColor={selection === 1 ? Color.text.full : Color.text.high}
-                    backgroundColor={props.error && selection === 1 ? Color.status.color.errorDefault : selection === 1 ? Color.status.color.successDefault: undefined}
-                    title={props.translation.global_no}
+                    title={props.noString ? props.noString : 'No'}
                     size='small'
                     onPress={() => onCellPress(1)}
                 />
@@ -44,33 +43,24 @@ const CheckboxButton = (props: Props) =>{
                         flex: 1, 
                         borderWidth: props.error && selection === 2 ? 2 : selection === 2 ? 2 : 1, 
                         borderColor: props.error && selection === 2 ? Color.status.color.error : selection === 2 ? Color.line.greenSoft : Color.line.soft, 
-                        marginLeft: 4
+                        marginLeft: 4, 
+                        backgroundColor: props.error && selection === 2 ? Color.status.color.errorDefault : selection === 2 ? Color.status.color.successDefault : undefined
                     }}
                     textColor={selection === 2 ? Color.text.full : Color.text.high}
-                    backgroundColor={props.error && selection === 2 ? Color.status.color.errorDefault : selection === 2 ? Color.status.color.successDefault : undefined}
-                    title={props.translation.global_yes}
+                    title={props.yesString ? props.yesString : 'Si'}
                     size='small'
                     onPress={() => onCellPress(2)}
                 />
             </ButtonView>
-            {props.error &&
-                <Text
-                    type='b2'
-                    weight='medium'
-                    style={{marginTop: 48, color: Color.status.color.error}}
-                >
-                    {props.translation.global_error}
-                </Text>
-            }
         </Container>
     )
 }
 export default CheckboxButton;
 export interface Props{
-    translation: {
-		[key: string]: any
-	},
     style?: ViewStyle,
     onChange?: Function,
-    error?: boolean
+    error?: boolean,
+    yesString?: string,
+    noString?: string,
+    errorString?: string
 }

@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useState, useEffect } from 'react';
 import styled from 'styled-components/native';
 import { ViewStyle } from 'react-native';
 import Text from '../Text/Text';
@@ -19,11 +19,17 @@ const Cell = styled.Pressable<{selected: boolean}>`
     margin: 0px 4px;
 `
 
-const OptionSelect: FC<Props> = props =>{
+const SelectVisit: FC<Props> = props =>{
 
-    const [ selectedItem, setSelectedItem ] = useState<{id: string, title?: string} | undefined>(props.defaultSelection ? {id: props.defaultSelection} : undefined);
+    const [ selectedItem, setSelectedItem ] = useState<{id: string, title?: string} | undefined>(undefined);
 
-    const onCellPress = (item: {id: string, title: string}) =>{
+    useEffect(() =>{
+        if(props.selectedItem) {
+            setSelectedItem({id: props.selectedItem});
+        }
+    },[props.selectedItem]);
+
+    const onCellPress = (item: {id: string, title?: string}) =>{
         if(selectedItem && selectedItem.id === item.id){
             setSelectedItem(undefined);
             props.onPress && props.onPress(undefined);
@@ -37,32 +43,36 @@ const OptionSelect: FC<Props> = props =>{
         <Container
             style={props.style}
         >
-            {props.options.map((item, index) =>(
-                <Cell
-                    key={'cell'+index}
-                    onPress={() => onCellPress(item)}
-                    selected={selectedItem?.id === item.id}
-                >
-                    <item.icon />
-                    <Text
-                        type='p2'
-                        style={{marginTop: 12}}
+            {props.options.map((item, index) => { 
+                let selected = selectedItem?.id === item.id;
+                return(
+                    <Cell
+                        key={'cell'+index}
+                        onPress={() => onCellPress(item)}
+                        selected={selected}
                     >
-                        {item.title}
-                    </Text>
-                </Cell>
-            ))}
+                        <item.icon />
+                        <Text
+                            type='p2'
+                            style={{marginTop: 12}}
+                        >
+                            {item.title}
+                        </Text>
+                    </Cell>
+                    )
+                }
+            )}
         </Container>
     )
 }
-export default OptionSelect;
+export default SelectVisit;
 export interface Props{
     onPress?: Function,
     options: Array<{
         id: string,
-        title: string,
-        icon: any
+        title?: string,
+        icon?: any
     }>,
-    defaultSelection?: string,
+    selectedItem?: string,
     style?: ViewStyle
 }

@@ -46,7 +46,7 @@ const VideoProgressBar: FC<Props> = props =>{
                 {getSeconds(progressLeft)}
             </Text>
             <ProgressBar
-                style={{marginRight: 8, marginLeft: 8}}
+                style={{marginRight: 8, marginLeft: 8, flex: 1}}
                 progress={props.progress}
                 maxProgress={props.maxProgress}
                 colorBarTotal={props.colorBarTotal}

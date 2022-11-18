@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import { ViewStyle } from 'react-native';
 import Text from '../Text/Text';
 import Color from '../../constants/Color';
@@ -37,9 +37,13 @@ const numberKeys = [
 
 const KeyboardRating: FC<Props> = props =>{
 
-    const [ selectedOption, setSelectedOption ] = useState<any>(undefined);
+    const [ selectedOption, setSelectedOption ] = useState<string | undefined>(props.selectedOption);
 
-    const _onPress = key =>{
+    useEffect(() =>{
+        setSelectedOption(props.selectedOption);
+    },[props.selectedOption]);
+
+    const onPress = key =>{
         if (key === '') {
             return;
         } else {
@@ -60,7 +64,7 @@ const KeyboardRating: FC<Props> = props =>{
                         // onShowUnderlay={() => {setIsPressing(true); setIndex(index)}}
                         // onHideUnderlay={() => {setIsPressing(false); setIndex(0)}}
                         underlayColor={Color.status.primary.softDefault}
-                        onPress={() => _onPress(item.mainText)}
+                        onPress={() => onPress(item.mainText)}
                     >
                         <BD>
                             <Text 
@@ -82,5 +86,6 @@ export default KeyboardRating;
 export interface Props {
     onKeyPress?: Function,
     ref?: any,
-    style?: ViewStyle
+    style?: ViewStyle,
+    selectedOption?: string
 }

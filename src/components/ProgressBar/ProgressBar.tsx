@@ -3,7 +3,6 @@ import * as Progress from 'react-native-progress';
 import styled from 'styled-components/native';
 
 const ProgressView = styled.View`
-    flex: 1;
 `
 
 const ProgressBar: FC<Props> = props =>{

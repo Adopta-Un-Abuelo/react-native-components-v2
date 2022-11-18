@@ -48,7 +48,7 @@ const VideoModal: FC<Props> = props =>{
     const [ videoDuration, setVideoDuration ] = useState<number>(0);
 
     const onVideoEnd = () =>{
-        if(videoProgress >= props.skipIn) {
+        if(props.skipIn && videoProgress >= props.skipIn) {
             props.onVideoEnd && props.onVideoEnd();
         }
     }
@@ -84,9 +84,9 @@ const VideoModal: FC<Props> = props =>{
                             <X color={Color.text.white}/>
                         </CloseButton>
                     }
-                    {props.skipIn === 0 ? 
+                    {props.skipIn ? props.skipIn === 0 ? 
                         undefined
-                        :
+                    :
                         <Text
                             type='b2'
                             weight={props.skipIn >= videoProgress ? 'medium' : 'bold'}
@@ -94,7 +94,7 @@ const VideoModal: FC<Props> = props =>{
                         >
                             {props.skipIn >= videoProgress ? props.skipInString+' '+ new Date((props.skipIn - videoProgress) * 1000).toISOString().substr(14, 5) : props.skipString}
                         </Text>
-                    }
+                    : undefined}
                 </Header>
                 <VideoView>
                     <Video
@@ -140,8 +140,8 @@ const VideoModal: FC<Props> = props =>{
 }
 export default VideoModal;
 export interface Props{
-    skipInString: string,
-    skipString: string,
+    skipInString?: string,
+    skipString?: string,
     visible: boolean,
     url: string,
     skipIn?: number,

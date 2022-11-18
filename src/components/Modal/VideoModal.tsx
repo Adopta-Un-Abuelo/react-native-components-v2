@@ -48,7 +48,7 @@ const VideoModal: FC<Props> = props =>{
     const [ videoDuration, setVideoDuration ] = useState<number>(0);
 
     const onVideoEnd = () =>{
-        if(props.skipIn && videoProgress >= props.skipIn) {
+        if(videoProgress >= (props.skipIn ? props.skipIn : 0)) {
             props.onVideoEnd && props.onVideoEnd();
         }
     }
@@ -75,7 +75,7 @@ const VideoModal: FC<Props> = props =>{
         >
             <VideoContainer>
                 <Header>
-                    {props.skipIn === 0 ? 
+                    {props.skipIn ? props.skipIn === 0 ? 
                         undefined
                         :
                         <CloseButton
@@ -83,7 +83,7 @@ const VideoModal: FC<Props> = props =>{
                         >
                             <X color={Color.text.white}/>
                         </CloseButton>
-                    }
+                    : undefined}
                     {props.skipIn ? props.skipIn === 0 ? 
                         undefined
                     :

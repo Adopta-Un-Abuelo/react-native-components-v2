@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components/native';
 import { ViewStyle } from 'react-native';
 import Color from '../../constants/Color';
@@ -12,7 +12,13 @@ const ButtonView = styled.Pressable`
 
 const CheckboxButton = (props: Props) =>{
 
-    const [ selection, setSelection ] = useState<number>(0);
+    const [ selection, setSelection ] = useState<number>(props.selection ? props.selection : 0);
+
+    useEffect(() =>{
+        if(props.selection !== undefined){
+            setSelection(props.selection);
+        }
+    },[props.selection]);
 
     const onCellPress = (id) => {
         setSelection(id);
@@ -41,7 +47,7 @@ const CheckboxButton = (props: Props) =>{
                 <Button
                     style={{
                         flex: 1, 
-                        borderWidth: props.error && selection === 2 ? 2 : selection === 2 ? 2 : 1, 
+                        borderWidth: (props.error && selection === 2) ? 2 : selection === 2 ? 2 : 1, 
                         borderColor: props.error && selection === 2 ? Color.status.color.error : selection === 2 ? Color.line.greenSoft : Color.line.soft, 
                         marginLeft: 4, 
                         backgroundColor: props.error && selection === 2 ? Color.status.color.errorDefault : selection === 2 ? Color.status.color.successDefault : undefined
@@ -58,6 +64,7 @@ const CheckboxButton = (props: Props) =>{
 export default CheckboxButton;
 export interface Props{
     style?: ViewStyle,
+    selection?: 0 | 1 | 2,
     onChange?: Function,
     error?: boolean,
     yesString?: string,

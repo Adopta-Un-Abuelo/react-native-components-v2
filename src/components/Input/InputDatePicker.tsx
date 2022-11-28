@@ -17,7 +17,7 @@ const DateInput = (props: Props) =>{
         setShowModal(true);
     }
 
-    const onSave = () =>{        
+    const onSave = () =>{       
         const temp = new Intl.DateTimeFormat(props.currentLocale, {month: '2-digit', day: '2-digit', year: 'numeric'}).format(selectedDate);
         setDateInputValue(temp);
         setShowModal(false);
@@ -43,6 +43,7 @@ const DateInput = (props: Props) =>{
                     androidVariant={'iosClone'}
                     onDateChange={onDateChange}
                     locale={props.currentLocale}
+                    textColor={'black'}
                 />
             </Modal>
             <InputFalse

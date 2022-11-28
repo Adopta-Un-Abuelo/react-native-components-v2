@@ -8,7 +8,7 @@ const Container = styled.View<{showShadow?: boolean}>`
     flex-direction: row;
     justify-content: flex-end;
     align-items: center;
-    padding: 8px 24px;
+    padding: 16px 24px;
     border-top-width: ${props => props.showShadow ? '1px' : '0px'};
     border-top-color: ${Color.background.low};
 `

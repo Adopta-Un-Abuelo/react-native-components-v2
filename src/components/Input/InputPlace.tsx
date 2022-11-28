@@ -4,7 +4,6 @@ import { Search } from 'lucide-react-native';
 import Color from '../../constants/Color';
 import Modal from '../Modal/Modal';
 import Input from './InputFalse';
-import { View } from 'react-native';
 
 const PlaceInput = forwardRef((props: Props, ref: Ref<InputRef>) =>{
 
@@ -69,25 +68,29 @@ const PlaceInput = forwardRef((props: Props, ref: Ref<InputRef>) =>{
                     onFocus: () => setIsFocused(true),
                     onBlur: () => setIsFocused(false),
                     clearButtonMode: 'while-editing',
-                    autoCorrect: false
+                    autoCorrect: false,
+                    placeholderTextColor: Color.text.high
                 }}
-                renderLeftButton={() => <View style={{justifyContent: 'center', paddingLeft: 6}}><Search height={20} width={20} color={Color.text.full}/></View>}
+                renderLeftButton={() => <Search height={20} width={20} color={Color.text.full}/>}
                 styles={{
                     textInputContainer:{
                         height: 48,
                         borderColor: Color.line.low,
                         borderWidth: 1,
                         borderRadius: 100,
-                        paddingRight: 8,
-                        paddingLeft: 8,
+                        paddingRight: 16,
+                        paddingLeft: 16,
                         backgroundColor: Color.background.soft,
-                        marginTop: 16
+                        marginTop: 16,
+                        alignItems: 'center'
                     },
                     textInput:{
+                        height: 48,
                         fontFamily: 'Poppins-Regular',
-                        backgroundColor: undefined,
+                        backgroundColor: 'transparent',
+                        marginTop: 6,
                         fontSize: 15,
-                        color: Color.text.full
+                        color: Color.text.full,
                     },
                     description:{
                         fontFamily: 'Poppins-Regular',

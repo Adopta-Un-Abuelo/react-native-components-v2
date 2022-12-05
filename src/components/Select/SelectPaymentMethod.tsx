@@ -1,308 +1,147 @@
-import React, { useState, useEffect, forwardRef, Ref, useImperativeHandle, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components/native';
-import { Plus, ChevronRight } from 'lucide-react-native';
+import { Plus, ChevronDown } from 'lucide-react-native';
 import { Platform } from 'react-native';
-import { isApplePaySupported } from '@stripe/stripe-react-native';
+import { isApplePaySupported, isGooglePaySupported } from '@stripe/stripe-react-native';
 import Color from '../../constants/Color';
 import PaycardLogos from '../../constants/Paycard';
 import Text from '../Text/Text';
-import Modal from '../Modal/Modal';
-import PaymentMethodModal, { PaymentMethodModalRef } from '../Modal/PaymentMethodModal';
+import PaymentSelectMethodModal from '../Modal/PaymentSelectMethodModal';
+import PaycardMethodForm from '../Form/PaycardMethodForm';
 
-const ScrollView = styled.ScrollView`
-`
 const RowButton = styled.Pressable`
     flex-direction: row;
-`
-const RowView = styled.View`
-    flex-direction: row;
-`
-const Cell = styled.Pressable`
-    height: 80px;
-    flex-direction: row;
+    margin-bottom: 22px;
     align-items: center;
 `
-const CellTextView = styled.View<{show: boolean}>`
-    height: 100%;
-    flex: 1;
-    flex-direction: column;
+const PlusButton = styled.Pressable`
+    height: 21px;
+    width: 32px;
+    border-radius: 6px;
+    background-color: ${Color.background.primaryLow};
+    align-items: center;
     justify-content: center;
-    margin: 0px 0px 0px 16px;
-    border-bottom-color: ${Color.line.soft};
-    border-bottom-width: ${props => props.show ? '1px' : '0px'};
 `
-const creditCardHidde = '···· '
 
-const PaymentMethodSelect = forwardRef((props: Props, ref: Ref<SelectPaymentMethodRef>) =>{
+const PaymentMethodSelect = (props: Props) =>{
 
     const nativePayment = {
         objectId: Platform.OS === 'ios' ? 'applePay' : 'googlePay',
         title: Platform.OS === 'ios' ? 'Apple Pay' : 'Google Pay',
         date: undefined,
         icon: Platform.OS === 'ios' ? PaycardLogos.apple.icon : PaycardLogos.google.icon,
-        paymentMethod: undefined
+        paymentMethod: undefined,
+        default: false
     };
 
-    const cardPayment = {
-        objectId: 'new',
-        title: props.translation ? props.translation.payment_method_select_add_credit_card : 'Añadir forma de pago',
+    const addNewCardPayment = {
+        objectId: 'addNewCardPayment',
+        title: props.translation.payment_select_add_method,
         date: undefined,
-        icon: Plus,
-        paymentMethod: undefined
+        icon: <PlusButton><Plus height={16} width={16} color={Color.text.primary} /></PlusButton>,
+        paymentMethod: undefined,
+        default: false
     };
-
-    // TODO - Method of payment - Google Pay
-    const [ methodSelected, setMethodSelected ] = useState(props.methodsTypes.includes('native') && Platform.OS === 'ios' ? nativePayment : cardPayment);
-    const [ options, setOptions ] = useState<Array<{objectId: string, title: string, date: string, icon: any}>>([]);
-
-    // Manage open/close transition
-    const [ action, setAction ] = useState<undefined | string>(undefined);
-
-    // Modals
-    const [ showSelectModal, setShowSelectModal ] = useState<boolean>(false);
-    const [ showPaycardModal, setShowPaycardModal ] = useState<boolean>(false);
     
-    const paymentMethodModal = useRef<PaymentMethodModalRef>()
+    const [ paymentMethodSelected, setPaymentMethodSelected ] = useState<any>(nativePayment);
+    const [ paymentMethodOptions, setPaymentMethodOptions ] = useState<Array<any>>([]);
 
-    useImperativeHandle(ref, () => ({
-        showAdd(){
-            paymentMethodModal.current.show();
-        },
-        hideAdd(){
-            paymentMethodModal.current.hide();
-        }
-    }));
+    const [ showSelectPaymentMethodModal, setShowSelectPaymentMethodModal ] = useState<boolean>(false);
+    const [ showPaycardModal, setShowPaycardModal ] = useState<boolean>(false);
 
     useEffect(() =>{
-        // Set payment method (NATIVE OR CARD)
-        // if(((Platform.OS === 'ios' && isApplePaySupported()) || Platform.OS === 'android') && props.methodsTypes.includes('native')){
-        if(((Platform.OS === 'ios' && isApplePaySupported())) && props.methodsTypes.includes('native')){
-            setOptions([nativePayment, cardPayment]);
-            props.onChange && props.onChange(nativePayment);
-        }
-        else{
-            setOptions([cardPayment])
-            props.onChange && props.onChange(cardPayment);
-        }
-    },[]);
+        // Set payment method options (NATIVE OR CARD)
+        onSetPaymentOptions();
+    },[props.paymentMethodsUser]);
 
-    useEffect(() =>{
-        setDefaultCard();
-    },[props.paymentMethods]);
-
-    const onDismissModalPayCard = () =>{
-        setShowPaycardModal(false);
-    }
-    const onDismiss = () =>{
-        setAction(undefined);
-        setShowSelectModal(false);
-        props.onDismiss && props.onDismiss();
-    }
-
-    const parseDate = (date) => {
-        if(date) {
-            const formatter = new Intl.DateTimeFormat('es', { month: 'numeric', year: 'numeric' });
-            return formatter.format(new Date(date.iso));    
-        } else {
-            return undefined;
+    const onSetPaymentOptions = () => {
+        let paymentOptionsTemp: any = [];
+        // Check for user payment methods
+        if(props.paymentMethodsUser) {
+            props.paymentMethodsUser.map(item =>{
+                paymentOptionsTemp.push(item);
+            });
         }
+        // Check for apple/google pay support
+        if((Platform.OS === 'ios' && isApplePaySupported()) || (Platform.OS === 'android' && isGooglePaySupported())){
+            paymentOptionsTemp.push(nativePayment);
+            paymentOptionsTemp.push(addNewCardPayment);
+            props.onPaymentMethodChange && props.onPaymentMethodChange(nativePayment);
+        } else{
+            paymentOptionsTemp.push(addNewCardPayment);
+            props.onPaymentMethodChange && props.onPaymentMethodChange(addNewCardPayment);
+        }
+        // Set payment options
+        setPaymentMethodOptions(paymentOptionsTemp);
+        // Check for default paycard
+        onSetDefaultPaymentMethod();
     }
 
-    const setDefaultCard = (method?) =>{
-        if(method){
-            setMethodSelected(method)
-            props.onChange && props.onChange(method);
+    const onSetDefaultPaymentMethod = (paymentMethod?) =>{
+        setShowSelectPaymentMethodModal(false);
+
+        if(paymentMethod){
+            setPaymentMethodSelected(paymentMethod);
+            props.onPaymentMethodChange && props.onPaymentMethodChange(paymentMethod);
         } else{
             // Set payment if user have default card
-            if(props.paymentMethods){
-                props.paymentMethods?.map(item =>{
+            if(props.paymentMethodsUser){
+                props.paymentMethodsUser.map(item =>{
                     if(item.default){
-                        const method = {
-                            objectId: item.objectId, 
-                            title: creditCardHidde+item.last4,
-                            date: parseDate(item.expDate),
-                            icon: PaycardLogos[item.brand.toLowerCase()].icon,
-                            paymentMethod: undefined
-                        }
-                        setMethodSelected(method);
-                        props.onChange && props.onChange(item);
+                        setPaymentMethodSelected(item);
+                        props.onPaymentMethodChange && props.onPaymentMethodChange(item);
                     }
                 })
             }
         }
     }
 
-    const onModalHide = () =>{
-        if(action === 'goToNew'){
-            setShowPaycardModal(true);
-            setAction(undefined)
-        }
-    }
-
-    const onOptionSelected = option => {
-        // Select method of payment
-        if(option.objectId === 'applePay' || option.objectId === 'googlePay') {
-            setMethodSelected(option);
-        } else if(option.objectId === 'new') {
-            setMethodSelected(cardPayment);
-            setAction('goToNew');
-        } else {
-            setDefaultCard({
-                objectId: option.objectId, 
-                title: creditCardHidde+option.last4,
-                date: parseDate(option.expDate),
-                icon: option.icon ? option.icon : PaycardLogos[option.brand.toLowerCase()].icon,
-                paymentMethod: undefined
-            });
-        }
-        // Close select modal
-        setShowSelectModal(false);
-        props.onChange && props.onChange(option);
-    }
-
-    const onPaycardChange = result => {
-        if(result){
-            if(result.type === "card"){
-                let expDate = result.data.Card.expMonth.toString()+'/'+result.data.Card.expYear.toString();
-                const method = {
-                    objectId: 'newCard',
-                    title: creditCardHidde+result.data.Card.last4,
-                    date: expDate,
-                    icon: PaycardLogos[(result.data.Card.brand).toLowerCase()].icon,
-                    paymentMethod: result.data.id
-                }
-                setMethodSelected(method);
-                props.onChange && props.onChange(method);
-            } else if(result.type === "sepa_debit"){
-                const method = {
-                    objectId: 'newCard',
-                    title: result.data.iban,
-                    date: undefined,
-                    icon: PaycardLogos["Cuenta bancaria"].icon,
-                    paymentMethod: result.data
-                }
-                setMethodSelected(method);
-                props.onChange && props.onChange(method);
-            }
-        }
+    const onSetPaycard = () => {
+        
     }
 
     return(
         <RowButton
-            style={props.style}
-            onPress={() => setShowSelectModal(true)}
+            onPress={() => {setShowSelectPaymentMethodModal(true)}}
         >
-            <Modal
-                visible={showSelectModal}
-                orientation={'bottom'}
-                showTopClose={true}
-                showBottomClose={false}
-                title={props.translation ? props.translation.payment_method_select_modal_payment_method : '¿Cómo quieres pagar?'}
-                onDismiss={onDismiss}
-                onModalHide={onModalHide}
+            {paymentMethodSelected.objectId !== 'addNewCardPayment' &&
+                <paymentMethodSelected.icon height={32} width={32} style={{marginRight: 16}} />
+            }
+            <Text
+                type='p2'
+                weight='medium'
+                numberOfLines={1}
             >
-                <ScrollView>
-                    {props.paymentMethods && props.paymentMethods.map((item, index) =>{
-                        const Paycard = item.objectId === 'newCard' ? item.icon : PaycardLogos[item.brand.toLowerCase()].icon;
-                        const last4 = item.objectId === 'newCard' ? item.title : creditCardHidde+item.last4;
-                        const expDate = item.objectId === 'newCard' ? item.date : parseDate(item.expDate);
-                        return (
-                            <Cell
-                                key={'paymentMethod'+index}
-                                onPress={() => onOptionSelected(item)}
-                            >
-                                <Paycard height={32} width={32}/>
-                                <CellTextView
-                                    show={true}
-                                >
-                                    <Text
-                                        type='p1'
-                                        weight='medium'
-                                    >
-                                        {last4}
-                                    </Text>
-                                    {expDate &&
-                                        <Text
-                                            type='c1'
-                                            style={{color: Color.text.high}}
-                                        >
-                                            {expDate}
-                                        </Text>
-                                    }   
-                                </CellTextView>
-                            </Cell>
-                        )
-                    })}
-                    {options.map((item, index) =>(
-                        <Cell
-                            key={'paymentOption'+index}
-                            onPress={() => onOptionSelected(item)}
-                        >
-                            <item.icon height={32} width={32} color={item.objectId === 'new' ? Color.text.primary : undefined} fill={item.objectId === 'new' ? Color.text.primary : undefined}/>
-                            <CellTextView
-                                show={item.objectId !== 'new'}
-                            >
-                                <Text
-                                    type='p1'
-                                    weight='medium'
-                                    style={{color: item.objectId === 'new' ? Color.text.primary : Color.text.full}}
-                                >
-                                    {item.title}
-                                </Text>
-                            </CellTextView>
-                        </Cell>
-                    ))}
-                </ScrollView>
-            </Modal>
-            <PaymentMethodModal
-                ref={paymentMethodModal}
+                {paymentMethodSelected.objectId === 'addNewCardPayment' ? (props.translation.payment_select_no_method) : (paymentMethodSelected.title ? paymentMethodSelected.title : props.translation.payment_select_add_method)}
+            </Text>
+            <ChevronDown height={16} width={16} color={Color.text.medium} style={{marginLeft: 8}} />
+            <PaymentSelectMethodModal                
+                expiresString={props.translation.payment_select_method_modal_expires}
+                modalTitleString={props.translation.payment_select_method_modal_title}
+                currentUser={props.currentUser}
+                visible={showSelectPaymentMethodModal}
+                paymentMethodOptions={paymentMethodOptions}
+                onDismiss={() => setShowSelectPaymentMethodModal(false)}
+                onPaymentMethodSelected={onSetDefaultPaymentMethod}
+                onModalHide={(showDelete) => setShowPaycardModal(showDelete)}
+            />
+            <PaycardMethodForm
+                // ref={paycardForm}
                 translation={props.translation}
                 visible={showPaycardModal}
                 currentUser={props.currentUser}
-                methodsTypes={props.methodsTypes}
-                onDismiss={() => {
-                    onDismissModalPayCard();
-                    props.onDismiss && props.onDismiss()
-                }}
-                onChange={onPaycardChange}
+                onDismiss={() => setShowPaycardModal(false)}
+                onSetPaycard={onSetPaycard}            
             />
-            <RowView
-                style={{marginTop: 6, alignItems: 'center', flex: 1}}
-            >
-                {methodSelected.objectId !== 'new' &&
-                    <methodSelected.icon height={30} width={30} style={{marginRight: 16}} />
-                }
-                <Text
-                    type='p2'
-                    weight='medium'
-                    numberOfLines={1}
-                >
-                    {methodSelected.objectId === 'new' ? (props.translation ? props.translation.payment_method_select_modify_no_payment_method : 'No hay método de pago') : (methodSelected.title ? methodSelected.title : 'Añadir método de pago')}
-                </Text>
-                <ChevronRight height={16} width={16} color={Color.text.high} style={{marginLeft: 4}} />
-            </RowView>
         </RowButton>
     )
-});
+};
 export default PaymentMethodSelect;
 export interface Props{
     translation: {
 		[key: string]: any
 	},
-    ref?: any,
-    style?: Object,
-    paymentMethods?: Array<any>,
-    methodsTypes: Array<string>,
+    paymentMethodsUser?: Array<any>,
     currentUser: any,
-    onDismiss?: Function,
-    onChange?: (method: {
-        objectId: string,
-        title: string,
-        icon: any,
-        paymentMethod: Object
-    }) => void,
-}
-export interface SelectPaymentMethodRef{
-    showAdd: () => void,
-    hideAdd: () => void
+    onPaymentMethodChange: Function
 }

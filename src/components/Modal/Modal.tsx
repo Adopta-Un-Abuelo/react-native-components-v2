@@ -187,8 +187,8 @@ export interface Props{
     subtitle?: string,
     orientation?: 'top' | 'bottom' | 'center' | 'fullScreen',
     showTopClose?: boolean,
-    canGoBack?: boolean,
     showBottomClose?: boolean,
+    canGoBack?: boolean,
     buttonProps?: {
         onPress?: any,
         title: string,

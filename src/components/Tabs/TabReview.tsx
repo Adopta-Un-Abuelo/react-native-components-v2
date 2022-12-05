@@ -6,7 +6,7 @@ import Text from '../Text/Text';
 import ReviewSmall from '../Review/ReviewSmall';
 
 const ItemView = styled.Pressable`
-    width: ${Dimensions.get('window').width - 60}px;
+    width: ${Dimensions.get('window').width - 90}px;
     padding: 16px;
     background-color: ${Color.background.neutral};
     border-radius: 12px;
@@ -30,9 +30,7 @@ const TabScrollable: FC<Props> = props =>{
 
     const renderCell = ({item, index}) => {
         return(
-            <ItemView
-                style={{marginLeft: index === 0 ? 16 : 0}}
-            >
+            <ItemView>
                 <RowView>
                     <ColumnView
                         style={{flex: 1, marginRight: 12}}

@@ -7,13 +7,8 @@ export { default as ButtonImage } from './Button/ButtonImage';
 export { default as CallToAction } from './Button/CallToAction';
 export { default as ButtonSmall } from './Button/ButtonSmall';
 
-export { default as Alert } from './Alert/Alert';
-export { default as Banner } from './Banner/Banner';
-export { default as Breadcrumb } from './Breadcrumb/Breadcrumb';
+export { default as CheckboxButton } from './Checkbox/CheckboxButton';
 export { default as Checkbox } from './Checkbox/Checkbox';
-export { default as RadioButton } from './RadioButton/RadioButton';
-export { default as Tag } from './Tag/Tag';
-export { default as MenuList } from './MenuList/MenuList';
 
 export { default as Container } from './Container/Container';
 export { default as ScrollContainer } from './Container/ScrollContainer';
@@ -44,7 +39,6 @@ export { default as WebModal } from './Modal/WebModal';
 export { default as VideoModal } from './Modal/VideoModal';
 export { default as SelectCountryModal } from './Modal/SelectCountryModal';
 export { default as CenterModal } from './Modal/CenterModal';
-export { default as PaymentSelectMethodModal } from './Modal/PaymentSelectMethodModal';
 
 export { default as VideoProgressBar } from './ProgressBar/VideoProgressBar';
 export { default as ProgressBar } from './ProgressBar/ProgressBar';
@@ -59,5 +53,10 @@ export { default as Tabs } from './Tabs/Tabs';
 export { default as TabScrollable } from './Tabs/TabScrollable';
 export { default as TabReview } from './Tabs/TabReview';
 
-export { default as CheckboxButton } from './Checkbox/CheckboxButton';
+export { default as Alert } from './Alert/Alert';
+export { default as Banner } from './Banner/Banner';
+export { default as Breadcrumb } from './Breadcrumb/Breadcrumb';
+export { default as RadioButton } from './RadioButton/RadioButton';
+export { default as Tag } from './Tag/Tag';
+export { default as MenuList } from './MenuList/MenuList';
 export { default as AnimatedProgressRing } from './Chart/AnimatedProgressRing';

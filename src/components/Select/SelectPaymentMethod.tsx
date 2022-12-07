@@ -112,7 +112,7 @@ const PaymentMethodSelect = (props: Props) =>{
                 weight='medium'
                 numberOfLines={1}
             >
-                {paymentMethodSelected.objectId === 'addNewCardPayment' ? (props.translation.payment_select_no_method) : (paymentMethodSelected.title ? paymentMethodSelected.title : props.translation.payment_select_add_method)}
+                {paymentMethodSelected.objectId === 'addNewCardPayment' ? (props.translation.payment_select_add_method) : (paymentMethodSelected.title ? paymentMethodSelected.title : props.translation.payment_select_add_method)}
             </Text>
             <ChevronDown height={16} width={16} color={Color.text.medium} style={{marginLeft: 8}} />
             <PaymentSelectMethodModal                

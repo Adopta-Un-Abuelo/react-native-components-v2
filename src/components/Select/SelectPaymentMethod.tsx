@@ -8,6 +8,7 @@ import PaycardLogos from '../../constants/Paycard';
 import Text from '../Text/Text';
 import PaymentSelectMethodModal from '../Modal/PaymentSelectMethodModal';
 import PaycardMethodForm from '../Form/PaycardMethodForm';
+import { PaycardConst } from 'react-native-components-v2/src/constants';
 
 const RowButton = styled.Pressable`
     flex-direction: row;
@@ -48,6 +49,7 @@ const PaymentMethodSelect = (props: Props) =>{
 
     const [ showSelectPaymentMethodModal, setShowSelectPaymentMethodModal ] = useState<boolean>(false);
     const [ showPaycardModal, setShowPaycardModal ] = useState<boolean>(false);
+    const creditCardHide = '···· '
 
     useEffect(() =>{
         // Set payment method options (NATIVE OR CARD)
@@ -96,8 +98,17 @@ const PaymentMethodSelect = (props: Props) =>{
         }
     }
 
-    const onSetPaycard = () => {
-        
+    const onSetPaycard = (paymentMethod) => {
+        let newPaymentOption = {
+            objectId: 'newCard', 
+            title: creditCardHide + paymentMethod.Card.last4,
+            date: paymentMethod.Card.expMonth + "/" + paymentMethod.Card.expYear,
+            icon: PaycardConst[paymentMethod.Card.brand.toLowerCase()].icon,
+            paymentMethod: paymentMethod.id,
+            default: true
+        };
+        paymentMethodOptions.unshift(newPaymentOption);
+        onSetDefaultPaymentMethod(newPaymentOption);
     }
 
     return(
@@ -126,7 +137,6 @@ const PaymentMethodSelect = (props: Props) =>{
                 onModalHide={(showDelete) => setShowPaycardModal(showDelete)}
             />
             <PaycardMethodForm
-                // ref={paycardForm}
                 translation={props.translation}
                 visible={showPaycardModal}
                 currentUser={props.currentUser}

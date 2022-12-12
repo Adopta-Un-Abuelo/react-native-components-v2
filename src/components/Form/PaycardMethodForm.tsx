@@ -1,11 +1,11 @@
-import React, { forwardRef, useState, Ref, useImperativeHandle, useEffect, useRef } from 'react';
+import React, { forwardRef, useState, useEffect } from 'react';
 import styled from 'styled-components/native';
-import { createPaymentMethod, CardField } from '@stripe/stripe-react-native';
 import Color from '../../constants/Color';
 import Modal from '../Modal/Modal';
 import { Keyboard } from 'react-native';
 import Text from '../Text/Text';
 import { Lock } from 'lucide-react-native';
+import { CardField,  BillingDetails, createPaymentMethod } from '@stripe/stripe-react-native';
 
 const Container = styled.View`
     flex: 1;
@@ -22,76 +22,63 @@ const ContainerSecure = styled.View`
     justify-content: flex-end;
 `
 
-const PaycardMethodForm = forwardRef((props: Props, ref: Ref<PaymentMethodFormRef>) =>{
+const PaycardMethodForm = forwardRef((props: Props) =>{
 
-    const paycardForm = useRef<PaymentMethodFormRef>();
     const [ visible, setVisible ] = useState(props.visible);
     const [ error, setError ] = useState<boolean>(false);
     const [ loading, setLoading ] = useState(false);
 
+    const [ cardDetails, setCardDetails ] = useState<any>();
     const [ isFocus, setIsFocus ] = useState(false);
-    const [ cardDetails, setCardDetails ] = useState(undefined);
 
     useEffect(() =>{
         setVisible(props.visible);
     },[props.visible]);
 
-    // useImperativeHandle(ref, () => ({
-    //     async generateToken(){
-    //         return await generateToken();
-    //     }
-    // }));
+    const onSavePaycard = async () => {
+        Keyboard.dismiss(); 
+        if(cardDetails && cardDetails.complete) {
+            setLoading(true);
+            // Gather customer billing information
+            const billingDetails: BillingDetails = {
+                name: props.currentUser.name,
+                phone: props.currentUser.phone,
+                email: props.currentUser.email
+            };
+        
+            // Create payment method
+            const { paymentMethod, error } = await createPaymentMethod({
+                paymentMethodType: 'Card',
+                paymentMethodData: { billingDetails }
+            });
 
-    const generateToken = async () =>{
-        // if(cardDetails){
-        //     try{
-        //         const result = await createPaymentMethod({
-        //             paymentMethodType: 'Card',
-        //             billingDetails:{
-        //                 name: props.currentUser.name,
-        //                 phone: props.currentUser.phone,
-        //                 email: props.currentUser.email
-        //             },
-        //             ...cardDetails
-        //         });
-        //         return {
-        //             status: 'ok',
-        //             result: {
-        //                 type: 'card',
-        //                 data: result.paymentMethod
-        //             }
-        //         };
-        //     } catch(e){
-        //         console.error(e);
-        //         return{
-        //             status: 'error',
-        //             error: e
-        //         };
-        //     }
-        // }
-    }
+            // Check if error
+            if (error || !paymentMethod) {
+                console.log(`Error code: ${error.code}`, error.message);
+                setError(true);
+                setLoading(false);
+                return;
+            } 
+
+            // Success
+            props.onSetPaycard && props.onSetPaycard(paymentMethod);
+            onDismiss();
+            setLoading(false);
+        } else {
+            setError(true);
+        }
+    };
 
     const onDismiss = () => {
         setVisible(false);
         props.onDismiss && props.onDismiss();
     }
 
-    const onSavePress = async () =>{
-        Keyboard.dismiss();        
-            // setLoading(true);
-            // const result = await paycardForm?.current.generateToken();
-            // if(result && result.status === 'ok'){
-            //     props.onChange && props.onChange(result.result);
-            //     onDismiss();
-            // } else {
-            //     setError(true);
-            // }
-            // setLoading(false);
-    }
-
     const onCardChange = async (cardDetails) =>{
         if(cardDetails.complete){
             setCardDetails(cardDetails);
+        } else {
+            setCardDetails(undefined);
         }
     }
 
@@ -105,27 +92,31 @@ const PaycardMethodForm = forwardRef((props: Props, ref: Ref<PaymentMethodFormRe
             buttonProps={{
                 title: props.translation ? props.translation.payment_select_paycard_save_card : 'Guardar',
                 loading: loading,
-                onPress: onSavePress
+                onPress: onSavePaycard
             }}
         >
             <Container>
+
                 <CardField
-                    postalCodeEnabled={false}
-                    // placeholders={{
-                    //     number: props.translation.payment_select_paycard_credit_card,
-                    //     expiration: props.translation.payment_select_paycard_date
-                    // }}
+                    placeholders={{
+                        number: props.translation.payment_select_paycard_credit_card,
+                        cvc: props.translation.payment_select_paycard_cvc,
+                        expiration: props.translation.payment_select_paycard_date
+                    }}
+                    autofocus
                     cardStyle={{
+                        fontSize: 16,
                         fontFamily: 'Poppins-Regular',
-                        borderRadius: 12,
+                        textErrorColor: Color.text.red,
                         borderWidth: isFocus ? 2 : 1,
                         borderColor: isFocus ? Color.line.primarySoft : Color.line.soft,
-                        cursorColor: Color.text.primary
+                        borderRadius: 12
                     }}
                     style={{
                         width: '100%',
                         height: 56
                     }}
+                    postalCodeEnabled={false}
                     onCardChange={onCardChange}
                     onFocus={() =>  setIsFocus(true)}
                     onBlur={() => setIsFocus(false)}
@@ -151,7 +142,6 @@ const PaycardMethodForm = forwardRef((props: Props, ref: Ref<PaymentMethodFormRe
                 </Row>
             </ContainerSecure>
         </Modal>
-        
     )
 })
 export default PaycardMethodForm;
@@ -163,11 +153,4 @@ export interface Props{
     currentUser: any,
     onDismiss: Function,
     onSetPaycard: Function,
-}
-export interface PaymentMethodFormRef{
-    generateToken: () => Promise<{
-        status: string,
-        result?: Object,
-        error?: any
-    }>
 }

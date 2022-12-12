@@ -82,21 +82,21 @@ const PaymentSelectMethodModal: FC<Props> = props =>{
     }
 
     return(
-            <Modal
-                visible={visible}
-                orientation={'bottom'}
-                showTopClose={true}
-                title={props.modalTitleString}
-                onDismiss={onDismiss}
-                onModalHide={onModalHide}
-                style={{paddingBottom: 40}}
-            >
-                <ScrollView>
-                    {props.paymentMethodOptions && props.paymentMethodOptions.map((item, index) => {
-                        return renderPaymentCell(item, index)
-                    })}
-                </ScrollView>
-            </Modal>
+        <Modal
+            visible={visible}
+            orientation={'bottom'}
+            showTopClose={true}
+            title={props.modalTitleString}
+            onDismiss={onDismiss}
+            onModalHide={onModalHide}
+            style={{paddingBottom: 40}}
+        >
+            <ScrollView>
+                {props.paymentMethodOptions && props.paymentMethodOptions.map((item, index) => {
+                    return renderPaymentCell(item, index)
+                })}
+            </ScrollView>
+        </Modal>
     ) 
 };
 export default PaymentSelectMethodModal;

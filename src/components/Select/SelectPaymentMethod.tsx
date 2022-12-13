@@ -2,13 +2,13 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components/native';
 import { Plus, ChevronDown } from 'lucide-react-native';
 import { Platform } from 'react-native';
-import { isApplePaySupported, isGooglePaySupported } from '@stripe/stripe-react-native';
+import { isPlatformPaySupported } from '@stripe/stripe-react-native';
 import Color from '../../constants/Color';
 import PaycardLogos from '../../constants/Paycard';
 import Text from '../Text/Text';
 import PaymentSelectMethodModal from '../Modal/PaymentSelectMethodModal';
 import PaycardMethodForm from '../Form/PaycardMethodForm';
-import { PaycardConst } from 'react-native-components-v2/src/constants';
+import { PaycardConst } from '../../constants';
 
 const RowButton = styled.Pressable`
     flex-direction: row;
@@ -56,7 +56,7 @@ const PaymentMethodSelect = (props: Props) =>{
         onSetPaymentOptions();
     },[props.paymentMethodsUser]);
 
-    const onSetPaymentOptions = () => {
+    const onSetPaymentOptions = async () => {
         let paymentOptionsTemp: any = [];
         // Check for user payment methods
         if(props.paymentMethodsUser) {
@@ -65,7 +65,7 @@ const PaymentMethodSelect = (props: Props) =>{
             });
         }
         // Check for apple/google pay support
-        if((Platform.OS === 'ios' && isApplePaySupported()) || (Platform.OS === 'android' && isGooglePaySupported())){
+        if(await isPlatformPaySupported()){
             paymentOptionsTemp.push(nativePayment);
             paymentOptionsTemp.push(addNewCardPayment);
             props.onPaymentMethodChange && props.onPaymentMethodChange(nativePayment);
@@ -110,7 +110,7 @@ const PaymentMethodSelect = (props: Props) =>{
         paymentMethodOptions.unshift(newPaymentOption);
         onSetDefaultPaymentMethod(newPaymentOption);
     }
-
+    
     return(
         <RowButton
             onPress={() => {setShowSelectPaymentMethodModal(true)}}

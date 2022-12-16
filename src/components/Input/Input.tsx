@@ -120,12 +120,12 @@ const Input = forwardRef((props: Props, ref: Ref<InputRef>) =>{
                             hideTitle={props.hideTitle}
                             {...rest}
                         />
-                        {props.showEuro &&
+                        {props.currency &&
                             <Text
                                 type='h4'
                                 weight='regular'
                             >
-                                €
+                                {props.currency}
                             </Text>
                         }
                     </Row>
@@ -143,7 +143,7 @@ export interface Props extends TextInputProps{
     children?: any,
     hideTitle?: boolean,
     type?: 'small' | 'big',
-    showEuro?: boolean
+    currency?: string
 }
 export interface InputRef{
     focus: () => void,

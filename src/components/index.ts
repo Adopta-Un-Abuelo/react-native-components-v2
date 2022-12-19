@@ -39,6 +39,7 @@ export { default as WebModal } from './Modal/WebModal';
 export { default as VideoModal } from './Modal/VideoModal';
 export { default as SelectCountryModal } from './Modal/SelectCountryModal';
 export { default as CenterModal } from './Modal/CenterModal';
+export { default as PaycardMethodForm } from './Form/PaycardMethodForm';
 
 export { default as VideoProgressBar } from './ProgressBar/VideoProgressBar';
 export { default as ProgressBar } from './ProgressBar/ProgressBar';

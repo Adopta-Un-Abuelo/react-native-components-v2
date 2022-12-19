@@ -46,7 +46,7 @@ export interface Props{
     options: Array<{
         id: string,
         title: string,
-        icon?: any,
+        Icon?: any,
         disabled?: boolean
     }>
     onPress?: Function

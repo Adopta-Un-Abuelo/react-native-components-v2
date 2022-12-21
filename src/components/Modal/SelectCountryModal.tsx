@@ -6,13 +6,14 @@ import Modal from './Modal';
 import Text from '../Text/Text';
 import Color from '../../constants/Color';
 import Input from '../Input/Input';
+import getUnicodeFlagIcon from 'country-flag-icons/unicode';
 
 const Cell = styled.Pressable`
     flex-direction: row;
     align-items: center;
     margin-left: -24px;
     margin-right: -24px;
-    padding: 16px 32px;
+    padding: 16px 24px;
     border-bottom-width: 1px;
     border-bottom-color: ${Color.line.soft};
 `
@@ -91,23 +92,23 @@ const SelectCountryModal: FC<Props> = props =>{
                 />
             } */}
             <Scroll>
-                {countries.map((item, index) =>(
-                    <Cell
-                        style={{opacity: 1}}
-                        key={'callOption'+index}
-                        onPress={() => onPress(item)}
-                    >
-                        {item.icon &&
-                            <item.icon height={24} width={24}/>
-                        }
-                        <Text
-                            type='p2'
-                            style={{marginLeft: (item.icon) ? 12 : 0}}
+                {countries.map((item, index) =>{
+                    const flag = getUnicodeFlagIcon(item.countryCode);
+                    return(
+                        <Cell
+                            style={{opacity: 1}}
+                            key={'callOption'+index}
+                            onPress={() => onPress(item)}
                         >
-                            {props.locale === 'en' ? item.enPrefix : item.esPrefix}
-                        </Text>
-                    </Cell>
-                ))}
+                            <Text type='h5' style={{flex: 1, justifyContent: 'center'}}>
+                                {flag+'  '}
+                                <Text>
+                                    {props.locale === 'en' ? (item.enCountry+' ('+item.prefix+')') : (item.esCountry+' ('+item.prefix+')')}
+                                </Text>
+                            </Text>
+                        </Cell>
+                    )
+                })}
             </Scroll>
         </Modal>
     )
@@ -124,9 +125,7 @@ export interface Props{
         prefix: string,
         esCountry: string,
         enCountry: string,
-        esPrefix: string,
-        enPrefix: string,
-        icon?: any
+        countryCode: string
     }>,
     locale: string,
     // showSearch?: boolean

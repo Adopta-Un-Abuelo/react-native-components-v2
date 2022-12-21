@@ -6,10 +6,8 @@ import Input from '../Input/Input';
 const PhoneInput = (props: Props) =>{
 
     const input = useRef<TextInput>(null);
-    const [ title, setTitle ] = useState('+34');
 
     const onCountryChange = (country: {prefix: string}) =>{
-        setTitle(country.prefix);
         props.onCountryChange && props.onCountryChange(country);
     }
 
@@ -36,11 +34,11 @@ const PhoneInput = (props: Props) =>{
                 style={{height: '100%'}}
                 countries={props.countries}
                 locale={props.locale}
-                title={title}
                 modalProps={{
                     title: props.modalTitle ? props.modalTitle : 'Prefijo telefónico',
                     showSearch: true
                 }}
+                defaultCountry={props.defaultCountry}
                 onChange={onCountryChange}
                 onShow={onSelectShow}
                 onDismiss={onSelectDismiss}
@@ -55,9 +53,7 @@ export interface Props{
         prefix: string,
         esCountry: string,
         enCountry: string,
-        esPrefix: string,
-        enPrefix: string,
-        icon?: any
+        countryCode: string
     }>,
     locale: string,
     value?: string,
@@ -65,6 +61,7 @@ export interface Props{
     style?: Object,
     placeholder?: string,
     modalTitle?: string,
+    defaultCountry?: string,
     onCountryChange?: (country: { prefix: string }) => void,
     onChangeText?: (phone: string) => void,
 }

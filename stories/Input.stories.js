@@ -73,18 +73,29 @@ storiesOf('Input', module)
                     prefix: '+34',
                     esCountry: 'España',
                     enCountry: 'Spain',
-                    esPrefix: 'España (+34)',
-                    enPrefix: 'Spain (+34)',
-                    // icon: SpainFlag
-                }, {
+                    countryCode: 'ES'
+                },
+                {
                     id: 'france',
                     prefix: '+33',
                     esCountry: 'Francia',
                     enCountry: 'France',
-                    esPrefix: 'Francia (+33)',
-                    enPrefix: 'France (+33)',
-                    // icon: FranceFlag
-                }]}
+                    countryCode: 'FR'
+                },
+                {
+                    id: 'mexico',
+                    prefix: '+52',
+                    esCountry: 'México',
+                    enCountry: 'Mexico',
+                    countryCode: 'MX'
+                },
+                {
+                    id: 'argentina',
+                    prefix: '+54',
+                    esCountry: 'Argentina',
+                    enCountry: 'Argentina',
+                    countryCode: 'AR'
+                },]}
                 type={text('type', 'big')}
                 locale={'es'}
                 value={text('value')}

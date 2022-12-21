@@ -1,6 +1,6 @@
 {
   "name": "react-native-components-v2",
-  "version": "0.2.11",
+  "version": "0.2.12",
   "private": false,
   "main": "lib/commonjs/index.js",
   "scripts": {
@@ -16,7 +16,8 @@
   },
   "dependencies": {
     "@react-native-community/masked-view": "^0.1.11",
-		"@stripe/stripe-react-native": "^0.22.1",
+    "@stripe/stripe-react-native": "^0.22.1",
+    "country-flag-icons": "^1.5.5",
     "expo": "~44.0.6",
     "expo-status-bar": "~1.2.0",
     "fuse.js": "^6.6.2",

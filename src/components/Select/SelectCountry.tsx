@@ -5,6 +5,7 @@ import { ChevronDown } from 'lucide-react-native';
 import Color from '../../constants/Color';
 import Text from '../Text/Text';
 import SelectCountryModal from '../Modal/SelectCountryModal';
+import getUnicodeFlagIcon from 'country-flag-icons/unicode';
 
 const Container = styled.View`
     justify-content: center;
@@ -14,10 +15,6 @@ const SelectStyled = styled.Pressable`
     flex-direction: row;
     z-index: 1000;
 `
-const Icon = styled.View`
-    height: 24px;
-    width: 24px;
-`
 const Arrow = styled.View`
     height: 7px;
     width: 12px;
@@ -26,12 +23,30 @@ const Arrow = styled.View`
 
 const SelectCountry = (props: Props) =>{
 
+    const [ countries, setCountries ] = useState([]);
     const [ showMenu, setShowMenu ] = useState<boolean>(false);
-    const [ selectedCountry, setSelectedCountry ] = useState<{[key: string]: any}>(props.countries && props.countries[0]);
+    const [ selectedCountry, setSelectedCountry ] = useState<{[key: string]: any}>();
+
+    useEffect(() =>{
+        //Init fuse.js search
+        if(props.countries){
+            const tempVar = props.locale === 'en' ? 'enCountry' : 'esCountry';
+            const temp = props.countries.sort((a, b) => a[tempVar].localeCompare(b[tempVar]));
+            const selectedCountry = temp.filter(item => item.countryCode === (props.selectedCountry ? props.selectedCountry : 'ES'));
+            setSelectedCountry({
+                ...selectedCountry[0],
+                flag: getUnicodeFlagIcon(selectedCountry[0].countryCode)
+            });
+            setCountries(temp);
+        }
+    },[props.countries]);
 
     useEffect(() =>{
         if(props.selectedCountry){
-            setSelectedCountry(props.selectedCountry)
+            setSelectedCountry({
+                ...props.selectedCountry,
+                flag: getUnicodeFlagIcon(props.selectedCountry.countryCode)
+            });
         }
     }, [props.selectedCountry]);
 
@@ -45,8 +60,11 @@ const SelectCountry = (props: Props) =>{
         props.onDismiss && props.onDismiss();
     }
 
-    const onOptionClick = (option: Object) =>{
-        setSelectedCountry(option);
+    const onOptionClick = (option: any) =>{
+        setSelectedCountry({
+            ...option,
+            flag: getUnicodeFlagIcon(option.countryCode)
+        });
         setShowMenu(false);
         props.onChange && props.onChange(option);
     }
@@ -59,10 +77,10 @@ const SelectCountry = (props: Props) =>{
                 style={{borderWidth: 0}}
                 onPress={onSelectClick}
             >
-                {selectedCountry && selectedCountry.icon &&
-                    <Icon>
-                        <selectedCountry.icon/>
-                    </Icon>
+                {selectedCountry &&
+                    <Text>
+                        {selectedCountry.flag}
+                    </Text>
                 }
                 <Arrow>
                     <ChevronDown color={Color.text.high}/>
@@ -72,14 +90,14 @@ const SelectCountry = (props: Props) =>{
                     weight='medium'
                     style={{...props.textStyle, marginLeft: 16}}
                 >
-                    {props.title ? props.title : selectedCountry.prefix}
+                    {selectedCountry ? selectedCountry.prefix : ' '}
                 </Text>
             </SelectStyled>
             <SelectCountryModal
                 {...props.modalProps}
                 orientation={'fullScreen'}
                 visible={showMenu}
-                countries={props.countries}
+                countries={countries}
                 locale={props.locale}
                 onPress={onOptionClick}
                 onDismiss={onModalDismiss}
@@ -99,13 +117,11 @@ export interface Props{
         prefix: string,
         esCountry: string,
         enCountry: string,
-        esPrefix: string,
-        enPrefix: string,
-        icon?: any
+        countryCode: string
     }>,
     locale: string,
-    title?: string,
     modalProps?: Object,
+    defaultCountry?: string,
     onChange?: Function,
     onShow?: Function,
     onDismiss?: Function

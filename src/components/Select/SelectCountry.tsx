@@ -32,7 +32,7 @@ const SelectCountry = (props: Props) =>{
         if(props.countries){
             const tempVar = props.locale === 'en' ? 'enCountry' : 'esCountry';
             const temp = props.countries.sort((a, b) => a[tempVar].localeCompare(b[tempVar]));
-            const selectedCountry = temp.filter(item => item.countryCode === (props.selectedCountry ? props.selectedCountry : 'ES'));
+            const selectedCountry = temp.filter(item => item.countryCode === (props.defaultCountry ? props.defaultCountry : 'ES'));
             const countryObj = {
                 ...selectedCountry[0],
                 flag: getUnicodeFlagIcon(selectedCountry[0].countryCode)
@@ -44,13 +44,14 @@ const SelectCountry = (props: Props) =>{
     },[props.countries]);
 
     useEffect(() =>{
-        if(props.selectedCountry){
+        if(props.defaultCountry){
+            const selectedCountry = countries.filter(item => item.countryCode === (props.defaultCountry ? props.defaultCountry : 'ES'));
             setSelectedCountry({
-                ...props.selectedCountry,
-                flag: getUnicodeFlagIcon(props.selectedCountry.countryCode)
+                ...selectedCountry[0],
+                flag: getUnicodeFlagIcon(selectedCountry[0].countryCode)
             });
         }
-    }, [props.selectedCountry]);
+    }, [props.defaultCountry]);
 
     const onSelectClick = () =>{
         setShowMenu(true);
@@ -111,9 +112,6 @@ export default SelectCountry;
 export interface Props{
     textStyle?: TextStyle,
     style?: ViewStyle,
-    selectedCountry?: {
-        [key: string]: any
-    },
     countries: Array<{
         id: string,
         prefix: string,

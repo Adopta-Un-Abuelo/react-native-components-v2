@@ -33,11 +33,13 @@ const SelectCountry = (props: Props) =>{
             const tempVar = props.locale === 'en' ? 'enCountry' : 'esCountry';
             const temp = props.countries.sort((a, b) => a[tempVar].localeCompare(b[tempVar]));
             const selectedCountry = temp.filter(item => item.countryCode === (props.selectedCountry ? props.selectedCountry : 'ES'));
-            setSelectedCountry({
+            const countryObj = {
                 ...selectedCountry[0],
                 flag: getUnicodeFlagIcon(selectedCountry[0].countryCode)
-            });
+            }
+            setSelectedCountry(countryObj);
             setCountries(temp);
+            props.onChange && props.onChange(countryObj);
         }
     },[props.countries]);
 

@@ -1,11 +1,12 @@
 import React, { FC, useEffect, useState } from 'react';
 import styled from 'styled-components/native';
 import Fuse from 'fuse.js'
-import { Search } from 'react-native-lucide';
+import { Search } from 'lucide-react-native';
 import Modal from './Modal';
 import Text from '../Text/Text';
 import Color from '../../constants/Color';
 import Input from '../Input/Input';
+import getUnicodeFlagIcon from 'country-flag-icons/unicode';
 
 const Cell = styled.Pressable`
     flex-direction: row;
@@ -70,7 +71,6 @@ const SelectCountryModal: FC<Props> = props =>{
 
     return(
         <Modal
-            translation={props.translation}
             visible={visible}
             orientation={props.orientation}
             showTopClose={true}
@@ -80,44 +80,41 @@ const SelectCountryModal: FC<Props> = props =>{
             onDismiss={onDismiss}
             onModalHide={onModalHide}
         >
-            {props.showSearch &&
+            {/* {props.showSearch &&
                 <Input
-                    style={{marginBottom: 12, height: 48}}
-                    placeholder={props.translation ? props.translation.general_btn_search : 'Buscar'}
+                    style={{marginBottom: 12, height: 48, borderRadius: 100}}
+                    placeholder={props.translation ? props.translation('sign_up.phone.modal.search') : 'Buscar'}
                     icon={Search}
                     hideTitle={true}
                     returnKeyType={'search'}
                     onChangeText={onSearchChange}
                     type={'small'}
                 />
-            }
+            } */}
             <Scroll>
-                {countries.map((item, index) =>(
-                    <Cell
-                        style={{opacity: 1}}
-                        key={'callOption'+index}
-                        onPress={() => onPress(item)}
-                    >
-                        {item.icon &&
-                            <item.icon height={24} width={24}/>
-                        }
-                        <Text
-                            type='p2'
-                            style={{marginLeft: (item.icon) ? 12 : 0}}
+                {countries.map((item, index) =>{
+                    const flag = getUnicodeFlagIcon(item.countryCode);
+                    return(
+                        <Cell
+                            style={{opacity: 1}}
+                            key={'callOption'+index}
+                            onPress={() => onPress(item)}
                         >
-                            {props.locale === 'en' ? item.enPrefix : item.esPrefix}
-                        </Text>
-                    </Cell>
-                ))}
+                            <Text type='h5' style={{flex: 1, justifyContent: 'center'}}>
+                                {flag+'  '}
+                                <Text>
+                                    {props.locale === 'en' ? (item.enCountry+' ('+item.prefix+')') : (item.esCountry+' ('+item.prefix+')')}
+                                </Text>
+                            </Text>
+                        </Cell>
+                    )
+                })}
             </Scroll>
         </Modal>
     )
 }
 export default SelectCountryModal;
 export interface Props{
-    translation: {
-        [key: string]: any
-    },
     onPress?: Function,
     onDismiss?: Function,
     visible: boolean,
@@ -128,10 +125,8 @@ export interface Props{
         prefix: string,
         esCountry: string,
         enCountry: string,
-        esPrefix: string,
-        enPrefix: string,
-        icon?: any
+        countryCode: string
     }>,
     locale: string,
-    showSearch?: boolean
+    // showSearch?: boolean
 }

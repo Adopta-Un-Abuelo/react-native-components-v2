@@ -1,22 +1,25 @@
 import React, { useState, useEffect, forwardRef, useImperativeHandle, useRef, Ref } from 'react';
 import styled from 'styled-components/native';
-import { TextInput, ViewStyle } from 'react-native';
+import { TextInput, TextInputProps, ViewStyle } from 'react-native';
 import Color from '../../constants/Color';
 import Text from '../Text/Text';
 
 const Container = styled.View<{error?: boolean, isFocused: boolean | undefined, type?: string}>`
-    height: ${props => props.type === 'small' ? '48px' : '56px'};
-    border-color: ${props => props.error ? Color.status.color.error : props.isFocused ? Color.line.primarySoft : Color.line.soft};
+    height: ${props => props.type === 'small' ? '48px' : props.type === 'big' ? undefined : '56px'};
+    min-height: ${props => props.type === 'big' ? '160px' : '0px'};
+    border-color: ${props => props.error ? Color.status.color.error : props.isFocused ? Color.line.full : Color.line.soft};
     border-width: ${props => props.type === 'small' ? '0px' : (props.error || props.isFocused ? '2px' : '1px')};
     border-radius: 12px;
-    align-items: center;
+    align-items: ${props => props.type === 'big' ? undefined : 'center'};
     flex-direction: row;
     padding: 0px 16px;
+    padding-top: ${props => props.type === 'big' ? '16px' : '0px'};
+    padding-bottom: ${props => props.type === 'big' ? '16px' : '0px'};
     background-color: ${props => props.type === 'small' ? Color.background.soft : Color.background.neutral};
 `
 const InputStyled = styled.TextInput<{isFocused: boolean | undefined, hasValue: boolean, hideTitle?: boolean}>`
     flex: 1;
-    font-size: 16px;
+    font-size: 15px;
     font-family: 'Poppins-Regular';
     height: 100%;
     padding: 0px;
@@ -34,8 +37,10 @@ const InputView = styled.View`
 const Row = styled.View`
     flex-direction: row;
 `
+const Column = styled.View`
+`
 
-const InputComponent = forwardRef((props: Props, ref: Ref<InputRef>) =>{
+const Input = forwardRef((props: Props, ref: Ref<InputRef>) =>{
 
     const input = useRef<TextInput>();
     const [ isFocused, setIsFocused ] = useState<boolean>(false);
@@ -56,103 +61,89 @@ const InputComponent = forwardRef((props: Props, ref: Ref<InputRef>) =>{
         setCurrentPlaceholder(props.placeholder);
     },[props.placeholder]);
 
-    const onFocus = () =>{
+    const onFocus = (e) =>{
         setIsFocused(true);
         setCurrentPlaceholder(undefined);
-        props.onFocus && props.onFocus();
+        props.onFocus && props.onFocus(e);
     }
 
-    const onBlur = () =>{
+    const onBlur = (e) =>{
         setIsFocused(false);
         setCurrentPlaceholder(props.placeholder);
-        props.onBlur && props.onBlur();
+        props.onBlur && props.onBlur(e);
     }
 
-    const onChangeText = text =>{
-        if(text && text.length > 0) setValue(text);
-        else setValue(undefined);
+    const onChangeText = (text) => {
+        if(text && text.length > 0) {
+            setValue(text);
+        } else {
+            setValue(undefined);
+        }
         props.onChangeText && props.onChangeText(text);
     }
 
     return(
-        <Container
-            style={style}
-            error={props.error}
-            isFocused={isFocused}
-            type={props.type}
-        >
-            {props.icon &&
-                <IconView>
-                    <props.icon color={props.error ? Color.status.color.error : Color.text.primaryBlack}/>
-                </IconView>
-            }
-            {children}
-            <InputView>
-                {((!currentPlaceholder || value) && !props.hideTitle) &&
-                    <Text
-                        type='c1'
-                        style={{position: 'absolute', color: Color.text.high}}
-                    >
-                        {props.placeholder}
-                    </Text>
+        <Column>
+            <Container
+                style={style}
+                error={props.error}
+                isFocused={isFocused}
+                type={props.type}
+            >
+                {props.icon &&
+                    <IconView>
+                        <props.icon color={props.error ? Color.status.color.error : Color.text.primaryBlack}/>
+                    </IconView>
                 }
-                <Row>
-                    <InputStyled
-                        ref={input}
-                        caretHidden={true}
-                        selectionColor={Color.text.primary}
-                        onFocus={onFocus}
-                        onBlur={onBlur}
-                        placeholder={currentPlaceholder}
-                        onChangeText={onChangeText}
-                        isFocused={isFocused}
-                        hasValue={value ? true : false}
-                        placeholderTextColor={Color.text.high}
-                        maxLength={props.maxLength}
-                        keyboardType={props.keyboardType}
-                        textAlignVertical={props.alignVertical ? 'top' : 'auto'}
-                        multiline={props.multiline}
-                        {...rest}
-                    />
-                    {props.showEuro &&
+                {children}
+                <InputView>
+                    {((!currentPlaceholder || value) && !props.hideTitle) &&
                         <Text
-                            type='h4'
-                            weight='regular'
+                            type='c2'
+                            style={{position: 'absolute', color: Color.text.high}}
                         >
-                            €
+                            {props.placeholder}
                         </Text>
                     }
-                </Row>
-            </InputView>
-        </Container>
+                    <Row>
+                        <InputStyled
+                            ref={input}
+                            caretHidden={true}
+                            selectionColor={Color.text.primary}
+                            onFocus={onFocus}
+                            onBlur={onBlur}
+                            placeholder={currentPlaceholder}
+                            onChangeText={onChangeText}
+                            isFocused={isFocused}
+                            hasValue={value ? true : false}
+                            placeholderTextColor={Color.text.high}
+                            hideTitle={props.hideTitle}
+                            {...rest}
+                        />
+                        {props.currency &&
+                            <Text
+                                type='h4'
+                                weight='regular'
+                            >
+                                {props.currency}
+                            </Text>
+                        }
+                    </Row>
+                </InputView>
+            </Container>
+        </Column>
     )
 });
-export default InputComponent;
-export interface Props{
-    id?: string,
-    ref?: any,
+export default Input;
+export interface Props extends TextInputProps{
     error?: boolean,
     icon?: any,
     style?: ViewStyle,
     onFocus?: any,
-    onBlur?: any,
-    placeholder?: string,
-    onChangeText?: any,
-    maxLength?: number,
-    keyboardType?: 'default' | 'number-pad' | 'decimal-pad' | 'phone-pad' | 'numeric' | 'email-address',
-    blurOnSubmit?: boolean,
-    clearButtonMode?: 'never' | 'while-editing' | 'unless-editing' | 'always',
-    value?: string,
-    autoComplete?: string
-    autoCapitalize?: 'none' | 'sentences' | 'words' | 'characters',
-    autoCorrent?: boolean
     children?: any,
     hideTitle?: boolean,
-    returnKeyType?: 'done' | 'go' | 'next' | 'search' | 'send',
     type?: 'small' | 'big',
-    multiline?: boolean,
-    alignVertical?: boolean,
-    showEuro?: boolean
+    currency?: string
 }
 export interface InputRef{
     focus: () => void,

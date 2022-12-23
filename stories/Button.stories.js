@@ -5,7 +5,7 @@ import { action } from '@storybook/addon-actions';
 import { boolean, text, color, object, select, number } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/react-native';
 import { Button, ButtonBottom, ButtonImage, CallToAction, Color, Text, ButtonSmall } from '../src';
-import { Info } from 'react-native-lucide';
+import { Info } from 'lucide-react-native';
 
 storiesOf('Button', module)
 	.add('Main', () => (
@@ -18,7 +18,7 @@ storiesOf('Button', module)
 			title={text('text', 'Button')}
 			loading={boolean('loading', false)}
 			disabled={boolean('disabled', false)}
-			color={color('color', Color.blue3)}
+			textColor={color('color', Color.blue3)}
 			type={select('type', {
 				fill: 'fill',
 				line: 'line'
@@ -36,7 +36,7 @@ storiesOf('Button', module)
 			title={text('text', 'Button')}
 			loading={boolean('loading', false)}
 			disabled={boolean('disabled', false)}
-			color={color('color', Color.blue3)}
+			textColor={color('color', Color.blue3)}
 			type={select('type', {
 				fill: 'fill',
 				line: 'line'

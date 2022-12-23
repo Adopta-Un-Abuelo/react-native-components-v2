@@ -4,7 +4,7 @@ import { action } from '@storybook/addon-actions';
 import { boolean, text, object, number, select, date } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/react-native';
 import { Input, InputCode, InputDate, InputDatePicker, InputPhone, InputPlace, TextView } from '../src';
-import { Watch } from 'react-native-lucide'
+import { Watch } from 'lucide-react-native'
 
 storiesOf('Input', module)
 	.add('Main', () => {
@@ -60,30 +60,43 @@ storiesOf('Input', module)
         return(
             <InputDatePicker
                 placeholder='Fecha'
+                error={boolean('error', false)}
             />
 	    )
     })
     .add('Phone', () => {
         return(
             <InputPhone
-                translation={{input_phone_phone_prefix : 'PREFIJO PUTO TELEFONICO', input_phone_phone : 'PUTO TELEFONO'}}
+                translation={{input_phone_phone_prefix : 'PREFIJO TELEFONICO', input_phone_phone : 'TELEFONO'}}
                 countries={[{
                     id: 'spain',
                     prefix: '+34',
                     esCountry: 'España',
                     enCountry: 'Spain',
-                    esPrefix: 'España (+34)',
-                    enPrefix: 'Spain (+34)',
-                    // icon: SpainFlag
-                }, {
+                    countryCode: 'ES'
+                },
+                {
                     id: 'france',
                     prefix: '+33',
                     esCountry: 'Francia',
                     enCountry: 'France',
-                    esPrefix: 'Francia (+33)',
-                    enPrefix: 'France (+33)',
-                    // icon: FranceFlag
-                }]}
+                    countryCode: 'FR'
+                },
+                {
+                    id: 'mexico',
+                    prefix: '+52',
+                    esCountry: 'México',
+                    enCountry: 'Mexico',
+                    countryCode: 'MX'
+                },
+                {
+                    id: 'argentina',
+                    prefix: '+54',
+                    esCountry: 'Argentina',
+                    enCountry: 'Argentina',
+                    countryCode: 'AR'
+                },]}
+                type={text('type', 'big')}
                 locale={'es'}
                 value={text('value')}
                 error={boolean('error', false)}

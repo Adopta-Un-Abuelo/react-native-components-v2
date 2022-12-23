@@ -4,7 +4,7 @@ import { action } from '@storybook/addon-actions';
 import { array, object } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/react-native';
 import { MenuList } from '../src';
-import { Watch, Wifi, WifiOff } from 'react-native-lucide'
+import { Watch, Wifi, WifiOff } from 'lucide-react-native'
 
 storiesOf('MenuList', module)
 	.add('Main', () => {

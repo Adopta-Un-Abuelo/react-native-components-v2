@@ -3,7 +3,7 @@ import styled from 'styled-components/native';
 import { ViewStyle } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Modal from "react-native-modal";
-import { X, ArrowLeft } from 'react-native-lucide';
+import { X, ArrowLeft } from 'lucide-react-native';
 import Text from '../Text/Text';
 import Button from '../Button/Button';
 import { Color } from '../../constants';
@@ -17,7 +17,7 @@ const ModalView = styled(SafeAreaView)<{orientation?: 'top' | 'bottom' | 'center
     border-top-right-radius: ${props => (props.orientation === 'bottom' || props.orientation === 'fullScreen') ? '24px' : '12px'};
     border-bottom-left-radius: ${props => (props.orientation === 'bottom' || props.orientation === 'fullScreen') ? '0px' : '12px'};
     border-bottom-right-radius: ${props => (props.orientation === 'bottom' || props.orientation === 'fullScreen') ? '0px' : '12px'};
-    padding: ${props => props.noPadding ? '0px' : '0px 16px'};
+    padding: ${props => props.noPadding ? '0px' : '8px 24px'};
     background-color: ${Color.background.neutral};
 `
 const SwipeView = styled.View`
@@ -43,6 +43,7 @@ const CloseButton = styled.Pressable`
     width: 56px;
     justify-content: center;
     z-index: 1000;
+    padding-left: 8px;
 `
 const TitleCenterView = styled.View`
     flex: 1;
@@ -148,47 +149,46 @@ const ModalComponent = (props: Props) =>{
                             </Header>
                 }
                 {props.children}
-                <ButtonArea>
-                    {buttonProps &&
-                        <Button
-                            {...buttonProps}
-                            style={{marginTop: 12, ...buttonProps.style}}
-                        />
-                    }
-                    {secondButtonProps &&
-                        <Button
-                            {...secondButtonProps}
-                            style={{marginTop: 12, ...secondButtonProps.style}}
-                        />
-                    }
-                    {props.showBottomClose &&
-                        <Button
-                            type={'line'}
-                            style={{borderWidth: 0, marginTop: 8}}
-                            color={Color.text.high}
-                            title={props.translation ? props.translation.general_btn_cancel : 'Cancelar'}
-                            onPress={onClosePress}
-                        />
-                    }
-                    {props.ButtonArea}
-                </ButtonArea>
+                {(buttonProps || secondButtonProps || props.showBottomClose || props.ButtonArea) &&
+                    <ButtonArea>
+                        {buttonProps &&
+                            <Button
+                                {...buttonProps}
+                                style={{marginTop: 12, ...buttonProps.style}}
+                            />
+                        }
+                        {secondButtonProps &&
+                            <Button
+                                {...secondButtonProps}
+                                style={{marginTop: 8, ...secondButtonProps.style}}
+                            />
+                        }
+                        {props.showBottomClose &&
+                            <Button
+                                type={'line'}
+                                style={{borderWidth: 0, marginTop: 8}}
+                                textColor={Color.text.high}
+                                title={props.cancelString ? props.cancelString : 'Cancelar'}
+                                onPress={onClosePress}
+                            />
+                        }
+                        {props.ButtonArea}
+                    </ButtonArea>
+                }
             </ModalView>
         </Modal>
     )
 };
 export default ModalComponent;
 export interface Props{
-    translation?: {
-		[key: string]: any
-	},
     style?: ViewStyle,
     ref?: any,
     title?: string,
     subtitle?: string,
     orientation?: 'top' | 'bottom' | 'center' | 'fullScreen',
     showTopClose?: boolean,
-    canGoBack?: boolean,
     showBottomClose?: boolean,
+    canGoBack?: boolean,
     buttonProps?: {
         onPress?: any,
         title: string,
@@ -207,5 +207,6 @@ export interface Props{
     onModalHide?: Function,
     avoidKeyboard?: boolean,
     children?: any,
-    noPadding?: boolean
+    noPadding?: boolean,
+    cancelString?: string
 }

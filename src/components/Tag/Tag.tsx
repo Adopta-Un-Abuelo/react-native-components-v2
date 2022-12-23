@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import styled from 'styled-components/native';
 import { ViewStyle, TextStyle } from 'react-native';
-import { Hash } from 'react-native-lucide';
+import { Hash } from 'lucide-react-native';
 import Color from '../../constants/Color';
 import Text from '../Text/Text';
 

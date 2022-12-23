@@ -1,7 +1,7 @@
 import React, { FC, useEffect, useState } from 'react';
 import styled from 'styled-components/native';
 import Fuse from 'fuse.js'
-import { Search } from 'react-native-lucide';
+import { Search } from 'lucide-react-native';
 import Modal from './Modal';
 import Text from '../Text/Text';
 import Color from '../../constants/Color';
@@ -80,6 +80,7 @@ const SelectionModal: FC<Props> = props =>{
             showBottomClose={true}
             title={props.title}
             avoidKeyboard={true}
+            cancelString={props.cancelString}
             onDismiss={onDismiss}
             onModalHide={onModalHide}
         >
@@ -101,7 +102,7 @@ const SelectionModal: FC<Props> = props =>{
                         onPress={() => onPress(item)}
                     >
                         {item.icon &&
-                            <item.icon height={24} width={24}/>
+                            <item.icon color={Color.text.primary} />
                         }
                         {item.Icon &&
                             <Icon>
@@ -134,5 +135,6 @@ export interface Props{
         Icon?: any,
         disabled?: boolean
     }>,
-    showSearch?: boolean
+    showSearch?: boolean,
+    cancelString?: string
 }

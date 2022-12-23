@@ -8,10 +8,11 @@ const Container = styled.View`
     flex-direction: row;
     flex-wrap: wrap;
 `
-const Cell = styled.Pressable<{selected?: boolean, backgroundColor?: string, disabled?: boolean}>`
+const Cell = styled.Pressable<{selected?: boolean, backgroundColor?: string, disabled?: boolean, index: number}>`
     flex-direction: row;
-    padding: 5px 12px;
-    margin-right: 4px;
+    padding: 5px 11px;
+    margin-left: ${props => props.index === 0 ? '0px' : '2px'};
+    margin-right: 2px;
     border-radius: 1000px;
     margin-bottom: 8px;
     justify-content: center;
@@ -36,7 +37,7 @@ const TagSelect: FC<Props> = props =>{
             }))
             setSelectedItems(temp);
         }
-    },[]);
+    },[props.defaultSelection]);
 
     useEffect(() =>{
         if(props.selectedItems) setSelectedItems(props.selectedItems);
@@ -78,6 +79,7 @@ const TagSelect: FC<Props> = props =>{
                         backgroundColor={item.backgroundColor}
                         disabled={disabled}
                         style={{...props.cellStyle}}
+                        index={index}
                     >
                         {item.icon ?
                             item.icon
@@ -89,7 +91,6 @@ const TagSelect: FC<Props> = props =>{
                         >
                             <Text
                                 type='p2'
-                                weight='medium'
                                 style={{color: item.color ? item.color : disabled ? Color.text.full : (selected ? Color.text.primary : Color.text.full), ...props.textStyle}}
                             >
                                 {props.locale === 'en' ? item.en : item.title}

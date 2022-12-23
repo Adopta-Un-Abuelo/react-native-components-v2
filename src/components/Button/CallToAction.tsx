@@ -3,7 +3,7 @@ import styled from 'styled-components/native';
 import { ViewStyle } from 'react-native';
 import Text from '../Text/Text';
 import { Color } from '../../constants';
-import { ArrowRight } from 'react-native-lucide';
+import { ArrowRight } from 'lucide-react-native';
 
 const Button = styled.Pressable`
     flex-direction: row;

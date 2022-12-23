@@ -17,8 +17,8 @@ const DateInput = (props: Props) =>{
         setShowModal(true);
     }
 
-    const onSave = () =>{        
-        const temp = new Intl.DateTimeFormat(props.currentLocale, {month: 'short', day: 'numeric', year: 'numeric'}).format(selectedDate);
+    const onSave = () =>{       
+        const temp = new Intl.DateTimeFormat(props.currentLocale, {month: '2-digit', day: '2-digit', year: 'numeric'}).format(selectedDate);
         setDateInputValue(temp);
         setShowModal(false);
         props.onChange && props.onChange(selectedDate)
@@ -26,46 +26,45 @@ const DateInput = (props: Props) =>{
 
     return(
         <>
-        <Modal
-            visible={showModal}
-            orientation={'bottom'}
-            title={props.translation?.input_date_picker_birthday}
-            buttonProps={{
-                title: props.translation?.general_btn_save,
-                onPress: onSave
-            }}
-            onDismiss={() => setShowModal(false)}
-        >
-            <DatePicker
-                date={selectedDate}
-                mode={props.mode}
-                minimumDate={props.minimumDate}
-                maximumDate={props.maximumDate}
-                androidVariant={'iosClone'}
-                onDateChange={onDateChange}
-                locale={props.currentLocale}
+            <Modal
+                visible={showModal}
+                orientation={'bottom'}
+                buttonProps={{
+                    title: props.saveString ? props.saveString : 'Guardar',
+                    onPress: onSave
+                }}
+                onDismiss={() => setShowModal(false)}
+            >
+                <DatePicker
+                    date={selectedDate}
+                    mode={props.mode}
+                    minimumDate={props.minimumDate}
+                    maximumDate={props.maximumDate}
+                    androidVariant={'iosClone'}
+                    onDateChange={onDateChange}
+                    locale={props.currentLocale}
+                    textColor={'black'}
+                />
+            </Modal>
+            <InputFalse
+                style={props.style}
+                value={dateInputValue}
+                placeholder={props.placeholder}
+                onPress={onInputFocus}
+                error={props.error}
             />
-        </Modal>
-        <InputFalse
-            style={props.style}
-            value={dateInputValue}
-            placeholder={props.placeholder}
-            onPress={onInputFocus}
-        />
         </>
     )
 }
 export default DateInput;
 export interface Props{
     currentLocale: string,
-    translation?: {
-		[key: string]: any
-	},
     style?: Object,
     error?: boolean,
     onChange?: Function,
     maximumDate?: Date,
     minimumDate?: Date,
     mode?: 'date' | 'datetime' | 'time',
-    placeholder?: string
+    placeholder?: string,
+    saveString?: string
 }

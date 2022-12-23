@@ -1,7 +1,7 @@
 import React from 'react';
 import { View } from 'react-native';
 
-import { Activity, Airplay, AlignCenter } from 'react-native-lucide';
+import { Activity, Airplay, AlignCenter } from 'lucide-react-native';
 import { array, boolean, object, select, text } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/react-native';
 import { Modal, Text, SelectionModal, PaymentMethodModal, WebModal, VideoModal } from '../src';

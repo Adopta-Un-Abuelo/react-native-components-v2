@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useRef } from 'react';
 import { TextInput } from 'react-native';
 import SelectCountry from '../Select/SelectCountry';
 import Input from '../Input/Input';
@@ -6,10 +6,8 @@ import Input from '../Input/Input';
 const PhoneInput = (props: Props) =>{
 
     const input = useRef<TextInput>(null);
-    const [ title, setTitle ] = useState('+34');
 
     const onCountryChange = (country: {prefix: string}) =>{
-        setTitle(country.prefix);
         props.onCountryChange && props.onCountryChange(country);
     }
 
@@ -23,9 +21,8 @@ const PhoneInput = (props: Props) =>{
 
     return(
         <Input
-            id="phoneInput"
             {...props}
-            placeholder={props.translation ? props.translation?.input_phone_phone : 'Teléfono'}
+            placeholder={props.placeholder ? props.placeholder : 'Número de teléfono'}
             autoComplete={'tel'}
             keyboardType={'number-pad'}
             error={props.error}
@@ -35,14 +32,13 @@ const PhoneInput = (props: Props) =>{
         >
             <SelectCountry
                 style={{height: '100%'}}
-                translation={props.translation}
                 countries={props.countries}
                 locale={props.locale}
-                title={title}
                 modalProps={{
-                    title: props.translation ? props.translation?.input_phone_phone_prefix : 'Prefijo telefónico',
+                    title: props.modalTitle ? props.modalTitle : 'Prefijo telefónico',
                     showSearch: true
                 }}
+                defaultCountry={props.defaultCountry}
                 onChange={onCountryChange}
                 onShow={onSelectShow}
                 onDismiss={onSelectDismiss}
@@ -52,22 +48,20 @@ const PhoneInput = (props: Props) =>{
 }
 export default PhoneInput;
 export interface Props{
-    translation: {
-		[key: string]: any
-	},
     countries: Array<{
         id: string,
         prefix: string,
         esCountry: string,
         enCountry: string,
-        esPrefix: string,
-        enPrefix: string,
-        icon?: any
+        countryCode: string
     }>,
     locale: string,
     value?: string,
     error?: boolean,
-    onCountryChange?: Function,
-    onChangeText?: Function,
-    style?: Object
+    style?: Object,
+    placeholder?: string,
+    modalTitle?: string,
+    defaultCountry?: string,
+    onCountryChange?: (country: { prefix: string }) => void,
+    onChangeText?: (phone: string) => void,
 }

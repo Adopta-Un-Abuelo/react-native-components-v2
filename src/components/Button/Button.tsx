@@ -6,17 +6,17 @@ import Color from '../../constants/Color';
 import Text from '../Text/Text';
 import LinearGradient from 'react-native-linear-gradient';
 
-const Container = styled.Pressable<{type?: 'line' | 'fill', color?: string, size?: 'small' | 'big'}>`
+const Container = styled.Pressable<{type?: 'line' | 'fill', backgroundColor?: string, size?: 'small' | 'big'}>`
     flex-direction: row;
-    height: ${props => props.size === 'small' ? '48px' : '56px'};
-    border-radius: 12px;
-    background-color: ${props => props.type === 'line' ? 'transparent' : (props.color ? props.color : Color.status.primary.default)};
+    height: ${props => props.size === 'small' ? '44px' : '56px'};
     align-items: center;
     justify-content: center;
+    border-radius:  ${props => props.size === 'small' ? '100px' : '100px'};
+    background-color: ${props => props.type === 'line' ? 'transparent' : (props.backgroundColor ? props.backgroundColor : Color.status.primary.default)};
+    border-color: ${props => props.backgroundColor ? props.backgroundColor : Color.status.primary.default};
     border-width: ${props => props.type === 'line' ? '1px' : '0px'};
-    border-color: ${props => props.color ? props.color : Color.status.primary.default};
-    padding-left: 24px;
-    padding-right: 24px;
+    padding-left: 20px;
+    padding-right: 20px;
     opacity: ${props => props.disabled ? 0.48 : 1};
 `
 const Gradient = styled(LinearGradient)`
@@ -25,7 +25,7 @@ const Gradient = styled(LinearGradient)`
     bottom: 0;
     right: 0;
     left: 0;
-    border-radius: 12px;
+    border-radius: 100px;
 `
 
 const Button = (props: Props) =>{
@@ -41,8 +41,8 @@ const Button = (props: Props) =>{
             disabled={props.disabled}
             onPress={onPress}
             type={props.type}
-            color={props.color}
             size={props.size}
+            backgroundColor={props.backgroundColor}
         >
             {props.loading ?
                 <LottieView 
@@ -61,14 +61,14 @@ const Button = (props: Props) =>{
                         />
                     }
                     {props.icon &&
-                        <props.icon style={{marginRight: 16}} color={props.color ? props.color : Color.text.full}/>
+                        <props.icon style={{marginRight: 16}} color={props.textColor ? props.textColor : Color.text.white}/>
                     }
                     <Text
                         type='b1'
                         weight='semibold'
                         style={{
                             textAlign: 'center',
-                            color: props.color ? props.color : Color.text.white,
+                            color: props.textColor ? props.textColor : Color.text.white,
                             ...props.textStyle
                         }}
                         numberOfLines={1}
@@ -88,7 +88,8 @@ export interface Props extends PressableProps{
     textStyle?: TextStyle,
     style?: ViewStyle,
     title: string,
-    color?: string,
+    textColor?: string,
+    backgroundColor?: string,
     icon?: any,
     type?: 'fill' | 'line',
     size?: 'big' | 'small',

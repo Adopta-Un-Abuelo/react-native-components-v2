@@ -1,7 +1,7 @@
 import React, { FC, useState } from 'react';
 import styled from 'styled-components/native';
 import { ViewStyle } from 'react-native';
-import { Check } from 'react-native-lucide';
+import { Check } from 'lucide-react-native';
 import Text from '../Text/Text';
 import Color from '../../constants/Color';
 
@@ -16,11 +16,11 @@ const Cell = styled.Pressable`
     border-bottom-color: ${Color.line.soft};
 `
 const CircleView = styled.View<{selected: boolean}>`
-    height: 24px;
-    width: 24px;
-    background-color: ${props => props.selected ? Color.background.primary : Color.background.primaryLow};
-    border-radius: 200px;
-    border-width: 1px;
+    height: 26px;
+    width: 26px;
+    background-color: ${props => props.selected ? Color.background.primary : Color.background.neutral};
+    border-radius: 100px;
+    border-width: 2px;
     border-color: ${props => props.selected ? Color.background.primary : Color.line.primarySoft};
     justify-content: center;
     align-items: center;
@@ -48,16 +48,16 @@ const RadioButton: FC <Props> = props =>{
                         style={props.cellStyle}
                     >
                         <Text
-                            type='p2'
+                            type='p1'
                             weight='medium'
-                            style={{marginRight: 12, flex: 1}}
+                            style={{marginRight: 18, flex: 1}}
                         >
                             {item.title}
                         </Text>
                         <CircleView
                             selected={selected}
                         >
-                            {selected && <Check width={18} height={18} color={Color.text.white}/>}
+                            {selected && <Check width={16} height={16} color={Color.text.white}/>}
                         </CircleView>
                     </Cell>
                 )

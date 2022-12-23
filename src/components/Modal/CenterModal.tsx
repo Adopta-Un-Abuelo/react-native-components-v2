@@ -11,9 +11,14 @@ const ContentView = styled.Pressable`
 const ButtonContainer = styled.View`
     flex-direction: row;
     margin-top: 32px;
+    border-top-width: 1px;
+    border-top-color: ${Color.line.soft};
 `
 const ButtonView = styled.Pressable`
-    flex: 1
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+    height: 56px;
 `
 
 const CenterModal: FC <Props> = props =>{
@@ -33,7 +38,6 @@ const CenterModal: FC <Props> = props =>{
 
     return(
         <Modal
-            translation={props.translation}
             visible={visible}
             showTopClose={false}
             showBottomClose={false}
@@ -68,7 +72,7 @@ const CenterModal: FC <Props> = props =>{
                             weight='medium'
                             style={{textAlign: 'center'}}
                         >
-                            {props.translation.general_btn_cancel}
+                            {props.cancelString ? props.cancelString : 'Cancelar'}
                         </Text>
                     </ButtonView>
                     <ButtonView
@@ -89,9 +93,6 @@ const CenterModal: FC <Props> = props =>{
 }
 export default CenterModal;
 export interface Props{
-    translation: {
-		[key: string]: any
-	},
     visible: boolean,
     onDismiss: Function,
     onPress: Function,
@@ -99,5 +100,6 @@ export interface Props{
     subtitle?: string,
     buttonTitle: string,
     buttonColor?: string,
+    cancelString?: string
     icon?: any,
 }

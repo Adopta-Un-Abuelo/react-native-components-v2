@@ -1,24 +1,28 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components/native';
 import { ViewStyle } from 'react-native';
-import Text from '../Text/Text';
 import Color from '../../constants/Color';
 import Button from '../Button/Button';
 
 const Container = styled.View`
 `
-const ButtonView = styled.View`
+const ButtonView = styled.Pressable`
     flex-direction: row;
-    padding: 0px 56px;
 `
 
 const CheckboxButton = (props: Props) =>{
 
-    const [ selection, setSelection ] = useState<number>(undefined);
+    const [ selection, setSelection ] = useState<number>(props.selection ? props.selection : 0);
+
+    useEffect(() =>{
+        if(props.selection !== undefined){
+            setSelection(props.selection);
+        }
+    },[props.selection]);
 
     const onCellPress = (id) => {
         setSelection(id);
-        const answer = id === 1 ? props.translation.general_no : props.translation.general_yes;
+        const answer = id === 1 ? 'false' : 'true';
         props.onChange && props.onChange(answer);
     }
 
@@ -28,38 +32,42 @@ const CheckboxButton = (props: Props) =>{
         >
             <ButtonView>
                 <Button
-                    style={{flex: 1, marginRight: 4, backgroundColor: props.error && selection === 1 ? Color.status.color.error : selection === 1 ? Color.status.primary.default : Color.status.primary.softDefault}}
-                    color={selection === 1 ? Color.text.white : Color.text.primary}
-                    title={props.translation.general_no}
+                    style={{
+                        flex: 1, 
+                        borderWidth: props.error && selection === 1 ? 2 : selection === 1 ? 2 : 1, 
+                        borderColor: props.error && selection === 1 ? Color.status.color.error : selection === 1 ? Color.line.greenSoft : Color.line.soft, 
+                        marginRight: 4, 
+                        backgroundColor: props.error && selection === 1 ? Color.status.color.errorDefault : selection === 1 ? Color.status.color.successDefault: undefined
+                    }}
+                    textColor={selection === 1 ? Color.text.full : Color.text.high}
+                    title={props.noString ? props.noString : 'No'}
                     size='small'
                     onPress={() => onCellPress(1)}
                 />
                 <Button
-                    style={{flex: 1, marginLeft: 4, backgroundColor: props.error && selection === 2 ? Color.status.color.error : selection === 2 ? Color.status.primary.default : Color.status.primary.softDefault}}
-                    color={selection === 2 ? Color.text.white : Color.text.primary}
-                    title={props.translation.general_yes}
+                    style={{
+                        flex: 1, 
+                        borderWidth: (props.error && selection === 2) ? 2 : selection === 2 ? 2 : 1, 
+                        borderColor: props.error && selection === 2 ? Color.status.color.error : selection === 2 ? Color.line.greenSoft : Color.line.soft, 
+                        marginLeft: 4, 
+                        backgroundColor: props.error && selection === 2 ? Color.status.color.errorDefault : selection === 2 ? Color.status.color.successDefault : undefined
+                    }}
+                    textColor={selection === 2 ? Color.text.full : Color.text.high}
+                    title={props.yesString ? props.yesString : 'Si'}
                     size='small'
                     onPress={() => onCellPress(2)}
                 />
             </ButtonView>
-            {props.error &&
-                <Text
-                    type='p2'
-                    weight='medium'
-                    style={{marginTop: 4, textAlign: 'center', color: Color.status.color.error}}
-                >
-                    {props.translation.general_cb_error}
-                </Text>
-            }
         </Container>
     )
 }
 export default CheckboxButton;
 export interface Props{
-    translation: {
-		[key: string]: any
-	},
     style?: ViewStyle,
+    selection?: 0 | 1 | 2,
     onChange?: Function,
-    error?: boolean
+    error?: boolean,
+    yesString?: string,
+    noString?: string,
+    errorString?: string
 }

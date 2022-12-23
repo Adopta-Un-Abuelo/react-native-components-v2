@@ -17,6 +17,10 @@ const SafeView = styled(SafeAreaView)<{color?: string}>`
 const ViewContainer = styled.View`
     flex: 1;
 `
+const ChildrenContainer = styled.View`
+    flex: 1;
+    padding: 0px 24px;
+`
 const Container: FC<Props> = props =>{
     const haveCustomHeader = props.navbarProps && props.navbarProps.Header;
     return(
@@ -37,7 +41,9 @@ const Container: FC<Props> = props =>{
                                 {...props.navbarProps}
                             />
                         )}
-                        {props.children}
+                        <ChildrenContainer>
+                            {props.children}
+                        </ChildrenContainer>
                         {props.buttonProps &&
                             <ButtonBottom
                                 {...props.buttonProps}
@@ -72,10 +78,9 @@ export interface Props{
         noHeader?: boolean,
         backButtonStyle?: any,
         Header?: any,
-        backgroundColor?: string
+        backgroundColor?: string,
+        textContainerStyle?: Object
     }
-    title?: string,
-    subtitle?: string,
     style?: Object,
     color?: string,
     contentStyle?: Object,

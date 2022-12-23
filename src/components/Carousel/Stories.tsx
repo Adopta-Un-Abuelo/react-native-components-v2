@@ -107,7 +107,7 @@ const Stories = forwardRef((props: Props, ref: Ref<StoriesRef>) =>{
                 <ProgressBarView>
                     {props.views.map((item, index) =>
                         <ProgressBar
-                            style={{marginLeft: 2, marginRight: 2}}
+                            style={{marginLeft: 2, marginRight: 2, flex: 1}}
                             key={'progress'+index}
                             maxTime={props.storyTime ? props.storyTime : 5}
                             onFinish={() => onStorieFinish(index)}

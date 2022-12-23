@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { ViewStyle } from 'react-native';
-import { Menu } from 'react-native-lucide';
+import { MoreHorizontal } from 'lucide-react-native';
 import ButtonImage from '../Button/ButtonImage';
 import SelectionModal from '../Modal/SelectionModal';
+import { Color } from '../../constants';
 
 const MenuList = (props: Props) =>{
 
@@ -19,10 +20,10 @@ const MenuList = (props: Props) =>{
     return(
         <>
         {props.icon ?
-            <props.icon onPress={onButtonPress}/>
+            <props.icon onPress={onButtonPress} color={Color.text.primary} />
         :
             <ButtonImage
-                icon={Menu}
+                icon={MoreHorizontal}
                 style={props.style}
                 onPress={onButtonPress}
             />
@@ -32,6 +33,7 @@ const MenuList = (props: Props) =>{
             orientation={'bottom'}
             onDismiss={onModalDismiss}
             options={props.options}
+            cancelString={props.cancelString}
             onPress={props.onPress}
         />
         </>
@@ -44,8 +46,9 @@ export interface Props{
     options: Array<{
         id: string,
         title: string,
-        icon?: any,
+        Icon?: any,
         disabled?: boolean
     }>
     onPress?: Function
+    cancelString?: string
 }

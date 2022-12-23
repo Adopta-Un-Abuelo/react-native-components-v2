@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import styled from 'styled-components/native';
 import { Animated } from 'react-native';
-import { ArrowLeft } from "react-native-lucide";
+import { ArrowLeft } from "lucide-react-native";
 import ButtonImage from '../Button/ButtonImage';
 import Breadcrumb from '../Breadcrumb/Breadcrumb';
 import Text from '../Text/TextAnimated';
@@ -25,7 +25,7 @@ const RightHeader = styled.View`
 const TextContainer = styled(Animated.View)`
     flex: 1;
     justify-content: flex-end;
-    margin-right: 16px;
+    margin-right: 24px;
 `
 
 const NavigationBar: FC<Props> = props => {
@@ -33,7 +33,7 @@ const NavigationBar: FC<Props> = props => {
     const showBackButton = (!props.hideBackButton && props.navigation && props.navigation.canGoBack()) ? true : false;
 
     const MIN_HEADER_HEIGHT = 56;
-    const MAX_HEADER_HEIGHT = (props.title && props.subtitle) ? 120 : ((!props.subtitle && !props.title) ? 56 : 100);
+    const MAX_HEADER_HEIGHT = !props.title ? 56 : 94;
 
     const headerHeight = props.animatedValue ? props.animatedValue.interpolate({
         inputRange: [0, MAX_HEADER_HEIGHT],
@@ -42,8 +42,8 @@ const NavigationBar: FC<Props> = props => {
     }) : MAX_HEADER_HEIGHT;
 
     // Title margin left
-    const MIN_TITLE_LEFT = 16;
-    const MAX_TITLE_LEFT = showBackButton ? 56 : 16;
+    const MIN_TITLE_LEFT = 24;
+    const MAX_TITLE_LEFT = showBackButton ? 56 : 24;
 
     const titleSides = props.animatedValue ? props.animatedValue.interpolate({
         inputRange: [0, MAX_HEADER_HEIGHT],
@@ -53,7 +53,7 @@ const NavigationBar: FC<Props> = props => {
 
     // Title margin bottom
     const MIN_TITLE_BOTTOM = 0;
-    const MAX_TITLE_BOTTOM = (props.title && props.subtitle) ? 8 : 8;
+    const MAX_TITLE_BOTTOM = 8;
 
     const titleBottom = props.animatedValue ? props.animatedValue.interpolate({
         inputRange: [0, MAX_HEADER_HEIGHT],
@@ -63,7 +63,7 @@ const NavigationBar: FC<Props> = props => {
 
     // Title Font
     const MIN_TITLE_FONT = 18;
-    const MAX_TITLE_FONT = 32;
+    const MAX_TITLE_FONT = 24;
 
     const titleFont = props.animatedValue ? props.animatedValue.interpolate({
         inputRange: [0, MAX_HEADER_HEIGHT],
@@ -105,7 +105,8 @@ const NavigationBar: FC<Props> = props => {
                         zIndex: 1000,
                         alignItems: 'center',
                         justifyContent: 'center',
-                        ...props.backButtonStyle
+                        ...props.backButtonStyle,
+                        marginStart: 8
                     }}
                     icon={ArrowLeft}
                     onPress={()=>props.navigation?.goBack()}
@@ -115,18 +116,19 @@ const NavigationBar: FC<Props> = props => {
                 style={{
                     left: titleSides,
                     right: titleSides,
-                    bottom: titleBottom
+                    bottom: titleBottom,
+                    ...props.textContainerStyle
                 }}
             >
                 {props.title &&
                     <Text
-                        type='h2'
+                        type='h3'
                         numberOfLines={1}
                         adjustsFontSizeToFit={true}
                         lineBreakMode={'tail'}
                         style={{
                             fontSize: titleFont,
-                            marginRight: 16
+                            marginRight: 24
                         }}
                     >
                         {props.title}
@@ -172,8 +174,8 @@ export interface Props{
     hideBreadcrumb?: boolean,
     hideHeader?: boolean,
     title?: string,
-    subtitle?: string,
     headerRight?: any,
     animatedValue?: Animated.Value,
-    backgroundColor?: string
+    backgroundColor?: string,
+    textContainerStyle?: Object
 }

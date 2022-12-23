@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components/native';
 import { TextStyle, ViewStyle } from 'react-native';
-import { ChevronDown } from 'react-native-lucide';
+import { ChevronDown } from 'lucide-react-native';
 import Color from '../../constants/Color';
 import Text from '../Text/Text';
 import SelectCountryModal from '../Modal/SelectCountryModal';
+import getUnicodeFlagIcon from 'country-flag-icons/unicode';
 
 const Container = styled.View`
     justify-content: center;
@@ -12,10 +13,7 @@ const Container = styled.View`
 const SelectStyled = styled.Pressable`
     display: flex;
     flex-direction: row;
-`
-const Icon = styled.View`
-    height: 24px;
-    width: 24px;
+    z-index: 1000;
 `
 const Arrow = styled.View`
     height: 7px;
@@ -25,14 +23,35 @@ const Arrow = styled.View`
 
 const SelectCountry = (props: Props) =>{
 
+    const [ countries, setCountries ] = useState([]);
     const [ showMenu, setShowMenu ] = useState<boolean>(false);
-    const [ selectedCountry, setSelectedCountry ] = useState<{[key: string]: any}>(props.countries && props.countries[0]);
+    const [ selectedCountry, setSelectedCountry ] = useState<{[key: string]: any}>();
 
     useEffect(() =>{
-        if(props.selectedCountry){
-            setSelectedCountry(props.selectedCountry)
+        //Init fuse.js search
+        if(props.countries){
+            const tempVar = props.locale === 'en' ? 'enCountry' : 'esCountry';
+            const temp = props.countries.sort((a, b) => a[tempVar].localeCompare(b[tempVar]));
+            const selectedCountry = temp.filter(item => item.countryCode === (props.defaultCountry ? props.defaultCountry : 'ES'));
+            const countryObj = {
+                ...selectedCountry[0],
+                flag: getUnicodeFlagIcon(selectedCountry[0].countryCode)
+            }
+            setSelectedCountry(countryObj);
+            setCountries(temp);
+            props.onChange && props.onChange(countryObj);
         }
-    }, [props.selectedCountry]);
+    },[props.countries]);
+
+    useEffect(() =>{
+        if(props.defaultCountry){
+            const selectedCountry = countries.filter(item => item.countryCode === (props.defaultCountry ? props.defaultCountry : 'ES'));
+            setSelectedCountry({
+                ...selectedCountry[0],
+                flag: getUnicodeFlagIcon(selectedCountry[0].countryCode)
+            });
+        }
+    }, [props.defaultCountry]);
 
     const onSelectClick = () =>{
         setShowMenu(true);
@@ -44,8 +63,11 @@ const SelectCountry = (props: Props) =>{
         props.onDismiss && props.onDismiss();
     }
 
-    const onOptionClick = (option: Object) =>{
-        setSelectedCountry(option);
+    const onOptionClick = (option: any) =>{
+        setSelectedCountry({
+            ...option,
+            flag: getUnicodeFlagIcon(option.countryCode)
+        });
         setShowMenu(false);
         props.onChange && props.onChange(option);
     }
@@ -58,10 +80,10 @@ const SelectCountry = (props: Props) =>{
                 style={{borderWidth: 0}}
                 onPress={onSelectClick}
             >
-                {selectedCountry && selectedCountry.icon &&
-                    <Icon>
-                        <selectedCountry.icon/>
-                    </Icon>
+                {selectedCountry &&
+                    <Text>
+                        {selectedCountry.flag}
+                    </Text>
                 }
                 <Arrow>
                     <ChevronDown color={Color.text.high}/>
@@ -71,15 +93,14 @@ const SelectCountry = (props: Props) =>{
                     weight='medium'
                     style={{...props.textStyle, marginLeft: 16}}
                 >
-                    {props.title ? props.title : selectedCountry.prefix}
+                    {selectedCountry ? selectedCountry.prefix : ' '}
                 </Text>
             </SelectStyled>
             <SelectCountryModal
-                translation={props.translation}
                 {...props.modalProps}
                 orientation={'fullScreen'}
                 visible={showMenu}
-                countries={props.countries}
+                countries={countries}
                 locale={props.locale}
                 onPress={onOptionClick}
                 onDismiss={onModalDismiss}
@@ -89,26 +110,18 @@ const SelectCountry = (props: Props) =>{
 }
 export default SelectCountry;
 export interface Props{
-    translation: {
-        [key: string]: any
-    },
     textStyle?: TextStyle,
     style?: ViewStyle,
-    selectedCountry?: {
-        [key: string]: any
-    },
     countries: Array<{
         id: string,
         prefix: string,
         esCountry: string,
         enCountry: string,
-        esPrefix: string,
-        enPrefix: string,
-        icon?: any
+        countryCode: string
     }>,
     locale: string,
-    title?: string,
     modalProps?: Object,
+    defaultCountry?: string,
     onChange?: Function,
     onShow?: Function,
     onDismiss?: Function

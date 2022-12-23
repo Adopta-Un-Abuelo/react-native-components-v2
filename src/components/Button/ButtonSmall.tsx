@@ -8,14 +8,14 @@ import LinearGradient from 'react-native-linear-gradient';
 
 const Container = styled.Pressable<{type?: 'line' | 'fill', color?: string, size?: 'small' | 'big'}>`
     flex-direction: row;
-    height: 36px;
-    border-radius: 8px;
+    height: 44px;
+    border-radius: 100px;
     background-color: ${props => props.type === 'line' ? 'transparent' : (props.color ? props.color : Color.status.primary.default)};
     align-items: center;
     justify-content: center;
     border-width: ${props => props.type === 'line' ? '1px' : '0px'};
     border-color: ${props => props.color ? props.color : Color.status.primary.default};
-    padding: 0px 12px;
+    padding: 0px 20px;
     opacity: ${props => props.disabled ? 0.48 : 1};
     align-self: flex-start;
 `
@@ -63,7 +63,7 @@ const ButtonSmall = (props: Props) =>{
                         <props.icon style={{marginRight: 8, ...props.iconStyle}} color={(props.iconStyle && props.iconStyle.stroke) ? props.iconStyle.stroke : (props.type === 'line' ? (props.color ? props.color : Color.text.primary) : Color.text.white)}/>
                     }
                     <Text
-                        type='b2'
+                        type='b1'
                         weight='semibold'
                         style={{
                             textAlign: 'center',

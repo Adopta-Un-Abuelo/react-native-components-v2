@@ -13,13 +13,10 @@ const Input = styled.TextInput<{error?: boolean, isFocused?: boolean, ref?: any}
     width: 48px;
     border-radius: 12px;
     border-width: ${props => props.isFocused ? '2px' : '1px'};
-    border-color: ${props => props.isFocused ? Color.line.primarySoft : Color.line.soft};
+    border-color: ${props => props.isFocused ? Color.line.full : Color.line.soft};
     text-align: center;
-    justify-content: center;
     margin-right: 4px;
-    font-family: 'Poppins-SemiBold';
-    font-size: 18px;
-    text-align: center;
+    font-size: 28px;
     color: ${Color.text.full};
 `
 
@@ -47,7 +44,7 @@ const CodeInput = forwardRef((props: Props, ref: Ref<InputCodeRef>) =>{
     const [ isFocused5, setIsFocused5 ] = useState<boolean>(false);
     const [ isFocused6, setIsFocused6 ] = useState<boolean>(false);
 
-    const placeholder='-'
+    const placeholder='_'
     const keyboardType='number-pad'
 
     useEffect(() =>{
@@ -165,9 +162,9 @@ const CodeInput = forwardRef((props: Props, ref: Ref<InputCodeRef>) =>{
                 error={props.error}
                 selectionColor={'transparent'}
                 placeholder={placeholder}
+                placeholderTextColor={Color.text.low}
                 keyboardType={keyboardType}
                 value={input1Value}
-                maxLength={1}
                 autoFocus={true}
                 isFocused={isFocused1}
             />
@@ -178,6 +175,7 @@ const CodeInput = forwardRef((props: Props, ref: Ref<InputCodeRef>) =>{
                 error={props.error}
                 selectionColor={'transparent'}
                 placeholder={placeholder}
+                placeholderTextColor={Color.text.low}
                 keyboardType={keyboardType}
                 value={input2Value}
                 maxLength={1}
@@ -190,6 +188,7 @@ const CodeInput = forwardRef((props: Props, ref: Ref<InputCodeRef>) =>{
                 error={props.error}
                 selectionColor={'transparent'}
                 placeholder={placeholder}
+                placeholderTextColor={Color.text.low}
                 keyboardType={keyboardType}
                 value={input3Value}
                 maxLength={1}
@@ -202,6 +201,7 @@ const CodeInput = forwardRef((props: Props, ref: Ref<InputCodeRef>) =>{
                 error={props.error}
                 selectionColor={'transparent'}
                 placeholder={placeholder}
+                placeholderTextColor={Color.text.low}
                 keyboardType={keyboardType}
                 value={input4Value}
                 maxLength={1}
@@ -214,6 +214,7 @@ const CodeInput = forwardRef((props: Props, ref: Ref<InputCodeRef>) =>{
                 error={props.error}
                 selectionColor={'transparent'}
                 placeholder={placeholder}
+                placeholderTextColor={Color.text.low}
                 keyboardType={keyboardType}
                 value={input5Value}
                 maxLength={1}
@@ -226,6 +227,7 @@ const CodeInput = forwardRef((props: Props, ref: Ref<InputCodeRef>) =>{
                 error={props.error}
                 selectionColor={'transparent'}
                 placeholder={placeholder}
+                placeholderTextColor={Color.text.low}
                 keyboardType={keyboardType}
                 value={input6Value}
                 maxLength={1}

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, forwardRef, useImperativeHandle, useRef, Ref } from 'react';
+import React, { useState, forwardRef, useImperativeHandle, useRef, Ref } from 'react';
 import styled from 'styled-components/native';
 import { TextInput, TextInputProps, ViewStyle } from 'react-native';
 import Color from '../../constants/Color';
@@ -24,7 +24,7 @@ const InputStyled = styled.TextInput<{isFocused: boolean | undefined, hasValue: 
     height: 100%;
     padding: 0px;
     color: ${Color.text.primaryBlack};
-    margin-top: ${props => ((props.isFocused || props.hasValue) && !props.hideTitle) ? '10px' : '0px'};
+    margin-top: ${props => ((props.isFocused || props.hasValue) && !props.hideTitle) ? '8px' : '0px'};
 `
 const IconView = styled.View`
     height: 24px;
@@ -44,7 +44,6 @@ const Input = forwardRef((props: Props, ref: Ref<InputRef>) =>{
 
     const input = useRef<TextInput>();
     const [ isFocused, setIsFocused ] = useState<boolean>(false);
-    const [ currentPlaceholder, setCurrentPlaceholder ] = useState<string | undefined>(props.placeholder);
     const [ value, setValue ] = useState<string | undefined>(undefined);
     const { children, style, error, icon, ...rest } = props;
 
@@ -57,19 +56,13 @@ const Input = forwardRef((props: Props, ref: Ref<InputRef>) =>{
         }
     }));
 
-    useEffect(() =>{
-        setCurrentPlaceholder(props.placeholder);
-    },[props.placeholder]);
-
     const onFocus = (e) =>{
         setIsFocused(true);
-        setCurrentPlaceholder(undefined);
         props.onFocus && props.onFocus(e);
     }
 
     const onBlur = (e) =>{
         setIsFocused(false);
-        setCurrentPlaceholder(props.placeholder);
         props.onBlur && props.onBlur(e);
     }
 
@@ -97,10 +90,10 @@ const Input = forwardRef((props: Props, ref: Ref<InputRef>) =>{
                 }
                 {children}
                 <InputView>
-                    {((!currentPlaceholder || value) && !props.hideTitle) &&
+                    {((isFocused || value) && !props.hideTitle) &&
                         <Text
                             type='c2'
-                            style={{position: 'absolute', color: Color.text.high}}
+                            style={{position: 'absolute', color: Color.text.high, top: -4}}
                         >
                             {props.placeholder}
                         </Text>
@@ -110,15 +103,14 @@ const Input = forwardRef((props: Props, ref: Ref<InputRef>) =>{
                             ref={input}
                             caretHidden={true}
                             selectionColor={Color.text.primary}
-                            onFocus={onFocus}
-                            onBlur={onBlur}
-                            placeholder={currentPlaceholder}
-                            onChangeText={onChangeText}
-                            isFocused={isFocused}
+                            isFocused={(isFocused || value) ? true : false}
                             hasValue={value ? true : false}
                             placeholderTextColor={Color.text.high}
                             hideTitle={props.hideTitle}
                             {...rest}
+                            onFocus={onFocus}
+                            onBlur={onBlur}
+                            onChangeText={onChangeText}
                         />
                         {props.currency &&
                             <Text

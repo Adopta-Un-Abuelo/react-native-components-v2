@@ -106,7 +106,7 @@ const NavigationBar: FC<Props> = props => {
                         alignItems: 'center',
                         justifyContent: 'center',
                         ...props.backButtonStyle,
-                        marginStart: 8
+                        marginStart: 4
                     }}
                     icon={ArrowLeft}
                     onPress={()=>props.navigation?.goBack()}

@@ -2,7 +2,7 @@ import React, { forwardRef, useEffect, useState, Ref, useImperativeHandle } from
 import styled from 'styled-components/native';
 import LinearGradient from 'react-native-linear-gradient';
 import ProgressBar from '../ProgressBar/StoriesProgressBar';
-import { Color } from '../..';
+import Color from '../../constants/Color';
 
 const Container = styled.View`
     flex: 1;

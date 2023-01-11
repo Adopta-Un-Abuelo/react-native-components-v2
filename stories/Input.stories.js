@@ -13,6 +13,28 @@ storiesOf('Input', module)
                 style={object('style', {
                     margin: 24
                 })}
+                placeholder={text('placeholder', 'Placeholder')}
+                error={boolean('error', false)}
+                maxLength={number('maxLength', 30)}
+                keyboardType={select('keyboardType', ['default', 'number-pad', 'decimal-pad', 'phone-pad', 'numeric', 'email-address'])}
+                blurOnSubmit={boolean('blurOnSubmit', true)}
+                clearButtonMode={select('clearButtonMode', ['never', 'while-editing', 'unless-editing', 'always'])}
+                value={text('value')}
+                autoCapitalize={select('autoCapitalize', ['none', 'sentences', 'words', 'characters'])}
+                autoCorrent={boolean('autoCorrent', false)}
+                hideTitle={boolean('hideTitle', false)}
+                onFocus={action('onFocus')}
+                onBlur={action('onBlur')}
+                onChangeText={action('onChangeText')}
+            />
+	    )
+    })
+    .add('Main with icon', () => {
+        return(
+            <Input
+                style={object('style', {
+                    margin: 24
+                })}
                 icon={Watch}
                 placeholder={text('placeholder', 'Placeholder')}
                 error={boolean('error', false)}
@@ -96,7 +118,6 @@ storiesOf('Input', module)
                     enCountry: 'Argentina',
                     countryCode: 'AR'
                 },]}
-                type={text('type', 'big')}
                 locale={'es'}
                 value={text('value')}
                 error={boolean('error', false)}

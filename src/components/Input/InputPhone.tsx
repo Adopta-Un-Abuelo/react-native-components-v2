@@ -31,7 +31,7 @@ const PhoneInput = (props: Props) =>{
             hideTitle={true}
         >
             <SelectCountry
-                style={{height: '100%'}}
+                style={{height: '100%', marginRight: 12}}
                 countries={props.countries}
                 locale={props.locale}
                 modalProps={{

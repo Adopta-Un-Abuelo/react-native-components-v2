@@ -28,5 +28,6 @@ export default KeyboardAvoidingComponent;
 export interface Props{
     style?: Object,
     color?: string,
+    children?: any,
     keyboardVerticalOffset?: number
 }

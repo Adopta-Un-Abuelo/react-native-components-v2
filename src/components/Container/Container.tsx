@@ -86,6 +86,7 @@ export interface Props{
     style?: Object,
     color?: string,
     contentStyle?: any,
+    children?: any,
     buttonProps?: {
         title: string,
         onPress: any,

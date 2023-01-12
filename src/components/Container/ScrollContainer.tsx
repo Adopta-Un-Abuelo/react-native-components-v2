@@ -96,5 +96,6 @@ export interface Props{
     secondButtonProps?: any,
     contentStyle?: any,
     style?: any,
+    children?: any,
     edges?: Array<"top" | "right" | "left" | "bottom">
 }

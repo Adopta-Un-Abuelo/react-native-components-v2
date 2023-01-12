@@ -61,5 +61,6 @@ export interface Props{
     ref?: any,
     style?: ViewStyle,
     value?: string,
-    onPress?: Function
+    onPress?: Function,
+    children?: any
 }

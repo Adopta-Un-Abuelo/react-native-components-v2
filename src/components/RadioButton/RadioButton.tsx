@@ -57,7 +57,7 @@ const RadioButton: FC <Props> = props =>{
                         <CircleView
                             selected={selected}
                         >
-                            {selected && <Check width={16} height={16} color={Color.text.white}/>}
+                            {selected && <Check width={18} height={18} strokeWidth={3} color={Color.text.white}/>}
                         </CircleView>
                     </Cell>
                 )

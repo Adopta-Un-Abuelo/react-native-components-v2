@@ -13,12 +13,7 @@ storiesOf('Checkbox', module)
             })}
             textStyle={object('textStyle', {})}
 			cellStyle={object('cellStyle', {})}
-			options={array('options', [
-                {
-                    id: 'option1',
-                    title: 'This is a checkbox'
-                }
-            ])}
+			title={'Test checkbox'}
             error={boolean('error', false)}
             onChange={action('onChange')}
 		/>

@@ -41,7 +41,9 @@ const Container: FC<Props> = props =>{
                                 {...props.navbarProps}
                             />
                         )}
-                        <ChildrenContainer>
+                        <ChildrenContainer
+                            style={props.contentStyle}
+                        >
                             {props.children}
                         </ChildrenContainer>
                         {props.buttonProps &&
@@ -83,7 +85,7 @@ export interface Props{
     }
     style?: Object,
     color?: string,
-    contentStyle?: Object,
+    contentStyle?: any,
     buttonProps?: {
         title: string,
         onPress: any,

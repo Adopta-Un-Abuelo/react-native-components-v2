@@ -10,9 +10,8 @@ import Modal from "react-native-modal";
 import VideoProgressBar from '../ProgressBar/VideoProgressBar';
 
 const VideoContainer = styled.View`
-    width: 100%;
-    height: 100%;
-    background-color: #000000;
+    flex: 1;
+    background-color: black;
 `
 const Header = styled.View`
     height: 56px;
@@ -74,28 +73,27 @@ const VideoModal: FC<Props> = props =>{
             onDismiss={onVideoEnd}
         >
             <VideoContainer>
-                <Header>
-                    {props.skipIn ? props.skipIn === 0 ? 
-                        undefined
-                        :
-                        <CloseButton
-                            onPress={onVideoEnd}
-                        >
-                            <X color={Color.text.white}/>
-                        </CloseButton>
-                    : undefined}
-                    {props.skipIn ? props.skipIn === 0 ? 
-                        undefined
-                    :
-                        <Text
-                            type='b2'
-                            weight={props.skipIn >= videoProgress ? 'medium' : 'bold'}
-                            style={{color: props.skipIn >= videoProgress ? Color.text.whiteHigh : Color.text.white}}
-                        >
-                            {props.skipIn >= videoProgress ? props.skipInString+' '+ new Date((props.skipIn - videoProgress) * 1000).toISOString().substr(14, 5) : props.skipString}
-                        </Text>
-                    : undefined}
-                </Header>
+                {props.skipIn &&
+                    <Header>
+                        {(props.skipIn && props.skipIn !== 0) &&
+                            <CloseButton
+                                onPress={onVideoEnd}
+                                disabled={props.skipIn !== 0}
+                            >
+                                <X color={Color.text.white}/>
+                            </CloseButton>
+                        }
+                        {(props.skipIn && props.skipIn !== 0) &&
+                            <Text
+                                type='b2'
+                                weight={props.skipIn >= videoProgress ? 'medium' : 'bold'}
+                                style={{color: props.skipIn >= videoProgress ? Color.text.whiteHigh : Color.text.white}}
+                            >
+                                {props.skipIn >= videoProgress ? props.skipInString+' '+ new Date((props.skipIn - videoProgress) * 1000).toISOString().substr(14, 5) : props.skipString}
+                            </Text>
+                        }
+                    </Header>
+                }
                 <VideoView>
                     <Video
                         source={{uri: props.url}}
@@ -117,7 +115,7 @@ const VideoModal: FC<Props> = props =>{
                     />
                 </VideoView>
                 <ControllersView
-                    style={{paddingTop: 24, paddingStart: 16, paddingEnd: 16, paddingBottom: 24}}
+                    style={{paddingStart: 16, paddingEnd: 16}}
                 >
                     <ButtonImage
                         icon={paused ? Play : Pause}

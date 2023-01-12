@@ -33,7 +33,6 @@ const DateInput = (props: Props) =>{
                 const year = text.substring(6);
                 if(month && day){
                     const date = new Date(year, month, day);
-                    const today = new Date();
                     if(props.maximumDate && props.maximumDate < date) setDateError(true);
                     else if(props.minimumDate && props.minimumDate > date) setDateError(true);
                     else props.onChange && props.onChange({
